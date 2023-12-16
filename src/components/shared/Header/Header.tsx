@@ -1,9 +1,17 @@
-import React from 'react';
+import React from "react";
+
+import TopHeader from "./TopHeader";
+import MainHeader from "./MainHeader";
 
 const HeaderPage = () => {
   return (
     <div>
-      Header
+      {/* Top Nav */}
+      <TopHeader />
+
+      {/* Main Nav */}
+
+      <MainHeader />
     </div>
   );
 };
