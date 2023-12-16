@@ -3,14 +3,12 @@ import {
   PhoneOutlined,
   MessageOutlined,
   IssuesCloseOutlined,
-  FacebookOutlined,
-  TwitterOutlined,
-  InstagramOutlined,
-  YoutubeOutlined,
 } from "@ant-design/icons";
 import Link from "next/link";
+import { ISocial } from "@/interfaces/common";
+import { SocialList } from "@/constants/SocialList";
 
-const SocialList = [
+const ContactList = [
   {
     name: "number",
     text: "(+880)123456789",
@@ -28,36 +26,13 @@ const SocialList = [
   },
 ];
 
-const FollowList = [
-  {
-    name: "facebook",
-    link: "https://www.facebook.com/",
-    icon: <FacebookOutlined />,
-  },
-  {
-    name: "twitter",
-    link: "https://twitter.com/",
-    icon: <TwitterOutlined />,
-  },
-  {
-    name: "instagram",
-    link: "https://www.instagram.com/",
-    icon: <InstagramOutlined />,
-  },
-  {
-    name: "youtube",
-    link: "https://www.youtube.com/",
-    icon: <YoutubeOutlined />,
-  },
-];
-
 const TopHeader = () => {
   return (
     <div className="font-inter md:grid grid-cols-3 hidden ">
       {/* Social */}
 
       <div className="flex items-center bg-black text-white py-3 w-full gap-10 lg:col-span-2 col-span-3 justify-around pr-[120px]">
-        {SocialList.map((item, index) => (
+        {ContactList.map((item, index) => (
           <div className="flex items-center text-[14px] gap-2" key={index}>
             <div className="pb-2 text-[18px]">{item.icon}</div>
             {/* divider left */}
@@ -74,9 +49,9 @@ const TopHeader = () => {
       <div className="bg-primary flex items-center gap-9 py-3 w-full lg:col-span-1 col-span-3  pl-5 font-inter">
         <p className="text-white font-semibold">Follow Now</p>
         <div className="flex items-center gap-4">
-          {FollowList.map((item, index) => (
+          {SocialList.map((item: ISocial, index) => (
             <Link
-              href={item?.link}
+              href={item?.href}
               target="_blank"
               key={index}
               title={item?.name}
@@ -93,7 +68,8 @@ const TopHeader = () => {
 
                   "
             >
-              {item.icon}
+              <span className="sr-only">{item.name}</span>
+              <item.icon className="h-6 w-6" aria-hidden="true" />
             </Link>
           ))}
         </div>

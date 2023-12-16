@@ -1,15 +1,18 @@
+"use client";
 import React from "react";
 
 import Logo from "../../../../public/assets/logo-light.png";
 import Image from "next/image";
 import { NavList } from "@/constants/NavList";
 import Dropdown from "@/components/Dropdown/Dropdown";
-import { SearchOutlined, UserOutlined } from "@ant-design/icons";
+import { SearchOutlined, MenuOutlined } from "@ant-design/icons";
 import Link from "next/link";
+import Drawers from "@/components/Drawer/Drawer";
 
 const MainHeader = () => {
+  const [open, setOpen] = React.useState(false);
   return (
-    <div className=" items-center grid md:grid-cols-5 grid-cols-3 shadow">
+    <div className=" items-center grid md:grid-cols-5 grid-cols-3 shadow justify-between">
       <Link
         href={"/"}
         className="col-span-1 bg-primary flex justify-center py-4 px-2 "
@@ -39,6 +42,18 @@ const MainHeader = () => {
         <button className="bg-primary text-white px-5 py-2 rounded-lg border-2 border-primary hover:bg-white hover:text-primary">
           <span className="ml-2">Login</span>
         </button>
+
+        <button onClick={() => setOpen(true)} className="lg:hidden">
+          <MenuOutlined className="text-[24px]" />
+        </button>
+
+        <Drawers open={open} placement="right" setOpen={setOpen} title="Menu">
+          <div className="flex flex-col gap-5 items-start text-black">
+            {NavList.map((item, i) => (
+              <Dropdown key={i} item={item} />
+            ))}
+          </div>
+        </Drawers>
       </div>
     </div>
   );
