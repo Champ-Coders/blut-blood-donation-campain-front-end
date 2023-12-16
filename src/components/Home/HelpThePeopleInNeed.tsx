@@ -2,6 +2,8 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import PrimaryButton from "../UI/PrimaryButton";
+import Title1 from "../UI/Title1";
+import SubTitle from "../UI/SubTitle";
 
 //
 const HelpThePeopleInNeed = () => {
@@ -35,10 +37,8 @@ const HelpThePeopleInNeed = () => {
         />
       </section>
       <section className="w-full px-2 py-[4rem] lg:[45%] text-start flex flex-col  gap-4 justify-between">
-        <h3 className="text-xl text-primary uppercase">{title}</h3>
-        <h1 className="text-black font-[800] text-5xl  max-w-[80%] ">
-          {subTitle}
-        </h1>
+        <Title1 data={{ title }} />
+        <SubTitle data={{ subTitle }} />
         <p className="text-[#666666] text-xl">{description}</p>
         <ul className="font-[500] grid grid-cols-2 gap-3">
           {features?.map((feature: any, index: number) => {
