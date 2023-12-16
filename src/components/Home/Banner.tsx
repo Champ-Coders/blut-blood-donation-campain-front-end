@@ -1,17 +1,10 @@
 import { bannerCarousel } from "@/constants/Banner";
 import { Carousel } from "antd";
 import { YoutubeFilled } from "@ant-design/icons";
-import React from "react";
 import Link from "next/link";
 const Banner = () => {
-  const contentStyle: React.CSSProperties = {
-    height: "160px",
-    lineHeight: "160px",
-    textAlign: "center",
-  };
-
   return (
-    <div>
+    <div className="relative">
       <Carousel autoplay>
         {bannerCarousel.map((item) => (
           <div key={item._id}>
@@ -42,6 +35,26 @@ const Banner = () => {
           </div>
         ))}
       </Carousel>
+      <div className="flex sm:flex-row flex-col top-20 text-white cursor-pointer">
+        <div className="bg-black hover:bg-gray-600 px-10 w-full h-44 text-justify">
+          <h3 className="text-2xl mt-5 sm:mt-8 mb-4 font-extrabold">
+            Register Now
+          </h3>
+          <p className="">
+            Nor again is there anyone who loves or pursues or desires to obtain
+            pain of itself, because it is pain,
+          </p>
+        </div>
+        <div className="bg-primary hover:bg-rose-600 px-10 w-full h-44 text-justify">
+          <h3 className="text-2xl mt-5 sm:mt-8 mb-4 font-extrabold">
+            Donate Now
+          </h3>
+          <p className="">
+            Nor again is there anyone who loves or pursues or desires to obtain
+            pain of itself, because it is pain,
+          </p>
+        </div>
+      </div>
     </div>
   );
 };

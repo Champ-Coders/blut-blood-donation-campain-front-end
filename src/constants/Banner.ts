@@ -4,7 +4,7 @@ export const bannerCarousel: IBanner[] = [
   {
     _id: "1",
     backgroundImageURL:
-      "https://img.theweek.in/content/dam/week/news/health/images/2023/6/4/blood-donation.jpg",
+      "https://croptheme.com/blut/blut-ltr/assets/images/hero/hero-five.jpg",
     link: "/blog/donate",
     quotes: "Donate Blood and Save Lives!",
     videoURL: "https://www.youtube.com/watch?v=8qSAVJcETgs",
@@ -12,7 +12,7 @@ export const bannerCarousel: IBanner[] = [
   {
     _id: "2",
     backgroundImageURL:
-      "https://img.theweek.in/content/dam/week/news/health/images/2023/6/4/blood-donation.jpg",
+      "https://croptheme.com/blut/blut-ltr/assets/images/hero/hero-four.jpg",
     link: "/blog/donate",
     quotes: "One Bag of Blood Can Bring Back One Fro the Dead.",
     videoURL: "https://www.youtube.com/watch?v=8qSAVJcETgs",
@@ -20,7 +20,7 @@ export const bannerCarousel: IBanner[] = [
   {
     _id: "3",
     backgroundImageURL:
-      "https://croptheme.com/blut/blut-ltr/assets/images/news/blog-default-poster.png",
+      "https://croptheme.com/blut/blut-ltr/assets/images/hero/hero-slider-bg.png",
     link: "/blog/donate",
     quotes: "A Blood Bag in Time Saves a Life.",
     videoURL: "https://www.youtube.com/watch?v=8qSAVJcETgs",
