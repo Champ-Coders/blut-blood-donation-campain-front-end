@@ -15,9 +15,7 @@ const config: Config = {
         "Player-Display": ["Playfair Display", "serif"],
       },
       colors: {
-        primary: "#ff8e28",
-        bgColor: "white",
-        borderColor: "#FFFFFF1A",
+        primary: "#ea062b",
       },
     },
   },
