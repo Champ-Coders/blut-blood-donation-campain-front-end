@@ -6,8 +6,6 @@ import { INav } from "@/interfaces/INav";
 
 const Dropdown = ({ item }: { item: INav }) => {
   const [open, setOpen] = React.useState(false);
-
-  console.log(item);
   return (
     <div
       onMouseEnter={() => setOpen(true)}

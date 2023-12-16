@@ -53,7 +53,7 @@ const FollowList = [
 
 const TopHeader = () => {
   return (
-    <div className="font-roboto md:grid grid-cols-3 hidden ">
+    <div className="font-inter md:grid grid-cols-3 hidden ">
       {/* Social */}
 
       <div className="flex items-center bg-black text-white py-3 w-full gap-10 lg:col-span-2 col-span-3 justify-around pr-[120px]">
@@ -88,7 +88,7 @@ const TopHeader = () => {
                  text-[18px]
                   px-2 py-1 rounded
                    transition-all
-                   duration-300
+                   duration-500
                    ease-in-out
 
                   "
