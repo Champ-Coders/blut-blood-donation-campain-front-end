@@ -1,10 +1,10 @@
 export interface INav {
   name: string;
   path: string;
-  children?: INavChildren[];
+  children: NavList[];
 }
 
-export interface INavChildren {
-  key: string;
-  label: string;
-}
+type NavList = {
+  name: string;
+  path: string;
+};

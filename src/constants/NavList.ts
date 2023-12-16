@@ -9,22 +9,23 @@ export const NavList: INav[] = [
   {
     name: "About Us",
     path: "/about",
+    children: [],
   },
   {
     name: "Campaign",
     path: "/campaign",
     children: [
       {
-        key: "1",
-        label: "Campaign Grid",
+        name: "Campaign Grid",
+        path: "/campaign",
       },
       {
-        key: "2",
-        label: "Campaign List",
+        name: "Campaign List",
+        path: "/campaign-list",
       },
       {
-        key: "3",
-        label: "Campaign Details",
+        name: "Campaign Details",
+        path: "/campaign-details",
       },
     ],
   },
@@ -33,8 +34,8 @@ export const NavList: INav[] = [
     path: "/pages",
     children: [
       {
-        key: "1",
-        label: "About Us",
+        name: "About Us",
+        path: "/about",
       },
     ],
   },
@@ -43,16 +44,16 @@ export const NavList: INav[] = [
     path: "/blog",
     children: [
       {
-        key: "1",
-        label: "Blog Grid",
+        name: "Blog Grid",
+        path: "/blog",
       },
       {
-        key: "2",
-        label: "Blog List",
+        name: "Blog List",
+        path: "/blog-list",
       },
       {
-        key: "3",
-        label: "Blog Details",
+        name: "Blog Details",
+        path: "/blog-details",
       },
     ],
   },
