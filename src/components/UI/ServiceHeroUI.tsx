@@ -31,7 +31,7 @@ const ServiceHeroUI = ({
         <h1 className="text-[4.5rem] font-[600] text-slate-300">{no}</h1>
         <SubTitle data={{ subTitle: title, css: "mr:0  " }} />
 
-        <p className="text-[#666666] text-xl">{description}</p>
+        <p className="text-[#666666] text-[18px]">{description}</p>
 
         <PrimaryButton data={{ text: "Read More", link }}></PrimaryButton>
       </section>
