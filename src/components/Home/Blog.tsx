@@ -4,7 +4,7 @@ import React from "react";
 
 const Blog = () => {
   return (
-    <div className="bg-gray-100 pt-24 pb-10">
+    <div className="bg-gray-100 pt-48 sm:pt-24 pb-10">
       <div className="flex sm:flex-row w-full mx-auto md:w-5/6 flex-col justify-between gap-8">
         <div className="bg-white text-center w-full relative">
           <Image
