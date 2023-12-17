@@ -1,4 +1,5 @@
 import BannerBreadcrumb from "@/components/UI/BannerBreadcrumb";
+import DonationProcess from "@/components/about/DonationProcess";
 
 const AboutPage = () => {
   return (
@@ -13,6 +14,7 @@ const AboutPage = () => {
         image="/assets/blood-donor-bg.png"
       />
       about
+      <DonationProcess />
     </div>
   );
 };
