@@ -44,7 +44,7 @@ const Counter = () => {
       className=" mt-7 min-h-[22rem] bg-cover bg-center bg-no-repeat bg-black opacity-[0.2] relative bg-fixe  lg:max-h-[30rem]"
     >
       <div className="absolute inset-0 bg-black opacity-[0.9]"></div>
-      <section className="text-center grid grid-cols-2 py-[3vw] backdrop-blur-0 ">
+      <section className="container mx-auto text-center grid grid-cols-2 lg:grid-cols-4 py-[3vw] backdrop-blur-0 ">
         {companyStatistics?.counter?.map((item: any, index: number) => {
           return (
             <div
