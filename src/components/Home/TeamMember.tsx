@@ -5,9 +5,9 @@ import TeamMembersCard from "../TeamMembersCard/TeamMembersCard";
 const TeamMember = () => {
   return (
     <section>
-      <div className="common">
+      <div className=" !pt-0 common">
         <div>
-          <div className="text-center">
+          <div className="text-center mb-10">
             <h5 className="text-[#EA062B] text-[16px] uppercase mb-4">
               TEAM MEMBERS
             </h5>
