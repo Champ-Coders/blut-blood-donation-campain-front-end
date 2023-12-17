@@ -58,7 +58,7 @@ const InputField = ({
               : `${
                   errors?.name
                     ? "border-1 w-full bg-red-500 rounded-lg py-2 px-[10px] font-inter text-[12px] leading-6 placeholder:capitalize text-gray-900 focus:outline-rose-500"
-                    : "border w-full bg-gray-500 rounded-lg border-border py-2 px-[10px] font-inter text-[12px] leading-6 placeholder:capitalize text-gray-900 focus:outline-primary"
+                    : "border w-full bg-gray-50 rounded-lg border-border py-2 px-[10px] font-inter text-[12px] leading-6 placeholder:capitalize text-gray-900 focus:outline-primary"
                 }`
           }`}
           {...register(name ? name : "noName", {
@@ -75,7 +75,7 @@ const InputField = ({
               : `${
                   errors?.name
                     ? "border-1 w-full bg-red-500 rounded-lg py-2 px-[10px] font-inter text-[12px] leading-6 placeholder:capitalize text-gray-900 focus:outline-rose-500"
-                    : "border w-full bg-gray-500 rounded-lg border-border py-2 px-[10px] font-inter text-[12px] leading-6 placeholder:capitalize text-gray-900 focus:outline-primary"
+                    : "border w-full bg-gray-50 rounded-lg border-border py-2 px-[10px] font-inter text-[12px] leading-6 placeholder:capitalize text-gray-900 focus:outline-primary"
                 }`
           }`}
           name={name}

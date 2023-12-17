@@ -18,12 +18,10 @@ const options: IFormSelector[] = [
   {
     value: "Donation Type",
     label: "Donation Type",
-
   },
   {
     value: "Free Donation",
     label: "Free Donation",
-
   },
   {
     value: "Health Checkup",
@@ -60,7 +58,12 @@ const options: IFormSelector[] = [
 ];
 
 const AppointmentForm: React.FC<AppointmentFormProps> = () => {
-  const { register, handleSubmit, setValue } = useForm();
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    formState: { errors },
+  } = useForm();
 
   const onSubmit = (data: any) => {
     // Handle form submission logic here
@@ -71,33 +74,27 @@ const AppointmentForm: React.FC<AppointmentFormProps> = () => {
     <form className="block w-full" onSubmit={handleSubmit(onSubmit)}>
       <div className="flex flex-col lg:flex-row gap-[25px] mb-[25px]">
         <InputField
-          customClass="px-5 py-[14px] bg-[#f5f5f5] 
-        text-lg text-[#666] w-full
-        "
           name={"name"}
           placeholder="Your Name"
           type="text"
           register={register}
+          errors={errors}
         />
         <InputField
-          customClass="px-5 py-[14px] bg-[#f5f5f5] 
-        text-lg text-[#666] w-full
-        "
           name={"number"}
           placeholder="Your Number"
           type="number"
           register={register}
+          errors={errors}
         />
       </div>
       <div className="mb-[25px]">
         <InputField
-          customClass="px-5 py-[14px] bg-[#f5f5f5] 
-        text-lg text-[#666] w-full
-        "
           name={"email"}
           placeholder="Your Email"
           type="email"
           register={register}
+          errors={errors}
         />
       </div>
       <div className="mb-[25px]">
@@ -106,15 +103,11 @@ const AppointmentForm: React.FC<AppointmentFormProps> = () => {
           options={options}
           isMulti={false}
           required={true}
+          setData={setValue}
         />
       </div>
       <div className="mb-[25px]">
-        <TextAreaField
-          customClass="px-5 py-[14px] bg-[#f5f5f5] 
-          text-lg text-[#666] w-full h-[150px]"
-          placeholder="Your Message"
-          name="message"
-        />
+        <TextAreaField placeholder="Your Message" name="message" />
       </div>
       <Button type="submit">Submit</Button>
     </form>
