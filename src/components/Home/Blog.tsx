@@ -4,7 +4,7 @@ import React from "react";
 
 const Blog = () => {
   return (
-    <div className="flex sm:flex-row flex-col justify-around mx-2 mt-2 py-10 px-2 gap-8 bg-slate-100">
+    <div className="flex sm:flex-row flex-col justify-around mx-2 mt-24 pt-5 pb-10 px-2 gap-8 bg-slate-100">
       <div className="bg-white text-center md:h-[600px] max-w-xl sm:h-[580px] h-[550px] w-full relative">
         <Image
           alt="blog-img"
