@@ -29,7 +29,6 @@ const InputField = ({
   disabled,
   defaultValue,
   onChange,
-
 }: InputFieldProps) => {
   return (
     <div className="w-full">
@@ -58,8 +57,8 @@ const InputField = ({
               ? customClass
               : `${
                   errors?.name
-                    ? "border-1 w-full bg-red-50 rounded-lg py-2 px-[10px] font-inter text-sm leading-6 placeholder:capitalize text-gray-90 focus:outline-rose-50"
-                    : "border w-full bg-gray-5 rounded-lg border-border py-2 px-[10px] font-inter text-sm leading-6 placeholder:capitalize text-gray-90 focus:outline-purple"
+                    ? "border-1 w-full bg-red-500 rounded-lg py-2 px-[10px] font-inter text-[12px] leading-6 placeholder:capitalize text-gray-900 focus:outline-rose-500"
+                    : "border w-full bg-gray-50 rounded-lg border-border py-2 px-[10px] font-inter text-[12px] leading-6 placeholder:capitalize text-gray-900 focus:outline-primary"
                 }`
           }`}
           {...register(name ? name : "noName", {
@@ -75,8 +74,8 @@ const InputField = ({
               ? customClass
               : `${
                   errors?.name
-                    ? "border-1 w-full bg-red-50 rounded-lg py-2 px-[10px] font-inter text-sm leading-6 placeholder:capitalize text-gray-90 focus:outline-rose-50"
-                    : "border w-full bg-gray-5 rounded-lg border-border py-2 px-[10px] font-inter text-sm leading-6 placeholder:capitalize text-gray-90 focus:outline-purple"
+                    ? "border-1 w-full bg-red-500 rounded-lg py-2 px-[10px] font-inter text-[12px] leading-6 placeholder:capitalize text-gray-900 focus:outline-rose-500"
+                    : "border w-full bg-gray-50 rounded-lg border-border py-2 px-[10px] font-inter text-[12px] leading-6 placeholder:capitalize text-gray-900 focus:outline-primary"
                 }`
           }`}
           name={name}
@@ -87,7 +86,7 @@ const InputField = ({
           required={required ? true : false}
         />
       )}
-      {errors?.name && <p className="text-rose-50">{label} is required</p>}
+      {errors?.name && <p className="text-rose-500">{label} is required</p>}
     </div>
   );
 };

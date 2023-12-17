@@ -11,6 +11,8 @@ import CountUp from "react-countup";
 
 const Counter = () => {
 
+ 
+
   const formatter = (value: number) => (
     <CountUp
       start={0}
