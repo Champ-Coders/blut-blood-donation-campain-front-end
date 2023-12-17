@@ -4,8 +4,8 @@ import { YoutubeFilled } from "@ant-design/icons";
 import Link from "next/link";
 const Banner = () => {
   return (
-    <div>
-      <Carousel autoplay arrows dotPosition="top" className="-z-10">
+    <div className="relative">
+      <Carousel autoplay dotPosition="top">
         {bannerCarousel.map((item) => (
           <div key={item._id}>
             <div
@@ -35,7 +35,7 @@ const Banner = () => {
           </div>
         ))}
       </Carousel>
-      <div className="flex w-full md:w-5/6 mx-0 md:mx-auto sm:flex-row flex-col top-20 text-white cursor-pointer -mt-20 z-80">
+      <div className="flex w-full md:w-5/6 mx-0 md:mx-auto sm:flex-row flex-col text-white cursor-pointer absolute -bottom-20 left-0 right-0">
         <div className="bg-black hover:bg-gray-600 px-10 w-full h-44">
           <h3 className="text-2xl mt-5 sm:mt-8 mb-4 font-extrabold">
             Register Now
