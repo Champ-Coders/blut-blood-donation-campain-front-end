@@ -4,6 +4,11 @@ export interface ISocial {
   icon: any;
 }
 
+export interface ICurrentBloodRequest {
+  location: string;
+  bloodGroup: string;
+  date: string;}
+
 export interface IBanner {
   _id: string;
   backgroundImageURL: string;
