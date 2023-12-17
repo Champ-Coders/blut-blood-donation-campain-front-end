@@ -27,11 +27,11 @@ const NewsCard: React.FC<NewsCardProps> = ({ news }) => {
         </div>
         <div className="p-[25px] shadow-3xl bg-white">
           <div>
-            <p className="flex flex-wrap text-[#ea062b] items-center text-xl gap-2 lg:gap-[25px] mb-[21px]">
+            <p className="flex flex-wrap text-[#ea062b] items-center gap-2  mb-[21px]">
               <FaClock />
               {news.date}
               <IoLogoWechat />
-              {news.comment}
+              comment {news.comment}
             </p>
           </div>
           <div>
@@ -40,7 +40,7 @@ const NewsCard: React.FC<NewsCardProps> = ({ news }) => {
             </h3>
             <p className="text-[#666]">{news.description}</p>
             <Link
-              className="mb-[9px] flex gap-1 items-center font-bold"
+              className="mt-[16px] flex gap-1 items-center font-bold hover:text-[#ea062b] transition duration-300"
               href={"/"}
             >
               Read More <MdKeyboardDoubleArrowRight />
