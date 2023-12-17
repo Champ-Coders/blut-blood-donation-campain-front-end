@@ -1,9 +1,10 @@
 import React from "react";
 import Image from "next/image";
-import experience from "@/assets/counter/experience.png";
-import donors from "@/assets/counter/donors.png";
-import awards from "@/assets/counter/awards.png";
-import recipient from "@/assets/counter/recipient.png";
+import experience from "../../../public/assets/counter/experience.png";
+import donors from "../../../public/assets/counter/donors.png";
+import awards from "../../../public/assets/counter/awards.png";
+import recipient from "../../../public/assets/counter/recipient.png";
+import counterBG from "../../../public/assets/banner/counter-bg.png";
 
 const Counter = () => {
   const companyStatistics = {
@@ -36,15 +37,20 @@ const Counter = () => {
 
   return (
     <div
-      style={{
-        backgroundImage: `url('/assets/banner/counter-bg.png')`,
-        opacity: 0.9,
-        textAlign: "center",
-      }}
-      className=" mt-7 min-h-[22rem] bg-cover bg-center bg-no-repeat bg-black opacity-[0.2] relative bg-fixe  lg:max-h-[30rem]"
+      // style={{
+      //   // backgroundImage: `url(https://i.ibb.co/YRnxkCY/counter-bg.png)`,
+      //   // opacity: 0.5,
+      //   textAlign: "center",
+      // }}
+      className=" mt-7 min-h-[22rem] text-center relative bg-fixe  lg:max-h-[30rem]"
     >
-      <div className="absolute inset-0 bg-black opacity-[0.9]"></div>
-      <section className="text-center grid grid-cols-2 py-[3vw] backdrop-blur-0 ">
+      <div className="absolute w-full h-full -z-10 left-0 top-0 ">
+        <Image src={counterBG} className="" alt="blood-donor-bg" fill />
+      </div>
+      {/* overlay start */}
+      <div className="absolute w-full h-full left-0 top-0 -z-[5] bg-[#16181b] opacity-80"></div>
+      {/* <div className="absolute inset-0 bg-black opacity-[0.9]"></div> */}
+      <section className="container mx-auto text-center grid grid-cols-2 lg:grid-cols-4 py-[3vw] backdrop-blur-0 ">
         {companyStatistics?.counter?.map((item: any, index: number) => {
           return (
             <div
