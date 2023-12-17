@@ -7,5 +7,12 @@ export interface ISocial {
 export interface ICurrentBloodRequest {
   location: string;
   bloodGroup: string;
-  date: string;
+  date: string;}
+
+export interface IBanner {
+  _id: string;
+  backgroundImageURL: string;
+  quotes: string;
+  link: string;
+  videoURL: string;
 }
