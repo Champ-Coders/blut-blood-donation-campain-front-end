@@ -35,6 +35,7 @@ export interface ITeamMember {
   }[];
 }
 
+
 export interface IOurNews {
   id: string;
   date: string;
