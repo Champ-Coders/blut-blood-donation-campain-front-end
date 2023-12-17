@@ -1,4 +1,6 @@
+import { TeamMembers } from "@/constants/TeamMembers";
 import React from "react";
+import TeamMembersCard from "../TeamMembersCard/TeamMembersCard";
 
 const TeamMember = () => {
   return (
@@ -14,7 +16,11 @@ const TeamMember = () => {
             </h4>
           </div>
 
-          <div></div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+            {TeamMembers.map((item) => (
+              <TeamMembersCard item={item} key={item.id} />
+            ))}
+          </div>
         </div>
       </div>
     </section>
