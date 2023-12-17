@@ -27,7 +27,7 @@ const HelpThePeopleInNeed = () => {
   const { title, subTitle, description, features, cta, img } = heroData;
 
   return (
-    <div className="container mx-auto block lg:flex justify-between">
+    <div className="container mx-auto block lg:flex justify-between mt-[2rem]  py-[5rem]">
       <section className="w-full p-2 lg:max-w-[45%]">
         <Image
           src="https://croptheme.com/blut/blut-ltr/assets/images/organization-illustration.png"
@@ -39,7 +39,7 @@ const HelpThePeopleInNeed = () => {
       <section className="w-full px-2 py-[4rem] lg:max-w-[55%] text-start flex flex-col  gap-4 justify-between">
         <Title1 data={{ title }} />
         <SubTitle data={{ subTitle, css:"max-w-[32rem]"}} />
-        <p className="text-[#666666] text-[18px] max-w-[32rem]">{description}</p>
+        <p className="text-[#666666] text-[16px] max-w-[32rem]">{description}</p>
         <ul className="font-[500] grid grid-cols-2 gap-3 pr-4">
           {features?.map((feature: any, index: number) => {
             return (
