@@ -13,8 +13,8 @@ const AboutPage = () => {
         title="About Us"
         image="/assets/blood-donor-bg.png"
       />
-      about
       <DonationProcess />
+      about
     </div>
   );
 };
