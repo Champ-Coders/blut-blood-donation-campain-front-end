@@ -1,29 +1,35 @@
+import { PhoneFilled, MailFilled } from "@ant-design/icons";
+
 const CallNow = () => {
   return (
-    <div className="min-h-[calc(100vh-64px)]">
+    <div>
       <div
         style={{
-          backgroundImage: `url(https://innovativeartisan.com/demo/html/blad-ai/assets/images/call.jpg)`,
+          backgroundImage: `url(https://res.cloudinary.com/dyy4n4fmh/image/upload/v1702731618/call_mvw3tp.jpg)`,
         }}
-        className={`bg-cover h-auto sm:h-[calc(100vh-64px)] relative py-[90px]`}
+        className={`bg-cover h-auto sm:h-[504px] relative py-[90px]`}
       >
-        <div className="absolute h-auto inset-0 bg-black/80"></div>
-        <div className="w-full p-10 h-full font-poppins flex justify-center items-center">
-          <div className="container mx-auto max-w-6xl">
-            <div className="py-[70px] text-white border-8 border-primary relative text-center block">
-              <span className="w-[58px] h-[58px] rotate-45 -top-[33px] absolute left-[50%] -translate-x-[50%] inline-flex justify-center items-center  bg-primary text-white text-center">
-                <span className="-rotate-45">P</span>
+        <div className="absolute  h-auto inset-0 bg-black/80"></div>
+        <div className="w-full h-full font-poppins flex justify-center items-center">
+          <div className="container group mx-auto px-4 max-w-[1130px]">
+            <div className="py-[70px] text-white border-[5px] sm:border-[10px] border-primary relative text-center block">
+              <span className="w-[78px] h-[78px] transition duration-300 ease-in group-hover:rotate-0 rotate-45 -top-[45px] absolute left-[50%] -translate-x-[50%] inline-flex justify-center items-center  bg-primary group-hover:bg-white group-hover:text-primary text-white text-center">
+                <span className="relative inset-0 rotate-45">
+                  <PhoneFilled className="text-3xl" size={50} />
+                </span>
               </span>
-              <p>START DONATING</p>
-              <h1 className="my-6 text-3xl sm:text-5xl">
-                <span className="font-semibold">Call Now:</span> +8801935399238
+              <p className="mb-4 mt-2 font-medium uppercase">START DONATING</p>
+              <h1 className="mb-4 font-bold text-3xl sm:text-5xl leading-[66px]">
+                Call Now: (+880)123456789
               </h1>
-              <div className="flex justify-center items-center gap-5">
-                <p className="text-sm sm:text-base transition duration-300 ease-in hover:text-primary">
+              <div className="flex justify-center flex-col sm:flex-row items-center gap-5">
+                <p className="text-sm sm:text-base transition duration-300 ease-in flex justify-center items-center gap-2 group-hover:text-primary">
+                  <MailFilled />
                   Dhaka, Bangladesh
                 </p>
-                <p className="text-sm sm:text-base transition duration-300 ease-in hover:text-primary">
-                  Donate@gamil.com
+                <p className="text-sm sm:text-base transition duration-300 ease-in  flex justify-center items-center gap-2 group-hover:text-primary">
+                  <MailFilled />
+                  donate@gamil.com
                 </p>
               </div>
             </div>
