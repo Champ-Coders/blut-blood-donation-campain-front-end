@@ -8,7 +8,7 @@ export const NavList: INav[] = [
   },
   {
     name: "About Us",
-    path: "/about",
+    path: "/about-us",
     children: [],
   },
   {
