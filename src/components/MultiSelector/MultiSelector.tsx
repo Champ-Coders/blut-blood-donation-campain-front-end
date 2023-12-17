@@ -28,17 +28,18 @@ const MultiSelect = ({
       return {
         ...styles,
         backgroundColor: "#F9FAFB",
-        borderColor: isFocused ? "#009788" : "#D9DEE3",
+        borderColor: isFocused ? "#ea062b" : "#D9DEE3",
         borderRadius: "8px",
         fontSize: "14px",
         padding: "2px",
+        color: isFocused ? "white" : "black",
       };
     },
     option: (styles: any, { isFocused }: any) => {
       return {
         ...styles,
-        color: isFocused ? "white" : null,
-        backgroundColor: isFocused ? "#009788" : null,
+        color: isFocused ? "white" : "black",
+        backgroundColor: isFocused ? "#ea062b" : null,
       };
     },
     indicatorSeparator: (styles: any) => ({
@@ -49,7 +50,7 @@ const MultiSelect = ({
       ...styles,
       color: "white",
       ":hover": {
-        backgroundColor: "#009788",
+        backgroundColor: "#ea062b",
         color: "white",
       },
     }),
