@@ -10,39 +10,52 @@ type AppointmentFormProps = {};
 
 interface IFormSelector {
   value: string;
+  label: string;
 }
 [];
 
 const options: IFormSelector[] = [
   {
     value: "Donation Type",
+    label: "Donation Type",
+
   },
   {
     value: "Free Donation",
+    label: "Free Donation",
+
   },
   {
     value: "Health Checkup",
+    label: "Health Checkup",
   },
   {
     value: "Blood Donation",
+    label: "Blood Donation",
   },
   {
     value: "Free Donation",
+    label: "Free Donation",
   },
   {
     value: "Health Checkup",
+    label: "Health Checkup",
   },
   {
     value: "Blood Donation",
+    label: "Blood Donation",
   },
   {
     value: "Free Donation",
+    label: "Free Donation",
   },
   {
     value: "Health Checkup",
+    label: "Health Checkup",
   },
   {
     value: "Paid Donation",
+    label: "Paid Donation",
   },
 ];
 
@@ -91,7 +104,7 @@ const AppointmentForm: React.FC<AppointmentFormProps> = () => {
         <MultiSelect
           name={"donationType"}
           options={options}
-          isMulti={true}
+          isMulti={false}
           required={true}
         />
       </div>
