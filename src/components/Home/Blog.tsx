@@ -5,7 +5,7 @@ import React from "react";
 const Blog = () => {
   return (
     <div className="flex sm:flex-row flex-col justify-around mx-2 mt-2 py-10 px-2 gap-8 bg-slate-100">
-      <div className="bg-white text-center max-w-xl sm:h-[585px] h-[575px] w-full relative">
+      <div className="bg-white text-center md:h-[600px] max-w-xl sm:h-[580px] h-[550px] w-full relative">
         <Image
           alt="blog-img"
           src="/assets/banner/blood.png"
@@ -19,12 +19,12 @@ const Blog = () => {
           pleasure and praising pain was born and I will give pleasure
         </p>
         <Link href="/blog" className="absolute bottom-0 left-0 w-full">
-          <button className="btn bg-black mt-16 hover:bg-primary text-white text-lg w-full py-3 font-bold">
+          <button className="btn bg-black hover:bg-primary text-white text-lg w-full py-3 font-bold">
             Read More
           </button>
         </Link>
       </div>
-      <div className="bg-white text-center max-w-xl sm:h-[585px] h-[520px] w-full relative">
+      <div className="bg-white text-center md:h-[600px] max-w-xl sm:h-[580px] h-[550px] w-full relative">
         <Image
           alt="blog-img"
           src="/assets/banner/donor.png"
@@ -38,12 +38,12 @@ const Blog = () => {
           pleasure and praising pain was born and I will give pleasure
         </p>
         <Link href="/blog" className="absolute bottom-0 left-0 w-full">
-          <button className="btn bg-black mt-16 hover:bg-primary text-white text-lg w-full py-3 font-bold">
+          <button className="btn bg-black hover:bg-primary text-white text-lg w-full py-3 font-bold">
             Read More
           </button>
         </Link>
       </div>
-      <div className="bg-white text-center max-w-xl sm:h-[585px] h-[520px] w-full relative">
+      <div className="bg-white text-center md:h-[600px] max-w-xl sm:h-[580px] h-[550px] w-full relative">
         <Image
           alt="blog-img"
           src="/assets/banner/donations.png"
