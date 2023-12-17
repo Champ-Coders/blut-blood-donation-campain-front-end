@@ -15,6 +15,8 @@ const NewsCard: React.FC<NewsCardProps> = ({ news }) => {
     <div>
       <div>
         <Image className="w-full h-full" src={news.image} alt={news.title} />
+        <div className="absolute  top-[50%] w-full h-full z-10"></div>
+        <div className="bg-[#222222a6] w-full h-full absolute left-0 top-0"></div>
         <div className="p-[25px] shadow-3xl bg-white">
           <div>
             <p className="flex flex-wrap text-[#ea062b] items-center text-xl gap-2 lg:gap-[25px] mb-[21px]">
