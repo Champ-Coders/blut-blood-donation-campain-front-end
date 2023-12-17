@@ -4,7 +4,7 @@ import React from "react";
 import PrimaryButton from "../UI/PrimaryButton";
 import Title1 from "../UI/Title1";
 import SubTitle from "../UI/SubTitle";
-
+import { DoubleRightOutlined } from "@ant-design/icons";
 //
 const HelpThePeopleInNeed = () => {
   const heroData = {
@@ -27,25 +27,26 @@ const HelpThePeopleInNeed = () => {
   const { title, subTitle, description, features, cta, img } = heroData;
 
   return (
-    <div className="container mx-auto block lg:flex justify-between">
-      <section className="w-full p-2 lg:[45%]">
+    <div className="container mx-auto block lg:flex justify-between mt-[2rem]  py-[5rem]">
+      <section className="w-full p-2 lg:max-w-[45%]">
         <Image
           src="https://croptheme.com/blut/blut-ltr/assets/images/organization-illustration.png"
           width={564}
-          height={504}
+          height={490}
           alt="help_people"
         />
       </section>
-      <section className="w-full px-2 py-[4rem] lg:[45%] text-start flex flex-col  gap-4 justify-between">
+      <section className="w-full px-2 py-[4rem] lg:max-w-[55%] text-start flex flex-col  gap-4 justify-between">
         <Title1 data={{ title }} />
-        <SubTitle data={{ subTitle }} />
-        <p className="text-[#666666] text-xl">{description}</p>
-        <ul className="font-[500] grid grid-cols-2 gap-3">
+        <SubTitle data={{ subTitle, css:"max-w-[32rem]"}} />
+        <p className="text-[#666666] text-[16px] max-w-[32rem]">{description}</p>
+        <ul className="font-[500] grid grid-cols-2 gap-3 pr-4">
           {features?.map((feature: any, index: number) => {
             return (
               <li className="flex " key={index}>
-                <span className="text-primary mr-2 font-bold">{">>"}</span>
-                <h3 className="text-xl font-semibold capitalize text-black">
+                <DoubleRightOutlined className="!text-primary" />
+                 &nbsp;
+                <h3 className="text-[16px] font-semibold capitalize text-black">
                   {feature}
                 </h3>
               </li>
