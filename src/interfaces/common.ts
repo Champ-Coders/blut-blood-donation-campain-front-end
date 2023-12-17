@@ -34,3 +34,13 @@ export interface ITeamMember {
     icon: IconType;
   }[];
 }
+
+export interface IOurNews {
+  id: string;
+  date: string;
+  comment: string;
+  title: string;
+  image: StaticImageData;
+  description: string;
+}
+[];
