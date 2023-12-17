@@ -10,6 +10,9 @@ import { Statistic } from "antd";
 import CountUp from "react-countup";
 
 const Counter = () => {
+
+  const formatter = (value: number) => <CountUp end={value} separator="," />;
+
   const formatter = (value: number) => (
     <CountUp
       start={0}
@@ -22,6 +25,7 @@ const Counter = () => {
       separator=","
     />
   );
+
 
   const companyStatistics = {
     banner: "/assets/counter-bg.png",
