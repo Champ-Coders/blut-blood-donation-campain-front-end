@@ -10,7 +10,20 @@ import { Statistic } from "antd";
 import CountUp from "react-countup";
 
 const Counter = () => {
-  const formatter = (value: number) => <CountUp end={value} separator="," />;
+
+  const formatter = (value: number) => (
+    <CountUp
+      start={0}
+      duration={2}
+      redraw
+      useEasing
+      enableScrollSpy
+      scrollSpyDelay={200}
+      end={value}
+      separator=","
+    />
+  );
+
 
   const companyStatistics = {
     banner: "/assets/counter-bg.png",

@@ -5,9 +5,11 @@ export interface ISocial {
 }
 
 export interface ICurrentBloodRequest {
+  id: string;
   location: string;
   bloodGroup: string;
-  date: string;}
+  date: string;
+}
 
 export interface IBanner {
   _id: string;

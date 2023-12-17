@@ -1,12 +1,15 @@
-import { FaPlay } from "react-icons/fa";
+import { FaHeart, FaPlay } from "react-icons/fa";
 import React from "react";
 import bg from "@/assets/home/blood-donor-bg.png";
 import Image from "next/image";
+import { CurrentBloodRequest } from "@/constants/CurrentBloodRequest";
+import { ICurrentBloodRequest } from "@/interfaces/common";
+import AppointmentForm from "../AppointmentForm/AppointmentForm";
 
 const BloodOwner = () => {
   return (
     <section className={`  `}>
-      <div className="py-[116px]  relative">
+      <div className="py-[50px] lg:py-[116px]  relative">
         {/* bg image start */}
         <div className="absolute w-full h-full -z-10 left-0 top-0 ">
           <Image src={bg} className="" alt="blood-donor-bg" fill />
@@ -21,7 +24,7 @@ const BloodOwner = () => {
               <h5 className="text-[#EA062B] text-[16px] uppercase mb-4">
                 blood owner
               </h5>
-              <h4 className="capitalize text-5xl font-bold text-white mb-7">
+              <h4 className="capitalize text-2xl lg:text-5xl font-bold text-white mb-7">
                 we are blood donor group
               </h4>
             </div>
@@ -40,12 +43,36 @@ const BloodOwner = () => {
         </div>
       </div>
       {/* bottom section start */}
-      <div className="common">
-        <div>
-          <div className="bg-white p-[35px] shadow-[0px_9px_52px_0px_rgba(0,0,0,.07)]">
-            <h3>current blood request</h3>
+      <div className="common p-0 relative -top-[60px]">
+        <div className="flex flex-col lg:flex-row gap-10 ">
+          <div className="bg-white py-[35px] px-[25px] shadow-[0px_9px_52px_0px_rgba(0,0,0,.07)] w-full">
+            <h3 className="text-[30px] text-[#111111] font-bold capitalize">
+              current blood request
+            </h3>
+            <div className="w-full">
+              <ul>
+                {CurrentBloodRequest.map((item: ICurrentBloodRequest) => (
+                  <li
+                    key={item.id}
+                    className="flex items-center gap-[10px] border-b-[#11111140] border-b-[1px] py-[19px]"
+                  >
+                    <FaHeart className="text-[#ea062b]" />
+                    {item.bloodGroup}
+                    {item.location} ({item.date})
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
-          <div></div>
+          {/* form */}
+          <div className="bg-white py-[35px] px-[25px] shadow-[0px_9px_52px_0px_rgba(0,0,0,.07)] w-full">
+            <h3 className="text-[30px] text-[#111111] font-bold capitalize mb-[30px]">
+              Request Appointment Here
+            </h3>
+            <div className="w-full">
+              <AppointmentForm />
+            </div>
+          </div>
         </div>
       </div>
     </section>
