@@ -10,9 +10,6 @@ import { Statistic } from "antd";
 import CountUp from "react-countup";
 
 const Counter = () => {
-
- 
-
   const formatter = (value: number) => (
     <CountUp
       start={0}
@@ -25,7 +22,6 @@ const Counter = () => {
       separator=","
     />
   );
-
 
   const companyStatistics = {
     banner: "/assets/counter-bg.png",
@@ -57,8 +53,19 @@ const Counter = () => {
 
   return (
     <div className=" mt-7 min-h-[22rem] text-center relative bg-fixe  lg:max-h-[30rem]">
-      <div className="absolute w-full h-full -z-10 left-0 top-0 ">
-        <Image src={counterBG} className="" alt="blood-donor-bg" fill />
+      <div
+        style={{
+          backgroundImage: `url(${counterBG.src})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+          backgroundAttachment: "fixed",
+          position: "relative",
+          zIndex: 0,
+        }}
+        className="absolute w-full h-full -z-10 left-0 top-0 "
+      >
+        {/* <Image src={counterBG} className="" alt="blood-donor-bg" fill /> */}
       </div>
       {/* overlay start */}
       <div className="absolute w-full h-full left-0 top-0 -z-[5] bg-[#16181b] opacity-80"></div>
