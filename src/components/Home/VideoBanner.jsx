@@ -15,7 +15,7 @@ const VideoBanner = () => {
           src="https://res.cloudinary.com/dce4t5emk/video/upload/v1702898386/jtdswsajgic87bnqyclj.mp4"
         />
         <div className="relative z-10   flex items-center justify-start md:h-screen h-[500px] w-full md:w-5/6 mx-0 md:mx-auto p-5">
-          <div className="text-start md:w-3/6 font-poppins">
+          <div className="text-start lg:w-3/6 font-poppins">
             <h1 className="text-primary md:text-5xl text-3xl font-bold">
               Donate Blood Save Life
             </h1>
@@ -37,7 +37,7 @@ const VideoBanner = () => {
 
       {/* Register */}
 
-      <div className="flex w-full md:w-5/6 mx-0 md:mx-auto sm:flex-row flex-col text-white cursor-pointer md:absolute sm:-bottom-20 -bottom-48 left-0 right-0 z-50">
+      <div className="flex w-full md:w-5/6 mx-0 md:mx-auto sm:flex-row flex-col text-white cursor-pointer md:absolute sm:-bottom-20 -bottom-48 left-0 right-0 z-30">
         <div className="bg-black hover:bg-primary px-10 w-full h-44">
           <h3 className="text-2xl mt-5 sm:mt-8 mb-4 font-extrabold">
             Register Now
