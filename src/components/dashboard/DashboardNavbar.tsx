@@ -6,9 +6,12 @@ import {
   BellOutlined,
   SettingOutlined,
 } from "@ant-design/icons";
-import { Button, Input } from "antd";
+import { Button, Input, Select } from "antd";
 import { Header } from "antd/es/layout/layout";
-import React from "react";
+import React, { useState } from "react";
+import MultipleSelectUI from "../UI/MultipleSelectUI";
+
+const optionData = ["AB+", "AB-", "A+", "A-", "B+", "B-", "C+", "C-"];
 
 const DashboardNavbar = ({
   collapsed,
@@ -17,6 +20,8 @@ const DashboardNavbar = ({
   collapsed: boolean;
   setCollapsed: any;
 }) => {
+  const [selectedItems, setSelectedItems] = useState<string[]>([]);
+
   return (
     <Header
       style={{
@@ -44,8 +49,6 @@ const DashboardNavbar = ({
             height: 64,
           }}
         />
-
-        {/* <Logo></Logo> */}
       </section>
 
       <section
@@ -58,41 +61,13 @@ const DashboardNavbar = ({
           // background: "blue",
         }}
       >
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            gap: "10px",
-            // background:"white"
-            border: "2px solid red",
+        <MultipleSelectUI data={{ optionData: optionData }} />
 
-            borderRadius: "8px",
-            padding: "2px 18px",
-            fontSize: "1rem",
-          }}
-        >
-         
-          <SearchOutlined
-            style={{
-              padding: "1rem",
-              background: "red",
-              borderRadius: "50%",
-              color: "white",
-            }}
-          />
-          <input
-            placeholder="Search"
-            style={{
-              outline: "none",
-              height: "40px",
-              padding:"0 24px"
-    
-            }}
-          />
-        </div>
+        {/*//! MultipleSelectUI reusable UI for select multiple options  */}
+
         <BellOutlined
           style={{
-            padding: "1rem",
+            padding: "0.6rem",
             background: "red",
             borderRadius: "50%",
             color: "white",
@@ -100,7 +75,7 @@ const DashboardNavbar = ({
         />
         <SettingOutlined
           style={{
-            padding: "1rem",
+            padding: "0.6rem",
             background: "red",
             borderRadius: "50%",
             color: "white",
