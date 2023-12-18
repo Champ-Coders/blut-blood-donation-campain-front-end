@@ -22,6 +22,7 @@ export default function Home() {
       {/* <Banner /> */}
       <VideoBanner />
       <BloodTypeDonors />
+      <HomeEvent />
       {/* <Blog /> */}
       <HelpThePeopleInNeed />
       <Counter />
