@@ -60,16 +60,9 @@ const RegisterForm: React.FC<RegisterFormProps> = () => {
         <div className="flex-grow w-full">
           <div className="flex w-full sm:flex-row flex-col mb-1 sm:mb-4 justify-between items-center gap-3 sm:gap-6">
             <InputField
-              label="First Name"
-              name={"first_name"}
-              type="text"
-              register={register}
-              errors={errors}
-            />
-            <InputField
-              label="Last Name"
-              name={"last_name"}
-              type="text"
+              label="Date Of Birth"
+              name={"date_of_birth"}
+              type="date"
               register={register}
               errors={errors}
             />
