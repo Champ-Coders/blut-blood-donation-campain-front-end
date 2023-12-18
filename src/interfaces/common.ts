@@ -35,7 +35,6 @@ export interface ITeamMember {
   }[];
 }
 
-
 export interface IOurNews {
   id: string;
   date: string;
@@ -45,3 +44,17 @@ export interface IOurNews {
   description: string;
 }
 [];
+
+export interface IFormSelector {
+  value: string;
+  label: string;
+}
+
+export interface IPopularCamp {
+  title: string;
+  des: string;
+  image: StaticImageData;
+  date: string;
+  timeSlot: string;
+  address: string;
+}
