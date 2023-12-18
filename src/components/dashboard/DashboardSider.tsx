@@ -6,6 +6,8 @@ import Link from "next/link";
 import { ProfileOutlined, UserOutlined } from "@ant-design/icons";
 import { dashboardItems } from "@/constants/dashboardItems";
 import { USER_ROLE } from "@/constants/userRole";
+import Image from "next/image";
+import "./dashboard.css";
 
 const { Sider } = Layout;
 
@@ -46,13 +48,19 @@ const DashboardSidebar = ({
       }}
     >
       {!collapsed ? (
-        <section className="ml-6 text-3xl mt-3 flex gap-2 items-center">
-          <UserOutlined className="text-2xl " />
+        <section className="ml-3 text-3xl mt- flex gap-2 items-center">
           <Link
-            href={`/admin/`}
-            className={`font-semibold font-serif text-primary`}
+            href={"/"}
+            className="bg-primary flex justify-center text-white rounded w-full font-bold py-2 px-2 "
           >
-            DashBoard
+            Blut
+            {/* <Image
+          src={Logo}
+          alt="logo"
+          width={600}
+          height={500}
+          className=" w-[127px] "
+        /> */}
           </Link>
         </section>
       ) : (
@@ -61,8 +69,9 @@ const DashboardSidebar = ({
 
       <Menu
         // theme="light"
-        className="bg-white lg:mt-4"
+        className="bg-white mt-10"
         defaultSelectedKeys={["1"]}
+        triggerSubMenuAction={"hover"}
         style={{
           overflowY: "auto",
         }}
