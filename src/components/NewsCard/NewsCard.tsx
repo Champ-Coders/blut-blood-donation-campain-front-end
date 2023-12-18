@@ -17,7 +17,7 @@ const NewsCard: React.FC<NewsCardProps> = ({ news }) => {
         <div className="relative">
           <Image className="w-full h-full" src={news.image} alt={news.title} />
           <div className="absolute  ease-in-out top-[50%] w-full h-full z-10"></div>
-          <div className="hidden group-hover:block transition duration-300">
+          <div className="hidden group-hover:block group-hover:transition group-hover:duration-500 group-hover:ease-in-out">
             <div className="bg-[#222222a6] w-full h-full absolute left-0 top-0 flex items-center justify-center ">
               <div className=" text-white text-3xl">
                 <FaPlus />
