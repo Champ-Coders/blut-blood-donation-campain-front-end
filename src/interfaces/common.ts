@@ -54,7 +54,6 @@ export interface IEvent {
   description: string;
   image: StaticImageData;
   link: string;
->>>>>>>>> Temporary merge branch 2
 }
 
 export interface IPopularCamp {
