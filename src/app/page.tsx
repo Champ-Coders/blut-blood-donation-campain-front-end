@@ -5,6 +5,7 @@ import BloodTypeDonors from "@/components/Home/BloodTypeDonors";
 import CallNow from "@/components/Home/CallNow";
 import Counter from "@/components/Home/Counter";
 import HelpThePeopleInNeed from "@/components/Home/HelpThePeopleInNeed";
+import HomeEvent from "@/components/Home/HomeEvent";
 import News from "@/components/Home/News";
 import PopularCampaigns from "@/components/Home/PopularCampaigns";
 import Services from "@/components/Home/Services";
@@ -21,6 +22,7 @@ export default function Home() {
       {/* <Banner /> */}
       <VideoBanner />
       <BloodTypeDonors />
+      <HomeEvent />
       {/* <Blog /> */}
       <HelpThePeopleInNeed />
       <Counter />
