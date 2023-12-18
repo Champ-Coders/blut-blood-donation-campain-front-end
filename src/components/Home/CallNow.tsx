@@ -1,10 +1,9 @@
-import { PhoneFilled, MailFilled } from "@ant-design/icons";
 import { FaPhone,FaLocationDot,FaEnvelope } from "react-icons/fa6";
 
 
 const CallNow = () => {
   return (
-    <div>
+    <div className="mt-12">
       <div
         style={{
           backgroundImage: `url(https://res.cloudinary.com/dyy4n4fmh/image/upload/v1702731618/call_mvw3tp.jpg)`,
