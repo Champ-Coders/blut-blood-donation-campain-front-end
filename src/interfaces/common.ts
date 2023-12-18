@@ -45,6 +45,17 @@ export interface IOurNews {
 }
 [];
 
+export interface IEvent {
+  id: string;
+  date: string;
+  time: string;
+  location: string;
+  title: string;
+  description: string;
+  image: StaticImageData;
+  link: string;
+}
+
 export interface IPopularCamp {
   title: string;
   des: string;
