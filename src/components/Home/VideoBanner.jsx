@@ -14,6 +14,7 @@ const VideoBanner = () => {
           muted
           src="https://res.cloudinary.com/dce4t5emk/video/upload/v1702898386/jtdswsajgic87bnqyclj.mp4"
         />
+
         <div className="relative z-10   flex items-center justify-start md:h-screen h-[500px] w-full md:w-5/6 mx-0 md:mx-auto p-5">
           <div className="text-start lg:w-3/6 font-poppins">
             <h1 className="text-primary md:text-5xl text-3xl font-bold">
@@ -47,7 +48,7 @@ const VideoBanner = () => {
               Nor again is there anyone who loves or pursues or desires to
               obtain pain of itself, because it is pain,
             </p>
-            <div className="sm:ml-10 ml-6 sm:-mt-10 -mt-8">
+            <div className="sm:ml-10 ml-6  -mt-4">
               <DownloadOutlined className="-rotate-90 font-bold text-4xl" />
             </div>
           </div>
@@ -61,7 +62,7 @@ const VideoBanner = () => {
               Nor again is there anyone who loves or pursues or desires to
               obtain pain of itself, because it is pain,
             </p>
-            <div className="sm:ml-10 ml-6 sm:-mt-10 -mt-8">
+            <div className="sm:ml-10 ml-6  -mt-4">
               <DownloadOutlined className="-rotate-90 font-bold text-4xl" />
             </div>
           </div>
