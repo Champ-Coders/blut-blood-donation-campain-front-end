@@ -12,7 +12,7 @@ import Drawers from "@/components/Drawer/Drawer";
 const MainHeader = () => {
   const [open, setOpen] = React.useState(false);
   return (
-    <div className=" items-center grid md:grid-cols-5 grid-cols-3 shadow justify-between ">
+    <div className=" items-center grid md:grid-cols-5 grid-cols-3 shadow justify-between bg-white">
       <Link
         href={"/"}
         className="col-span-1 bg-primary flex justify-center py-4 px-2 "
@@ -24,7 +24,7 @@ const MainHeader = () => {
           height={500}
           className=" w-[127px] "
         />
-      </Link>
+      </Link> 
 
       <div className="lg:flex items-center gap-5 md:col-span-2 justify-around hidden">
         {NavList.map((item, i) => (

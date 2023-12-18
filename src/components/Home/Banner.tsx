@@ -31,6 +31,8 @@ const Banner = () => {
   }, [currentIndex]);
   return (
     <div className="relative">
+
+      {/* banner */}
       <div className="relative">
         <div className="overflow-hidden">
           <div
@@ -82,6 +84,13 @@ const Banner = () => {
           <RightOutlined />
         </button>
       </div>
+
+
+      {/* Register */}
+
+
+
+
       <div className="flex w-full md:w-5/6 mx-0 md:mx-auto sm:flex-row flex-col text-white cursor-pointer absolute sm:-bottom-20 -bottom-48 left-0 right-0">
         <div className="bg-black hover:bg-primary px-10 w-full h-44">
           <h3 className="text-2xl mt-5 sm:mt-8 mb-4 font-extrabold">
