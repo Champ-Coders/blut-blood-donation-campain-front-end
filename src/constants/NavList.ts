@@ -37,6 +37,10 @@ export const NavList: INav[] = [
         name: "About Us",
         path: "/about",
       },
+      {
+        name: "Register Now",
+        path: "/register",
+      },
     ],
   },
   {
