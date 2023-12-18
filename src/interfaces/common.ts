@@ -45,6 +45,11 @@ export interface IOurNews {
 }
 [];
 
+export interface IFormSelector {
+  value: string;
+  label: string;
+}
+
 export interface IPopularCamp {
   title: string;
   des: string;
