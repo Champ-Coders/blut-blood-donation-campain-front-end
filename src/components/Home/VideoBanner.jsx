@@ -1,42 +1,37 @@
-import { DownloadOutlined, YoutubeFilled } from "@ant-design/icons";
+import { DownloadOutlined } from "@ant-design/icons";
 import React from "react";
-import Link from "next/link";
 
 const VideoBanner = () => {
   return (
     <div className="md:relative">
-      {/* video player ,auto play,no controller  with video link https://drive.google.com/file/d/13F1MbW1lbNDPKXLexo3Iv7ZWWY_J6DH8/view?usp=sharing */}
+      {/* video player */}
 
-      <div className="">
-        <div className="border-4">
-          <video
-            className="w-full h-full object-cover"
-            autoPlay
-            loop
-            muted
-            src={
-              "https://res.cloudinary.com/dce4t5emk/video/upload/v1702898386/jtdswsajgic87bnqyclj.mp4"
-            }
-          >
-            <div className="w-full flex-shrink-0">
-              <div className=" sm:px-32 px-10 py-20 sm:py-40 text-center sm:text-left">
-                <p>
-                  <YoutubeFilled className="text-primary text-5xl" />
-                </p>
-                <h3 className="text-primary text-lg sm:text-3xl mt-8 font-bold">
-                  Donate Blood Save Life
-                </h3>
-                <h3 className="text-black text-2xl sm:text-5xl max-w-xl mt-2 sm:mt-6 font-extrabold">
-                  Donate Blood And Inspire Others To Donate
-                </h3>
-                <Link href={"/"}>
-                  <button className="btn bg-primary mt-16 sm:mt-32 hover:bg-black text-white text-xl px-5 py-2 rounded-lg">
-                    Explore Now
-                  </button>
-                </Link>
-              </div>
-            </div>
-          </video>
+      <div className="relative">
+        <video
+          className="absolute w-full h-full object-cover"
+          autoPlay
+          loop
+          muted
+          src="https://res.cloudinary.com/dce4t5emk/video/upload/v1702898386/jtdswsajgic87bnqyclj.mp4"
+        />
+        <div className="relative z-10   flex items-center justify-start md:h-screen h-[500px] w-full md:w-5/6 mx-0 md:mx-auto p-5">
+          <div className="text-start md:w-3/6 font-poppins">
+            <h1 className="text-primary md:text-5xl text-3xl font-bold">
+              Donate Blood Save Life
+            </h1>
+            <h2 className="text-black md:text-6xl text-4xl font-semibold mt-4">
+              Donate Blood And Inspire Others To Donate
+            </h2>
+            <button
+              className="mt-8 px-4 py-2 bg-primary text-white rounded border p-2 border-primary hover:text-primary hover:bg-white
+             translate-all
+              duration-300
+              ease-in-out
+              "
+            >
+              Explore Now
+            </button>
+          </div>
         </div>
       </div>
 
