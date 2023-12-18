@@ -27,7 +27,7 @@ const AvailableDonorLink = [
 
 const BloodTypeDonors = () => {
   return (
-    <div className="md:my-[90px] my-[200px]">
+    <div className="md:my-[90px] my-[30px]">
       <DonorLink availableDonorLink={AvailableDonorLink} />
       <CompatibleBloodTypeDonors />
     </div>
