@@ -6,11 +6,17 @@ import { INav } from "@/interfaces/INav";
 
 const Dropdown = ({ item }: { item: INav }) => {
   const [open, setOpen] = React.useState(false);
+
+  // get route path name
+  const path = window.location.pathname;
+
   return (
     <div
       onMouseEnter={() => setOpen(true)}
       onMouseLeave={() => setOpen(false)}
-      className="relative inline-block text-left font-inter font-medium  text-black hover:text-primary transition-all duration-500 ease-in-out"
+      className={`relative inline-block text-left font-inter font-medium   hover:text-primary transition-all duration-500 ease-in-out ${
+        path === item.path ? "text-primary" : "text-black"
+      }`}
     >
       <Link href={item.path} className="flex items-center gap-1">
         {item?.name}
