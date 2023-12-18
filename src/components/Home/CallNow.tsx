@@ -8,6 +8,12 @@ const CallNow = () => {
       <div
         style={{
           backgroundImage: `url(https://res.cloudinary.com/dyy4n4fmh/image/upload/v1702731618/call_mvw3tp.jpg)`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+          backgroundAttachment: "fixed",
+          position: "relative",
+          zIndex: 0,
         }}
         className={`bg-cover h-auto sm:h-[504px] relative py-[90px]`}
       >

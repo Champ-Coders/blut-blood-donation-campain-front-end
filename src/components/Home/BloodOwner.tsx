@@ -8,12 +8,20 @@ import AppointmentForm from "../AppointmentForm/AppointmentForm";
 
 const BloodOwner = () => {
   return (
-    <section className={`  `}>
-      <div className="py-[50px] lg:py-[116px]  relative">
-        {/* bg image start */}
-        <div className="absolute w-full h-full -z-10 left-0 top-0 ">
-          <Image src={bg} className="" alt="blood-donor-bg" fill />
-        </div>
+    <section className={`relative`}>
+      <div
+        style={{
+          // backgroundImage
+          backgroundImage: `url(${bg.src})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+          backgroundAttachment: "fixed",
+          position: "relative",
+          zIndex: 0,
+        }}
+        className="py-[50px] lg:py-[116px]  "
+      >
         {/* overlay start */}
         <div className="absolute w-full h-full left-0 top-0 -z-[5] bg-[#16181b] opacity-80"></div>
         {/* overlay end */}
