@@ -40,6 +40,7 @@ const BannerBreadcrumb = ({
         width: "100%",
         backgroundSize: "cover",
         backgroundPosition: "center",
+        backgroundAttachment: "fixed",
         boxShadow: "inset 0 0 0 50vw rgba(0, 0, 0, 0.5)",
       }}
       className="h-[200px] md:h-[400px] flex flex-col items-center justify-center bg-blend-lighten "
