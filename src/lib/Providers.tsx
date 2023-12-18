@@ -9,9 +9,9 @@ const Providers = ({ children }: { children: React.ReactNode }) => {
       <ConfigProvider
         theme={{
           token: {
-            // Seed Token
-            colorPrimary: "red",
-           
+            colorPrimary: "#ea062b",
+            colorPrimaryBgHover: "#5371FF",
+            
           },
         }}
       >

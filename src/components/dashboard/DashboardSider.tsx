@@ -8,6 +8,8 @@ import { dashboardItems } from "@/constants/dashboardItems";
 import { USER_ROLE } from "@/constants/userRole";
 import Image from "next/image";
 import "./dashboard.css";
+import logo from "../../../public/assets/logo-light.png";
+import SideMenuUI from "../UI/SideMenuUI";
 
 const { Sider } = Layout;
 
@@ -21,7 +23,7 @@ const DashboardSidebar = ({
   return (
     <Sider
       // collapsible
-      className="bg-primar"
+      // className="bg-primar text-primary"
       collapsed={collapsed}
       onCollapse={(value) => setCollapsed(value)}
       width={300}
@@ -53,31 +55,28 @@ const DashboardSidebar = ({
             href={"/"}
             className="bg-primary flex justify-center text-white rounded w-full font-bold py-2 px-2 "
           >
-            Blut
-            {/* <Image
-          src={Logo}
-          alt="logo"
-          width={600}
-          height={500}
-          className=" w-[127px] "
-        /> */}
+            <Image
+              src={logo}
+              alt="logo"
+              width={600}
+              height={500}
+              className=" w-[127px] "
+            />
           </Link>
         </section>
       ) : (
         <UserOutlined className="text-2xl ml-7 mt-3" />
       )}
 
-      <Menu
-        // theme="light"
-        className="bg-white mt-10"
-        defaultSelectedKeys={["1"]}
-        triggerSubMenuAction={"hover"}
-        style={{
-          overflowY: "auto",
+      <SideMenuUI
+        data={{
+          itemsData: dashboardItems(USER_ROLE.admin),
+          mainCss: "bg-white",
+          menuCss: "bg-slate-50 text-primary my-5 font-[600]",
+          subMenuCss: "hover:bg-primary hover:text-white",
         }}
-        mode="inline"
-        items={dashboardItems(USER_ROLE.admin)}
       />
+      {/* //! SIdeMenuUI is reusable MenuUI for showing layout sidebar UI with dropdown children */}
     </Sider>
   );
 };

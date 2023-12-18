@@ -11,6 +11,7 @@ import {
   UserOutlined,
   UsergroupDeleteOutlined,
   ClusterOutlined,
+  UserSwitchOutlined
 } from "@ant-design/icons";
 import Link from "next/link";
 import { USER_ROLE } from "./userRole";
@@ -19,20 +20,23 @@ export const dashboardItems = (role: USER_ROLE) => {
   // ! common sidebar for every user
   const defaultSidebarItems: MenuProps["items"] = [
     {
-      label: <button className="text-xl font-semibold my-[2rem]">Profile</button>,
+      label: <button className="">Profile</button>,
       key: "profile",
       icon: (
-        <ProfileOutlined
+        <UserSwitchOutlined
           style={{
-            fontSize: "1.5rem",
-            borderRadius: "10px",
-            margin: "2rem 3px",
+            fontSize: "1.8rem",
+            // borderRadius: "10px",
           }}
         />
       ),
       children: [
         {
-          label: <Link className="text-[16px] font-semibold" href={`/profile`}>Your Profile</Link>,
+          label: (
+            <Link className="" href={`/profile`}>
+              Your Profile
+            </Link>
+          ),
           key: `/${role}/profile`,
         },
       ],
@@ -43,40 +47,46 @@ export const dashboardItems = (role: USER_ROLE) => {
     ...defaultSidebarItems,
 
     {
-      label: <button className="text-xl font-semibold my-[2rem]">Manage Users</button>,
+      label: <button className=" ">Manage Users</button>,
       key: "manage-user",
       icon: (
         <UsergroupDeleteOutlined
           style={{
-            fontSize: "1.5rem",
-            borderRadius: "10px",
-            margin: "2rem 3px",
+            fontSize: "1.8rem",
+            // borderRadius: "10px",
           }}
         />
       ),
       children: [
         {
-          label: <button className="text-xl font-semibold my-[2rem]">All Users</button>,
+          label: <button className=" ">All Users</button>,
           key: "All-users",
           icon: (
             <UserOutlined
               style={{
-                fontSize: "1.5rem",
-                borderRadius: "10px",
-                margin: "2rem 3px",
+                fontSize: "1.8rem",
+                // borderRadius: "10px",
               }}
             />
           ),
           children: [
             {
               label: (
-                <Link className="text-[16px] font-semibold" href={`/admin/manage-users/all-users`}>Users List</Link>
+                <Link
+                  className=""
+                  href={`/admin/manage-users/all-users`}
+                >
+                  Users List
+                </Link>
               ),
               key: `/admin/user/all-users-list`,
             },
             {
               label: (
-                <Link className="text-[16px] font-semibold" href={`/admin/manage-users/all-users/create`}>
+                <Link
+                  className=""
+                  href={`/admin/manage-users/all-users/create`}
+                >
                   Create user{" "}
                 </Link>
               ),
@@ -90,20 +100,29 @@ export const dashboardItems = (role: USER_ROLE) => {
           icon: (
             <UserOutlined
               style={{
-                fontSize: "1.5rem",
-                borderRadius: "10px",
-                margin: "2rem 3px",
+                fontSize: "1.8rem",
+                // borderRadius: "10px",
               }}
             />
           ),
           children: [
             {
-              label: <Link className="text-[16px] font-semibold" href={`/admin/manage-users/donar`}>donar List</Link>,
+              label: (
+                <Link
+                  className=""
+                  href={`/admin/manage-users/donar`}
+                >
+                  donar List
+                </Link>
+              ),
               key: `admin/manage-users/donar`,
             },
             {
               label: (
-                <Link className="text-[16px] font-semibold" href={`/admin/manage-users/donar/create`}>
+                <Link
+                  className=""
+                  href={`/admin/manage-users/donar/create`}
+                >
                   Create Donar
                 </Link>
               ),
@@ -117,22 +136,29 @@ export const dashboardItems = (role: USER_ROLE) => {
           icon: (
             <UserOutlined
               style={{
-                fontSize: "1.5rem",
-                borderRadius: "10px",
-                margin: "2rem 3px",
+                fontSize: "1.8rem",
+                // borderRadius: "10px",
               }}
             />
           ),
           children: [
             {
               label: (
-                <Link className="text-[16px] font-semibold" href={`/admin/manage-users/donars`}>donars List</Link>
+                <Link
+                  className=""
+                  href={`/admin/manage-users/donars`}
+                >
+                  donars List
+                </Link>
               ),
               key: `/admin/manage-users/donars`,
             },
             {
               label: (
-                <Link className="text-[16px] font-semibold" href={`/admin/manage-users/all-users/donars/create`}>
+                <Link
+                  className=""
+                  href={`/admin/manage-users/all-users/donars/create`}
+                >
                   Create donar
                 </Link>
               ),
@@ -146,22 +172,29 @@ export const dashboardItems = (role: USER_ROLE) => {
           icon: (
             <UserOutlined
               style={{
-                fontSize: "1.5rem",
-                borderRadius: "10px",
-                margin: "2rem 3px",
+                fontSize: "1.8rem",
+                // borderRadius: "10px",
               }}
             />
           ),
           children: [
             {
               label: (
-                <Link className="text-[16px] font-semibold" href={`/admin/manage-users/donars`}>donars List</Link>
+                <Link
+                  className=""
+                  href={`/admin/manage-users/donars`}
+                >
+                  donars List
+                </Link>
               ),
               key: `/admin/manage-users/donars`,
             },
             {
               label: (
-                <Link className="text-[16px] font-semibold" href={`/admin/manage-users/all-users/donars/create`}>
+                <Link
+                  className=""
+                  href={`/admin/manage-users/all-users/donars/create`}
+                >
                   Create donar
                 </Link>
               ),
@@ -172,116 +205,168 @@ export const dashboardItems = (role: USER_ROLE) => {
       ],
     },
     {
-      label: <button className="text-xl font-semibold my-[2rem]">Manage Service</button>,
+      label: <button className=" ">Manage Service</button>,
       key: "manage-service",
       icon: (
         <CreditCardOutlined
           style={{
-            fontSize: "1.5rem",
-            borderRadius: "10px",
-            margin: "2rem 3px",
+            fontSize: "1.8rem",
+            // borderRadius: "10px",
           }}
         />
       ),
       children: [
         {
-          label: <Link className="text-[16px] font-semibold" href={`/admin/service`}>service List</Link>,
+          label: (
+            <Link className="" href={`/admin/service`}>
+              service List
+            </Link>
+          ),
           key: `/admin/service`,
         },
         {
-          label: <Link className="text-[16px] font-semibold" href={`/admin/service/create`}>Create service</Link>,
+          label: (
+            <Link
+              className=""
+              href={`/admin/service/create`}
+            >
+              Create service
+            </Link>
+          ),
           key: `/admin/service/create`,
         },
       ],
     },
     {
-      label: <button className="text-xl font-semibold my-[2rem]">Manage Blogs</button>,
+      label: <button className=" ">Manage Blogs</button>,
       key: "manage-blogs",
       icon: (
         <ClusterOutlined
           style={{
-            fontSize: "1.5rem",
-            borderRadius: "10px",
-            margin: "2rem 3px",
+            fontSize: "1.8rem",
+            // borderRadius: "10px",
           }}
         />
       ),
       children: [
         {
-          label: <Link className="text-[16px] font-semibold" href={`/admin/blogs`}>blogs List</Link>,
+          label: (
+            <Link className="" href={`/admin/blogs`}>
+              blogs List
+            </Link>
+          ),
           key: `/admin/blogs`,
         },
         {
-          label: <Link className="text-[16px] font-semibold" href={`/admin/blogs/create`}>Create blogs</Link>,
+          label: (
+            <Link
+              className=""
+              href={`/admin/blogs/create`}
+            >
+              Create blogs
+            </Link>
+          ),
           key: `/admin/blogs/create`,
         },
       ],
     },
     {
-      label: <button className="text-xl font-semibold my-[2rem]">Manage FAQ</button>,
+      label: <button className=" ">Manage FAQ</button>,
       key: "manage-faq",
       icon: (
         <ThunderboltOutlined
           style={{
-            fontSize: "1.5rem",
-            borderRadius: "10px",
-            margin: "2rem 3px",
+            fontSize: "1.8rem",
+            // borderRadius: "10px",
           }}
         />
       ),
       children: [
         {
-          label: <Link className="text-[16px] font-semibold" href={`/admin/faq`}>faq List</Link>,
+          label: (
+            <Link className="" href={`/admin/faq`}>
+              faq List
+            </Link>
+          ),
           key: `/admin/faq`,
         },
         {
-          label: <Link className="text-[16px] font-semibold" href={`/admin/faq/create`}>Create faq</Link>,
+          label: (
+            <Link
+              className=""
+              href={`/admin/faq/create`}
+            >
+              Create faq
+            </Link>
+          ),
           key: `/admin/faq/create`,
         },
       ],
     },
     {
-      label: <button className="text-xl font-semibold my-[2rem]">Manage Review</button>,
+      label: <button className=" ">Manage Review</button>,
       key: "manage-review",
       icon: (
         <FileTextOutlined
           style={{
-            fontSize: "1.5rem",
-            borderRadius: "10px",
-            margin: "2rem 3px",
+            fontSize: "1.8rem",
+            // borderRadius: "10px",
           }}
         />
       ),
       children: [
         {
-          label: <Link className="text-[16px] font-semibold" href={`/admin/module`}>Modules List</Link>,
+          label: (
+            <Link className="" href={`/admin/module`}>
+              Modules List
+            </Link>
+          ),
           key: `/admin/module`,
         },
         {
-          label: <Link className="text-[16px] font-semibold" href={`/admin/module/create`}>Create modules</Link>,
+          label: (
+            <Link
+              className=""
+              href={`/admin/module/create`}
+            >
+              Create modules
+            </Link>
+          ),
           key: `/admin/module/create`,
         },
       ],
     },
     {
-      label: <button className="text-xl font-semibold my-[2rem]">Manage NavItems</button>,
+      label: (
+        <button className=" ">Manage NavItems</button>
+      ),
       key: "manage-navItem",
       icon: (
         <ScheduleOutlined
           style={{
-            fontSize: "1.5rem",
-            borderRadius: "10px",
-            margin: "2rem 3px",
+            fontSize: "1.8rem",
+            // borderRadius: "10px",
           }}
         />
       ),
       children: [
         {
-          label: <Link className="text-[16px] font-semibold" href={`/admin/navItem`}>navItem List</Link>,
+          label: (
+            <Link className="" href={`/admin/navItem`}>
+              navItem List
+            </Link>
+          ),
           key: `/admin/navItem`,
         },
         {
-          label: <Link className="text-[16px] font-semibold" href={`/admin/navItem/create`}>Create navItem</Link>,
+          label: (
+            <Link
+              className=""
+              href={`/admin/navItem/create`}
+            >
+              Create navItem
+            </Link>
+          ),
           key: `/admin/navItem/create`,
         },
       ],
@@ -290,13 +375,16 @@ export const dashboardItems = (role: USER_ROLE) => {
   // ! donar SidebarItems
   const donarSidebarItems: MenuProps["items"] = [
     {
-      label: <Link className="text-[16px] font-semibold" href={`/${role}/admin`}>Manage Admin</Link>,
+      label: (
+        <Link className="" href={`/${role}/admin`}>
+          Manage Admin
+        </Link>
+      ),
       icon: (
         <AlipayCircleFilled
           style={{
-            fontSize: "1.5rem",
-            borderRadius: "10px",
-            margin: "2rem 3px",
+            fontSize: "1.8rem",
+            // borderRadius: "10px",
           }}
         />
       ),
@@ -308,26 +396,32 @@ export const dashboardItems = (role: USER_ROLE) => {
   const patientSidebarItems: MenuProps["items"] = [
     ...defaultSidebarItems,
     {
-      label: <Link className="text-[16px] font-semibold" href={`/${role}/booking`}>Booking History</Link>,
+      label: (
+        <Link className="" href={`/${role}/booking`}>
+          Booking History
+        </Link>
+      ),
       icon: (
         <ThunderboltOutlined
           style={{
-            fontSize: "1.5rem",
-            borderRadius: "10px",
-            margin: "2rem 3px",
+            fontSize: "1.8rem",
+            // borderRadius: "10px",
           }}
         />
       ),
       key: `/${role}/Service`,
     },
     {
-      label: <Link className="text-[16px] font-semibold" href={`/${role}/review`}>Review/Feedback History</Link>,
+      label: (
+        <Link className="" href={`/${role}/review`}>
+          Review/Feedback History
+        </Link>
+      ),
       icon: (
         <AccountBookFilled
           style={{
-            fontSize: "1.5rem",
-            borderRadius: "10px",
-            margin: "2rem 3px",
+            fontSize: "1.8rem",
+            // borderRadius: "10px",
           }}
         />
       ),
@@ -335,13 +429,16 @@ export const dashboardItems = (role: USER_ROLE) => {
     },
 
     {
-      label: <Link className="text-[16px] font-semibold" href={`/${role}/support`}>Support and Help</Link>,
+      label: (
+        <Link className="" href={`/${role}/support`}>
+          Support and Help
+        </Link>
+      ),
       icon: (
         <BorderOuterOutlined
           style={{
-            fontSize: "1.5rem",
-            borderRadius: "10px",
-            margin: "2rem 3px",
+            fontSize: "1.8rem",
+            // borderRadius: "10px",
           }}
         />
       ),

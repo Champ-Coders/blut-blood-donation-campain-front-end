@@ -6,6 +6,7 @@ import useBreakpoint from "antd/lib/grid/hooks/useBreakpoint";
 import DashboardSidebar from "@/components/dashboard/DashboardSider";
 import { dashboardItems } from "@/constants/dashboardItems";
 import { USER_ROLE } from "@/constants/userRole";
+import SideMenuUI from "@/components/UI/SideMenuUI";
 
 const { Content } = Layout;
 
@@ -28,12 +29,15 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
           onClose={() => setCollapsed(false)}
           open={collapsed}
         >
-          <Menu
-            className="bg-white"
-            defaultSelectedKeys={["1"]}
-            mode="inline"
-            items={dashboardItems(USER_ROLE.admin)}
+          <SideMenuUI
+            data={{
+              itemsData: dashboardItems(USER_ROLE.admin),
+              mainCss: "bg-white",
+              menuCss: "bg-slate-50 text-primary my-5 font-[600]",
+              subMenuCss: "hover:bg-primary hover:text-white",
+            }}
           />
+          {/* //! SIdeMenuUI is reusable MenuUI for showing layout sidebar UI with dropdown children */}
         </Drawer>
       ) : (
         <section>

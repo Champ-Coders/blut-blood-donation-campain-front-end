@@ -1,3 +1,5 @@
 .ant-menu-submenu-arrow {
-    display: none !important;
-  }
+  display: none !important;
+}
+
+/* Custom styles for selected item */
