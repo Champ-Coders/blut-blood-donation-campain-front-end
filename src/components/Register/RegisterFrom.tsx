@@ -15,7 +15,7 @@ const RegisterForm: React.FC<RegisterFormProps> = () => {
     formState: { errors },
   } = useForm();
 
-  console.log(errors)
+  console.log(errors);
   const onSubmit = (data: any) => {
     // Handle form submission logic here
     console.log("Form Data:", data);
@@ -140,7 +140,10 @@ const RegisterForm: React.FC<RegisterFormProps> = () => {
               errors={errors}
             />
 
-            <button type="submit" className="relative w-full rounded px-5 py-2 overflow-hidden group bg-primary  hover:bg-black text-white transition-all ease-out duration-300">
+            <button
+              type="submit"
+              className="relative w-full rounded px-5 py-2 overflow-hidden group bg-primary  hover:bg-black text-white transition-all ease-out duration-300"
+            >
               <span className="absolute right-0 w-8 h-32 -mt-12 transition-all duration-1000 transform translate-x-10 bg-white opacity-10 rotate-12 group-hover:-translate-x-[550px] ease"></span>
               <span className="relative">Submit</span>
             </button>

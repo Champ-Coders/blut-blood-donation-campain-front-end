@@ -17,22 +17,13 @@ const TeamMembersCard: React.FC<TeamMembersCardProps> = ({ item }) => {
             <div className="absolute  top-[50%] w-full h-full z-10 ">
               <ul className="flex gap-2 rounded-3xl items-center justify-center">
                 {item?.socialMedia.map((socialItem) => (
-                  <li
-                    key={socialItem.id}
-                    className={`bg-white p-4 ${
-                      socialItem.id === "1"
-                        ? "rounded-tl-[20px] rounded-bl-[20px]"
-                        : ""
-                    } ${
-                      socialItem.id === "3"
-                        ? "rounded-tr-[20px] rounded-br-[20px]"
-                        : ""
-                    } rounded-full`}
-                  >
-                    <Link href={socialItem.link}>
-                      <socialItem.icon size={18} className={"text-[#ea062b]"} />
-                    </Link>
-                  </li>
+                  <Link key={socialItem.id} href={socialItem.link}>
+                    <li
+                      className={`bg-white p-4 text-[#ea062b] hover:text-white hover:bg-[#ea062b] rounded-full  transition duration-500 ease-in-out hover:-translate-y-5`}
+                    >
+                      <socialItem.icon size={18} className={""} />
+                    </li>{" "}
+                  </Link>
                 ))}
               </ul>
             </div>

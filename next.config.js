@@ -2,7 +2,7 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: ["croptheme.com"],
+    domains: ["croptheme.com", 'i.ibb.co'],
   },
 };
 
