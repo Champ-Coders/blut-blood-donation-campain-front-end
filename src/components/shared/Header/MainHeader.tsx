@@ -24,7 +24,7 @@ const MainHeader = () => {
           height={500}
           className=" w-[127px] "
         />
-      </Link>
+      </Link> 
 
       <div className="lg:flex items-center gap-5 md:col-span-2 justify-around hidden">
         {NavList.map((item, i) => (
