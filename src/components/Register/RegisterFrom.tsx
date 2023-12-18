@@ -6,7 +6,7 @@ import MultiSelect from "../MultiSelector/MultiSelector";
 import TextAreaField from "../TextAreaField/TextAreaField";
 import Button from "../Button/Button";
 
-type AppointmentFormProps = {};
+type RegisterFormProps = {};
 
 interface IFormSelector {
   value: string;
@@ -29,7 +29,7 @@ const options: IFormSelector[] = [
   },
 ];
 
-const AppointmentForm: React.FC<AppointmentFormProps> = () => {
+const RegisterForm: React.FC<RegisterFormProps> = () => {
   const {
     register,
     handleSubmit,
@@ -73,4 +73,4 @@ const AppointmentForm: React.FC<AppointmentFormProps> = () => {
     </form>
   );
 };
-export default AppointmentForm;
+export default RegisterForm;
