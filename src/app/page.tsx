@@ -10,7 +10,9 @@ import PopularCampaigns from "@/components/Home/PopularCampaigns";
 import Services from "@/components/Home/Services";
 import TeamMember from "@/components/Home/TeamMember";
 import Testimonials from "@/components/Home/Testimonials";
+
 import VideoBanner from "@/components/Home/VideoBanner.jsx";
+
 import Newsletter from "@/components/Newsletter/Newsletter";
 
 export default function Home() {
