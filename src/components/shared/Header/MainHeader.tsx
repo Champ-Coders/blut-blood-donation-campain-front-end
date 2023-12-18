@@ -12,7 +12,7 @@ import Drawers from "@/components/Drawer/Drawer";
 const MainHeader = () => {
   const [open, setOpen] = React.useState(false);
   return (
-    <div className=" items-center grid md:grid-cols-5 grid-cols-3 shadow justify-between">
+    <div className=" items-center grid md:grid-cols-5 grid-cols-3 shadow justify-between ">
       <Link
         href={"/"}
         className="col-span-1 bg-primary flex justify-center py-4 px-2 "
