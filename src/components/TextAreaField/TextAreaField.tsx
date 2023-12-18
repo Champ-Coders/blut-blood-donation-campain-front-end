@@ -6,6 +6,7 @@ interface TextAreaFieldProps {
   name?: string;
   customClass?: string;
   placeholder?: string;
+  rows?:number;
   required?: boolean;
   register?: UseFormRegister<FieldValues>;
   errors?: any;
@@ -21,6 +22,7 @@ const TextAreaField = ({
   customClass,
   placeholder,
   required,
+  rows,
   register,
   errors,
   value,
@@ -46,6 +48,7 @@ const TextAreaField = ({
       {register ? (
         <textarea
           placeholder={placeholder}
+          rows={rows}
           disabled={disabled}
           defaultValue={defaultValue ? defaultValue : undefined} // Use undefined for textarea defaultValue
           // onChange={onChange ? onChange : () => {}}
@@ -75,6 +78,7 @@ const TextAreaField = ({
                 }`
           }`}
           name={name}
+          rows={rows}
           value={value}
           disabled={disabled}
           defaultValue={defaultValue ? defaultValue : undefined}
