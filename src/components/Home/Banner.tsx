@@ -92,7 +92,7 @@ const Banner = () => {
               Nor again is there anyone who loves or pursues or desires to
               obtain pain of itself, because it is pain,
             </p>
-            <div className="sm:ml-10 ml-6 sm:-mt-10 -mt-8">
+            <div className="sm:ml-10 ml-6">
               <DownloadOutlined className="-rotate-90 font-bold text-4xl" />
             </div>
           </div>
@@ -106,7 +106,7 @@ const Banner = () => {
               Nor again is there anyone who loves or pursues or desires to
               obtain pain of itself, because it is pain,
             </p>
-            <div className="sm:ml-10 ml-6 sm:-mt-10 -mt-8">
+            <div className="sm:ml-10 ml-6">
               <DownloadOutlined className="-rotate-90 font-bold text-4xl" />
             </div>
           </div>
