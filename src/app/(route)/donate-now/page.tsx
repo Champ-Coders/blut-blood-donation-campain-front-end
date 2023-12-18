@@ -1,6 +1,20 @@
-const DonateNowPage = () => {
+import DonateNow from "@/components/DonateNow/DonateNow"
+import BannerBreadcrumb from "@/components/UI/BannerBreadcrumb"
+
+const RegisterPage = () => {
   return (
-    <div>DonateNowPage</div>
+    <div>
+      <BannerBreadcrumb
+        items={[
+          {
+            label: "Donate",
+          },
+        ]}
+        title="Donate Now"
+        image="/assets/blood-donor-bg.png"
+      />
+      <DonateNow />
+      </div>
   )
 }
-export default DonateNowPage
+export default RegisterPage
