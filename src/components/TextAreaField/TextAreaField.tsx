@@ -6,6 +6,7 @@ interface TextAreaFieldProps {
   name?: string;
   customClass?: string;
   placeholder?: string;
+  rows?:number;
   required?: boolean;
   register?: UseFormRegister<FieldValues>;
   errors?: any;
@@ -21,6 +22,7 @@ const TextAreaField = ({
   customClass,
   placeholder,
   required,
+  rows,
   register,
   errors,
   value,
@@ -46,6 +48,7 @@ const TextAreaField = ({
       {register ? (
         <textarea
           placeholder={placeholder}
+          rows={rows}
           disabled={disabled}
           defaultValue={defaultValue ? defaultValue : undefined} // Use undefined for textarea defaultValue
           // onChange={onChange ? onChange : () => {}}
@@ -54,8 +57,8 @@ const TextAreaField = ({
               ? customClass
               : `${
                   errors?.name
-                    ? "border-1 w-full bg-red-50 rounded-lg py-2 px-[10px] font-inter text-sm leading-6 placeholder:capitalize text-gray-90 focus:outline-rose-50"
-                    : "border w-full bg-gray-5 rounded-lg border-border py-2 px-[10px] font-inter text-sm leading-6 placeholder:capitalize text-gray-90 focus:outline-purple"
+                    ? "border-1 w-full bg-red-500 rounded-lg py-2 px-[10px] font-inter text-sm leading-6 placeholder:capitalize text-gray-900 focus:outline-rose-500"
+                    : "border w-full bg-gray-50 rounded-lg border-border py-2 px-[10px] font-inter text-sm leading-6 placeholder:capitalize text-gray-90 focus:outline-primary"
                 }`
           }`}
           {...register(name ? name : "noName", {
@@ -70,11 +73,12 @@ const TextAreaField = ({
               ? customClass
               : `${
                   errors?.name
-                    ? "border-1 w-full bg-red-50 rounded-lg py-2 px-[10px] font-inter text-sm leading-6 placeholder:capitalize text-gray-90 focus:outline-rose-50"
-                    : "border w-full bg-gray-5 rounded-lg border-border py-2 px-[10px] font-inter text-sm leading-6 placeholder:capitalize text-gray-90 focus:outline-purple"
+                    ? "border-1 w-full bg-red-50 rounded-lg py-2 px-[10px] font-inter text-sm leading-6 placeholder:capitalize text-gray-900 focus:outline-rose-500"
+                    : "border w-full bg-gray-50 rounded-lg border-border py-2 px-[10px] font-inter text-sm leading-6 placeholder:capitalize text-gray-900 focus:outline-primary"
                 }`
           }`}
           name={name}
+          rows={rows}
           value={value}
           disabled={disabled}
           defaultValue={defaultValue ? defaultValue : undefined}
@@ -82,7 +86,7 @@ const TextAreaField = ({
           required={required ? true : false}
         ></textarea>
       )}
-      {errors?.name && <p className="text-rose-50">{label} is required</p>}
+      {errors?.name && <p className="text-rose-500">{label} is required</p>}
     </div>
   );
 };
