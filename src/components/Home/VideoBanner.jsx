@@ -3,7 +3,7 @@ import React from "react";
 
 const VideoBanner = () => {
   return (
-    <div className="md:relative">
+    <div className="md:relative ">
       {/* video player */}
 
       <div className="relative">
@@ -16,7 +16,7 @@ const VideoBanner = () => {
         />
 
         <div className="relative z-10   flex items-center justify-start md:h-screen h-[500px] w-full md:w-5/6 mx-0 md:mx-auto p-5">
-          <div className="text-start lg:w-3/6 font-poppins">
+          <div className="text-start lg:w-3/6 font-playfair">
             <h1 className="text-primary md:text-5xl text-3xl font-bold">
               Donate Blood Save Life
             </h1>
