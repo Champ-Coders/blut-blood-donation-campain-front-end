@@ -4,7 +4,7 @@ import two from "../assets/popularCamp/free-group.png";
 export const popularCamps = [
   {
     title: "Blood Donation Camp",
-    des: "Lorem ipsum dolor sit consectetur adipiscing elit, sed do incididunt et dolore magna sit consectetur.",
+    des: "Our Blood Donation Camp program is a great way to give back to the community and potentially save lives.",
     image: one,
     date: "14 February, 2023",
     timeSlot: "11.00 - 4.00",
@@ -12,7 +12,7 @@ export const popularCamps = [
   },
   {
     title: "Free Group Checking",
-    des: "Lorem ipsum dolor sit consectetur adipiscing elit, sed do incididunt et dolore magna sit consectetur.",
+    des: "Our Free Group Checking program is a great way to give back to the community and potentially save lives.",
     image: two,
     date: "12 February, 2023",
     timeSlot: "10.00 - 2.00",

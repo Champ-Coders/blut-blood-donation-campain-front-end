@@ -40,7 +40,11 @@ const EventCard: React.FC<EventCardProps> = ({ item }) => {
         <h3 className="my-[10px] text-2xl font-semibold text-black">
           {item.title}
         </h3>
-        <p className="mb-[14px] leading-[30px]">{item.description}</p>
+        <p className="mb-[14px] leading-[30px]">
+          {item.description.length > 200
+            ? item.description.slice(0, 200) + "..."
+            : item.description}
+        </p>
         <Link className="text-[#ea062b]" href={`/events/${item.id}`}>
           Learn More
         </Link>
