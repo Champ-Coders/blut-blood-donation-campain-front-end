@@ -1,6 +1,6 @@
 import { ITeamMember } from "@/interfaces/common";
 
-import image1 from "../../public/assets/team-member/nora.png";
+import image1 from "../../public/assets/team-member/masud.jpg";
 import image2 from "../../public/assets/team-member/joshi.png";
 import image3 from "../../public/assets/team-member/alex.png";
 import {
@@ -13,8 +13,8 @@ import {
 export const TeamMembers: ITeamMember[] = [
   {
     id: "1",
-    name: "Nora Khaypeia",
-    position: "Co-Founder",
+    name: "Mahafujur Rahaman Masud",
+    position: "CEO & Founder",
     image: image1,
     socialMedia: [
       {
@@ -42,7 +42,7 @@ export const TeamMembers: ITeamMember[] = [
   {
     id: "2",
     name: "Joshi",
-    position: "Co-Founder",
+    position: "Volunteer",
     image: image2,
     socialMedia: [
       {
@@ -70,7 +70,7 @@ export const TeamMembers: ITeamMember[] = [
   {
     id: "3",
     name: "Alex",
-    position: "Co-Founder",
+    position: "Volunteer",
     image: image3,
     socialMedia: [
       {
