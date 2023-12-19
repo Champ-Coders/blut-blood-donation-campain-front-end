@@ -50,6 +50,25 @@ const RegisterForm: React.FC<RegisterFormProps> = () => {
           </div>
         </div>
       </div>
+      {/* Email */}
+      <div className="flex justify-between flex-col md:flex-row items-start gap-5">
+        <p className="mt-4 -mb-1 min-w-[165px] font-semibold text-lg">
+          Email *
+        </p>
+
+        <div className="flex-grow w-full">
+          <div className="flex w-full sm:flex-row flex-col mb-1 sm:mb-4 justify-between items-center gap-3 sm:gap-6">
+          <InputField
+              label="Email"
+              name={"email"}
+              type="email"
+              register={register}
+              required
+              errors={errors}
+            />
+          </div>
+        </div>
+      </div>
       {/* Date Of Birth */}
       <div className="flex justify-between flex-col md:flex-row items-start gap-5">
         <p className="mt-4 -mb-1 min-w-[165px] font-semibold text-lg">
