@@ -47,9 +47,11 @@ const MainHeader = () => {
         </button>
 
         {/* login button  */}
-        <button className="bg-primary text-white px-5 py-2 rounded-lg border-2 border-primary hover:bg-white hover:text-primary">
+       <Link href={'/login'}>
+       <button className="bg-primary text-white px-5 py-2 rounded-lg border-2 border-primary hover:bg-white hover:text-primary">
           <span className="ml-2">Login</span>
         </button>
+       </Link>
 
         <button onClick={() => setOpen(true)} className="lg:hidden">
           <MenuOutlined className="text-[24px]" />
