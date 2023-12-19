@@ -7,7 +7,7 @@ export const NavList: INav[] = [
     children: [],
   },
   {
-    name: "About Us",
+    name: "About",
     path: "/about-us",
     children: [],
   },
@@ -70,7 +70,6 @@ export const NavList: INav[] = [
       },
     ],
   },
-
   {
     name: "Contact",
     path: "/contact",
