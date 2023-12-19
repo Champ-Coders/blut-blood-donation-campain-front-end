@@ -12,13 +12,6 @@ import Drawers from "@/components/Drawer/Drawer";
 const MainHeader = () => {
   const [open, setOpen] = React.useState(false);
 
-  
-  
-
-
-
-
-
   return (
     <div className=" items-center grid md:grid-cols-5 grid-cols-3 shadow justify-between bg-white">
       <Link
@@ -32,7 +25,7 @@ const MainHeader = () => {
           height={500}
           className=" w-[127px] "
         />
-      </Link> 
+      </Link>
 
       <div className="lg:flex items-center gap-5 md:col-span-2 justify-around hidden">
         {NavList.map((item, i) => (
@@ -47,11 +40,11 @@ const MainHeader = () => {
         </button>
 
         {/* login button  */}
-       <Link href={'/login'}>
-       <button className="bg-primary text-white px-5 py-2 rounded-lg border-2 border-primary hover:bg-white hover:text-primary">
-          <span className="ml-2">Login</span>
-        </button>
-       </Link>
+        <Link href={"/login"}>
+          <button className="bg-primary text-white px-5 py-2 rounded-lg border-2 border-primary hover:bg-white hover:text-primary">
+            <span className="ml-2">Login</span>
+          </button>
+        </Link>
 
         <button onClick={() => setOpen(true)} className="lg:hidden">
           <MenuOutlined className="text-[24px]" />
