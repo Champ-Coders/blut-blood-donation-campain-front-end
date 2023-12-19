@@ -64,8 +64,8 @@ const GetInTouch: React.FC<GetInTouchProps> = () => {
                 errors={errors}
               />
               <InputField
-                placeholder="Address"
-                name={"address"}
+                placeholder="Subject"
+                name={"subject"}
                 type="text"
                 required
                 register={register}
