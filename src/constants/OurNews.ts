@@ -10,17 +10,16 @@ export const ourNews: IOurNews[] = [
     comment: "3",
     title: "Donation Is Hope For The Poor Helpless Children",
     image: blogImage1,
-    description:
-      "Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, magni eos qui ratione voluptatem  aspernatur aut odit aut",
+    description: "Donation Is Hope For The Poor Helpless Children, also for the old helpless people. We should come forward to help them. We should help them with our ability. ",
   },
   {
     id: "2",
     date: "18 Nov 2020",
     comment: "3",
-    title: "Donation Is Hope For The Poor Helpless Children",
+    title: "Blood Donation Is The Best Donation",
     image: blogImage2,
     description:
-      "Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, magni eos qui ratione voluptatem  aspernatur aut odit aut",
+      "We believe that blood donation is the best.Our Blood Donation Camp program is a great way to give back to the community and potentially save lives. ",
   },
   {
     id: "3",
@@ -29,6 +28,6 @@ export const ourNews: IOurNews[] = [
     title: "Donation Is Hope For The Poor Helpless Children",
     image: blogImage3,
     description:
-      "Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, magni eos qui ratione voluptatem  aspernatur aut odit aut",
+      "Donation Is Hope For The Poor Helpless Children, also for the old helpless people. We should come forward to help them. We should help them with our ability.",
   },
 ];
