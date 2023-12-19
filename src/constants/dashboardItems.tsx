@@ -11,7 +11,7 @@ import {
   UserOutlined,
   UsergroupDeleteOutlined,
   ClusterOutlined,
-  UserSwitchOutlined
+  UserSwitchOutlined,
 } from "@ant-design/icons";
 import Link from "next/link";
 import { USER_ROLE } from "./userRole";
@@ -25,7 +25,8 @@ export const dashboardItems = (role: USER_ROLE) => {
       icon: (
         <UserSwitchOutlined
           style={{
-            fontSize: "1.8rem",
+            fontSize: "18px",
+            // marginRight:"5px"
             // borderRadius: "10px",
           }}
         />
@@ -52,7 +53,8 @@ export const dashboardItems = (role: USER_ROLE) => {
       icon: (
         <UsergroupDeleteOutlined
           style={{
-            fontSize: "1.8rem",
+            fontSize: "18px",
+            // marginRight:"5px"
             // borderRadius: "10px",
           }}
         />
@@ -64,7 +66,8 @@ export const dashboardItems = (role: USER_ROLE) => {
           icon: (
             <UserOutlined
               style={{
-                fontSize: "1.8rem",
+                fontSize: "18px",
+                // marginRight:"5px"
                 // borderRadius: "10px",
               }}
             />
@@ -72,10 +75,7 @@ export const dashboardItems = (role: USER_ROLE) => {
           children: [
             {
               label: (
-                <Link
-                  className=""
-                  href={`/admin/manage-users/all-users`}
-                >
+                <Link className="" href={`/admin/manage-users/all-users`}>
                   Users List
                 </Link>
               ),
@@ -100,7 +100,8 @@ export const dashboardItems = (role: USER_ROLE) => {
           icon: (
             <UserOutlined
               style={{
-                fontSize: "1.8rem",
+                fontSize: "18px",
+                // marginRight:"5px"
                 // borderRadius: "10px",
               }}
             />
@@ -108,10 +109,7 @@ export const dashboardItems = (role: USER_ROLE) => {
           children: [
             {
               label: (
-                <Link
-                  className=""
-                  href={`/admin/manage-users/donar`}
-                >
+                <Link className="" href={`/admin/manage-users/donar`}>
                   donar List
                 </Link>
               ),
@@ -119,10 +117,7 @@ export const dashboardItems = (role: USER_ROLE) => {
             },
             {
               label: (
-                <Link
-                  className=""
-                  href={`/admin/manage-users/donar/create`}
-                >
+                <Link className="" href={`/admin/manage-users/donar/create`}>
                   Create Donar
                 </Link>
               ),
@@ -136,7 +131,8 @@ export const dashboardItems = (role: USER_ROLE) => {
           icon: (
             <UserOutlined
               style={{
-                fontSize: "1.8rem",
+                fontSize: "18px",
+                // marginRight:"5px"
                 // borderRadius: "10px",
               }}
             />
@@ -144,10 +140,7 @@ export const dashboardItems = (role: USER_ROLE) => {
           children: [
             {
               label: (
-                <Link
-                  className=""
-                  href={`/admin/manage-users/donars`}
-                >
+                <Link className="" href={`/admin/manage-users/donars`}>
                   donars List
                 </Link>
               ),
@@ -172,7 +165,8 @@ export const dashboardItems = (role: USER_ROLE) => {
           icon: (
             <UserOutlined
               style={{
-                fontSize: "1.8rem",
+                fontSize: "18px",
+                // marginRight:"5px"
                 // borderRadius: "10px",
               }}
             />
@@ -180,10 +174,7 @@ export const dashboardItems = (role: USER_ROLE) => {
           children: [
             {
               label: (
-                <Link
-                  className=""
-                  href={`/admin/manage-users/donars`}
-                >
+                <Link className="" href={`/admin/manage-users/donars`}>
                   donars List
                 </Link>
               ),
@@ -210,7 +201,8 @@ export const dashboardItems = (role: USER_ROLE) => {
       icon: (
         <CreditCardOutlined
           style={{
-            fontSize: "1.8rem",
+            fontSize: "18px",
+            // marginRight:"5px"
             // borderRadius: "10px",
           }}
         />
@@ -226,10 +218,7 @@ export const dashboardItems = (role: USER_ROLE) => {
         },
         {
           label: (
-            <Link
-              className=""
-              href={`/admin/service/create`}
-            >
+            <Link className="" href={`/admin/service/create`}>
               Create service
             </Link>
           ),
@@ -243,7 +232,8 @@ export const dashboardItems = (role: USER_ROLE) => {
       icon: (
         <ClusterOutlined
           style={{
-            fontSize: "1.8rem",
+            fontSize: "18px",
+            // marginRight:"5px"
             // borderRadius: "10px",
           }}
         />
@@ -259,10 +249,7 @@ export const dashboardItems = (role: USER_ROLE) => {
         },
         {
           label: (
-            <Link
-              className=""
-              href={`/admin/blogs/create`}
-            >
+            <Link className="" href={`/admin/blogs/create`}>
               Create blogs
             </Link>
           ),
@@ -276,7 +263,8 @@ export const dashboardItems = (role: USER_ROLE) => {
       icon: (
         <ThunderboltOutlined
           style={{
-            fontSize: "1.8rem",
+            fontSize: "18px",
+            // marginRight:"5px"
             // borderRadius: "10px",
           }}
         />
@@ -292,10 +280,7 @@ export const dashboardItems = (role: USER_ROLE) => {
         },
         {
           label: (
-            <Link
-              className=""
-              href={`/admin/faq/create`}
-            >
+            <Link className="" href={`/admin/faq/create`}>
               Create faq
             </Link>
           ),
@@ -309,7 +294,8 @@ export const dashboardItems = (role: USER_ROLE) => {
       icon: (
         <FileTextOutlined
           style={{
-            fontSize: "1.8rem",
+            fontSize: "18px",
+            // marginRight:"5px"
             // borderRadius: "10px",
           }}
         />
@@ -325,10 +311,7 @@ export const dashboardItems = (role: USER_ROLE) => {
         },
         {
           label: (
-            <Link
-              className=""
-              href={`/admin/module/create`}
-            >
+            <Link className="" href={`/admin/module/create`}>
               Create modules
             </Link>
           ),
@@ -337,14 +320,13 @@ export const dashboardItems = (role: USER_ROLE) => {
       ],
     },
     {
-      label: (
-        <button className=" ">Manage NavItems</button>
-      ),
+      label: <button className=" ">Manage NavItems</button>,
       key: "manage-navItem",
       icon: (
         <ScheduleOutlined
           style={{
-            fontSize: "1.8rem",
+            fontSize: "18px",
+            // marginRight:"5px"
             // borderRadius: "10px",
           }}
         />
@@ -360,10 +342,7 @@ export const dashboardItems = (role: USER_ROLE) => {
         },
         {
           label: (
-            <Link
-              className=""
-              href={`/admin/navItem/create`}
-            >
+            <Link className="" href={`/admin/navItem/create`}>
               Create navItem
             </Link>
           ),
@@ -383,7 +362,8 @@ export const dashboardItems = (role: USER_ROLE) => {
       icon: (
         <AlipayCircleFilled
           style={{
-            fontSize: "1.8rem",
+            fontSize: "18px",
+            // marginRight:"5px"
             // borderRadius: "10px",
           }}
         />
@@ -404,7 +384,8 @@ export const dashboardItems = (role: USER_ROLE) => {
       icon: (
         <ThunderboltOutlined
           style={{
-            fontSize: "1.8rem",
+            fontSize: "18px",
+            // marginRight:"5px"
             // borderRadius: "10px",
           }}
         />
@@ -420,7 +401,8 @@ export const dashboardItems = (role: USER_ROLE) => {
       icon: (
         <AccountBookFilled
           style={{
-            fontSize: "1.8rem",
+            fontSize: "18px",
+            // marginRight:"5px"
             // borderRadius: "10px",
           }}
         />
@@ -437,7 +419,8 @@ export const dashboardItems = (role: USER_ROLE) => {
       icon: (
         <BorderOuterOutlined
           style={{
-            fontSize: "1.8rem",
+            fontSize: "18px",
+            // marginRight:"5px"
             // borderRadius: "10px",
           }}
         />
