@@ -2,7 +2,7 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: ["croptheme.com", 'i.ibb.co', 'drive.google.com', 'google.com'],
+    domains: ["croptheme.com", 'i.ibb.co', 'drive.google.com', 'google.com', "giphy.com"],
   },
   webpack: (config) => {
     config.module.rules.push({
