@@ -14,8 +14,6 @@ import Testimonials from "@/components/Home/Testimonials";
 
 import VideoBanner from "@/components/Home/VideoBanner.jsx";
 
-import Newsletter from "@/components/Newsletter/Newsletter";
-
 export default function Home() {
   return (
     <>
