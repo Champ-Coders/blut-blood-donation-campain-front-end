@@ -11,7 +11,6 @@ const Providers = ({ children }: { children: React.ReactNode }) => {
           token: {
             colorPrimary: "#ea062b",
             colorPrimaryBgHover: "#5371FF",
-            
           },
         }}
       >
