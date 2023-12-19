@@ -10,7 +10,7 @@ const Services = () => {
       img: "https://croptheme.com/blut/blut-ltr/assets/images/services/blood-donation.png", // Replace with the actual path to your image
       title: "Blood Donation",
       description:
-        "I am text block. Click edit button to change this text. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.",
+        "Blood donation is a voluntary procedure that can help save the lives of others. There are several types of blood donation, which help meet different medical needs. The most common types of donation are whole blood, platelet, and double red cell donation.",
       detailsLink: "details_link_01",
     },
     {
@@ -18,7 +18,7 @@ const Services = () => {
       img: "https://croptheme.com/blut/blut-ltr/assets/images/services/blood-donation.png", // Replace with the actual path to your image
       title: "Health Check",
       description:
-        "I am text block. Click edit button to change this text. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.",
+        "Health checks are a way of finding out if you are at risk of health problems. They can also help find problems early, when your chances for treatment and cure are better. By getting the right health services, screenings, and treatments, you are taking steps that help your chances for living a longer, healthier life. Your age, health and family history, lifestyle choices (i.e. what you eat, how active you are, whether you smoke), and other important factors impact what and how often you need healthcare.",
       detailsLink: "details_link_02",
       additionalLinks: ["Health Check", "Blood Bank"],
     },
@@ -27,7 +27,7 @@ const Services = () => {
       img: "https://croptheme.com/blut/blut-ltr/assets/images/services/blood-donation.png", // Replace with the actual path to your image
       title: "Blood Bank",
       description:
-        "I am text block. Click edit button to change this text. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.",
+        "Blood Bank is a place where blood is collected from donors, typed, separated into components, stored, and prepared for transfusion to recipients. A blood bank may be a separate free-standing facility or part of a larger laboratory in a hospital. Separation of blood Typically, each donated unit of blood (whole blood) is separated into multiple components, such as red blood cells, plasma and platelets. Each component is generally transfused to a different individual, each with different needs. One unit of donated blood (450 ml) can be separated into the following components: 1. Red blood cells (RBCs) 2. Platelets 3. Plasma 4. Cryoprecipitate",
       detailsLink: "details_link_03",
     },
   ];
