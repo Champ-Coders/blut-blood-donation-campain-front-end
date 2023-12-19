@@ -71,14 +71,13 @@ const Register = () => {
  
         <div className="flex-grow w-full">
           <div className="flex w-full sm:flex-row flex-col mb-1 sm:mb-4 justify-between items-center gap-3 sm:gap-6">
-            <MultiSelect
-              placeholder="Blood Group"
-              name={"blood_group"}
-              options={blood_groups}
-              isMulti={false}
-              required={true}
-              setData={setValue}
-            />
+          <MultiSelect
+          name={"blood_group"}
+          options={blood_groups}
+          isMulti={false}
+          required={true}
+          setData={setValue}
+        />
           </div>
         </div>
 
