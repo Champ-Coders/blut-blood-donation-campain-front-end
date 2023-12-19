@@ -12,6 +12,11 @@ export const NavList: INav[] = [
     children: [],
   },
   {
+    name: "Events",
+    path: "/event",
+    children: [],
+  },
+  {
     name: "Campaign",
     path: "/campaign",
     children: [

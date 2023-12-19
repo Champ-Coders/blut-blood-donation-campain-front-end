@@ -54,9 +54,6 @@ export interface IEvent {
   description: string;
   image: StaticImageData;
   link: string;
-export interface IFormSelector {
-  value: string;
-  label: string;
 }
 
 export interface IPopularCamp {

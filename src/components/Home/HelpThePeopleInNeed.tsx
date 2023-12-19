@@ -11,7 +11,7 @@ const HelpThePeopleInNeed = () => {
     title: "HELP THE PEOPLE IN NEED",
     subTitle: "Welcome to Blood  Donors Organization",
     description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed eiusmod tempor incididunt ut labore et dolore magna aliqua. suspendisse the gravida. Risus commodo viverra maecenas",
+      "Help the people in need by donating blood. Your blood can save many lives.Our organization is working for the welfare of the people. We are providing the best services to the people.",
     features: [
       "Good Service",
       "Help People",
