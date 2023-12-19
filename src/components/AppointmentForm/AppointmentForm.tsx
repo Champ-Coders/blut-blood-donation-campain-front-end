@@ -103,7 +103,7 @@ const AppointmentForm: React.FC<AppointmentFormProps> = () => {
           options={options}
           isMulti={false}
           required={true}
-          setData={setValue}
+          setValue={setValue}
         />
       </div>
       <div className="mb-[25px]">

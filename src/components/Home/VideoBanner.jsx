@@ -39,28 +39,30 @@ const VideoBanner = () => {
       {/* Register */}
 
       <div className="flex w-full md:w-5/6 mx-0 md:mx-auto sm:flex-row flex-col text-white cursor-pointer md:absolute sm:-bottom-20 -bottom-48 left-0 right-0 z-30">
-        <div className="bg-black hover:bg-primary px-10 w-full h-44">
+        <div className="bg-black hover:bg-primary px-10 w-full h-44 border-r-2 border-black">
           <h3 className="text-2xl mt-5 sm:mt-8 mb-4 font-extrabold">
             Register Now
           </h3>
           <div className="grid grid-cols-5">
             <p className="text-sm col-span-4">
-              Nor again is there anyone who loves or pursues or desires to
-              obtain pain of itself, because it is pain,
+              Register yourself as a donor and save life of others. You can also
+              register as a volunteer.
             </p>
             <div className="sm:ml-10 ml-6  -mt-4">
               <DownloadOutlined className="-rotate-90 font-bold text-4xl" />
             </div>
           </div>
         </div>
-        <div className="bg-primary hover:bg-black px-10 w-full h-44 text-justify">
+
+        <div className="bg-primary hover:bg-black px-10 w-full h-44 text-justify border-l-2 border-primary">
           <h3 className="text-2xl mt-5 sm:mt-8 mb-4 font-extrabold">
             Donate Now
           </h3>
           <div className="grid grid-cols-5">
             <p className="text-sm col-span-4">
-              Nor again is there anyone who loves or pursues or desires to
-              obtain pain of itself, because it is pain,
+              If you are eligible for donating blood, you can donate blood to
+              the needy people.Blood donation is a noble cause.
+
             </p>
             <div className="sm:ml-10 ml-6  -mt-4">
               <DownloadOutlined className="-rotate-90 font-bold text-4xl" />
