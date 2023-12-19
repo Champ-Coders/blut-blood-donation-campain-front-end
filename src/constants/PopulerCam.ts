@@ -18,4 +18,20 @@ export const popularCamps = [
     timeSlot: "10.00 - 2.00",
     address: "Dhaka, BD",
   },
+  {
+    title: "Blood Donation Regular Event",
+    des: "Lorem ipsum dolor sit consectetur adipiscing elit, sed do incididunt et dolore magna sit consectetur.",
+    image: one,
+    date: "12 February, 2023",
+    timeSlot: "10.00 - 2.00",
+    address: "Dhaka, BD",
+  },
+  {
+    title: "International Day Blood Donation",
+    des: "Lorem ipsum dolor sit consectetur adipiscing elit, sed do incididunt et dolore magna sit consectetur.",
+    image: two,
+    date: "12 February, 2023",
+    timeSlot: "10.00 - 2.00",
+    address: "Dhaka, BD",
+  },
 ];

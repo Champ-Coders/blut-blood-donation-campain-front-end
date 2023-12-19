@@ -16,7 +16,6 @@ const DonationForm: React.FC<DonationFormProps> = () => {
     formState: { errors },
   } = useForm();
 
-  console.log(errors);
   const onSubmit = (data: any) => {
     // Handle form submission logic here
     console.log("Form Data:", data);
