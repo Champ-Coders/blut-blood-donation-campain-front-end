@@ -41,8 +41,8 @@ const DashboardSidebar = ({
         padding: "12px 0 0 0",
         // width: "70vw",
         background: "white",
-        scrollBehavior:"smooth"
-        // background:"",
+        scrollBehavior: "smooth",
+        backgroundColor: "#ea062b",
         // overflow: "auto",
         // height: "100vh",
         // position: "fixed",
@@ -62,7 +62,7 @@ const DashboardSidebar = ({
               alt="logo"
               width={600}
               height={500}
-              className=" w-[127px] "
+              className=" w-[127px] h-[45px] "
             />
           </Link>
         </section>
@@ -73,16 +73,19 @@ const DashboardSidebar = ({
           alt="logo"
           width={120}
           height={140}
-          className=" ml-7 bg-primary rounded "
+          className=" bg-primary rounded h-[50px] px-2 py-3"
         />
       )}
 
       <SideMenuUI
         data={{
           itemsData: dashboardItems(USER_ROLE.admin),
-          mainCss: `bg-white ${collapsed || "px-[2.5rem]"}`,
-          menuCss: "bg-slate-50 text-slate-700 text-[18px] my-[2.2rem] font-[600] hover:text-primary",
-          subMenuCss: "hover:bg-primary hover:text-white",
+          mainCss: `bg-white font-oswald pt-[20px] text-[14px] ${
+            collapsed || ""
+          }`,
+          menuCss:
+            " text-slate-700 text-[18px] font-oswald my-[8px] text-[14px] hover:text-primary",
+          subMenuCss: " hover:text-primary font-oswalds  text-[14px]",
         }}
       />
       {/* //! SIdeMenuUI is reusable MenuUI for showing layout sidebar UI with dropdown children */}
