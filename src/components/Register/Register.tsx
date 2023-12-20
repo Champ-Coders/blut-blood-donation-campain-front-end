@@ -38,8 +38,10 @@ const Register = () => {
       } else {
         message.error(response.message);
       }
-    } catch (error) {
-      console.log(error, "error data");
+    } catch (error:any) {
+      console.log(error)
+      ;
+      message.error(error?.data?.message);
     }
   };
   return (
