@@ -31,13 +31,13 @@ const DonationForm: React.FC<DonationFormProps> = () => {
 
         <div className="w-full">
           <div className="flex w-full sm:flex-row flex-col mb-1 sm:mb-4 justify-between items-center gap-3 sm:gap-6">
-          <MultiSelect
+            <MultiSelect
               placeholder="Enter Your Blood Group"
               name={"blood_group"}
               options={blood_groups}
               isMulti={false}
               required={true}
-              setData={setValue}
+              setValue={setValue}
             />
           </div>
         </div>
@@ -90,16 +90,21 @@ const DonationForm: React.FC<DonationFormProps> = () => {
         </div>
         <div className="w-full">
           <div className="flex w-full sm:flex-row flex-col mb-1 sm:mb-4 justify-between items-center gap-3 sm:gap-6">
-          <TextAreaField rows={6} register={register} placeholder="Case Description" name="message" />
+            <TextAreaField
+              rows={6}
+              register={register}
+              placeholder="Case Description"
+              name="message"
+            />
           </div>
         </div>
         <button
-              type="submit"
-              className="relative max-w-md rounded px-5 py-2 overflow-hidden group bg-primary  hover:bg-black text-white transition-all ease-out duration-300"
-            >
-              <span className="absolute right-0 w-8 h-32 -mt-12 transition-all duration-1000 transform translate-x-10 bg-white opacity-10 rotate-12 group-hover:-translate-x-40 ease"></span>
-              <span className="relative">Donate Now</span>
-            </button>
+          type="submit"
+          className="relative max-w-md rounded px-5 py-2 overflow-hidden group bg-primary  hover:bg-black text-white transition-all ease-out duration-300"
+        >
+          <span className="absolute right-0 w-8 h-32 -mt-12 transition-all duration-1000 transform translate-x-10 bg-white opacity-10 rotate-12 group-hover:-translate-x-40 ease"></span>
+          <span className="relative">Donate Now</span>
+        </button>
       </div>
     </form>
   );
