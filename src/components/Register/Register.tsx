@@ -6,6 +6,8 @@ import InputField from "../InputField/InputField";
 import Link from "next/link";
 import MultiSelect from "../MultiSelector/MultiSelector";
 import { blood_groups } from "@/constants/Register";
+import { useUserRegisterMutation } from "@/redux/Api/authApi/AuthApi";
+import { message } from "antd";
 
 const Register = () => {
   const {
@@ -15,9 +17,32 @@ const Register = () => {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data: any) => {
-    // Handle form submission logic here
-    console.log("Form Data:", data);
+  const [userRegister, { isLoading }] = useUserRegisterMutation();
+
+  const onSubmit = async (data: any) => {
+    const registrationData = {
+      name: data?.name,
+      email: data?.email,
+      phoneNumber: data?.phoneNumber,
+      password: data?.password,
+      bloodGroup: data?.bloodGroup.name,
+      dateOfBirth: data?.dateOfBirth,
+      address: data?.address,
+    };
+    console.log(registrationData);
+    try {
+      const response = await userRegister(registrationData).unwrap();
+
+      if (response?.success) {
+        message.success(response.message);
+      } else {
+        message.error(response.message);
+      }
+    } catch (error:any) {
+      console.log(error)
+      ;
+      message.error(error?.data?.message);
+    }
   };
   return (
     <div className="py-10 px-10 sm:px-24 mb-48">
@@ -26,19 +51,22 @@ const Register = () => {
           <form className="block w-full" onSubmit={handleSubmit(onSubmit)}>
             <div className="flex w-full sm:flex-row flex-col mb-4 justify-between items-center gap-3 sm:gap-6">
               <InputField
-                placeholder="First Name"
-                name={"first_name"}
+                placeholder="Your Name"
+                name={"name"}
                 type="text"
                 register={register}
                 required
                 errors={errors}
               />
+            </div>
+            {/* Phone */}
+            <div className="w-full mb-3 sm:mb-6">
               <InputField
-                placeholder="Last Name"
-                name={"last_name"}
+                placeholder="Enter Your Phone Number"
+                name={"phoneNumber"}
                 type="text"
-                required
                 register={register}
+                required
                 errors={errors}
               />
             </div>
@@ -65,27 +93,42 @@ const Register = () => {
               />
             </div>
 
-  {/* Blood Group */}
- 
- 
-        <div className="flex-grow w-full">
-          <div className="flex w-full sm:flex-row flex-col mb-1 sm:mb-4 justify-between items-center gap-3 sm:gap-6">
-          <MultiSelect
-          name={"blood_group"}
-          options={blood_groups}
-          isMulti={false}
-          required={true}
-          setData={setValue}
-        />
-          </div>
-        </div>
+            {/* Date of Birth*/}
+
+            <div className="flex-grow w-full mb-4">
+              <div className="flex w-full sm:flex-row flex-col mb-1 sm:mb-4 justify-between items-center gap-3 sm:gap-6">
+                <InputField
+                  placeholder="Enter Your Date Of Birth"
+                  name={"dateOfBirth"}
+                  type="date"
+                  register={register}
+                  required
+                  errors={errors}
+                />
+              </div>
+            </div>
+            {/*address*/}
+
+            <div className="flex w-full sm:flex-row flex-col mb-4 justify-between items-center gap-3 sm:gap-6">
+              <div className="flex w-full sm:flex-row flex-col mb-1 sm:mb-4 justify-between items-center gap-3 sm:gap-6">
+                <InputField
+                  placeholder="Enter Your Address"
+                  name={"address"}
+                  type="text"
+                  register={register}
+                  required
+                  errors={errors}
+                />
+              </div>
+            </div>
+
             {/* Blood Group */}
 
             <div className="flex-grow w-full">
               <div className="flex w-full sm:flex-row flex-col mb-1 sm:mb-4 justify-between items-center gap-3 sm:gap-6">
                 <MultiSelect
                   placeholder="Blood Group"
-                  name={"blood_group"}
+                  name={"bloodGroup"}
                   options={blood_groups}
                   isMulti={false}
                   required={true}

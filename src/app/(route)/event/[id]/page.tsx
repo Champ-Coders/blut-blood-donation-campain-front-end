@@ -1,4 +1,7 @@
+import JoinUs from "@/components/Event/JoinUs";
 import EventDetails from "@/components/EventDetails/EventDetails";
+import EventRegisterForm from "@/components/EventDetails/EventRegisterForm";
+import HomeEvent from "@/components/Home/HomeEvent";
 import BannerBreadcrumb from "@/components/UI/BannerBreadcrumb";
 import React from "react";
 
@@ -21,6 +24,9 @@ const EventDetail: React.FC<EventDetailProps> = () => {
       <section>
         <EventDetails />
       </section>
+      <EventRegisterForm />
+      <JoinUs />
+      <HomeEvent />
     </main>
   );
 };

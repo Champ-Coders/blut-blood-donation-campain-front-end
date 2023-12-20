@@ -1,8 +1,10 @@
+"use client";
+
 import { Menu } from "antd";
 import React from "react";
+import { DoubleRightOutlined } from "@ant-design/icons";
 
-
-//! SIdeMenuUI is reusable MenuUI for showing layout sidebar UI with dropdown children
+//! SIdeMenuUI is reusable MenuUI for showing layout sidebar UI with dropdown 
 
 const SideMenuUI = ({
   data: { itemsData, mainCss, menuCss, subMenuCss },
@@ -22,9 +24,10 @@ const SideMenuUI = ({
         className={menuCss}
         title={item.label}
       >
+        {/* Sub manu */}
         {item.children.map((childItem: any) => (
           <Menu.Item className={subMenuCss} key={childItem.key}>
-            {childItem.label}
+            <DoubleRightOutlined className="!text-primary" /> {childItem.label}
           </Menu.Item>
         ))}
       </Menu.SubMenu>
@@ -37,6 +40,8 @@ const SideMenuUI = ({
       triggerSubMenuAction="hover"
       style={{
         overflowY: "auto",
+        height: "calc(102vh)",
+        fontSize: "14px",
       }}
       mode="inline"
     >
@@ -47,7 +52,7 @@ const SideMenuUI = ({
           <Menu.Item
             key={item.key}
             icon={item.icon}
-            className="custom-menu-item"
+            className="custom-menu-item font-oswald text-[14px]"
           >
             {item.label}
           </Menu.Item>
