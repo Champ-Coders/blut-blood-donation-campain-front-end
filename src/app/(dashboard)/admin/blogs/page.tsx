@@ -2,18 +2,19 @@
 import ActionBar from "@/components/UI/ActionBar";
 import Breadcrumb from "@/components/UI/BreadCrumb";
 import Table from "@/components/UI/Table"
-import { useBlogsQuery } from "@/redux/Api/blogApi";
+import { useBlogsQuery, useDeleteBlogMutation } from "@/redux/Api/blogApi";
 import {
     DeleteOutlined,
     EditOutlined,
     ReloadOutlined,
   } from "@ant-design/icons";
-import { Button, Input } from "antd";
+import { Button, Input, message } from "antd";
 import Link from "next/link";
 import { useState } from "react";
 
 const AllBlogs = () => {
     const [searchText, setSearchText] = useState<string>("");
+    const [deleteBlog] = useDeleteBlogMutation()
     const {data:blogs} = useBlogsQuery(undefined)
 
   // filter Employee by name phone ID number
@@ -24,6 +25,18 @@ const AllBlogs = () => {
     );
   });
     
+  const deleteHandler = async (id: string) => {
+    message.loading("Deleting.....");
+    try {
+      const res = await deleteBlog(id);
+      if (res) {
+        message.success("Blog Deleted successfully");
+      }
+    } catch (err: any) {
+      //   console.error(err.message);
+      message.error(err.message);
+    }
+  };
     const columns:any[] = [
         {
             title: "Title",
@@ -35,29 +48,28 @@ const AllBlogs = () => {
           },
           {
             title: "Action",
-            // render: function () {
-            //   return (
-            //     <>
-            //       <Link href={`/admin/course/edit/`}>
-            //         <Button
-            //           style={{
-            //             margin: "0px 5px",
-            //           }}
-                   
-            //           type="primary"
-            //         >
-            //           <EditOutlined />
-            //         </Button>
-            //       </Link>
-            //       <Button
-            //         type="primary"
-            //         danger
-            //       >
-            //         <DeleteOutlined />
-            //       </Button>
-            //     </>
-            //   );
-            // },
+            render: function (data: any) {
+              return (
+                <>
+                    <Button
+                      style={{
+                        margin: "0px 5px",
+                      }}
+                      onClick={() => console.log(data)}
+                      type="default"
+                    >
+                      <EditOutlined />
+                    </Button>
+                  <Button
+                    onClick={() => deleteHandler(data?.id)}
+                    type="primary"
+                    danger
+                  >
+                    <DeleteOutlined />
+                  </Button>
+                </>
+              );
+            },
           },
       ];
   return (
