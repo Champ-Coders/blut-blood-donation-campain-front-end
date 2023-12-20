@@ -42,6 +42,8 @@ const FaqsPage = () => {
 
   const { data, isLoading, refetch } = useFaqsQuery({});
 
+  console.log(data);
+
   const faqs = data?.data;
 
   // const meta = data?.meta;
@@ -90,7 +92,7 @@ const FaqsPage = () => {
               width: "150px",
             }}
           >
-            <Link href={`/${role}/faqs/edit/${data.id}`}>
+            <Link href={`/${role}/faq/edit/${data.id}`}>
               <Button onClick={() => console.log(data)} type="primary">
                 <EditOutlined />
               </Button>
@@ -142,7 +144,7 @@ const FaqsPage = () => {
         />
 
         <div>
-          <Link href={`/${role}/faqs/create`}>
+          <Link href={`/${role}/faq/create`}>
             <Button type="primary">Create</Button>
           </Link>
           {(!!sortBy || !!sortOrder || searchTerm) && (
