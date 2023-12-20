@@ -14,3 +14,9 @@ export const getFromLocalStorage = (key: string) => {
 };
 
 
+export const getUserDataFromLC =( )=>{
+  const user = getFromLocalStorage("user");
+  return user;
+}
+
+
