@@ -61,7 +61,7 @@ const CreateBlog = () => {
             </div>
           </div>
         <Button type="primary" htmlType="submit">
-          add
+          Add
         </Button>
       </form>
     </div>
