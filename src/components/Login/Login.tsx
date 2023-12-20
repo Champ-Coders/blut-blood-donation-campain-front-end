@@ -23,16 +23,16 @@ const Login = () => {
 
     try {
       const response = await userLogin(data).unwrap();
-      console.log(response,"resssssss");
+      console.log(response, "resssssss");
       if (response?.success) {
-        console.log(response,);
+        console.log(response);
         message.success(response.message);
       } else {
         message.error(response?.message);
       }
-    } catch (error) {
+    } catch (error:any) {
       console.log(error, "login error");
-
+      message.error(error?.data?.message);
     }
   };
   return (
