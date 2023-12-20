@@ -27,7 +27,7 @@ const CreateBlog = () => {
           { label: "blogs", link: `/admin/blogs` },
         ]}
       />
-      <h1 className="text-xl font-bold my-1">Create Course</h1>
+      <h1 className="text-xl font-bold my-1">Create Blog</h1>
       <form className="block w-full" onSubmit={handleSubmit(onSubmit)}>
         <div className="w-full">
             <div className="my-[10px]  md:max-w-md mx-0">
