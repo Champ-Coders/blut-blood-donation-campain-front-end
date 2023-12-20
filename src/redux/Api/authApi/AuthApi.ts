@@ -15,21 +15,23 @@ export const authAPi = api.injectEndpoints({
         const response = await queryFulfilled;
         console.log(response, "response of login");
         const accessToken = response.data.data.accessToken;
-       setToLocalStorage("user", accessToken);
-     
+        setToLocalStorage("user", accessToken);
       },
     }),
     userRegister: build.mutation({
-      query: (registerData) => ({
-        url: `${AUTH_URL}/register`,
-        method: "POST",
-        body: registerData,
-      }),
+      query: (registerData) => {
+        console.log(registerData, "rrrrrrrr");
+        return {
+          url: `${AUTH_URL}/registration`,
+          method: "POST",
+          body: registerData,
+        };
+      },
       onQueryStarted: async (registerData, { dispatch, queryFulfilled }) => {
         const response = await queryFulfilled;
-        const accessToken = response.data.accessToken;
+        const accessToken = response.data.data.accessToken;
         const setToLCStorage = setToLocalStorage("user", accessToken);
-        console.log(setToLCStorage);
+        // console.log(setToLCStorage);
       },
     }),
   }),
