@@ -1,12 +1,12 @@
 "use client";
+import SideMenuUI from "@/components/UI/SideMenuUI";
 import DashboardNavbar from "@/components/dashboard/DashboardNavbar";
-import { Drawer, Layout, Menu } from "antd";
-import React, { useState } from "react";
-import useBreakpoint from "antd/lib/grid/hooks/useBreakpoint";
 import DashboardSidebar from "@/components/dashboard/DashboardSider";
 import { dashboardItems } from "@/constants/dashboardItems";
 import { USER_ROLE } from "@/constants/userRole";
-import SideMenuUI from "@/components/UI/SideMenuUI";
+import { Drawer, Layout } from "antd";
+import useBreakpoint from "antd/lib/grid/hooks/useBreakpoint";
+import React, { useState } from "react";
 
 const { Content } = Layout;
 
@@ -53,7 +53,6 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
             padding: "1em",
             minHeight: "100vh",
             overflowY: "initial",
-            textAlign: "center",
           }}
         >
           {children}
