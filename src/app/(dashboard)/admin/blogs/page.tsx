@@ -1,4 +1,5 @@
 'use client'
+import ActionBar from "@/components/UI/ActionBar";
 import Breadcrumb from "@/components/UI/BreadCrumb";
 import Table from "@/components/UI/Table"
 import {
@@ -58,10 +59,8 @@ const AllBlogs = () => {
           },
         ]}
       />
-      <div>
-        <h2 className="text-xl text-start font-bold font-roboto">Blogs List</h2>
-
-        <div style={{display:'flex', justifyContent:"space-between",alignItems:"center" , margin:"10px 0"}}>
+   
+   <ActionBar title="Blogs List">
         <Input
           type="text"
           size="large"
@@ -69,15 +68,13 @@ const AllBlogs = () => {
           style={{
             width: "20%",
           }}
-         
         />
         <div>
           <Link href="/admin/blogs/create">
             <Button type="default">Create</Button>
           </Link>
         </div>
-        </div>
-      </div>
+      </ActionBar>
       <Table
         columns={columns}
         dataSource={[]}
