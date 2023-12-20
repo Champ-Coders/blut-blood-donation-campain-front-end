@@ -1,4 +1,5 @@
-"use client";
+
+'use client'
 import React from "react";
 import TextAreaField from "../TextAreaField/TextAreaField";
 import InputField from "../InputField/InputField";
