@@ -15,7 +15,7 @@ const Services = () => {
     },
     {
       id: "02",
-      img: "https://croptheme.com/blut/blut-ltr/assets/images/services/blood-donation.png", // Replace with the actual path to your image
+      img: "https://i.ibb.co/R2CjppR/friendly-hospital-phlebotomist-collecting-blood-sample-from-patient-lab-preparation-blood-test-by-fe.jpg", // Replace with the actual path to your image
       title: "Health Check",
       description:
         "Health checks are a way of finding out if you are at risk of health problems. They can also help find problems early, when your chances for treatment and cure are better. By getting the right health services, screenings, and treatments, you are taking steps that help your chances for living a longer, healthier life. Your age, health and family history, lifestyle choices (i.e. what you eat, how active you are, whether you smoke), and other important factors impact what and how often you need healthcare.",

@@ -13,6 +13,8 @@ const config: Config = {
         poppins: ["Poppins", "sans-serif"],
         roboto: ["Roboto", "sans-serif"],
         "Player-Display": ["Playfair Display", "serif"],
+        oswald: ["Oswald", "sans-serif"],
+        playfair: ["Playfair Display", "serif"],
       },
       colors: {
         primary: "#ea062b",

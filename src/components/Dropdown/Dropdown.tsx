@@ -8,7 +8,10 @@ const Dropdown = ({ item }: { item: INav }) => {
   const [open, setOpen] = React.useState(false);
 
   // get route path name
-  const path = window.location.pathname;
+  let path = "";
+  if (typeof window !== "undefined") {
+    path = window.location.pathname;
+  }
 
   return (
     <div

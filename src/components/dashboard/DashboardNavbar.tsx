@@ -29,8 +29,6 @@ const DashboardNavbar = ({
         justifyContent: "space-between",
         color: "#000000",
         backgroundColor: "#ffffff",
-        boxShadow:
-          "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)",
         paddingInline: "3px",
         // position:"absolute",
         // top:0,
@@ -55,7 +53,7 @@ const DashboardNavbar = ({
         style={{
           display: "flex",
           alignItems: "center",
-          gap: "1em",
+          gap: "0.7vw",
           fontSize: "1.5rem",
           padding: "10px 10px",
           // background: "blue",
@@ -68,15 +66,15 @@ const DashboardNavbar = ({
         <BellOutlined
           style={{
             padding: "0.6rem",
-            background: "red",
+            background: "#ea062b",
             borderRadius: "50%",
             color: "white",
           }}
         />
-        <SettingOutlined
+        <UserOutlined
           style={{
             padding: "0.6rem",
-            background: "red",
+            background: "#ea062b",
             borderRadius: "50%",
             color: "white",
           }}

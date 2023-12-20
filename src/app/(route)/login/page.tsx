@@ -2,7 +2,7 @@ import Login from "@/components/Login/Login"
 
 const LoginPage = () => {
   return (
-    <div className="mb-24"><Login /></div>
+    <div><Login /></div>
   )
 }
 export default LoginPage

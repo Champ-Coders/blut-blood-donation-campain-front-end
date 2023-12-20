@@ -49,7 +49,7 @@ const Counter = () => {
     ],
   };
 
-  // console.log(companyStatistics);
+
 
   return (
     <div className=" mt-7 min-h-[22rem] text-center relative bg-fixe  lg:max-h-[30rem]">

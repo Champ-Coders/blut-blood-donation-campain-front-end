@@ -5,19 +5,25 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Oswald&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap");
+
+body {
+  /* playfair: ["Playfair Display", "serif"], */
+  font-family: "Playfair Display", serif;
+}
 
 .common {
   @apply mx-auto max-w-7xl px-6 pb-8 pt-20 sm:pt-24 lg:px-8 lg:pt-32;
 }
 
-
-.commonGap{
-  @apply w-full md:w-5/6 mx-0 md:mx-auto
+.commonGap {
+  @apply w-full md:w-5/6 mx-0 md:mx-auto;
 }
 
 .ant-table-title {
   background-color: #ea062b;
   font-size: 20px;
   color: #fff;
-  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
 }

@@ -7,7 +7,7 @@ import { blood_groups } from "@/constants/Register";
 
 type RegisterFormProps = {};
 
-const RegisterForm: React.FC<RegisterFormProps> = () => {
+const OrgRegisterForm: React.FC<RegisterFormProps> = () => {
   const {
     register,
     handleSubmit,
@@ -190,4 +190,4 @@ const RegisterForm: React.FC<RegisterFormProps> = () => {
     </form>
   );
 };
-export default RegisterForm;
+export default OrgRegisterForm;
