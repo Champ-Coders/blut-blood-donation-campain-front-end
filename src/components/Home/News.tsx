@@ -4,7 +4,7 @@ import NewsCard from "../NewsCard/NewsCard";
 
 const News = () => {
   return (
-    <section className="bg-[#f5f5f5] mt-10 pt-10 pb-40">
+    <section className="bg-[#f5f5f5] pt-10 pb-40">
       <div className="py-10 common">
         <div className="mb-10">
           <div className="text-center">

@@ -1,9 +1,11 @@
+
 'use client'
 import React from "react";
 import TextAreaField from "../TextAreaField/TextAreaField";
 import InputField from "../InputField/InputField";
 import { useForm } from "react-hook-form";
-import { FaArrowRightLong } from "react-icons/fa6";
+import { FaArrowRightLong, FaLocationDot } from "react-icons/fa6";
+import { FaClock, FaPhoneAlt } from "react-icons/fa";
 
 type GetInTouchProps = {};
 
@@ -21,12 +23,12 @@ const GetInTouch: React.FC<GetInTouchProps> = () => {
   };
   return (
     <div className="common">
-      <div className="grid grid-cols-12 gap-10">
-        <div className="col-span-7">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10  p-5 md:p-8 lg:p-16 shadow-[0px_9px_52px_0_rgba(0,0,0,.07)] rounded-lg">
+        <div className="md:col-span-1 lg:col-span-7">
           <h3 className="mb-6 lg:text-3xl font-semibold text-xl text-[#111]">
             Get In Touch
           </h3>
-          <p className="text-lg text-[#666] mb-7">
+          <p className="lg:text-lg text-[#666] mb-7">
             On the other hand, we denounce with righteous indignation and
             dislike men who are so beguiled and righteous indignation and
             dislike men by the charms
@@ -63,8 +65,8 @@ const GetInTouch: React.FC<GetInTouchProps> = () => {
                 errors={errors}
               />
               <InputField
-                placeholder="Address"
-                name={"address"}
+                placeholder="Subject"
+                name={"subject"}
                 type="text"
                 required
                 register={register}
@@ -90,8 +92,33 @@ const GetInTouch: React.FC<GetInTouchProps> = () => {
             <FaArrowRightLong />
           </button>
         </div>
-        <div className="col-span-5">
-          <div className="bg-[#ea062b] px-[30px] py-[60px] "></div>
+        <div className="md:col-span-1 lg:col-span-5">
+          <div className="bg-[#ea062b] px-[30px] py-[60px] text-white">
+            <p className="font-semibold lg:text-lg mb-[23px]">
+              Blood Excellence!
+            </p>
+            <h4 className="text-lg lg:text-3xl font-semibold leading-normal mb-5">
+              Expanded Blood Donate Services Here
+            </h4>
+            <p className="lg:text-lg leading-normal">
+              On the other hand, we denounce with righteous indignation and
+              dislike men who are so beguiled and demoralized by the charms{" "}
+            </p>
+            <div className="mt-[55px] flex flex-col gap-5 lg:text-lg leading-normal font-medium">
+              <p className="flex items-center gap-3">
+                <FaPhoneAlt />
+                Emergency Line: (002)
+              </p>
+              <p className="flex items-center gap-3">
+                <FaLocationDot />
+                Location: Street 68, Mahattan, New York
+              </p>
+              <p className="flex items-center gap-3">
+                <FaClock />
+                Mon - Fri: 8:00 am - 7:00 pm
+              </p>
+            </div>
+          </div>
         </div>
       </div>
     </div>

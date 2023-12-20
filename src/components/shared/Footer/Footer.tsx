@@ -28,7 +28,7 @@ const navigation = {
 
 const FooterPage = () => {
   return (
-    <div className="relative ">
+    <div className="relative mt-52 ">
       <div className="bg-black text-white" aria-labelledby="footer-heading">
         <div className="pb-10">
           <Newsletter />
