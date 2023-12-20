@@ -10,12 +10,14 @@ const CreateBlog = () => {
   const {
     handleSubmit,
     register,
+    reset,
     formState: { errors },
   } = useForm();
 
   const onSubmit = (data: any) => {
     // Handle form submission logic here
     console.log("Form Data:", data);
+    reset()
   };
   return (
     <div className="text-start">

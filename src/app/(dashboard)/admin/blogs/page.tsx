@@ -2,6 +2,7 @@
 import ActionBar from "@/components/UI/ActionBar";
 import Breadcrumb from "@/components/UI/BreadCrumb";
 import Table from "@/components/UI/Table"
+import { useBlogsQuery } from "@/redux/Api/blogApi";
 import {
     DeleteOutlined,
     EditOutlined,
@@ -9,10 +10,20 @@ import {
   } from "@ant-design/icons";
 import { Button, Input } from "antd";
 import Link from "next/link";
+import { useState } from "react";
 
 const AllBlogs = () => {
+    const [searchText, setSearchText] = useState<string>("");
+    const {data:blogs} = useBlogsQuery(undefined)
 
-
+  // filter Employee by name phone ID number
+  const filteredBlogData = blogs?.data?.filter((blog:any) => {
+    const lowercaseSearchText = searchText.toLowerCase();
+    return (
+        blog?.title?.toLowerCase().includes(lowercaseSearchText)
+    );
+  });
+    
     const columns:any[] = [
         {
             title: "Title",
@@ -63,10 +74,13 @@ const AllBlogs = () => {
    <ActionBar title="Blogs List">
         <Input
           type="text"
+          allowClear
           size="large"
           placeholder="Search..."
+          onChange={(e) => setSearchText(e.target.value)}
+          value={searchText}
           style={{
-            width: "20%",
+            width: "40%",
           }}
         />
         <div>
@@ -77,7 +91,7 @@ const AllBlogs = () => {
       </ActionBar>
       <Table
         columns={columns}
-        dataSource={[]}
+        dataSource={filteredBlogData}
       />
     </div>
   )
