@@ -1,4 +1,5 @@
 import DashboardCard from "@/components/DashboardCard/DashboardCard";
+import DashboardChart from "@/components/DashboardChart/DashboardChart";
 import RecentDonationCard from "@/components/RecentDonationCard/RecentDonationCard";
 import { title } from "process";
 import React from "react";
@@ -40,36 +41,18 @@ const Data: AdminPageProps[] = [
 const RecentDonation = [
   {
     image: "https://picsum.photos/200/300",
-    name: "John Doe",
+    name: "Md Mahafujur Rahaman Masud",
     date: "15 Dec 2023",
     bloodGroup: "A+",
   },
   {
-    image: "https://picsum.photos/200/300",
-    name: "John Doe",
+    image: "https://picsum.photos/seed/picsum/200/300",
+    name: "Mahabub Rahaman",
     date: "15 Dec 2023",
-    bloodGroup: "A+",
+    bloodGroup: "B+",
   },
   {
-    image: "https://picsum.photos/200/300",
-    name: "John Doe",
-    date: "15 Dec 2023",
-    bloodGroup: "A+",
-  },
-  {
-    image: "https://picsum.photos/200/300",
-    name: "John Doe",
-    date: "15 Dec 2023",
-    bloodGroup: "A+",
-  },
-  {
-    image: "https://picsum.photos/200/300",
-    name: "John Doe",
-    date: "15 Dec 2023",
-    bloodGroup: "A+",
-  },
-  {
-    image: "https://picsum.photos/200/300",
+    image: "https://picsum.photos/id/237/200/300",
     name: "John Doe",
     date: "15 Dec 2023",
     bloodGroup: "A+",
@@ -101,22 +84,35 @@ const AdminPage = () => {
 
       {/* recent donations , Analysis  */}
 
-      <div className="my-[30px]">
+      <div className="my-[30px] md:flex justify-between gap-10">
         {/* Recent Donations */}
+        <div>
+          <div className="flex justify-between items-center mb-5">
+            <h5 className="text-[24px] font-semibold font-playfair">
+              Recent Donations
+            </h5>
+            {/* <p className="font-oswald text-[16px] font-medium ">See All</p> */}
+          </div>
 
-        <div className="flex justify-between items-center mb-5">
-          <h5 className="text-[24px] font-semibold font-playfair">
-            Recent Donations
-          </h5>
-          {/* <p className="font-oswald text-[16px] font-medium ">See All</p> */}
+          {/* table => Image,name,date ,BloodGroup */}
+
+          <div className="flex flex-col gap-3">
+            {RecentDonation.map((data, i) => (
+              <RecentDonationCard key={i} recentDonation={data} />
+            ))}
+          </div>
         </div>
 
-        {/* table => Image,name,date ,BloodGroup */}
+        {/* Analysis */}
 
         <div>
-          {RecentDonation.map((data, i) => (
-            <RecentDonationCard key={i} recentDonation={data} />
-          ))}
+          <div className="flex justify-between items-center mb-5">
+            <h5 className="text-[24px] font-semibold font-playfair">
+              Analysis
+            </h5>
+          </div>
+          {/* Analysis */}
+          <DashboardChart />
         </div>
       </div>
     </div>
