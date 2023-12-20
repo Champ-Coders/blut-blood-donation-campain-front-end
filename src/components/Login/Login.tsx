@@ -4,6 +4,8 @@ import { FaPhone, FaLocationDot, FaEnvelope } from "react-icons/fa6";
 import { SubmitHandler, useForm } from "react-hook-form";
 import InputField from "../InputField/InputField";
 import Link from "next/link";
+import { useUserLoginMutation } from "@/redux/Api/authApi/AuthApi";
+import { message } from "antd";
 
 const Login = () => {
   const {
@@ -13,9 +15,25 @@ const Login = () => {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data: any) => {
+  const [userLogin, { isLoading }] = useUserLoginMutation();
+
+  const onSubmit = async (data: any) => {
     // Handle form submission logic here
-    console.log("Form Data:", data);
+    // console.log("Form Data:", data);
+
+    try {
+      const response = await userLogin(data).unwrap();
+      console.log(response,"resssssss");
+      if (response?.success) {
+        console.log(response,);
+        message.success(response.message);
+      } else {
+        message.error(response?.message);
+      }
+    } catch (error) {
+      console.log(error, "login error");
+
+    }
   };
   return (
     <div className="py-10 px-10 sm:px-24 mb-48">
@@ -47,66 +65,90 @@ const Login = () => {
               <p className="text-sm text-end pt-2">Forget Password</p>
             </div>
 
-
             <div className="w-full">
-            <button
-              type="submit"
-              className="relative w-full rounded px-5 py-2 overflow-hidden group bg-primary  hover:bg-black text-white transition-all ease-out duration-300"
-            >
-              <span className="absolute right-0 w-8 h-32 -mt-12 transition-all duration-1000 transform translate-x-10 bg-white opacity-10 rotate-12 group-hover:-translate-x-[550px] ease"></span>
-              <span className="relative">Submit</span>
-            </button>
+              <button
+                type="submit"
+                className="relative w-full rounded px-5 py-2 overflow-hidden group bg-primary  hover:bg-black text-white transition-all ease-out duration-300"
+              >
+                <span className="absolute right-0 w-8 h-32 -mt-12 transition-all duration-1000 transform translate-x-10 bg-white opacity-10 rotate-12 group-hover:-translate-x-[550px] ease"></span>
+                <span className="relative">Submit</span>
+              </button>
 
-            <p className="text-gray-400 text-sm pt-4 text-center">Do You have any account?<span className="text-primary"><Link href={'/register'}>Register</Link></span></p>
+              <p className="text-gray-400 text-sm pt-4 text-center">
+                Do You have any account?
+                <span className="text-primary">
+                  <Link href={"/register"}>Register</Link>
+                </span>
+              </p>
             </div>
           </form>
         </div>
 
         <div className="lg:w-1/2 lg:text-start text-center w-full">
           <p className="text-lg mb-4 font-bold text-primary">Log In</p>
-          <h2 className="text-3xl font-bold font-poppins">Surging Together for Life. Donate Blood, Transform Futures</h2>
-              <p className="py-2">Every drop of blood is a lifeline waiting to be extended. By donating blood, you become a beacon of hope, a silent hero, and a lifeline for those in need. </p>
+          <h2 className="text-3xl font-bold font-poppins">
+            Surging Together for Life. Donate Blood, Transform Futures
+          </h2>
+          <p className="py-2">
+            Every drop of blood is a lifeline waiting to be extended. By
+            donating blood, you become a beacon of hope, a silent hero, and a
+            lifeline for those in need.{" "}
+          </p>
           <div className="mt-2">
             <h4 className="text-base font-bold">Opening Hours</h4>
 
             <div className="flex py-1 my-2 border-y justify-between text-gray-400 text-sm items-start">
-                <p>Sunday - Friday</p>
-                <p>9.00 AM - 3.00 AM</p>
+              <p>Sunday - Friday</p>
+              <p>9.00 AM - 3.00 AM</p>
             </div>
 
             <div className="flex py-1 sm:flex-row flex-col my-4 justify-between text-gray-400 text-sm items-start">
-
-               <div className="flex mb-2 flex-col items-start">
-                <h2 className="text-xl text-gray-700 font-bold mb-5">Kakrail, Dhaka</h2>
-               <div className="flex justify-center mb-3 items-center gap-3">
-                  <span className="text-sm text-primary"><FaLocationDot /></span>
+              <div className="flex mb-2 flex-col items-start">
+                <h2 className="text-xl text-gray-700 font-bold mb-5">
+                  Kakrail, Dhaka
+                </h2>
+                <div className="flex justify-center mb-3 items-center gap-3">
+                  <span className="text-sm text-primary">
+                    <FaLocationDot />
+                  </span>
                   <p className="text-gray-400">Shantinagar, Dhaka 1012</p>
                 </div>
                 <div className="flex justify-center mb-3 items-center gap-3">
-                  <span className="text-sm text-primary"><FaPhone /></span>
+                  <span className="text-sm text-primary">
+                    <FaPhone />
+                  </span>
                   <p className="text-gray-400">(+880) 123456789</p>
                 </div>
                 <div className="flex justify-center mb-3 items-center gap-3">
-                  <span className="text-sm text-primary"><FaEnvelope /></span>
+                  <span className="text-sm text-primary">
+                    <FaEnvelope />
+                  </span>
                   <p className="text-gray-400">donate@gmail.com</p>
                 </div>
-               </div>
-               <div className="flex flex-col items-start">
-                <h2 className="text-xl font-bold text-gray-700  mb-5">Dhanmondi, Dhaka</h2>
-               <div className="flex justify-center mb-3 items-center gap-3">
-                  <span className="text-sm text-primary"><FaLocationDot /></span>
+              </div>
+              <div className="flex flex-col items-start">
+                <h2 className="text-xl font-bold text-gray-700  mb-5">
+                  Dhanmondi, Dhaka
+                </h2>
+                <div className="flex justify-center mb-3 items-center gap-3">
+                  <span className="text-sm text-primary">
+                    <FaLocationDot />
+                  </span>
                   <p className="text-gray-400">Shantinagar, Dhaka 1012</p>
                 </div>
                 <div className="flex justify-center mb-3 items-center gap-3">
-                  <span className="text-sm text-primary"><FaPhone /></span>
+                  <span className="text-sm text-primary">
+                    <FaPhone />
+                  </span>
                   <p className="text-gray-400">(+880) 123456789</p>
                 </div>
                 <div className="flex justify-center mb-3 items-center gap-3">
-                  <span className="text-sm text-primary"><FaEnvelope /></span>
+                  <span className="text-sm text-primary">
+                    <FaEnvelope />
+                  </span>
                   <p className="text-gray-400">donate@gmail.com</p>
                 </div>
-               </div>
-            
+              </div>
             </div>
           </div>
         </div>
