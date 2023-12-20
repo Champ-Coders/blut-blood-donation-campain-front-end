@@ -29,9 +29,8 @@ const CreateBlog = () => {
       />
       <h1 className="text-xl font-bold my-1">Create Course</h1>
       <form className="block w-full" onSubmit={handleSubmit(onSubmit)}>
-        <Row gutter={{ xs: 24, xl: 8, lg: 8, md: 24 }}>
-          <Col span={8} style={{ margin: "10px 0" }}>
-            <div className="my-[10px] mx-0">
+        <div className="w-full">
+            <div className="my-[10px]  md:max-w-md mx-0">
               <InputField
                 name="title"
                 label="Title"
@@ -41,7 +40,7 @@ const CreateBlog = () => {
                 required
               />
             </div>
-            <div className="my-[10px] mx-0">
+            <div className="my-[10px] md:max-w-md mx-0">
               <TextAreaField
                 name="description"
                 register={register}
@@ -50,7 +49,7 @@ const CreateBlog = () => {
                 required
               />
             </div>
-            <div className="my-[10px] mx-0">
+            <div className="my-[10px] md:max-w-md mx-0">
               <InputField
                 name="image"
                 type="text"
@@ -60,8 +59,7 @@ const CreateBlog = () => {
                 required
               />
             </div>
-          </Col>
-        </Row>
+          </div>
         <Button type="primary" htmlType="submit">
           add
         </Button>

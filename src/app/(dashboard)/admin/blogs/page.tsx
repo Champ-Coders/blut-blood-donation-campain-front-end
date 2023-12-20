@@ -75,13 +75,11 @@ const AllBlogs = () => {
         <Input
           type="text"
           allowClear
-          size="large"
+          size="middle"
           placeholder="Search..."
           onChange={(e) => setSearchText(e.target.value)}
           value={searchText}
-          style={{
-            width: "40%",
-          }}
+          className="max-w-sm mr-4"
         />
         <div>
           <Link href="/admin/blogs/create">
