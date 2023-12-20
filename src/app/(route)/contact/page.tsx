@@ -1,3 +1,4 @@
+import EventDetails from "@/components/EventDetails/EventDetails";
 import BannerBreadcrumb from "@/components/UI/BannerBreadcrumb";
 import GetInTouch from "@/components/contact/GetInTouch";
 import React from "react";
