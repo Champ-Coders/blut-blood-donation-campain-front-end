@@ -1,9 +1,11 @@
 "use client";
 
+import { Provider } from "react-redux";
 import StyledComponentsRegistry from "./AntResistry";
 import { ConfigProvider } from "antd";
+import store from "@/redux/app/store";
 
-const Providers = ({ children }: { children: React.ReactNode }) => {
+const Providers: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   return (
     <StyledComponentsRegistry>
       <ConfigProvider
@@ -14,7 +16,7 @@ const Providers = ({ children }: { children: React.ReactNode }) => {
           },
         }}
       >
-        {children}
+        <Provider store={store}>{children}</Provider>
       </ConfigProvider>
     </StyledComponentsRegistry>
     // <Provider store={store}>
