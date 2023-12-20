@@ -1,9 +1,12 @@
+"use client"
+
 import { Menu } from "antd";
 import React from "react";
 
-
 //! SIdeMenuUI is reusable MenuUI for showing layout sidebar UI with dropdown children
-
+function classNames(...classes:any) {
+  return classes.filter(Boolean).join(" ");
+}
 const SideMenuUI = ({
   data: { itemsData, mainCss, menuCss, subMenuCss },
 }: {
