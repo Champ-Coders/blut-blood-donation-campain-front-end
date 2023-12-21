@@ -5,13 +5,9 @@ import Image from "next/image";
 const LoadingPage = () => {
   return (
     <div className="h-screen w-full flex items-center justify-center ">
-      <Image src={LoadingImage} alt="Loading" width={500} height={500} />
+      <Image src={LoadingImage} alt="Loading" width={300} height={300} />
     </div>
   );
 };
 
 export default LoadingPage;
-
-
-
-

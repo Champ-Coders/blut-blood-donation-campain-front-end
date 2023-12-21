@@ -1,6 +1,5 @@
 import type { MenuProps } from "antd";
 import {
-  ProfileOutlined,
   ScheduleOutlined,
   ThunderboltOutlined,
   CreditCardOutlined,
@@ -26,8 +25,6 @@ export const dashboardItems = (role: USER_ROLE) => {
         <UserSwitchOutlined
           style={{
             fontSize: "18px",
-            // marginRight:"5px"
-            // borderRadius: "10px",
           }}
         />
       ),
@@ -67,8 +64,6 @@ export const dashboardItems = (role: USER_ROLE) => {
             <UserOutlined
               style={{
                 fontSize: "18px",
-                // marginRight:"5px"
-                // borderRadius: "10px",
               }}
             />
           ),
@@ -110,7 +105,7 @@ export const dashboardItems = (role: USER_ROLE) => {
             {
               label: (
                 <Link className="" href={`/admin/manage-users/donar`}>
-                  donar List
+                  Donar List
                 </Link>
               ),
               key: `admin/manage-users/donar`,
@@ -122,74 +117,6 @@ export const dashboardItems = (role: USER_ROLE) => {
                 </Link>
               ),
               key: `/admin/manage-users/donar/create`,
-            },
-          ],
-        },
-        {
-          label: "donars",
-          key: "donars",
-          icon: (
-            <UserOutlined
-              style={{
-                fontSize: "18px",
-                // marginRight:"5px"
-                // borderRadius: "10px",
-              }}
-            />
-          ),
-          children: [
-            {
-              label: (
-                <Link className="" href={`/admin/manage-users/donars`}>
-                  donars List
-                </Link>
-              ),
-              key: `/admin/manage-users/donars`,
-            },
-            {
-              label: (
-                <Link
-                  className=""
-                  href={`/admin/manage-users/all-users/donars/create`}
-                >
-                  Create donar
-                </Link>
-              ),
-              key: `//admin/manage-users/all-users/donars/create`,
-            },
-          ],
-        },
-        {
-          label: "donars",
-          key: "donars",
-          icon: (
-            <UserOutlined
-              style={{
-                fontSize: "18px",
-                // marginRight:"5px"
-                // borderRadius: "10px",
-              }}
-            />
-          ),
-          children: [
-            {
-              label: (
-                <Link className="" href={`/admin/manage-users/donars`}>
-                  donars List
-                </Link>
-              ),
-              key: `/admin/manage-users/donars`,
-            },
-            {
-              label: (
-                <Link
-                  className=""
-                  href={`/admin/manage-users/all-users/donars/create`}
-                >
-                  Create donar
-                </Link>
-              ),
-              key: `//admin/manage-users/all-users/donars/create`,
             },
           ],
         },
@@ -210,19 +137,58 @@ export const dashboardItems = (role: USER_ROLE) => {
       children: [
         {
           label: (
+            <Link className="" href={`/admin/service/create`}>
+              Create service
+            </Link>
+          ),
+          key: `/admin/service/create`,
+        },
+        {
+          label: (
             <Link className="" href={`/admin/service`}>
               service List
             </Link>
           ),
           key: `/admin/service`,
         },
+      ],
+    },
+    {
+      label: <button className=" ">Manage Event</button>,
+      key: "manage-event",
+      icon: (
+        <CreditCardOutlined
+          style={{
+            fontSize: "18px",
+            // marginRight:"5px"
+            // borderRadius: "10px",
+          }}
+        />
+      ),
+      children: [
         {
           label: (
-            <Link className="" href={`/admin/service/create`}>
-              Create service
+            <Link className="" href={`/admin/event/create`}>
+              Create Event
             </Link>
           ),
-          key: `/admin/service/create`,
+          key: `/admin/event/create`,
+        },
+        {
+          label: (
+            <Link className="" href={`/admin/event`}>
+              Event List
+            </Link>
+          ),
+          key: `/admin/event`,
+        },
+        {
+          label: (
+            <Link className="" href={`/admin/popular-event`}>
+              Popular Event
+            </Link>
+          ),
+          key: `/admin/popular-event`,
         },
       ],
     },
@@ -241,19 +207,19 @@ export const dashboardItems = (role: USER_ROLE) => {
       children: [
         {
           label: (
-            <Link className="" href={`/admin/blogs`}>
-              blogs List
-            </Link>
-          ),
-          key: `/admin/blogs`,
-        },
-        {
-          label: (
             <Link className="" href={`/admin/blogs/create`}>
               Create blogs
             </Link>
           ),
           key: `/admin/blogs/create`,
+        },
+        {
+          label: (
+            <Link className="" href={`/admin/blogs`}>
+              blogs List
+            </Link>
+          ),
+          key: `/admin/blogs`,
         },
       ],
     },
@@ -272,19 +238,50 @@ export const dashboardItems = (role: USER_ROLE) => {
       children: [
         {
           label: (
+            <Link className="" href={`/admin/faq/create`}>
+              Create faq
+            </Link>
+          ),
+          key: `/admin/faq/create`,
+        },
+        {
+          label: (
             <Link className="" href={`/admin/faq`}>
               faq List
             </Link>
           ),
           key: `/admin/faq`,
         },
+      ],
+    },
+    {
+      label: <button className=" ">Volunteers</button>,
+      key: "Volunteers",
+      icon: (
+        <FileTextOutlined
+          style={{
+            fontSize: "18px",
+            // marginRight:"5px"
+            // borderRadius: "10px",
+          }}
+        />
+      ),
+      children: [
         {
           label: (
-            <Link className="" href={`/admin/faq/create`}>
-              Create faq
+            <Link className="" href={`/admin/volunteers/create`}>
+              Volunteers Create
             </Link>
           ),
-          key: `/admin/faq/create`,
+          key: `/admin/volunteers/create`,
+        },
+        {
+          label: (
+            <Link className="" href={`/admin/volunteers`}>
+              Volunteers List
+            </Link>
+          ),
+          key: `/admin/volunteers`,
         },
       ],
     },
@@ -334,19 +331,19 @@ export const dashboardItems = (role: USER_ROLE) => {
       children: [
         {
           label: (
-            <Link className="" href={`/admin/navItem`}>
-              navItem List
-            </Link>
-          ),
-          key: `/admin/navItem`,
-        },
-        {
-          label: (
             <Link className="" href={`/admin/navItem/create`}>
               Create navItem
             </Link>
           ),
           key: `/admin/navItem/create`,
+        },
+        {
+          label: (
+            <Link className="" href={`/admin/navItem`}>
+              navItem List
+            </Link>
+          ),
+          key: `/admin/navItem`,
         },
       ],
     },
