@@ -36,9 +36,7 @@ const FaqsPage = () => {
   //     query["search"] = debouncedTerm;
   //   }
 
-  const { data, isLoading, refetch } = useFaqsQuery({});
-
-  console.log(data);
+  const { data, isLoading, refetch } = useFaqsQuery(searchTerm);
 
   const faqs = data?.data;
 
@@ -82,23 +80,12 @@ const FaqsPage = () => {
         return (
           <div
             style={{
-              display: "flex",
-              justifyContent: "space-around",
-              alignItems: "center",
               width: "150px",
             }}
           >
-            {/* <Link href={`/${role}/faq/edit/${data.id}`}>
-              <Button onClick={() => console.log(data)} type="primary">
-                <EditOutlined />
-              </Button>
-            </Link> */}
             <Button onClick={() => deleteHandler(data?.id)} danger>
               <DeleteOutlined />
             </Button>
-            {/* <Button onClick={() => console.log(data)}>
-              <EyeOutlined />
-            </Button> */}
           </div>
         );
       },
@@ -124,7 +111,7 @@ const FaqsPage = () => {
     setSearchTerm("");
   };
   return (
-    <div className="commonAdmin">
+    <div>
       <ActionBar title="Manage Faqs">
         <Input
           type="text"

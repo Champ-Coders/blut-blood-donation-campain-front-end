@@ -55,7 +55,7 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
             overflowY: "initial",
           }}
         >
-          {children}
+          <div className="commonAdmin">{children}</div>
         </Content>
         {/* <Footer></Footer> */}
       </Layout>
