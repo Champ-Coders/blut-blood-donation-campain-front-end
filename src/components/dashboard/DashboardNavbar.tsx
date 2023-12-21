@@ -4,7 +4,7 @@ import { MenuFoldOutlined, MenuUnfoldOutlined } from "@ant-design/icons";
 import { IoSearch } from "react-icons/io5";
 import { FaRegBell } from "react-icons/fa";
 
-import { Button } from "antd";
+import { Badge, Button } from "antd";
 import { Header } from "antd/es/layout/layout";
 import React, { Fragment, useState } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
@@ -92,13 +92,15 @@ const DashboardNavbar = ({
 
                 {/* notification */}
                 <div className="hidden lg:ml-4 lg:flex lg:items-center">
-                  <button
-                    type="button"
-                    className="flex-shrink-0 rounded-full bg-white p-1 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
-                  >
-                    <span className="sr-only">View notifications</span>
-                    <FaRegBell className="h-6 w-6" aria-hidden="true" />
-                  </button>
+                  <Badge count={99}>
+                    <button
+                      type="button"
+                      className="flex-shrink-0 rounded-full bg-white p-1 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+                    >
+                      <span className="sr-only">View notifications</span>
+                      <FaRegBell className="h-6 w-6" aria-hidden="true" />
+                    </button>
+                  </Badge>
 
                   {/* Profile dropdown */}
                   <Menu as="div" className="relative ml-4 flex-shrink-0">

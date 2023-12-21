@@ -4,6 +4,7 @@ import { Inter } from "next/font/google";
 import Providers from "@/lib/Providers";
 import HeaderPage from "@/components/shared/Header/Header";
 import FooterPage from "@/components/shared/Footer/Footer";
+import LiveChatButton from "@/components/Live-Chat/LiveChatButton";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -24,6 +25,9 @@ export default function RootLayout({
           <HeaderPage />
           {children}
           <FooterPage />
+          {/* floating icon */}
+
+          <LiveChatButton/>
         </body>
       </html>
     </Providers>
