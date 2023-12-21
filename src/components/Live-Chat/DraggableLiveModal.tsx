@@ -12,7 +12,7 @@ type DraggableLiveModalProps = {
 const DraggableLiveModal = () => {
   return (
     <div>
-      <div className="h-[400px] w-[400px] overflow-x-hidden bg-[#f0f0f5] px-3 py-2 font-inter flex flex-col justify-between ">
+      <div className="md:h-[400px] h-[200px] md:w-[400px] w-[200px] overflow-x-hidden bg-[#f0f0f5] px-3 py-2 font-inter flex flex-col justify-between ">
         {/* message */}
         <div className=" flex gap-2">
           <Image
@@ -23,7 +23,7 @@ const DraggableLiveModal = () => {
             className="w-[20px] h-[20px] rounded-full"
           />
 
-          <div className="bg-white shadow-lg rounded-lg w-4/5  h-[30px] px-2 pt-1 mt-1 text-black">
+          <div className="bg-white shadow-lg rounded-lg w-full  md:h-[40px] h-[60px] text-[12px] md:text-[14px] px-2 pt-1 mt-1 text-black">
             Our team typically replies in a few minutes.
           </div>
         </div>
