@@ -128,7 +128,7 @@ const FaqsPage = () => {
     setSearchTerm("");
   };
   return (
-    <div>
+    <div className="commonAdmin">
       <ActionBar title="Manage Faqs">
         <Input
           type="text"
