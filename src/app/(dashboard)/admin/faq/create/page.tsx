@@ -7,7 +7,7 @@ import { Button, message } from "antd";
 import { useForm } from "react-hook-form";
 
 const CreateServicePage = () => {
-  const [createFaq] = useCreateFaqMutation();
+  const [createFaq, { isLoading }] = useCreateFaqMutation();
 
   const {
     handleSubmit,
@@ -16,17 +16,17 @@ const CreateServicePage = () => {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = async (data: any) => {
+  const onSubmit = async (faqData: any) => {
     // Handle form submission logic here
-    const paylod = {
-      ...data,
+    const data = {
+      ...faqData,
       user: "65816e02a2ae4b2e43381dc1",
     };
-    console.log("Form Data:", paylod);
+    // console.log("Form Data:", data);
     try {
-      const res = await createFaq(paylod);
-      console.log(res);
-      if (res) {
+      const res = await createFaq(data);
+      console.log("🚀 ~ file: page.tsx:28 ~ onSubmit ~ res:", res)
+      if ("data" in res && res.data?.success) {
         message.success("Faq added successfully");
         reset();
       }
@@ -37,30 +37,6 @@ const CreateServicePage = () => {
 
   return (
     <div className="commonAdmin">
-      {/* <Form submitHandler={onSubmit}>
-        <Row gutter={{ xs: 24, xl: 8, lg: 8, md: 24 }}>
-          <Col span={8} style={{ margin: "10px 0" }}>
-            <InputField
-              name="question"
-              label="Faqs Question"
-              type="text"
-              placeholder="Faqs Question"
-            />
-          </Col>
-          <Col span={8} style={{ margin: "10px 0" }}>
-            <InputField
-              name="question"
-              label="Faqs Question"
-              type="text"
-              placeholder="Faqs Question"
-            />
-          </Col>
-        </Row>
-        <Button type="primary" htmlType="submit">
-          Add
-        </Button>
-      </Form> */}
-
       <form className="block w-full" onSubmit={handleSubmit(onSubmit)}>
         <div className="w-full">
           <div className="my-[10px]  md:max-w-md mx-0">
@@ -71,6 +47,7 @@ const CreateServicePage = () => {
               register={register}
               errors={errors}
               required
+              placeholder="Faqs Question"
             />
           </div>
           <div className="my-[10px] md:max-w-md mx-0">
@@ -80,10 +57,11 @@ const CreateServicePage = () => {
               errors={errors}
               label="Description of Faqs"
               required
+              placeholder="Description of Faqs"
             />
           </div>
         </div>
-        <Button type="primary" htmlType="submit">
+        <Button loading={isLoading} type="primary" htmlType="submit">
           Add
         </Button>
       </form>
