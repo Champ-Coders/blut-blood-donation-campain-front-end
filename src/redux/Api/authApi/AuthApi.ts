@@ -1,4 +1,7 @@
-import { setToLocalStorage } from "./../../../utils/local-storage";
+import {
+  getFromLocalStorage,
+  setToLocalStorage,
+} from "./../../../utils/local-storage";
 import { api } from "../api";
 
 const AUTH_URL = "/users";
@@ -34,7 +37,22 @@ export const authAPi = api.injectEndpoints({
         // console.log(setToLCStorage);
       },
     }),
+    userProfile: build.query({
+      query: () => {
+        return {
+          url: `${AUTH_URL}/profile`,
+          method: "GET",
+          headers: {
+            Authorization: `${getFromLocalStorage("user")}`,
+          },
+        };
+      },
+    }),
   }),
 });
 
-export const { useUserLoginMutation, useUserRegisterMutation } = authAPi;
+export const {
+  useUserLoginMutation,
+  useUserRegisterMutation,
+  useUserProfileQuery,
+} = authAPi;

@@ -8,6 +8,7 @@ import MultiSelect from "../MultiSelector/MultiSelector";
 import { blood_groups } from "@/constants/Register";
 import { useUserRegisterMutation } from "@/redux/Api/authApi/AuthApi";
 import { message } from "antd";
+import { useRouter } from "next/navigation";
 
 const Register = () => {
   const {
@@ -18,6 +19,8 @@ const Register = () => {
   } = useForm();
 
   const [userRegister, { isLoading }] = useUserRegisterMutation();
+
+  const router = useRouter();
 
   const onSubmit = async (data: any) => {
     const registrationData = {
@@ -35,12 +38,12 @@ const Register = () => {
 
       if (response?.success) {
         message.success(response.message);
+        router.push("/dashboard");
       } else {
         message.error(response.message);
       }
-    } catch (error:any) {
-      console.log(error)
-      ;
+    } catch (error: any) {
+      console.log(error);
       message.error(error?.data?.message);
     }
   };

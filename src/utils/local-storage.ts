@@ -13,12 +13,19 @@ export const getFromLocalStorage = (key: string) => {
   return localStorage.getItem(key);
 };
 
-export const getUserDataFromLC = () => {
+type IUserInfo = {
+  id: string;
+  email: string;
+  role: string;
+};
+export const getUserDataFromLC = (): IUserInfo | null => {
   const token = getFromLocalStorage("user");
 
+  // console.log(token,"token of lc");
+
   if (token) {
-    const userInfo = jwtDecode(token);
+    const userInfo: IUserInfo = jwtDecode(token);
     return userInfo;
   }
-  
+  return null;
 };
