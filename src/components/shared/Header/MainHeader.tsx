@@ -1,16 +1,21 @@
 "use client";
 import React from "react";
-
 import Logo from "../../../../public/assets/logo-light.png";
+import userIcon from "../../../../public/assets/icon/userIcon.png";
 import Image from "next/image";
 import { NavList } from "@/constants/NavList";
 import Dropdown from "@/components/Dropdown/Dropdown";
 import { SearchOutlined, MenuOutlined } from "@ant-design/icons";
 import Link from "next/link";
 import Drawers from "@/components/Drawer/Drawer";
+import { useUserProfileQuery } from "@/redux/Api/authApi/AuthApi";
 
 const MainHeader = () => {
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = React.useState(false);;
+
+  const {data} = useUserProfileQuery(null)
+  const userInfo = data?.data
+  // console.log(userInfo);
 
   return (
     <div className=" items-center grid md:grid-cols-5 grid-cols-3 shadow justify-between bg-white">
@@ -40,11 +45,19 @@ const MainHeader = () => {
         </button>
 
         {/* login button  */}
-        <Link href={"/login"}>
-          <button className="bg-primary text-white px-5 py-2 rounded-lg border-2 border-primary hover:bg-white hover:text-primary">
-            <span className="ml-2">Login</span>
-          </button>
-        </Link>
+        {userInfo?.email ? (
+          <Link href="/dashboard" className=" px-5 py-2 ">
+            {/* <UserOutlined   className="text-[2rem] p-4" />
+             */}
+             <Image src={userIcon} height={40} width={40} alt="userIcon" />
+          </Link>
+        ) : (
+          <Link href={"/login"}>
+            <button className="bg-primary text-white px-5 py-2 rounded-lg border-2 border-primary hover:bg-white hover:text-primary">
+              <span className="ml-2">Login</span>
+            </button>
+          </Link>
+        )}
 
         <button onClick={() => setOpen(true)} className="lg:hidden">
           <MenuOutlined className="text-[24px]" />

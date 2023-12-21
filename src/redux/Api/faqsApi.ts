@@ -24,10 +24,10 @@ const faqApi = api.injectEndpoints({
 
     // Faq create
     createFaq: build.mutation({
-      query: (body) => ({
-        url: `${FAQS_URL}/create`,
+      query: (data) => ({
+        url: `${FAQS_URL}/create-faqs`,
         method: "POST",
-        data: body,
+        data: data,
       }),
       invalidatesTags: [tagTypes.faq],
     }),

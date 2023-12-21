@@ -17,10 +17,10 @@ const CreateBlog = () => {
   const onSubmit = (data: any) => {
     // Handle form submission logic here
     console.log("Form Data:", data);
-    reset()
+    reset();
   };
   return (
-    <div className="text-start">
+    <div className="text-start commonAdmin">
       <Breadcrumb
         items={[
           { label: `admin`, link: `/admin` },
@@ -30,36 +30,36 @@ const CreateBlog = () => {
       <h1 className="text-xl font-bold my-1">Create Course</h1>
       <form className="block w-full" onSubmit={handleSubmit(onSubmit)}>
         <div className="w-full">
-            <div className="my-[10px]  md:max-w-md mx-0">
-              <InputField
-                name="title"
-                label="Title"
-                type="text"
-                register={register}
-                errors={errors}
-                required
-              />
-            </div>
-            <div className="my-[10px] md:max-w-md mx-0">
-              <TextAreaField
-                name="description"
-                register={register}
-                errors={errors}
-                label="Description"
-                required
-              />
-            </div>
-            <div className="my-[10px] md:max-w-md mx-0">
-              <InputField
-                name="image"
-                type="text"
-                register={register}
-                errors={errors}
-                label="Image URL"
-                required
-              />
-            </div>
+          <div className="my-[10px]  md:max-w-md mx-0">
+            <InputField
+              name="title"
+              label="Title"
+              type="text"
+              register={register}
+              errors={errors}
+              required
+            />
           </div>
+          <div className="my-[10px] md:max-w-md mx-0">
+            <TextAreaField
+              name="description"
+              register={register}
+              errors={errors}
+              label="Description"
+              required
+            />
+          </div>
+          <div className="my-[10px] md:max-w-md mx-0">
+            <InputField
+              name="image"
+              type="text"
+              register={register}
+              errors={errors}
+              label="Image URL"
+              required
+            />
+          </div>
+        </div>
         <Button type="primary" htmlType="submit">
           Add
         </Button>

@@ -3,11 +3,7 @@
 import ActionBar from "@/components/UI/ActionBar";
 import BDTable from "@/components/UI/BDTable";
 import { useDeleteFaqMutation, useFaqsQuery } from "@/redux/Api/faqsApi";
-import {
-  DeleteOutlined,
-  EditOutlined,
-  ReloadOutlined,
-} from "@ant-design/icons";
+import { DeleteOutlined, ReloadOutlined } from "@ant-design/icons";
 import { Button, Input, message } from "antd";
 import dayjs from "dayjs";
 import Link from "next/link";
@@ -63,13 +59,13 @@ const FaqsPage = () => {
   const columns = [
     {
       title: "Question",
-      dataIndex: "question",
+      dataIndex: "title",
     },
     {
       title: "Answer",
-      dataIndex: "answer",
+      dataIndex: "description",
       render: function (data: any) {
-        return data?.slice(0, 40) + " ...";
+        return data?.slice(0, 40);
       },
     },
     {
@@ -92,11 +88,11 @@ const FaqsPage = () => {
               width: "150px",
             }}
           >
-            <Link href={`/${role}/faq/edit/${data.id}`}>
+            {/* <Link href={`/${role}/faq/edit/${data.id}`}>
               <Button onClick={() => console.log(data)} type="primary">
                 <EditOutlined />
               </Button>
-            </Link>
+            </Link> */}
             <Button onClick={() => deleteHandler(data?.id)} danger>
               <DeleteOutlined />
             </Button>
@@ -128,7 +124,7 @@ const FaqsPage = () => {
     setSearchTerm("");
   };
   return (
-    <div>
+    <div className="commonAdmin">
       <ActionBar title="Manage Faqs">
         <Input
           type="text"

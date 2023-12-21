@@ -6,6 +6,7 @@ import InputField from "../InputField/InputField";
 import Link from "next/link";
 import { useUserLoginMutation } from "@/redux/Api/authApi/AuthApi";
 import { message } from "antd";
+import { useRouter } from "next/navigation";
 
 const Login = () => {
   const {
@@ -16,21 +17,23 @@ const Login = () => {
   } = useForm();
 
   const [userLogin, { isLoading }] = useUserLoginMutation();
+  const router = useRouter();
 
   const onSubmit = async (data: any) => {
     // Handle form submission logic here
-    // console.log("Form Data:", data);
+    // console.log("Form Data:", data);\
 
     try {
-      const response = await userLogin(data).unwrap();
-      console.log(response, "resssssss");
+      const response = (await userLogin(data).unwrap()) as any;
+      // console.log(response, "resssssss");
       if (response?.success) {
-        console.log(response);
+        // console.log(response);
         message.success(response.message);
+        router.push("/dashboard");
       } else {
         message.error(response?.message);
       }
-    } catch (error:any) {
+    } catch (error: any) {
       console.log(error, "login error");
       message.error(error?.data?.message);
     }
