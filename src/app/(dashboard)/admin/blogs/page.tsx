@@ -23,7 +23,7 @@ const AllBlogs = () => {
   const [blogId, setBlogId] = useState<string>("");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editBlog, setEditBlog] = useState({ title: "", description: "" });
-  const userData = getUserDataFromLC() as any;
+
   const {
     handleSubmit,
     register,
@@ -36,7 +36,7 @@ const AllBlogs = () => {
   const [deleteBlog] = useDeleteBlogMutation();
   const { data: blogs } = useBlogsQuery(undefined);
 
-  // filter Employee by name phone ID number
+  // filter Blog by name and title
   const filteredBlogData = blogs?.data?.filter((blog: any) => {
     const lowercaseSearchText = searchText.toLowerCase();
     return (
@@ -58,8 +58,8 @@ const AllBlogs = () => {
     }
   };
 
+  
   // Blog Edit function
-
   const onSubmit = async (data: any) => {
     const image = data.image[0];
     const formData = new FormData();
@@ -127,9 +127,7 @@ const AllBlogs = () => {
         return (
           <>
             <Button
-              style={{
-                margin: "0px 5px",
-              }}
+               className="mr-[6px]"
               onClick={() => {
                 setBlogId(selectedBlog.id);
                 setEditBlog({
