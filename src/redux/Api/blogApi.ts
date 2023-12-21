@@ -27,7 +27,7 @@ export const blogApi = api.injectEndpoints({
       query: (data) => ({
         url: `${BLOG_URL}/create-blog`,
         method: "POST",
-        data,
+        body: data,
       }),
       invalidatesTags: [tagTypes.blog],
     }),
@@ -36,7 +36,7 @@ export const blogApi = api.injectEndpoints({
       query: (data) => ({
         url: `${BLOG_URL}/${data.id}`,
         method: "PATCH",
-        data: data.body,
+        body: data.body,
       }),
       invalidatesTags: [tagTypes.blog],
     }),
@@ -56,4 +56,5 @@ export const {
   useBlogQuery,
   useDeleteBlogMutation,
   useBlogsQuery,
+  useUpdateBlogMutation,
 } = blogApi;
