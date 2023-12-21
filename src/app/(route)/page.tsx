@@ -1,5 +1,4 @@
-import Banner from "@/components/Home/Banner";
-import Blog from "@/components/Home/Blog";
+"use client";
 import BloodOwner from "@/components/Home/BloodOwner";
 import BloodTypeDonors from "@/components/Home/BloodTypeDonors";
 import CallNow from "@/components/Home/CallNow";
@@ -13,6 +12,8 @@ import TeamMember from "@/components/Home/TeamMember";
 import Testimonials from "@/components/Home/Testimonials";
 
 import VideoBanner from "@/components/Home/VideoBanner.jsx";
+import { FloatButton } from "antd";
+import { VerticalAlignTopOutlined } from "@ant-design/icons";
 
 export default function Home() {
   return (
@@ -31,6 +32,14 @@ export default function Home() {
       <BloodOwner />
       <TeamMember />
       <News />
+
+      {/* floating icon */}
+      <FloatButton.BackTop
+        shape="square"
+        type="primary"
+        style={{ right: 24 }}
+        icon={<VerticalAlignTopOutlined />}
+      />
     </>
   );
 }
