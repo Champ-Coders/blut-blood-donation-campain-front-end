@@ -1,3 +1,6 @@
+import React from "react";
+import { DoubleRightOutlined } from "@ant-design/icons";
+
 type AcationBarProps = {
   title: string;
   children: React.ReactNode;
@@ -6,7 +9,7 @@ type AcationBarProps = {
 const ActionBar = ({ title, children }: AcationBarProps) => {
   return (
     <div>
-      <h1>{title}</h1>
+      <h1 className="text-3xl font-semibold font-playfair my-3 ">{title}</h1>
 
       <div
         style={{

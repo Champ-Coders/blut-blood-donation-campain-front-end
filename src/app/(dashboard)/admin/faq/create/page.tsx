@@ -2,6 +2,7 @@
 
 import InputField from "@/components/InputField/InputField";
 import TextAreaField from "@/components/TextAreaField/TextAreaField";
+import ActionBar from "@/components/UI/ActionBar";
 import { useCreateFaqMutation } from "@/redux/Api/faqsApi";
 import { Button, message } from "antd";
 import { useForm } from "react-hook-form";
@@ -25,7 +26,7 @@ const CreateServicePage = () => {
     // console.log("Form Data:", data);
     try {
       const res = await createFaq(data);
-      console.log("🚀 ~ file: page.tsx:28 ~ onSubmit ~ res:", res)
+      console.log("🚀 ~ file: page.tsx:28 ~ onSubmit ~ res:", res);
       if ("data" in res && res.data?.success) {
         message.success("Faq added successfully");
         reset();
@@ -36,7 +37,7 @@ const CreateServicePage = () => {
   };
 
   return (
-    <div className="commonAdmin">
+    <ActionBar title="Create Faqs">
       <form className="block w-full" onSubmit={handleSubmit(onSubmit)}>
         <div className="w-full">
           <div className="my-[10px]  md:max-w-md mx-0">
@@ -65,7 +66,7 @@ const CreateServicePage = () => {
           Add
         </Button>
       </form>
-    </div>
+    </ActionBar>
   );
 };
 

@@ -2,6 +2,7 @@
 
 import InputField from "@/components/InputField/InputField";
 import TextAreaField from "@/components/TextAreaField/TextAreaField";
+import ActionBar from "@/components/UI/ActionBar";
 import Breadcrumb from "@/components/UI/BreadCrumb";
 import config from "@/config/config";
 import { useAddBlogMutation } from "@/redux/Api/blogApi";
@@ -42,7 +43,7 @@ const CreateBlog = () => {
         }
       });
 
-      message.loading("Creating Blog.....");
+    message.loading("Creating Blog.....");
     try {
       const res = await addBlog(imgFetch).unwrap();
       if (res) {
@@ -54,56 +55,55 @@ const CreateBlog = () => {
     reset();
   };
 
-
-  
   return (
-    <div className="text-start commonAdmin">
+    <div className="text-start">
       <Breadcrumb
         items={[
           { label: `admin`, link: `/admin` },
           { label: "blogs", link: `/admin/blogs` },
         ]}
       />
-      <h1 className="text-xl font-bold my-1">Create Blog</h1>
-      <form className="block w-full" onSubmit={handleSubmit(onSubmit)}>
-        <div className="w-full">
-          <div className="my-[10px]  md:max-w-md mx-0">
-            <InputField
-              name="title"
-              label="Title"
-              type="text"
-              register={register}
-              errors={errors}
-              required
-            />
-          </div>
-          <div className="my-[10px] md:max-w-md mx-0">
-            <TextAreaField
-              name="description"
-              register={register}
-              errors={errors}
-              label="Description"
-              required
-            />
-          </div>
-          <div className="my-[10px] md:max-w-md mx-0">
-            <InputField
-              name="image"
-              label="Image"
-              type="file"
-              register={register}
-              errors={errors}
-              required
-            />
-          </div>
-        </div>
+      {/* <h1 className="text-xl font-bold my-1">Create Blog</h1> */}
 
+      <ActionBar title="Create Blog">
+        <form className="block w-full" onSubmit={handleSubmit(onSubmit)}>
+          <div className="w-full">
+            <div className="my-[10px]  md:max-w-md mx-0">
+              <InputField
+                name="title"
+                label="Title"
+                type="text"
+                register={register}
+                errors={errors}
+                required
+              />
+            </div>
+            <div className="my-[10px] md:max-w-md mx-0">
+              <TextAreaField
+                name="description"
+                register={register}
+                errors={errors}
+                label="Description"
+                required
+              />
+            </div>
+            <div className="my-[10px] md:max-w-md mx-0">
+              <InputField
+                name="image"
+                label="Image"
+                type="file"
+                register={register}
+                errors={errors}
+                required
+              />
+            </div>
+          </div>
 
-        
-        <Button className="mt-2" type="primary" htmlType="submit">
-          Create  Blog
-        </Button>
-      </form>
+          <Button className="mt-2" type="primary" htmlType="submit">
+            Create Blog
+          </Button>
+        </form>
+      </ActionBar>
     </div>
   );
 };

@@ -58,7 +58,6 @@ const AllBlogs = () => {
     }
   };
 
-  
   // Blog Edit function
   const onSubmit = async (data: any) => {
     const image = data.image[0];
@@ -127,7 +126,7 @@ const AllBlogs = () => {
         return (
           <>
             <Button
-               className="mr-[6px]"
+              className="mr-[6px]"
               onClick={() => {
                 setBlogId(selectedBlog.id);
                 setEditBlog({
@@ -159,7 +158,7 @@ const AllBlogs = () => {
     },
   ];
   return (
-    <div className="commonAdmin">
+    <div>
       <Breadcrumb
         items={[
           {
