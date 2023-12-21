@@ -33,7 +33,7 @@ const LiveChatButton = () => {
 
             {/* body */}
             <div className="h-[60px] w-full my-[30px] flex flex-col justify-center items-center ">
-              <Badge size="default" status="success" dot >
+              <Badge size="default" status="success" dot>
                 <Image
                   src={"https://i.ibb.co/YcjhGgs/IMG-20231111-142014-1.jpg"}
                   alt="Live Chat"
@@ -59,8 +59,8 @@ const LiveChatButton = () => {
           }}
           icon={
             <div className="group transition-all ease-in-out duration-500">
-              <div className="absolute bg-white -mt-[75px] w-[200px] p-3 font-playfair rounded-xl mr-[300px] -ml-[180px] hidden group-hover:block transition-all ease-in-out duration-500">
-                Hi! Welcome back. How are you doing?
+              <div className="absolute bg-primary text-white shadow-xl  z-50 -mt-[75px] w-[200px] p-3 font-playfair rounded-xl mr-[300px] -ml-[180px] hidden group-hover:block transition-all ease-in-out duration-500">
+                Hi! Welcome back. How can i help you?
               </div>
               <Image
                 src={LiveChatImage}
