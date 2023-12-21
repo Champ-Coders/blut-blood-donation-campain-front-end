@@ -80,7 +80,7 @@ const DashboardNavbar = ({
                   </div>
                 </div>
 
-                {/* only Mobail */}
+                {/* only Mobile */}
 
                 <Image
                   src={Logo}
