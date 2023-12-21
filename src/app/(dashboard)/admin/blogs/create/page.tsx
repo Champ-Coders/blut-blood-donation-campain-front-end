@@ -3,10 +3,15 @@
 import InputField from "@/components/InputField/InputField";
 import TextAreaField from "@/components/TextAreaField/TextAreaField";
 import Breadcrumb from "@/components/UI/BreadCrumb";
-import { Button, Col, Row } from "antd";
+import config from "@/config/config";
+import { useAddBlogMutation } from "@/redux/Api/blogApi";
+import { getUserDataFromLC } from "@/utils/local-storage";
+import { Button, message } from "antd";
 import { useForm } from "react-hook-form";
 
 const CreateBlog = () => {
+  const userData = getUserDataFromLC() as any;
+  const [addBlog] = useAddBlogMutation();
   const {
     handleSubmit,
     register,
@@ -14,11 +19,43 @@ const CreateBlog = () => {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data: any) => {
-    // Handle form submission logic here
-    console.log("Form Data:", data);
+  const onSubmit = async (data: any) => {
+    const image = data.image[0];
+    const formData = new FormData();
+    formData.append("image", image);
+    const url = config.imageBbKey;
+
+    const imgFetch = await fetch(url, {
+      method: "POST",
+      body: formData,
+    })
+      .then((res) => res.json())
+      .then((imageData) => {
+        if (imageData.success) {
+          const newBlog = {
+            title: data.title,
+            description: data.description,
+            image: imageData?.data?.url,
+            user: userData?.id,
+          };
+          return newBlog;
+        }
+      });
+
+      message.loading("Creating Blog.....");
+    try {
+      const res = await addBlog(imgFetch).unwrap();
+      if (res) {
+        message.success("Blog Create successfully");
+      }
+    } catch (err: any) {
+      message.error(err.message);
+    }
     reset();
   };
+
+
+  
   return (
     <div className="text-start commonAdmin">
       <Breadcrumb
@@ -27,7 +64,7 @@ const CreateBlog = () => {
           { label: "blogs", link: `/admin/blogs` },
         ]}
       />
-      <h1 className="text-xl font-bold my-1">Create Course</h1>
+      <h1 className="text-xl font-bold my-1">Create Blog</h1>
       <form className="block w-full" onSubmit={handleSubmit(onSubmit)}>
         <div className="w-full">
           <div className="my-[10px]  md:max-w-md mx-0">
@@ -52,16 +89,19 @@ const CreateBlog = () => {
           <div className="my-[10px] md:max-w-md mx-0">
             <InputField
               name="image"
-              type="text"
+              label="Image"
+              type="file"
               register={register}
               errors={errors}
-              label="Image URL"
               required
             />
           </div>
         </div>
-        <Button type="primary" htmlType="submit">
-          Add
+
+
+        
+        <Button className="mt-2" type="primary" htmlType="submit">
+          Create  Blog
         </Button>
       </form>
     </div>
