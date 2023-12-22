@@ -68,13 +68,15 @@ const DashboardSidebar = ({
         </section>
       ) : (
         // <UserOutlined className="text-2xl ml-7 mt-3" />
-        <Image
-          src={logo}
-          alt="logo"
-          width={120}
-          height={140}
-          className=" bg-primary rounded h-[50px] px-2 py-3"
-        />
+        <Link  href={"/"}>
+          <Image
+            src={logo}
+            alt="logo"
+            width={120}
+            height={140}
+            className=" bg-primary rounded h-[50px] px-2 py-3"
+          />
+        </Link>
       )}
 
       <SideMenuUI

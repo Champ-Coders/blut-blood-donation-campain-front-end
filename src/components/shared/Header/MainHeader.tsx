@@ -33,7 +33,7 @@ const MainHeader = () => {
   const SignOutHandler = () => {
     logout();
     message.error("Successfully Sign Out");
-    // window.location.reload();
+    window.location.reload();
     router.push("/");
   };
 

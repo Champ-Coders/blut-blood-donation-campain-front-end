@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import { FaPhone, FaLocationDot, FaEnvelope } from "react-icons/fa6";
-import { SubmitHandler, useForm } from "react-hook-form";
+import {  useForm } from "react-hook-form";
 import InputField from "../InputField/InputField";
 import Link from "next/link";
 import MultiSelect from "../MultiSelector/MultiSelector";
@@ -28,23 +28,28 @@ const Register = () => {
       email: data?.email,
       phoneNumber: data?.phoneNumber,
       password: data?.password,
-      bloodGroup: data?.bloodGroup.name,
+      bloodGroup: data?.bloodGroup?.name,
       dateOfBirth: data?.dateOfBirth,
       address: data?.address,
     };
-    console.log(registrationData);
+    // console.log(registrationData);
     try {
       const response = await userRegister(registrationData).unwrap();
 
       if (response?.success) {
         message.success(response.message);
-        router.push("/dashboard");
+        router.push("/profile");
       } else {
         message.error(response.message);
       }
     } catch (error: any) {
-      console.log(error);
-      message.error(error?.data?.message);
+      // console.log(error);
+
+      if (error?.data?.errorMessages) {
+        message.error(error?.data?.errorMessages[0]?.message);
+      } else if (error?.data?.message) {
+        message.error(error?.data?.message);
+      }
     }
   };
   return (
@@ -63,18 +68,6 @@ const Register = () => {
                 errors={errors}
               />
             </div>
-            {/* Phone */}
-            <div className="w-full mb-3 sm:mb-6">
-              <InputField
-                placeholder="Enter Your Phone Number"
-                name={"phoneNumber"}
-                label="Your Phone Number"
-                type="text"
-                register={register}
-                required
-                errors={errors}
-              />
-            </div>
             {/* Email */}
             <div className="w-full mb-3 sm:mb-6">
               <InputField
@@ -82,6 +75,18 @@ const Register = () => {
                 label="Your Email Address"
                 name={"email"}
                 type="email"
+                register={register}
+                required
+                errors={errors}
+              />
+            </div>
+            {/* Phone */}
+            <div className="w-full mb-3 sm:mb-6">
+              <InputField
+                placeholder="Enter Your Phone Number"
+                name={"phoneNumber"}
+                label="Your Phone Number"
+                type="text"
                 register={register}
                 required
                 errors={errors}
@@ -153,7 +158,7 @@ const Register = () => {
                 className="relative w-full rounded px-5 py-2 overflow-hidden group bg-primary  hover:bg-black text-white transition-all ease-out duration-300"
               >
                 <span className="absolute right-0 w-8 h-32 -mt-12 transition-all duration-1000 transform translate-x-10 bg-white opacity-10 rotate-12 group-hover:-translate-x-[550px] ease"></span>
-                <span className="relative">Submit</span>
+                <span className="relative">Sign Up</span>
               </button>
 
               <p className="text-gray-400 text-sm pt-4 text-center">
