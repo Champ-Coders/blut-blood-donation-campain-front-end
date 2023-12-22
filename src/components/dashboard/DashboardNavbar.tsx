@@ -14,7 +14,6 @@ import Logo from "../../../public/assets/logo-light.png";
 import Image from "next/image";
 import { logout } from "@/utils/local-storage";
 import { useRouter } from "next/navigation";
-
 function classNames(...classes: any) {
   return classes.filter(Boolean).join(" ");
 }
@@ -31,6 +30,8 @@ const DashboardNavbar = ({
     logout();
     message.error("Successfully Sign Out");
     router.push("/");
+    // window.location.reload();
+
   };
 
   return (
