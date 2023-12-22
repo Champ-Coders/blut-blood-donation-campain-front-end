@@ -64,3 +64,19 @@ export interface IPopularCamp {
   timeSlot: string;
   address: string;
 }
+
+
+ export type IUser = {
+  _id: string;
+  name: string;
+  phoneNumber: string;
+  email: string;
+  role: string;
+  bloodGroup: string;
+  address: string;
+  dateOfBirth: string; // Assuming the date is in ISO 8601 format
+  totalDonation: number;
+  totalReceived: number;
+  available: boolean;
+  notification: number;
+};

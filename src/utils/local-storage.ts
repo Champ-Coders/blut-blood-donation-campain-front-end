@@ -29,3 +29,15 @@ export const getUserDataFromLC = (): IUserInfo | null => {
   }
   return null;
 };
+
+export const removeFromLocalStorage = (key: string) => {
+  if (!key || typeof window === "undefined") {
+    return;
+  }
+  localStorage.removeItem(key);
+};
+
+
+export const logout = () => {
+  removeFromLocalStorage("user"); // Assuming "user" is the key for the authentication 
+};

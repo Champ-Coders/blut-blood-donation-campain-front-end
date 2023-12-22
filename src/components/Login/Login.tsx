@@ -29,7 +29,7 @@ const Login = () => {
       if (response?.success) {
         // console.log(response);
         message.success(response.message);
-        router.push("/dashboard");
+        router.push("/profile");
       } else {
         message.error(response?.message);
       }
@@ -48,6 +48,7 @@ const Login = () => {
               <InputField
                 placeholder="Enter Your Email"
                 name={"email"}
+                label="Your Email Address"
                 type="email"
                 register={register}
                 required
@@ -58,6 +59,7 @@ const Login = () => {
             <div className="w-full mb-3 sm:mb-6">
               <InputField
                 placeholder="Enter Your Password"
+                label="Your Password"
                 name={"password"}
                 type="text"
                 register={register}

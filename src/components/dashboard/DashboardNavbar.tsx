@@ -4,7 +4,7 @@ import { MenuFoldOutlined, MenuUnfoldOutlined } from "@ant-design/icons";
 import { IoSearch } from "react-icons/io5";
 import { FaRegBell } from "react-icons/fa";
 
-import { Badge, Button } from "antd";
+import { Badge, Button, message } from "antd";
 import { Header } from "antd/es/layout/layout";
 import React, { Fragment, useState } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
@@ -12,6 +12,8 @@ import { Disclosure, Menu, Transition } from "@headlessui/react";
 // logo
 import Logo from "../../../public/assets/logo-light.png";
 import Image from "next/image";
+import { logout } from "@/utils/local-storage";
+import { useRouter } from "next/navigation";
 
 function classNames(...classes: any) {
   return classes.filter(Boolean).join(" ");
@@ -24,6 +26,13 @@ const DashboardNavbar = ({
   collapsed: boolean;
   setCollapsed: any;
 }) => {
+  const router = useRouter();
+  const SignOutHandler = () => {
+    logout();
+    message.error("Successfully Sign Out");
+    router.push("/");
+  };
+
   return (
     <Header
       style={{
@@ -152,15 +161,15 @@ const DashboardNavbar = ({
                         </Menu.Item>
                         <Menu.Item>
                           {({ active }) => (
-                            <a
-                              href="#"
+                            <button
+                              onClick={SignOutHandler}
                               className={classNames(
                                 active ? "bg-gray-100" : "",
                                 "block px-4 py-2 text-sm text-gray-700"
                               )}
                             >
                               Sign out
-                            </a>
+                            </button>
                           )}
                         </Menu.Item>
                       </Menu.Items>
