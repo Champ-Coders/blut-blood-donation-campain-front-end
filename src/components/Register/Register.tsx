@@ -55,6 +55,7 @@ const Register = () => {
             <div className="flex w-full sm:flex-row flex-col mb-4 justify-between items-center gap-3 sm:gap-6">
               <InputField
                 placeholder="Your Name"
+                label="Your Name"
                 name={"name"}
                 type="text"
                 register={register}
@@ -67,6 +68,7 @@ const Register = () => {
               <InputField
                 placeholder="Enter Your Phone Number"
                 name={"phoneNumber"}
+                label="Your Phone Number"
                 type="text"
                 register={register}
                 required
@@ -77,6 +79,7 @@ const Register = () => {
             <div className="w-full mb-3 sm:mb-6">
               <InputField
                 placeholder="Enter Your Email"
+                label="Your Email Address"
                 name={"email"}
                 type="email"
                 register={register}
@@ -88,6 +91,7 @@ const Register = () => {
             <div className="w-full mb-3 sm:mb-6">
               <InputField
                 placeholder="Enter Your Password"
+                label="Your Password"
                 name={"password"}
                 type="text"
                 register={register}
@@ -102,6 +106,7 @@ const Register = () => {
               <div className="flex w-full sm:flex-row flex-col mb-1 sm:mb-4 justify-between items-center gap-3 sm:gap-6">
                 <InputField
                   placeholder="Enter Your Date Of Birth"
+                  label="Your Date Of Birth"
                   name={"dateOfBirth"}
                   type="date"
                   register={register}
@@ -116,6 +121,7 @@ const Register = () => {
               <div className="flex w-full sm:flex-row flex-col mb-1 sm:mb-4 justify-between items-center gap-3 sm:gap-6">
                 <InputField
                   placeholder="Enter Your Address"
+                  label="Your Address"
                   name={"address"}
                   type="text"
                   register={register}
@@ -131,6 +137,7 @@ const Register = () => {
               <div className="flex w-full sm:flex-row flex-col mb-1 sm:mb-4 justify-between items-center gap-3 sm:gap-6">
                 <MultiSelect
                   placeholder="Blood Group"
+                  label="Select Your Blood Group"
                   name={"bloodGroup"}
                   options={blood_groups}
                   isMulti={false}
