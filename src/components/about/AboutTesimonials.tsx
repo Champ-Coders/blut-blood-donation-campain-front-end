@@ -16,17 +16,18 @@ type AboutTestimonialsProps = {};
 
 const AboutTestimonials: React.FC<AboutTestimonialsProps> = () => {
   return (
-    <section className="py-20">
-      <div className="text-center mb-5 sm:mb-10">
-        <h3 className="text-base sm:text-xl text-primary font-medium mb-3 uppercase">
-          Testimonials
-        </h3>
-        <h1 className="text-[#111] font-bold text-2xl lg:text-5xl">
-          What Our Clients Say
-        </h1>
+    <section className="py-20 ">
+      <div className="common p-0">
+        <div className="text-center mb-5 sm:mb-10">
+          <h3 className="text-base sm:text-xl text-primary font-medium mb-3 uppercase">
+            Testimonials
+          </h3>
+          <h1 className="text-[#111] font-bold text-2xl lg:text-5xl">
+            What Our Clients Say
+          </h1>
+        </div>
       </div>
-
-      <div className="bg-primary">
+      <div className="bg-primary px-5 p-5 md:py-[60px]">
         <Swiper
           spaceBetween={30}
           centeredSlides={true}
@@ -39,7 +40,7 @@ const AboutTestimonials: React.FC<AboutTestimonialsProps> = () => {
         >
           {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((item) => (
             <SwiperSlide key={item}>
-              <div className="common px-5 p-5 md:py-[60px] text-white">
+              <div className=" text-white">
                 <div className="text-center max-w-[800px] mx-auto">
                   <span className="text-5xl italic">&quot;</span>
                   <h4 className="mb-[30px]  text-3xl font-semibold">
