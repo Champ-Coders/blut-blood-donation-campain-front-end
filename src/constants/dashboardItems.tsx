@@ -308,19 +308,19 @@ export const dashboardItems = (role: USER_ROLE) => {
       children: [
         {
           label: (
-            <Link className="" href={`/admin/module`}>
-              Modules List
+            <Link className="" href={`/admin/review`}>
+              Review List
             </Link>
           ),
-          key: `/admin/module`,
+          key: `/admin/review`,
         },
         {
           label: (
-            <Link className="" href={`/admin/module/create`}>
-              Create modules
+            <Link className="" href={`/admin/review/create`}>
+              Create review
             </Link>
           ),
-          key: `/admin/module/create`,
+          key: `/admin/review/create`,
         },
       ],
     },
