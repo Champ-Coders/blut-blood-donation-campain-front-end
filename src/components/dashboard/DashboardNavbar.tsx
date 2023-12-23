@@ -9,8 +9,8 @@ import { Header } from "antd/es/layout/layout";
 import React, { Fragment, useState } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 
-// logo
 import Logo from "../../../public/assets/logo-light.png";
+import userImage from "../../../public/assets/icon/userIcon.png";
 import Image from "next/image";
 import { logout } from "@/utils/local-storage";
 import { useRouter } from "next/navigation";
@@ -31,7 +31,6 @@ const DashboardNavbar = ({
     message.error("Successfully Sign Out");
     router.push("/");
     // window.location.reload();
-
   };
 
   return (
@@ -117,9 +116,11 @@ const DashboardNavbar = ({
                     <div>
                       <Menu.Button className="flex rounded-full bg-white text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2">
                         <span className="sr-only">Open user menu</span>
-                        <img
+                        <Image
+                          height={50}
+                          width={50}
                           className="h-8 w-8 rounded-full"
-                          src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                          src={userImage}
                           alt=""
                         />
                       </Menu.Button>

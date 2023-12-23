@@ -1,11 +1,12 @@
 "use client";
 import { PhoneOutlined, MessageOutlined } from "@ant-design/icons";
 import userBg from "../../../../public/assets/banner/userBg.jpg";
-import userImage from "../../../../public/assets/icon/blood_user.jpg";
+import userImage from "../../../../public/assets/icon/userIcon.png";
 import Image from "next/image";
 import { useUserProfileQuery } from "@/redux/Api/authApi/AuthApi";
 import { IUser } from "@/interfaces/common";
 import Link from "next/link";
+import ChangePasswordPage from "@/components/dashboard/ChangePassword";
 
 const profile = {
   name: "Ricardo Cooper",
@@ -42,6 +43,7 @@ export default function ProfilePage() {
     <div>
       <div>
         <Image
+          unoptimized
           height={200}
           width={300}
           className="h-[30vh] w-full object-cover "
@@ -55,7 +57,7 @@ export default function ProfilePage() {
             <Image
               height={100}
               width={100}
-              className="h-24 w-24 rounded-full ring-4 ring-white sm:h-32 sm:w-32"
+              className="h-24 w-24 rounded-full  bg-white  sm:h-32 sm:w-32"
               src={userImage}
               alt=""
             />
@@ -99,55 +101,63 @@ export default function ProfilePage() {
           </h1>
         </div>
       </div>
-      <div className="bg-white max-w-2xl lg:max-w-[45rem] mx-1 lg:mx-auto my-2 lg:my-12 shadow overflow-hidden sm:rounded-lg">
-        <div className="px-4 py-5 sm:px-6">
-          <h3 className="text-lg leading-6 font-medium text-gray-900">
-            Personal Information
-          </h3>
-          <p className="mt-1 max-w-2xl text-sm text-gray-500">
-            Details and informations about user.
-          </p>
+
+      <div className="block lg:flex items-center justify-between">
+        <div className=" max-w-2xl lg:max-w-[45rem] mx-1 lg:mx-auto my-2 lg:my-12 shadow overflow-hidden sm:rounded-lg">
+          <div className="px-4 py-5 sm:px-6 ">
+            <h3 className="text-lg leading-6 font-medium text-gray-900">
+              Personal Information
+            </h3>
+            <p className="mt-1 max-w-2xl text-sm text-gray-500">
+              Details and informations about user.
+            </p>
+          </div>
+          <div className="border-t border-gray-200">
+            <dl>
+              <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                <dt className="text-sm font-medium text-gray-500">Full name</dt>
+                <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                  {userData?.name}
+                </dd>
+              </div>
+              <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                <dt className="text-sm font-medium text-gray-500">
+                  User Birthday
+                </dt>
+                <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                  {formattedDate}
+                </dd>
+              </div>
+              <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                <dt className="text-sm font-medium text-gray-500">
+                  Email address
+                </dt>
+                <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                  {userData?.email}
+                </dd>
+              </div>
+              <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                <dt className="text-sm font-medium text-red-500">
+                  Blood Group
+                </dt>
+                <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                  {userData?.bloodGroup}
+                </dd>
+              </div>
+              <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                <dt className="text-sm font-medium text-gray-500">About</dt>
+                <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                  To get social media testimonials like these, keep your
+                  customers engaged with your social media accounts by posting
+                  regularly yourself
+                </dd>
+              </div>
+            </dl>
+          </div>
         </div>
-        <div className="border-t border-gray-200">
-          <dl>
-            <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-              <dt className="text-sm font-medium text-gray-500">Full name</dt>
-              <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                {userData?.name}
-              </dd>
-            </div>
-            <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-              <dt className="text-sm font-medium text-gray-500">
-                User Birthday
-              </dt>
-              <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                {formattedDate}
-              </dd>
-            </div>
-            <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-              <dt className="text-sm font-medium text-gray-500">
-                Email address
-              </dt>
-              <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                {userData?.email}
-              </dd>
-            </div>
-            <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-              <dt className="text-sm font-medium text-red-500">Blood Group</dt>
-              <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                {userData?.bloodGroup}
-              </dd>
-            </div>
-            <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-              <dt className="text-sm font-medium text-gray-500">About</dt>
-              <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                To get social media testimonials like these, keep your customers
-                engaged with your social media accounts by posting regularly
-                yourself
-              </dd>
-            </div>
-          </dl>
-        </div>
+        <section className="mt-3 lg:mt-5">
+          <ChangePasswordPage />
+        </section>
       </div>
     </div>
   );

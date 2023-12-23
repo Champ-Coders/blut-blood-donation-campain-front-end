@@ -42,7 +42,7 @@ const CreateEvent = () => {
     message.loading("Creating Event.....");
     try {
       const res = await addEvent(eventData).unwrap();
-      //   console.log(res);
+        // console.log(res);
       if (res?.success) {
         message.success("Event created successfully");
       } else if (res?.error?.data) {
@@ -54,6 +54,7 @@ const CreateEvent = () => {
       console.log(err);
 
       if (err?.data?.errorMessages) {
+        
         message.error(err?.data?.errorMessages[0]?.message);
       } else if (err?.data?.message) {
         message.error(err?.data.message);
@@ -61,7 +62,7 @@ const CreateEvent = () => {
         message.error("Could not create the event");
       }
     }
-    reset();
+    // reset();
   };
 
   return (
@@ -138,7 +139,7 @@ const CreateEvent = () => {
                 required
               />
             </div>
-            <div className="my-[10px] md:max-w-md mx-0">
+            <div className="my-[10px]  md:max-w-md mx-0">
               <TextAreaField
                 name="description"
                 register={register}
