@@ -3,11 +3,7 @@ import ActionBar from "@/components/UI/ActionBar";
 import Breadcrumb from "@/components/UI/BreadCrumb";
 import Table from "@/components/UI/Table";
 import dayjs from "dayjs";
-import {
-  useEventsQuery,
-  useDeleteEventMutation,
-  useUpdateEventMutation,
-} from "@/redux/Api/eventApi";
+
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import { Button, Input, Modal, Popconfirm, message } from "antd";
 import Link from "next/link";
@@ -17,6 +13,7 @@ import { useForm } from "react-hook-form";
 import InputField from "@/components/InputField/InputField";
 import TextAreaField from "@/components/TextAreaField/TextAreaField";
 import config from "@/config/config";
+import { useDeleteEventMutation, useEventsQuery, useUpdateEventMutation } from "@/redux/Api/eventApi";
 
 const AllEvents = () => {
   const [searchText, setSearchText] = useState<string>("");
