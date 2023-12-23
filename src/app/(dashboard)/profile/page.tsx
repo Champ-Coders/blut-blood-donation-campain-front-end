@@ -30,7 +30,13 @@ export default function ProfilePage() {
   const { data } = useUserProfileQuery(null);
 
   const userData: IUser = data?.data;
-  console.log(data);
+  // console.log(data);
+
+  const formattedDate = new Date(userData?.dateOfBirth).toLocaleDateString(
+    "en-US",
+    { day: "2-digit", month: "long", year: "numeric" }
+  );
+  // console.log(formattedDate);
 
   return (
     <div>
@@ -93,38 +99,54 @@ export default function ProfilePage() {
           </h1>
         </div>
       </div>
-      <div className="text-center mt-12">
-        <h3 className="text-4xl font-semibold uppercase leading-normal text-blueGray-700 mb-2">
-          {userData?.role}{" "}
-          <span className="text-red-600">({userData?.bloodGroup})</span>
-        </h3>
-        <div className="text-sm leading-normal mt-0 mb-2 text-blueGray-400 font-bold uppercase">
-          <i className="fas fa-map-marker-alt mr-2 text-lg text-blueGray-400"></i>
-          Address: {userData?.address}
+      <div className="bg-white max-w-2xl lg:max-w-[45rem] mx-1 lg:mx-auto my-2 lg:my-12 shadow overflow-hidden sm:rounded-lg">
+        <div className="px-4 py-5 sm:px-6">
+          <h3 className="text-lg leading-6 font-medium text-gray-900">
+            Personal Information
+          </h3>
+          <p className="mt-1 max-w-2xl text-sm text-gray-500">
+            Details and informations about user.
+          </p>
         </div>
-        <div className="mb-2 text-blueGray-600 mt-10">
-          <i className="fas fa-briefcase mr-2 text-lg text-blueGray-400"></i>
-          Date of Birth: {userData?.dateOfBirth}
-        </div>
-        <div className="mb-2 text-blueGray-600">
-          <i className="fas fa-university mr-2 text-lg text-blueGray-400"></i>
-          Contact: {userData?.phoneNumber}
-        </div>
-      </div>
-      <div className="mt-10 py-10 border-t border-blueGray-200 text-center">
-        <div className="flex flex-wrap justify-center">
-          <div className="w-full lg:w-9/12 px-4">
-            <p className="mb-4 text-lg leading-relaxed text-blueGray-700">
-              A blood {userData?.role} of considerable range, {userData?.name}{" "}
-              the name taken by &nbsp; {userData?.address}, Brooklyn-based{" "}
-              {userData?.name} writes, performs and records all of his own
-              music, giving it a warm, intimate feel with a solid groove
-              structure. An artist of considerable range.
-            </p>
-            <a href="#" className="font-normal text-pink-500">
-              Show more
-            </a>
-          </div>
+        <div className="border-t border-gray-200">
+          <dl>
+            <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+              <dt className="text-sm font-medium text-gray-500">Full name</dt>
+              <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                {userData?.name}
+              </dd>
+            </div>
+            <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+              <dt className="text-sm font-medium text-gray-500">
+                User Birthday
+              </dt>
+              <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                {formattedDate}
+              </dd>
+            </div>
+            <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+              <dt className="text-sm font-medium text-gray-500">
+                Email address
+              </dt>
+              <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                {userData?.email}
+              </dd>
+            </div>
+            <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+              <dt className="text-sm font-medium text-red-500">Blood Group</dt>
+              <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                {userData?.bloodGroup}
+              </dd>
+            </div>
+            <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+              <dt className="text-sm font-medium text-gray-500">About</dt>
+              <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                To get social media testimonials like these, keep your customers
+                engaged with your social media accounts by posting regularly
+                yourself
+              </dd>
+            </div>
+          </dl>
         </div>
       </div>
     </div>
