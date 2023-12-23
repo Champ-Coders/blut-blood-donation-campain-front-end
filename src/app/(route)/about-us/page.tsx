@@ -26,7 +26,7 @@ const AboutPage = () => {
       <PopularCampaignsAbout />
       <AboutTestimonials />
       <CallNow />
-      <DonationProcessAbout />
+      {/* <DonationProcessAbout /> */}
       <TeamMember />
     </main>
   );
