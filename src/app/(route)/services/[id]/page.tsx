@@ -34,7 +34,7 @@ const ServiceDetail: React.FC<ServiceDetailProps> = () => {
               voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem
               ullam corporis suscipit laboriosam,
             </p>
-            <div className="h-[400px] overflow-hidden mb-5">
+            <div className="h-[400px] overflow-hidden mt-5 mb-10">
               <Image
                 width={839}
                 height={438}
