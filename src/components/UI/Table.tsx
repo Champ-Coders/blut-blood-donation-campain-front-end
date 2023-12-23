@@ -39,6 +39,7 @@ const Table = ({
       dataSource={dataSource}
       pagination={paginationConfig}
       onChange={onTableChange}
+      
     />
   );
 };

@@ -104,8 +104,16 @@ const AllEvents = () => {
       dataIndex: "title",
     },
     {
-      title: "Author",
-      dataIndex: ["user", "name"],
+      title: "Event Time",
+      dataIndex:"event_time",
+    },
+    {
+      title: "Event Date",
+      dataIndex:"event_date",
+    },
+    {
+      title: "Location",
+      dataIndex:"location",
     },
     {
       title: "CreatedAt",
