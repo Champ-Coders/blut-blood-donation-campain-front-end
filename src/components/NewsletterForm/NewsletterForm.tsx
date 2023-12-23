@@ -19,8 +19,11 @@ const NewsletterForm: React.FC<NewsletterFormProps> = () => {
   };
 
   return (
-    <form className="w-full flex  gap-[27px]" onSubmit={handleSubmit(onSubmit)}>
-      <div className="mb-[25px] w-full">
+    <form
+      className="w-full flex flex-col md:flex-row gap-5 lg:gap-[27px]"
+      onSubmit={handleSubmit(onSubmit)}
+    >
+      <div className="lg:mb-[25px] w-full">
         <InputField
           customClass="text-[#313131] w-full bg-white rounded-[5px] py-[15px] px-[20px] w-full"
           name={"email"}

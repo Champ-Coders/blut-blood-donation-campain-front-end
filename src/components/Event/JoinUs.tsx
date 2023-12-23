@@ -14,6 +14,7 @@ const JoinUs: React.FC<JoinUsProps> = () => {
         backgroundSize: "cover",
         backgroundPosition: "center",
         position: "relative",
+        backgroundAttachment: "fixed",
       }}
     >
       <div className="w-full h-full absolute left-0 top-0 bg-black opacity-75 z-10"></div>

@@ -50,7 +50,7 @@ const Services = () => {
                 no: service.id,
                 title: service.title,
                 description: service.description,
-                link: service.detailsLink,
+                link: `/services/${service.id}`,
                 align:
                   index % 2 !== 0
                     ? "lg:flex-row-reverse text-start lg:text-end gap-2 lg:gap-[8rem]"
