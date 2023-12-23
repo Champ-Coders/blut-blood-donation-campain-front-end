@@ -28,12 +28,12 @@ const navigation = {
 
 const FooterPage = () => {
   return (
-    <div className="relative mt-52 ">
+    <div className="relative mt-72 sm:mt-52 ">
       <div className="bg-black text-white" aria-labelledby="footer-heading">
-        <div className="pb-10">
+        <div className="p-5 lg:p-20 lg:pt-0 lg:pb-10 ">
           <Newsletter />
         </div>
-        <h2 id="footer-heading" className="sr-only">
+        <h2 id="footer-heading" className="sr-only pt-10">
           Footer
         </h2>
         <div className="common">
