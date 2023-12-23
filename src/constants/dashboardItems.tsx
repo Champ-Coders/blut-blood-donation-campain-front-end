@@ -37,6 +37,14 @@ export const dashboardItems = (role: USER_ROLE) => {
           ),
           key: `/${role}/profile`,
         },
+        {
+          label: (
+            <Link className="" href={`/profile/change-password`}>
+              Change Password
+            </Link>
+          ),
+          key: `/${role}/profile/change-password`,
+        },
       ],
     },
   ];

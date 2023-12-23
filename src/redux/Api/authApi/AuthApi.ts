@@ -48,6 +48,17 @@ export const authAPi = api.injectEndpoints({
         };
       },
     }),
+    // ! change password
+    changePassword: build.mutation({
+      query: (passwordData) => ({
+        url: `${AUTH_URL}/change-password`,
+        method: "PATCH",
+        body: passwordData,
+        headers: {
+          Authorization: `${getFromLocalStorage("user")}`,
+        },
+      }),
+    }),
   }),
 });
 
@@ -55,4 +66,5 @@ export const {
   useUserLoginMutation,
   useUserRegisterMutation,
   useUserProfileQuery,
+  useChangePasswordMutation,
 } = authAPi;
