@@ -6,28 +6,15 @@ import TextAreaField from "@/components/TextAreaField/TextAreaField";
 import ActionBar from "@/components/UI/ActionBar";
 import Breadcrumb from "@/components/UI/BreadCrumb";
 import { useAddReviewMutation } from "@/redux/Api/reviewApi";
+import { useServicesQuery } from "@/redux/Api/serviceApi";
 import { getUserDataFromLC } from "@/utils/local-storage";
 import { Button, message } from "antd";
 import { useForm } from "react-hook-form";
 
-const services = [
-    {
-        value: "serviceone",
-        label: "Service One",
-      },
-    {
-        value: "servicetwo",
-        label: "Service Two",
-      },
-    {
-        value: "servicethree",
-        label: "Service Three",
-      },
-]
-
 
 const CreateReview = () => {
   const userData = getUserDataFromLC() as any;
+  const { data: services } = useServicesQuery(undefined);
   const [addReview] = useAddReviewMutation();
   const {
     handleSubmit,
@@ -37,13 +24,21 @@ const CreateReview = () => {
     formState: { errors },
   } = useForm();
 
+
+  const serviceOptions=services?.data?.map((service:any)=>(
+    {
+        value: service.id,
+        label: service.title,
+      }
+  ))
+
   const onSubmit = async (data: any) => {
-    const newReview = {
-        review: data.review,
-        rating: data.rating,
-        service:data.service,
-        user: userData?.id,
-      };
+      const newReview = {
+          review: data.review,
+          rating: Number(data.rating),
+          service:data.service.id,
+          user: userData?.id,
+        };
     message.loading("Creating Review.....");
     try {
       const res = await addReview(newReview).unwrap();
@@ -92,7 +87,7 @@ const CreateReview = () => {
                <MultiSelect
                   label="Select Service"
                   name="service"
-                  options={services}
+                  options={serviceOptions}
                   isMulti={false}
                   required={true}
                   setValue={setValue}

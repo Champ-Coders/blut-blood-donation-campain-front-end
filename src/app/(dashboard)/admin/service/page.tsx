@@ -7,93 +7,95 @@ import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import { Button, Input, Modal, Popconfirm, message } from "antd";
 import Link from "next/link";
 import { useState } from "react";
+import { getUserDataFromLC } from "@/utils/local-storage";
 import { useForm } from "react-hook-form";
 import InputField from "@/components/InputField/InputField";
 import TextAreaField from "@/components/TextAreaField/TextAreaField";
-import { useDeleteReviewMutation, useReviewsQuery, useUpdateReviewMutation } from "@/redux/Api/reviewApi";
-import MultiSelect from "@/components/MultiSelector/MultiSelector";
-import { useServicesQuery } from "@/redux/Api/serviceApi";
+import config from "@/config/config";
+import {
+  useDeleteServiceMutation,
+  useServicesQuery,
+  useUpdateServiceMutation,
+} from "@/redux/Api/serviceApi";
 
-const services = [
-    {
-        value: "serviceone",
-        label: "Service One",
-      },
-    {
-        value: "servicetwo",
-        label: "Service Two",
-      },
-    {
-        value: "servicethree",
-        label: "Service Three",
-      },
-]
-
-const AllReview = () => {
+const AllService = () => {
   const [searchText, setSearchText] = useState<string>("");
-  const [reviewId, setReviewId] = useState<string>("");
+  const [serviceId, setServiceId] = useState<string>("");
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [editReview, setEditReview] = useState({ rating: 0, review: "" ,user:"",service:""});
-  const { data: services } = useServicesQuery(undefined);
+  const [editService, setEditService] = useState({
+    title: "",
+    description: "",
+  });
+
   const {
     handleSubmit,
-    register,setValue,
+    register,
     reset,
     formState: { errors },
   } = useForm();
 
-//   service option
-  const serviceOptions=services?.data?.map((service:any)=>(
-    {
-        value: service.id,
-        label: service.title,
-      }
-  ))
-
-
   // query and mutation
-  const [updateReview] = useUpdateReviewMutation();
-  const [deleteReview] = useDeleteReviewMutation();
-  const { data: reviews } = useReviewsQuery(undefined);
+  const [updateService] = useUpdateServiceMutation();
+  const [deleteService] = useDeleteServiceMutation();
+  const { data: service } = useServicesQuery(undefined);
 
-  // filter review by review, service titlee, user name
-  const filteredReviewData = reviews?.data?.filter((review: any) => {
+  // filter Service by name and title
+  const filteredServiceData = service?.data?.filter((service: any) => {
     const lowercaseSearchText = searchText.toLowerCase();
     return (
-        review?.review?.toLowerCase().includes(lowercaseSearchText) ||
-        review?.user?.name?.toLowerCase().includes(lowercaseSearchText) ||
-        review?.service?.title?.toLowerCase().includes(lowercaseSearchText) 
+      service?.title?.toLowerCase().includes(lowercaseSearchText) ||
+      service?.user?.name?.toLowerCase().includes(lowercaseSearchText)
     );
   });
 
-  // Delete Review
+  // Delete Service
   const deleteHandler = async (id: string) => {
     message.loading("Deleting.....");
     try {
-      const res = await deleteReview(id);
+      const res = await deleteService(id);
       if (res) {
-        message.success("Review Deleted successfully");
+        message.success("Service Deleted successfully");
       }
     } catch (err: any) {
       message.error(err.message);
     }
   };
 
-  // Review Edit function
+  // Service Edit function
   const onSubmit = async (data: any) => {
-    const updateData = {
-        review:data.review,
-        rating:Number(data.rating),
-        service:data.service.id
-    }
-    message.loading("Update Review.....");
+    const image = data.image[0];
+    const formData = new FormData();
+    formData.append("image", image);
+    const url = config.imageBbKey;
+
+    const updateData = await fetch(url, {
+      method: "POST",
+      body: formData,
+    })
+      .then((res) => res.json())
+      .then((imageData) => {
+        if (imageData.success) {
+          return {
+            title: data.title,
+            description: data.description,
+            image: imageData?.data?.url,
+          };
+        } else {
+          return {
+            title: data.title,
+            description: data.description,
+          };
+        }
+      });
+
+    message.loading("Update Service.....");
     try {
-      const res = await updateReview({
-        id: reviewId,
+      const res = await updateService({
+        id: serviceId,
         body: { ...updateData },
       }).unwrap();
       if (res) {
-        message.success("Review Update successfully");
+        message.success("Service Update successfully");
         setIsModalOpen(false);
       }
     } catch (err: any) {
@@ -104,19 +106,11 @@ const AllReview = () => {
 
   const columns: any[] = [
     {
-      title: "Review",
-      dataIndex: "review",
+      title: "Title",
+      dataIndex: "title",
     },
     {
-      title: "Rating",
-      dataIndex: "rating",
-    },
-    {
-      title: "Service",
-      dataIndex: ["service", "title"],
-    },
-    {
-      title: "User",
+      title: "Author",
       dataIndex: ["user", "name"],
     },
     {
@@ -129,20 +123,18 @@ const AllReview = () => {
     {
       title: "Action",
       render: function (data: any) {
-        const selectedReview = filteredReviewData.find(
-          (blog: any) => blog.id === data.id
+        const selectedService = filteredServiceData.find(
+          (service: any) => service.id === data.id
         );
         return (
           <>
             <Button
               className="mr-[6px]"
               onClick={() => {
-                setReviewId(selectedReview.id);
-                setEditReview({
-                  rating:selectedReview?.rating,
-                  review: selectedReview?.review,
-                  user: selectedReview?.user,
-                  service:selectedReview?.service?.title
+                setServiceId(selectedService.id);
+                setEditService({
+                  title: selectedService?.title,
+                  description: selectedService?.description,
                 });
                 setIsModalOpen(true);
               }}
@@ -153,8 +145,8 @@ const AllReview = () => {
 
             <Popconfirm
               placement="topLeft"
-              title="Delete the Review"
-              description="Are you sure to delete this review?"
+              title="Delete the Service"
+              description="Are you sure to delete this Service?"
               onConfirm={() => deleteHandler(data?.id)}
               okText="Yes"
               cancelText="No"
@@ -179,7 +171,7 @@ const AllReview = () => {
         ]}
       />
 
-      <ActionBar title="Review List">
+      <ActionBar title="Service List">
         <Input
           type="text"
           allowClear
@@ -190,16 +182,16 @@ const AllReview = () => {
           className="max-w-sm mr-4"
         />
         <div>
-          <Link href="/admin/review/create">
+          <Link href="/admin/service/create">
             <Button type="default">Create</Button>
           </Link>
         </div>
       </ActionBar>
-      <Table columns={columns} dataSource={filteredReviewData} />
+      <Table columns={columns} dataSource={filteredServiceData} />
 
       {/* Edit Modal */}
       <Modal
-        title="Edit Review"
+        title="Edit Service"
         open={isModalOpen}
         onOk={() => setIsModalOpen(false)}
         onCancel={() => setIsModalOpen(false)}
@@ -209,43 +201,41 @@ const AllReview = () => {
         <form className="block w-full" onSubmit={handleSubmit(onSubmit)}>
           <div className="w-full">
             <div className="my-[10px] mx-0">
-              <TextAreaField
-                name="review"
+              <InputField
+                name="title"
+                label="Title"
+                type="text"
+                defaultValue={editService?.title}
                 register={register}
                 errors={errors}
-                defaultValue={editReview?.review}
-                label="Review"
+              />
+            </div>
+            <div className="my-[10px] mx-0">
+              <TextAreaField
+                name="description"
+                register={register}
+                errors={errors}
+                defaultValue={editService?.description}
+                label="Description"
                 rows={4}
               />
             </div>
             <div className="my-[10px] mx-0">
               <InputField
-                name="rating"
-                label="Rating"
-                type="text"
-                defaultValue={editReview?.rating}
+                name="image"
+                label="Image"
+                type="file"
                 register={register}
                 errors={errors}
               />
             </div>
-            <div className="my-[10px]  md:max-w-md mx-0">
-               <MultiSelect
-                  label="Select Service"
-                  name="service"
-                  options={serviceOptions}
-                  isMulti={false}
-                  defaultValue={editReview.service}
-                  required={false}
-                  setValue={setValue}
-                />
-            </div>
           </div>
           <Button className="mt-2" type="primary" htmlType="submit">
-            Update Review
+            Update Service
           </Button>
         </form>
       </Modal>
     </div>
   );
 };
-export default AllReview;
+export default AllService;

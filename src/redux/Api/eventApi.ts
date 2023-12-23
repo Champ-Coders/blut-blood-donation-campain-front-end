@@ -1,3 +1,4 @@
+import { getFromLocalStorage } from "@/utils/local-storage";
 import { api } from "./api";
 import { tagTypes } from "./tagsType";
 
@@ -24,16 +25,19 @@ export const eventApi = api.injectEndpoints({
     }),
     // create
     addEvent: build.mutation({
-      query: (data:any) => ({
-        url: `${EVENT_URL}/create-event`,
+      query: (data: any) => ({
+        url: `${EVENT_URL}`,
         method: "POST",
         body: data,
+        headers: {
+          Authorization: `${getFromLocalStorage("user")}`,
+        },
       }),
       invalidatesTags: [tagTypes.event],
     }),
     // update
     updateEvent: build.mutation({
-      query: (data:any) => ({
+      query: (data: any) => ({
         url: `${EVENT_URL}/${data.id}`,
         method: "PATCH",
         body: data.body,
@@ -42,10 +46,13 @@ export const eventApi = api.injectEndpoints({
     }),
     // delete
     deleteEvent: build.mutation({
-      query: (id:string) => ({
-        url: `${EVENT_URL}/${id}`,
-        method: "DELETE",
-      }),
+      query: (id: string) => {
+        // console.log(id);
+        return {
+          url: `${EVENT_URL}/${id}`,
+          method: "DELETE",
+        };
+      },
       invalidatesTags: [tagTypes.event],
     }),
   }),
