@@ -44,9 +44,11 @@ const AllEvents = () => {
 
   // Delete Event
   const deleteHandler = async (id: string) => {
+    // console.log(id);
     message.loading("Deleting.....");
     try {
       const res = await deleteEvent(id);
+      // console.log(res);
       if (res) {
         message.success("Event Deleted successfully");
       }
@@ -149,7 +151,7 @@ const AllEvents = () => {
               placement="topLeft"
               title="Delete the Event"
               description="Are you sure to delete this Event?"
-              onConfirm={() => deleteHandler(data?.id)}
+              onConfirm={() => deleteHandler(data?._id)}
               okText="Yes"
               cancelText="No"
             >
