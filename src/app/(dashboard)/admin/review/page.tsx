@@ -3,11 +3,6 @@ import ActionBar from "@/components/UI/ActionBar";
 import Breadcrumb from "@/components/UI/BreadCrumb";
 import Table from "@/components/UI/Table";
 import dayjs from "dayjs";
-import {
-  useBlogsQuery,
-  useDeleteBlogMutation,
-  useUpdateBlogMutation,
-} from "@/redux/Api/blogApi";
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import { Button, Input, Modal, Popconfirm, message } from "antd";
 import Link from "next/link";
@@ -15,83 +10,76 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import InputField from "@/components/InputField/InputField";
 import TextAreaField from "@/components/TextAreaField/TextAreaField";
-import config from "@/config/config";
+import { useDeleteReviewMutation, useReviewsQuery, useUpdateReviewMutation } from "@/redux/Api/reviewApi";
+import MultiSelect from "@/components/MultiSelector/MultiSelector";
 
-const AllBlogs = () => {
+const services = [
+    {
+        value: "serviceone",
+        label: "Service One",
+      },
+    {
+        value: "servicetwo",
+        label: "Service Two",
+      },
+    {
+        value: "servicethree",
+        label: "Service Three",
+      },
+]
+
+const AllReview = () => {
   const [searchText, setSearchText] = useState<string>("");
-  const [blogId, setBlogId] = useState<string>("");
+  const [reviewId, setReviewId] = useState<string>("");
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [editBlog, setEditBlog] = useState({ title: "", description: "" });
+  const [editBlog, setEditReview] = useState({ rating: 0, review: "" ,user:"",service:""});
 
   const {
     handleSubmit,
-    register,
+    register,setValue,
     reset,
     formState: { errors },
   } = useForm();
 
   // query and mutation
-  const [updateBlog] = useUpdateBlogMutation();
-  const [deleteBlog] = useDeleteBlogMutation();
-  const { data: blogs } = useBlogsQuery(undefined);
+  const [updateReview] = useUpdateReviewMutation();
+  const [deleteReview] = useDeleteReviewMutation();
+  const { data: reviews } = useReviewsQuery(undefined);
 
-  // filter Blog by name and title
-  const filteredBlogData = blogs?.data?.filter((blog: any) => {
+  // filter review by review, service titlee, user name
+  const filteredReviewData = reviews?.data?.filter((review: any) => {
     const lowercaseSearchText = searchText.toLowerCase();
     return (
-      blog?.title?.toLowerCase().includes(lowercaseSearchText) ||
-      blog?.user?.name?.toLowerCase().includes(lowercaseSearchText)
+        review?.review?.toLowerCase().includes(lowercaseSearchText) ||
+        review?.user?.name?.toLowerCase().includes(lowercaseSearchText) ||
+        review?.service?.title?.toLowerCase().includes(lowercaseSearchText) 
     );
   });
 
-  // Delete Blog
+  // Delete Review
   const deleteHandler = async (id: string) => {
     message.loading("Deleting.....");
     try {
-      const res = await deleteBlog(id);
+      const res = await deleteReview(id);
       if (res) {
-        message.success("Blog Deleted successfully");
+        message.success("Review Deleted successfully");
       }
     } catch (err: any) {
       message.error(err.message);
     }
   };
 
-  // Blog Edit function
+  // Review Edit function
   const onSubmit = async (data: any) => {
-    const image = data.image[0];
-    const formData = new FormData();
-    formData.append("image", image);
-    const url = config.imageBbKey;
 
-    const updateData = await fetch(url, {
-      method: "POST",
-      body: formData,
-    })
-      .then((res) => res.json())
-      .then((imageData) => {
-        if (imageData.success) {
-          return {
-            title: data.title,
-            description: data.description,
-            image: imageData?.data?.url,
-          };
-        } else {
-          return {
-            title: data.title,
-            description: data.description,
-          };
-        }
-      });
-
-    message.loading("Update Blog.....");
+    message.loading("Update Review.....");
     try {
-      const res = await updateBlog({
-        id: blogId,
-        body: { ...updateData },
+      const res = await updateReview({
+        id: reviewId,
+        body: { ...data },
       }).unwrap();
       if (res) {
-        message.success("Blog Update successfully");
+        message.success("Review Update successfully");
         setIsModalOpen(false);
       }
     } catch (err: any) {
@@ -102,11 +90,19 @@ const AllBlogs = () => {
 
   const columns: any[] = [
     {
-      title: "Title",
-      dataIndex: "title",
+      title: "Review",
+      dataIndex: "review",
     },
     {
-      title: "Author",
+      title: "Rating",
+      dataIndex: "rating",
+    },
+    {
+      title: "Service",
+      dataIndex: ["service", "title"],
+    },
+    {
+      title: "User",
       dataIndex: ["user", "name"],
     },
     {
@@ -119,7 +115,7 @@ const AllBlogs = () => {
     {
       title: "Action",
       render: function (data: any) {
-        const selectedBlog = filteredBlogData.find(
+        const selectedReview = filteredReviewData.find(
           (blog: any) => blog.id === data.id
         );
         return (
@@ -127,10 +123,12 @@ const AllBlogs = () => {
             <Button
               className="mr-[6px]"
               onClick={() => {
-                setBlogId(selectedBlog.id);
-                setEditBlog({
-                  title: selectedBlog?.title,
-                  description: selectedBlog?.description,
+                setReviewId(selectedReview.id);
+                setEditReview({
+                  rating: selectedReview?.rating,
+                  review: selectedReview?.review,
+                  user: selectedReview?.user,
+                  service:selectedReview?.service
                 });
                 setIsModalOpen(true);
               }}
@@ -141,8 +139,8 @@ const AllBlogs = () => {
 
             <Popconfirm
               placement="topLeft"
-              title="Delete the blog"
-              description="Are you sure to delete this blog?"
+              title="Delete the Review"
+              description="Are you sure to delete this review?"
               onConfirm={() => deleteHandler(data?.id)}
               okText="Yes"
               cancelText="No"
@@ -167,7 +165,7 @@ const AllBlogs = () => {
         ]}
       />
 
-      <ActionBar title="Blogs List">
+      <ActionBar title="Review List">
         <Input
           type="text"
           allowClear
@@ -178,16 +176,16 @@ const AllBlogs = () => {
           className="max-w-sm mr-4"
         />
         <div>
-          <Link href="/admin/blogs/create">
+          <Link href="/admin/review/create">
             <Button type="default">Create</Button>
           </Link>
         </div>
       </ActionBar>
-      <Table columns={columns} dataSource={filteredBlogData} />
+      <Table columns={columns} dataSource={filteredReviewData} />
 
       {/* Edit Modal */}
       <Modal
-        title="Edit Blog"
+        title="Edit Review"
         open={isModalOpen}
         onOk={() => setIsModalOpen(false)}
         onCancel={() => setIsModalOpen(false)}
@@ -197,41 +195,43 @@ const AllBlogs = () => {
         <form className="block w-full" onSubmit={handleSubmit(onSubmit)}>
           <div className="w-full">
             <div className="my-[10px] mx-0">
-              <InputField
-                name="title"
-                label="Title"
-                type="text"
-                defaultValue={editBlog?.title}
-                register={register}
-                errors={errors}
-              />
-            </div>
-            <div className="my-[10px] mx-0">
               <TextAreaField
-                name="description"
+                name="review"
                 register={register}
                 errors={errors}
-                defaultValue={editBlog?.description}
-                label="Description"
+                defaultValue={editBlog?.review}
+                label="Review"
                 rows={4}
               />
             </div>
             <div className="my-[10px] mx-0">
               <InputField
-                name="image"
-                label="Image"
-                type="file"
+                name="rating"
+                label="Rating"
+                type="text"
+                defaultValue={editBlog?.rating}
                 register={register}
                 errors={errors}
               />
             </div>
+            <div className="my-[10px]  md:max-w-md mx-0">
+               <MultiSelect
+                  label="Select Service"
+                  name="service"
+                  options={services}
+                  isMulti={false}
+                  defaultValue={editBlog.service}
+                  required={false}
+                  setValue={setValue}
+                />
+            </div>
           </div>
           <Button className="mt-2" type="primary" htmlType="submit">
-            Update Blog
+            Update Review
           </Button>
         </form>
       </Modal>
     </div>
   );
 };
-export default AllBlogs;
+export default AllReview;
