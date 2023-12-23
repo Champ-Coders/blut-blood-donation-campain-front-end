@@ -184,7 +184,7 @@ const AllEvents = () => {
           className="max-w-sm mr-4"
         />
         <div>
-          <Link href="/admin/Events/create">
+          <Link href="/admin/event/create">
             <Button type="default">Create</Button>
           </Link>
         </div>

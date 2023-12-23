@@ -1,3 +1,4 @@
+import { getFromLocalStorage } from "@/utils/local-storage";
 import { api } from "./api";
 import { tagTypes } from "./tagsType";
 
@@ -25,9 +26,12 @@ export const eventApi = api.injectEndpoints({
     // create
     addEvent: build.mutation({
       query: (data:any) => ({
-        url: `${EVENT_URL}/create-event`,
+        url: `${EVENT_URL}`,
         method: "POST",
         body: data,
+        headers: {
+          Authorization: `${getFromLocalStorage("user")}`,
+        },
       }),
       invalidatesTags: [tagTypes.event],
     }),
