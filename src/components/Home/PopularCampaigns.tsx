@@ -15,7 +15,7 @@ import { IPopularCamp } from "@/interfaces/common";
 const PopularCampaigns = () => {
   return (
     <div className="bg-[#f5f5f5]">
-      <div className="container mx-auto max-w-7xl px-5 md:px-14 lg:px-24 py-10 mt-10 sm:py-16">
+      <div className="container mx-auto max-w-7xl px-5 md:px-14 lg:px-24 py-10 sm:py-16">
         <div className="text-center mb-5 sm:mb-10">
           <h3 className="text-base sm:text-xl text-primary font-medium mb-3 uppercase">
             DONATE NOW
