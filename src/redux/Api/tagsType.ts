@@ -1,5 +1,6 @@
 export enum tagTypes {
   user = "user",
+  donation = "donation",
   blog = "blog",
   service = "service",
   faq = "faq",
