@@ -3,6 +3,7 @@ import {
   setToLocalStorage,
 } from "./../../../utils/local-storage";
 import { api } from "../api";
+import { tagTypes } from "../tagsType";
 
 const AUTH_URL = "/users";
 
@@ -59,6 +60,14 @@ export const authAPi = api.injectEndpoints({
         },
       }),
     }),
+    getAllUsers: build.query({
+      query: (data) => ({
+        url: `${AUTH_URL}/all-users`,
+        method: "GET",
+        params: data,
+      }),
+      providesTags: [tagTypes.user],
+    }),
   }),
 });
 
@@ -67,4 +76,5 @@ export const {
   useUserRegisterMutation,
   useUserProfileQuery,
   useChangePasswordMutation,
+  useGetAllUsersQuery,
 } = authAPi;

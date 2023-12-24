@@ -13,13 +13,26 @@ import { useForm } from "react-hook-form";
 import InputField from "@/components/InputField/InputField";
 import TextAreaField from "@/components/TextAreaField/TextAreaField";
 import config from "@/config/config";
-import { useDeleteEventMutation, useEventsQuery, useUpdateEventMutation } from "@/redux/Api/eventApi";
+import {
+  useDeleteEventMutation,
+  useEventsQuery,
+  useUpdateEventMutation,
+} from "@/redux/Api/eventApi";
+import { uploadImageBB } from "@/hooks/ImgbbUploader";
 
 const AllEvents = () => {
   const [searchText, setSearchText] = useState<string>("");
   const [EventId, setEventId] = useState<string>("");
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [editEvent, setEditEvent] = useState({ title: "", description: "" });
+  const [editEvent, setEditEvent] = useState({
+    title: "",
+    description: "",
+    banner: "",
+    image: "",
+    event_time: "",
+    event_date: "",
+    location: "",
+  });
 
   const {
     handleSubmit,
@@ -31,7 +44,7 @@ const AllEvents = () => {
   // query and mutation
   const [updateEvent] = useUpdateEventMutation();
   const [deleteEvent] = useDeleteEventMutation();
-  const { data: Events } = useEventsQuery(undefined);
+  const { data: Events, isLoading } = useEventsQuery(undefined);
 
   // filter Event by name and title
   const filteredEventData = Events?.data?.filter((Event: any) => {
@@ -57,32 +70,32 @@ const AllEvents = () => {
     }
   };
 
+  console.log(editEvent);
   // Event Edit function
   const onSubmit = async (data: any) => {
-    const image = data.image[0];
-    const formData = new FormData();
-    formData.append("image", image);
-    const url = config.imageBbKey;
+    const { image, banner, ...others } = data;
+    // const image = data.image[0];
+    console.log(data);
 
-    const updateData = await fetch(url, {
-      method: "POST",
-      body: formData,
-    })
-      .then((res) => res.json())
-      .then((imageData) => {
-        if (imageData.success) {
-          return {
-            title: data.title,
-            description: data.description,
-            image: imageData?.data?.url,
-          };
-        } else {
-          return {
-            title: data.title,
-            description: data.description,
-          };
-        }
-      });
+    // if (typeof image !== "string") {
+    //   image = await uploadImageBB(image[0]);
+    // }
+
+    // if (typeof banner !== "string") {
+    //   banner = await uploadImageBB(banner[0]);
+    // }
+
+    // console.log(imageUrl,bannerUrl);
+
+    const updateData = {
+      title: data?.title || editEvent?.title,
+      description: data?.description || editEvent?.description,
+      image: data?.image || editEvent?.image,
+      event_time: data?.event_time || editEvent?.event_time,
+      event_date: data?.event_date || editEvent?.event_date,
+      location: data?.location || editEvent?.location,
+    };
+    console.log(updateData);
 
     message.loading("Update Event.....");
     try {
@@ -90,14 +103,15 @@ const AllEvents = () => {
         id: EventId,
         body: { ...updateData },
       }).unwrap();
+      console.log(res);
       if (res) {
         message.success("Event Update successfully");
         setIsModalOpen(false);
       }
     } catch (err: any) {
-      message.error(err.message);
+      // message.error(err.message);
     }
-    reset();
+    // reset();
   };
 
   const columns: any[] = [
@@ -107,15 +121,15 @@ const AllEvents = () => {
     },
     {
       title: "Event Time",
-      dataIndex:"event_time",
+      dataIndex: "event_time",
     },
     {
       title: "Event Date",
-      dataIndex:"event_date",
+      dataIndex: "event_date",
     },
     {
       title: "Location",
-      dataIndex:"location",
+      dataIndex: "location",
     },
     {
       title: "CreatedAt",
@@ -130,15 +144,22 @@ const AllEvents = () => {
         const selectedEvent = filteredEventData.find(
           (Event: any) => Event.id === data.id
         );
+        console.log(selectedEvent);
         return (
           <>
             <Button
               className="mr-[6px]"
               onClick={() => {
-                setEventId(selectedEvent.id);
+                setEventId(selectedEvent._id);
                 setEditEvent({
                   title: selectedEvent?.title,
                   description: selectedEvent?.description,
+
+                  banner: selectedEvent?.banner,
+                  image: selectedEvent?.image,
+                  event_time: selectedEvent?.event_time,
+                  event_date: selectedEvent?.event_date,
+                  location: selectedEvent?.location,
                 });
                 setIsModalOpen(true);
               }}
@@ -164,6 +185,7 @@ const AllEvents = () => {
       },
     },
   ];
+
   return (
     <div>
       <Breadcrumb
@@ -191,7 +213,11 @@ const AllEvents = () => {
           </Link>
         </div>
       </ActionBar>
-      <Table columns={columns} dataSource={filteredEventData} />
+      <Table
+        columns={columns}
+        dataSource={filteredEventData}
+        loading={isLoading ? true : false}
+      />
 
       {/* Edit Modal */}
       <Modal
@@ -204,33 +230,80 @@ const AllEvents = () => {
       >
         <form className="block w-full" onSubmit={handleSubmit(onSubmit)}>
           <div className="w-full">
-            <div className="my-[10px] mx-0">
+            <div className="my-[10px]  md:max-w-md mx-0">
               <InputField
                 name="title"
                 label="Title"
                 type="text"
+                register={register}
                 defaultValue={editEvent?.title}
-                register={register}
                 errors={errors}
+                // required
               />
             </div>
-            <div className="my-[10px] mx-0">
-              <TextAreaField
-                name="description"
+            <div className="my-[10px]  md:max-w-md mx-0">
+              <InputField
+                name="location"
+                label="Location"
+                defaultValue={editEvent?.location}
+                type="text"
                 register={register}
                 errors={errors}
-                defaultValue={editEvent?.description}
-                label="Description"
-                rows={4}
+                required
               />
             </div>
-            <div className="my-[10px] mx-0">
+
+            <div className="my-[10px] md:max-w-md mx-0">
               <InputField
                 name="image"
-                label="Image"
+                label="Event Image"
+                type="file"
+                register={register}
+                // defaultValue={editEvent?.image}
+                errors={errors}
+                // required
+              />
+            </div>
+            <div className="my-[10px] md:max-w-md mx-0">
+              <InputField
+                name="banner"
+                label="Event Banner"
                 type="file"
                 register={register}
                 errors={errors}
+                // required
+              />
+            </div>
+            <div className="my-[10px] md:max-w-md mx-0">
+              <InputField
+                name="event_time"
+                label="Event Time"
+                type="time"
+                register={register}
+                // defaultValue={editEvent?.event_time}
+                errors={errors}
+                // required
+              />
+            </div>
+            <div className="my-[10px] md:max-w-md mx-0">
+              <InputField
+                name="event_date"
+                label="Event Date"
+                type="date"
+                register={register}
+                defaultValue={editEvent?.event_date}
+                errors={errors}
+                // required
+              />
+            </div>
+            <div className="my-[10px] md:max-w-md mx-0">
+              <TextAreaField
+                name="description"
+                register={register}
+                defaultValue={editEvent?.description}
+                errors={errors}
+                label="Description"
+                // required
               />
             </div>
           </div>

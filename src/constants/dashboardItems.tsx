@@ -66,7 +66,11 @@ export const dashboardItems = (role: USER_ROLE) => {
       ),
       children: [
         {
-          label: <button className=" ">All Users</button>,
+          label: (
+            <Link className="" href={`/admin/manage-users`}>
+              All Users
+            </Link>
+          ),
           key: "All-users",
           icon: (
             <UserOutlined
@@ -75,30 +79,13 @@ export const dashboardItems = (role: USER_ROLE) => {
               }}
             />
           ),
-          children: [
-            {
-              label: (
-                <Link className="" href={`/admin/manage-users/all-users`}>
-                  Users List
-                </Link>
-              ),
-              key: `/admin/user/all-users-list`,
-            },
-            {
-              label: (
-                <Link
-                  className=""
-                  href={`/admin/manage-users/all-users/create`}
-                >
-                  Create user{" "}
-                </Link>
-              ),
-              key: `/admin/manage-users/create`,
-            },
-          ],
         },
         {
-          label: "donar",
+          label: (
+            <Link className="" href={`/admin/manage-donors`}>
+              All Donors
+            </Link>
+          ),
           key: "donar",
           icon: (
             <UserOutlined
@@ -109,24 +96,6 @@ export const dashboardItems = (role: USER_ROLE) => {
               }}
             />
           ),
-          children: [
-            {
-              label: (
-                <Link className="" href={`/admin/manage-users/donar`}>
-                  Donar List
-                </Link>
-              ),
-              key: `admin/manage-users/donar`,
-            },
-            {
-              label: (
-                <Link className="" href={`/admin/manage-users/donar/create`}>
-                  Create Donar
-                </Link>
-              ),
-              key: `/admin/manage-users/donar/create`,
-            },
-          ],
         },
       ],
     },
