@@ -36,14 +36,28 @@ export interface ITeamMember {
 }
 
 export interface IOurNews {
-  id: string;
   date: string;
   comment: string;
   title: string;
-  image: StaticImageData;
   description: string;
+
+  _id: string;
+  image: string;
+  user: {
+    // Define the structure of the user object if needed
+  };
+  createdAt: string;
+  updatedAt: string;
+  __v: number;
+  id: string;
 }
-[];
+
+export interface IResponse<T> {
+  statusCode: number;
+  success: boolean;
+  message: string;
+  data: T;
+}
 
 export interface IEvent {
   id: string;
@@ -65,8 +79,7 @@ export interface IPopularCamp {
   address: string;
 }
 
-
- export type IUser = {
+export type IUser = {
   _id: string;
   name: string;
   phoneNumber: string;
