@@ -1,6 +1,5 @@
 "use client";
 import React from "react";
-import image from "../../../../../public/assets/our-news/activity.png";
 import Image from "next/image";
 import BannerBreadcrumb from "@/components/UI/BannerBreadcrumb";
 import Button from "@/components/Button/Button";
