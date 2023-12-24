@@ -1,6 +1,9 @@
 import React from "react";
 import NewsCard from "../NewsCard/NewsCard";
-import { IOurNews, IResponse } from "@/interfaces/common";
+import { ourNews } from "@/constants/OurNews";
+import { IOurNews } from "@/interfaces/common";
+
+type AllBlogProps = {};
 
 async function getData() {
   const res = await fetch("http://localhost:5000/api/v1/blog");
@@ -14,8 +17,7 @@ async function getData() {
 
   return res.json();
 }
-
-const News = async () => {
+const AllBlog: React.FC<AllBlogProps> = async () => {
   const ourNews = await getData();
 
   return (
@@ -40,5 +42,4 @@ const News = async () => {
     </section>
   );
 };
-
-export default News;
+export default AllBlog;
