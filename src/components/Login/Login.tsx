@@ -29,7 +29,7 @@ const Login = () => {
       if (response?.success) {
         // console.log(response);
         message.success(response.message);
-        router.push("/profile");
+        router.push("/");
       } else {
         message.error(response?.message);
       }

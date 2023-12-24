@@ -29,7 +29,7 @@ const CreateEvent = () => {
 
   const onSubmit = async (data: any) => {
     // console.log(data);
-    const {image,banner,...others} = data
+    const { image, banner, ...others } = data;
     // const image = data.image[0];
     const imageUrl = await uploadImageBB(image[0]);
     const bannerUrl = await uploadImageBB(banner[0]);
@@ -42,12 +42,24 @@ const CreateEvent = () => {
     message.loading("Creating Event.....");
     try {
       const res = await addEvent(eventData).unwrap();
-    //   console.log(res);
-      if (res) {
-        message.success("Event Create successfully");
+      //   console.log(res);
+      if (res?.success) {
+        message.success("Event created successfully");
+      } else if (res?.error?.data) {
+        message.error(res?.error?.data?.message);
+      } else {
+        message.error("Could not create the event");
       }
     } catch (err: any) {
-      message.error(err.message);
+      console.log(err);
+
+      if (err?.data?.errorMessages) {
+        message.error(err?.data?.errorMessages[0]?.message);
+      } else if (err?.data?.message) {
+        message.error(err?.data.message);
+      } else {
+        message.error("Could not create the event");
+      }
     }
     reset();
   };
