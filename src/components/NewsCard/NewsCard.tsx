@@ -11,13 +11,12 @@ type NewsCardProps = {
 };
 
 const NewsCard: React.FC<NewsCardProps> = ({ news }) => {
-  // const date = new Date(news?.createdAt);
-
+  
   // need just date
   const date = news?.createdAt?.split("T")[0];
 
   return (
-    <article className="card !border-2">
+    <article className="card ">
       <figure className="card__header">
         <Image
           className="card__header__bg "
