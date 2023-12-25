@@ -59,12 +59,9 @@ const ChangePasswordPage = () => {
     }
   };
   return (
-    <div className="">
-      <form
-        className="w-full lg:w-[36vw] p-9 shadow-md mx-auto "
-        onSubmit={handleSubmit(onSubmit)}
-      >
-        <p className="text-lg mb-4 font-bold text-slate-700">
+    <div className="w-full bg-white  py-9 px-2 shadow-md mx-auto rounded">
+      <form className="" onSubmit={handleSubmit(onSubmit)}>
+        <p className="text-xl mb-4 font-bold text-slate-700">
           Change Your Password
         </p>
         {/* Email */}
@@ -114,6 +111,22 @@ const ChangePasswordPage = () => {
           </button>
         </div>
       </form>
+
+      <section className="mt-7 px-2 ">
+        <h2 className="text-xl mb-4 font-bold text-slate-700">
+          Password Requirement
+        </h2>
+
+        <p className="text-[#8690A5] text-[16px]">
+          Please follow this guide for a strong password:
+        </p>
+        <ol  className="mt-3 text-[14px] text-[#8690A5] flex flex-col gap-3">
+          <li>1. One special characters</li>
+          <li>2. Min 6 characters</li>
+          <li>3. One number (2 are recommend)</li>
+          <li>4. Change it often</li>
+        </ol>
+      </section>
     </div>
   );
 };
