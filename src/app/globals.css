@@ -70,3 +70,7 @@ body {
 .ant-breadcrumb-separator {
   color: white !important;
 }
+
+.ant-popconfirm-inner-content {
+  padding: 10px !important;
+}

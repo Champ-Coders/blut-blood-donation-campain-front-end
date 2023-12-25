@@ -148,19 +148,9 @@ const AllEvents = () => {
               </span>
             ) : (
               <>
-                <span className="text-primary font-bold rounded-md p-1">
+                <span className="text-primary bg-primary/20 rounded-md p-1">
                   Not Popular
                 </span>
-                <Popconfirm
-                  title="Are you sure?"
-                  onConfirm={() => updatePopularityHandler(data?.id)}
-                  okText="Yes"
-                  cancelText="No"
-                >
-                  <button className="bg-green-400 font-bold text-primary rounded-md p-1">
-                    Popular
-                  </button>
-                </Popconfirm>
               </>
             )}
           </div>
@@ -176,7 +166,20 @@ const AllEvents = () => {
         );
         // console.log(selectedEvent);
         return (
-          <>
+          <div className="flex gap-2 items-center">
+            {!data?.is_popular && (
+              <Popconfirm
+                title="Are you sure?"
+                onConfirm={() => updatePopularityHandler(data?.id)}
+                okText="Yes"
+                cancelText="No"
+              >
+                <button className="bg-green-600  text-white font-semibold rounded-md p-1 hover:bg-white border hover:text-green-600 border-green-600 ">
+                  Popular
+                </button>
+              </Popconfirm>
+            )}
+
             <Button
               className="mr-[6px]"
               onClick={() => {
@@ -213,7 +216,7 @@ const AllEvents = () => {
                 <DeleteOutlined />
               </Button>
             </Popconfirm>
-          </>
+          </div>
         );
       },
     },

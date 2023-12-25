@@ -50,7 +50,7 @@ const AllUsers = () => {
     setSortOrder(order === "ascend" ? "asc" : "desc");
   };
   const changeRole = async (id: string) => {
-    const res = await changeRoleByAdmin(id);
+    const res: any = await changeRoleByAdmin(id);
     if (res?.data?.statusCode == 200) {
       message.success(
         `${res?.data?.data?.name} is now ${res?.data?.data?.role}.`
@@ -79,8 +79,17 @@ const AllUsers = () => {
       sortDirections: ["descend", "ascend"],
       render: function (data: any) {
         if (data == "admin") {
-          return <p className="text-primary font-bold">Admin</p>;
-        } else return <p className="text-primary">Donor</p>;
+          return (
+            <p className="text-primary  bg-primary/20 rounded-xl text-center">
+              Admin
+            </p>
+          );
+        } else
+          return (
+            <p className="text-gray-900 bg-gray-300 rounded-xl text-center">
+              Donor
+            </p>
+          );
       },
     },
     {
