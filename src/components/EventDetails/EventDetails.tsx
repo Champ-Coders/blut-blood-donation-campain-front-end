@@ -8,6 +8,7 @@ import { BsCalendar2Date } from "react-icons/bs";
 import { LuClock9 } from "react-icons/lu";
 import { IoLocationSharp } from "react-icons/io5";
 import { RiWhatsappFill } from "react-icons/ri";
+import Comments from "../Comments/Comments";
 
 type EventDetailsProps = {};
 
@@ -139,14 +140,14 @@ const EventDetails: React.FC<EventDetailsProps> = () => {
               </div>
             </div>
             <div className="w-full lg:w-[30%]">
-              <div className="flex flex-col gap-5">
+              <div className="flex flex-col gap-5 text-[14px]">
                 {information.map((item) => (
                   <div
                     className="flex justify-center items-center gap-5"
                     key={item.id}
                   >
                     <div className="">
-                      <item.icon size={30} className="text-[#ea062b] " />
+                      <item.icon size={25} className="text-[#ea062b] " />
                     </div>
 
                     <div>
@@ -172,6 +173,10 @@ const EventDetails: React.FC<EventDetailsProps> = () => {
             </div>
           </div>
         </div>
+
+        {/* comment */}
+
+        <Comments />
       </div>
     </div>
   );
