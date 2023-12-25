@@ -23,7 +23,6 @@ const ServiceDetail = (props: IProps) => {
             },
           ]}
           title="Service"
-          image="/assets/blood-donor-bg.png"
         />
       </section>
       <section>
