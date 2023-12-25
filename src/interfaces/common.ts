@@ -93,3 +93,14 @@ export type IUser = {
   available: boolean;
   notification: number;
 };
+
+export type IPerson = {
+  id: string;
+  name: string;
+  title: string;
+  role: string;
+  email: string;
+  telephone: string;
+  donation: number;
+  imageUrl: string;
+};
