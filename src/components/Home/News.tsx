@@ -21,7 +21,7 @@ const News = async () => {
   const ourNews = await getData();
 
   return (
-    <section className="bg-[#f5f5f5]  ">
+    <section className=" ">
       <div className="py-10 common">
         <div className="mb-10">
           <div className="text-center">
