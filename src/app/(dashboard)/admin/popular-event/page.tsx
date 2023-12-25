@@ -14,7 +14,7 @@ import {
 } from "@/redux/Api/eventApi";
 import EventModalUI from "@/components/ModalUI/EventModalUI";
 
-const AllEvents = () => {
+const AllPopularEvents = () => {
   const [searchText, setSearchText] = useState<string>("");
   const [EventId, setEventId] = useState<string>("");
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -36,11 +36,14 @@ const AllEvents = () => {
   const filteredEventData = Events?.data?.filter((Event: any) => {
     const lowercaseSearchText = searchText.toLowerCase();
     return (
-      Event?.title?.toLowerCase().includes(lowercaseSearchText) ||
+      (Event?.is_popular &&
+        Event?.title?.toLowerCase().includes(lowercaseSearchText)) ||
       Event?.user?.name?.toLowerCase().includes(lowercaseSearchText) ||
       Event?.user?.location?.toLowerCase().includes(lowercaseSearchText)
     );
   });
+
+//   console.log(filteredEventData);
 
   // Delete Event
   const deleteHandler = async (id: string) => {
@@ -70,35 +73,6 @@ const AllEvents = () => {
     }
   };
 
-  // console.log(editEvent);
-  // Event Edit function
-
-  const updatePopularityHandler = async (id: string) => {
-    try {
-      const res = await updateEvent({
-        id: id,
-        body: { is_popular: true },
-      }).unwrap();
-      if (res?.success) {
-        message.success("popularity Event updated successfully");
-        setIsModalOpen(false);
-      } else if (res?.error?.data) {
-        message.error(res?.error?.data?.message);
-      } else {
-        message.error("Could not update the popularity event");
-      }
-    } catch (err: any) {
-      // console.log(err);
-
-      if (err?.data?.errorMessages) {
-        message.error(err?.data?.errorMessages[0]?.message);
-      } else if (err?.data?.message) {
-        message.error(err?.data.message);
-      } else {
-        message.error("Could not update the popularity event");
-      }
-    }
-  };
   const columns: any[] = [
     {
       title: "Image",
@@ -134,38 +108,6 @@ const AllEvents = () => {
     {
       title: "Location",
       dataIndex: "location",
-    },
-    {
-      title: "Popularity",
-      // dataIndex: "is_popular",
-      render: function (data: any) {
-        console.log(data);
-        return (
-          <div className="flex gap-2">
-            {data?.is_popular ? (
-              <span className="text-green-500 font-bold rounded-md p-1">
-                Popular
-              </span>
-            ) : (
-              <>
-                <span className="text-primary font-bold rounded-md p-1">
-                  Not Popular
-                </span>
-                <Popconfirm
-                  title="Are you sure?"
-                  onConfirm={() => updatePopularityHandler(data?.id)}
-                  okText="Yes"
-                  cancelText="No"
-                >
-                  <button className="bg-green-400 font-bold text-primary rounded-md p-1">
-                    Popular
-                  </button>
-                </Popconfirm>
-              </>
-            )}
-          </div>
-        );
-      },
     },
 
     {
@@ -263,4 +205,4 @@ const AllEvents = () => {
     </div>
   );
 };
-export default AllEvents;
+export default AllPopularEvents;
