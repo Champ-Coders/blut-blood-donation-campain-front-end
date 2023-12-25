@@ -45,7 +45,7 @@ const Testimonials = () => {
         {testimonial.map((test: any) => (
           <SwiperSlide key={test.title}>
             <div className="min-h-[300px] text-start px-1">
-              <div className="arrow relative shadow-lg py-5 px-3 sm:py-8 sm:px-5 bg-white shadow-[rgba(0,0,0,.05)]">
+              <div className="arrow relative border shadow-lg py-5 px-3 sm:py-8 sm:px-5 bg-white shadow-[rgba(0,0,0,.05)]">
                 <p className="text-start mb-4">
                   <Rate disabled defaultValue={5} />
                 </p>
@@ -62,6 +62,7 @@ const Testimonials = () => {
                     height={70}
                     priority
                     alt="text"
+                    className="w-14 h-14 lg:w-[70px] lg:h-[70px]"
                   />
                 </div>
                 <span className="flex-grow flex flex-col pl-4">

@@ -83,10 +83,27 @@ export const dashboardItems = (role: USER_ROLE) => {
         {
           label: (
             <Link className="" href={`/admin/manage-donors`}>
-              All Donors
+              All Donation
             </Link>
           ),
           key: "donar",
+          icon: (
+            <UserOutlined
+              style={{
+                fontSize: "18px",
+                // marginRight:"5px"
+                // borderRadius: "10px",
+              }}
+            />
+          ),
+        },
+        {
+          label: (
+            <Link className="" href={`/admin/pending-donation`}>
+              Pending Donation
+            </Link>
+          ),
+          key: "pending",
           icon: (
             <UserOutlined
               style={{

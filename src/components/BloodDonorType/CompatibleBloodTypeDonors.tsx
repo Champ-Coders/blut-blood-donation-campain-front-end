@@ -74,7 +74,7 @@ const CompatibleBloodTypeDonors = () => {
 
       <div className="text-center my-10 ">
         <h5 className="text-[#EA062B] text-[16px] uppercase mb-4">Learn</h5>
-        <h4 className="capitalize text-2xl lg:text-5xl font-bold text-black mb-7">
+        <h4 className="capitalize text-2xl font-playfair lg:text-5xl font-bold text-black mb-7">
           Learn About Donation
         </h4>
       </div>
@@ -93,7 +93,7 @@ const CompatibleBloodTypeDonors = () => {
           />
 
           <div className="text-center text-[#6b6f72] border-l-4 border-gray-200 flex flex-col items-center ">
-            <p className="text-[18px] font-semibold font-playfair px-4">
+            <p className="text-[18px] font-semibold font-Player-Display px-4">
               {" "}
               After donating blood, the body works to replenish the blood loss.
               This stimulates the production of new blood cells and in turn,
@@ -132,9 +132,11 @@ const CompatibleBloodTypeDonors = () => {
           columns={columns}
           dataSource={CompatibleBloodType}
           bordered
-          title={() => "Compatible Blood Type Donors"}
+          title={() => (
+            <p className="font-playfair">Compatible Blood Type Donors</p>
+          )}
           pagination={false}
-          className="w-[600px] shadow-xl rounded-lg"
+          className="w-[600px] shadow rounded-lg"
         />
       </div>
     </div>

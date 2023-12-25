@@ -1,5 +1,5 @@
-import DonateNow from "@/components/DonateNow/DonateNow"
-import BannerBreadcrumb from "@/components/UI/BannerBreadcrumb"
+import DonateNow from "@/components/DonateNow/DonateNow";
+import BannerBreadcrumb from "@/components/UI/BannerBreadcrumb";
 
 const RegisterPage = () => {
   return (
@@ -11,10 +11,9 @@ const RegisterPage = () => {
           },
         ]}
         title="Donate Now"
-        image="/assets/blood-donor-bg.png"
       />
       <DonateNow />
-      </div>
-  )
-}
-export default RegisterPage
+    </div>
+  );
+};
+export default RegisterPage;

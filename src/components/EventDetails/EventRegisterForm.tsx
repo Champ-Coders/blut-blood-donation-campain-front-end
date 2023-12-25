@@ -68,19 +68,19 @@ const EventRegisterForm: React.FC<EventRegisterFormProps> = () => {
           <div>
             <div>
               <p className="text-primary my-2 font-semibold">Register</p>
-              <h4 className="text-2xl lg:text-5xl text-[#111] font-semibold">
+              <h4 className="text-2xl lg:text-5xl text-[#111] font-semibold font-playfair">
                 Your Donation Can Make Someone’s Life Better
               </h4>
               <p className="text-[#6f747e] my-5 leading-normal">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusm tempor incididunt ut labore et dolore magna aliqua. Ut
-                enim ad minim veniam quis nostrud exercitation ullamco
+                Blood Donation is a simple thing to do, but it can make a big
+                difference in the lives of others. Make a blood donation
+                appointment with the American Red Cross today.
               </p>
             </div>
-            <h5 className="text-[#111] font-semibold leading-7 my-5">
+            <h5 className="text-[#111] font-semibold leading-7 my-5 ">
               Opening Hours
             </h5>
-            <div className=" border-t-[1px] border-b-[1px] border-t-[#7a7a7a] border-b-[#7a7a7a] py-2">
+            <div className=" border-t-[1px] border-b-[1px] border-y-gray-300  py-2">
               <div className="flex flex-wrap justify-between w-full text-[#7a7a7a]">
                 <p>Sunday - Saturday</p>
                 <p className="flex items-center gap-5">
@@ -92,8 +92,8 @@ const EventRegisterForm: React.FC<EventRegisterFormProps> = () => {
             <div className="flex flex-col my-10 lg:flex-row gap-10">
               <div>
                 <div>
-                  <h4 className="text-[#111] text-2xl leading-8 font-semibold mb-5">
-                    Denpasar, Bali
+                  <h4 className="text-[#111] text-2xl leading-8 font-semibold mb-5 font-playfair">
+                    Dhaka , Bangladesh
                   </h4>
                   <ul className="flex flex-col gap-5">
                     {information1.map((item) => (
@@ -106,8 +106,8 @@ const EventRegisterForm: React.FC<EventRegisterFormProps> = () => {
                 </div>
               </div>
               <div>
-                <h4 className="text-[#111] text-2xl leading-8 font-semibold mb-5">
-                  Kuta, Bali
+                <h4 className="text-[#111] text-2xl leading-8 font-semibold mb-5 font-playfair">
+                  Thakurgaon
                 </h4>
                 <ul className="flex flex-col gap-5">
                   {information2.map((item) => (

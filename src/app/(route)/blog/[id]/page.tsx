@@ -4,13 +4,15 @@ import Image from "next/image";
 import Breadcrumb from "@/components/UI/BreadCrumb";
 import BannerBreadcrumb from "@/components/UI/BannerBreadcrumb";
 import Button from "@/components/Button/Button";
+import config from "@/config/config";
+import Comments from "@/components/Comments/Comments";
 
 type BlogDetailProps = {
   params: { id: string };
 };
 
 async function getData(id: string) {
-  const res = await fetch(`http://localhost:5000/api/v1/blog/${id}`);
+  const res = await fetch(`${config.apiBaseUrl}/blog/${id}`);
   // The return value is *not* serialized
   // You can return Date, Map, Set, etc.
 
@@ -35,11 +37,10 @@ const BlogDetail: React.FC<BlogDetailProps> = async ({
         <BannerBreadcrumb
           items={[
             {
-              label: "Service",
+              label: "Blog Detail",
             },
           ]}
-          title="Service"
-          image="/assets/blood-donor-bg.png"
+          title="Blog Detail"
         />
       </section>
       <section>
@@ -47,7 +48,7 @@ const BlogDetail: React.FC<BlogDetailProps> = async ({
           <div className="grid grid-cols-1 md:grid-cols-6 lg:grid-cols-12 gap-5 md:gap-10">
             <div className="grid-cols-1 md:col-span-3 lg:col-span-8">
               <div>
-                <h2 className="text-5xl text-[#111] font-bold mb-7">
+                <h2 className="text-5xl text-[#111] font-bold mb-7 font-playfair">
                   {data.title}
                 </h2>
 
@@ -59,20 +60,20 @@ const BlogDetail: React.FC<BlogDetailProps> = async ({
                     alt={data.title}
                   />
                 </div>
-                <p className="text-base text-[#666] leading-7">
+                <p className="text-base text-[#666] leading-7 font-roboto">
                   {data.description}
                 </p>
               </div>
             </div>
             <div className="grid-cols-1 md:col-span-3 lg:col-span-4">
-              <div className="bg-primary p-5 text-white">
-                <h5 className="text-3xl font-semibold mb-5">
+              <div className="bg-primary p-5 text-white ">
+                <h5 className="text-3xl font-semibold mb-5 font-playfair">
                   Blood Excellence
                 </h5>
-                <h3 className="text-4xl font-semibold mb-5">
+                <h3 className="text-4xl font-semibold mb-5 font-playfair">
                   Expanded Blood Donate Services Here
                 </h3>
-                <p className="mb-5">
+                <p className="mb-5 font-roboto">
                   There are many variations of passages Lorem Ipsum available,
                   but the majority suffered of alteration in some form,
                 </p>
@@ -85,6 +86,10 @@ const BlogDetail: React.FC<BlogDetailProps> = async ({
               </div>
             </div>
           </div>
+
+          {/* Comments */}
+
+          <Comments />
         </div>
       </section>
     </main>

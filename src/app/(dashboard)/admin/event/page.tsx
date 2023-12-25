@@ -13,6 +13,7 @@ import {
   useUpdateEventMutation,
 } from "@/redux/Api/eventApi";
 import EventModalUI from "@/components/ModalUI/EventModalUI";
+import { BsCalendarCheck } from "react-icons/bs";
 
 const AllEvents = () => {
   const [searchText, setSearchText] = useState<string>("");
@@ -143,24 +144,14 @@ const AllEvents = () => {
         return (
           <div className="flex gap-2">
             {data?.is_popular ? (
-              <span className="text-green-500 font-bold rounded-md p-1">
+              <span className="text-green-600 bg-green-300  font-bold rounded-md p-1">
                 Popular
               </span>
             ) : (
               <>
-                <span className="text-primary font-bold rounded-md p-1">
+                <span className="text-primary bg-primary/20 rounded-md p-1">
                   Not Popular
                 </span>
-                <Popconfirm
-                  title="Are you sure?"
-                  onConfirm={() => updatePopularityHandler(data?.id)}
-                  okText="Yes"
-                  cancelText="No"
-                >
-                  <button className="bg-green-400 font-bold text-primary rounded-md p-1">
-                    Popular
-                  </button>
-                </Popconfirm>
               </>
             )}
           </div>
@@ -176,7 +167,20 @@ const AllEvents = () => {
         );
         // console.log(selectedEvent);
         return (
-          <>
+          <div className="flex gap-2 items-center w-[150px] justify-end">
+            {!data?.is_popular && (
+              <Popconfirm
+                title="Are you sure?"
+                onConfirm={() => updatePopularityHandler(data?.id)}
+                okText="Yes"
+                cancelText="No"
+              >
+                <button className="text-green-600 font-semibold rounded-md  hover:bg-white border hover:text-green-600 hover:border-green-600 text-[20px]  p-2">
+                  <BsCalendarCheck />
+                </button>
+              </Popconfirm>
+            )}
+
             <Button
               className="mr-[6px]"
               onClick={() => {
@@ -213,7 +217,7 @@ const AllEvents = () => {
                 <DeleteOutlined />
               </Button>
             </Popconfirm>
-          </>
+          </div>
         );
       },
     },

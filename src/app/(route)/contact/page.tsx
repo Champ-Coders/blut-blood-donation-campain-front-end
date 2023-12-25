@@ -15,7 +15,6 @@ const page: React.FC<pageProps> = () => {
           },
         ]}
         title="Contact Us"
-        image="/assets/blood-donor-bg.png"
       />
       <div>
         <GetInTouch />
