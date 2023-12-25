@@ -17,7 +17,6 @@ const page: React.FC<pageProps> = () => {
             },
           ]}
           title="blog"
-          image="/assets/blood-donor-bg.png"
         />
       </section>
       <AllBlog />

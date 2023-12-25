@@ -11,13 +11,12 @@ type NewsCardProps = {
 };
 
 const NewsCard: React.FC<NewsCardProps> = ({ news }) => {
-  console.log(news);
   return (
     <div className="group">
       <div>
         <div className="relative">
           <Image
-            className="w-full h-full"
+            className="w-full h-[200px]"
             src={news?.image}
             alt={news?.title}
             height={300}

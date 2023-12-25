@@ -132,9 +132,11 @@ const CompatibleBloodTypeDonors = () => {
           columns={columns}
           dataSource={CompatibleBloodType}
           bordered
-          title={() => "Compatible Blood Type Donors"}
+          title={() => (
+            <p className="font-playfair">Compatible Blood Type Donors</p>
+          )}
           pagination={false}
-          className="w-[600px] shadow-xl rounded-lg"
+          className="w-[600px] shadow rounded-lg"
         />
       </div>
     </div>
