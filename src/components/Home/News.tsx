@@ -21,7 +21,7 @@ const News = async () => {
   const ourNews = await getData();
 
   return (
-    <section className="bg-[#f5f5f5] pt-10 pb-40">
+    <section className="bg-[#f5f5f5]  ">
       <div className="py-10 common">
         <div className="mb-10">
           <div className="text-center">
@@ -40,7 +40,7 @@ const News = async () => {
             </Link>
           </div>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 mt-[100px]">
           {ourNews?.data?.slice(0, 3).map((news: IOurNews) => {
             return <NewsCard news={news} key={news._id} />;
           })}

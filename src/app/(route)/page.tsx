@@ -14,6 +14,7 @@ import Testimonials from "@/components/Home/Testimonials";
 import VideoBanner from "@/components/Home/VideoBanner.jsx";
 import { FloatButton } from "antd";
 import { VerticalAlignTopOutlined } from "@ant-design/icons";
+import FaqQuestion from "@/components/Home/FaqQuestion";
 
 export default function Home() {
   return (
@@ -32,6 +33,8 @@ export default function Home() {
       <BloodOwner />
       <TeamMember />
       <News />
+
+      <FaqQuestion />
 
       {/* floating icon */}
       <FloatButton.BackTop

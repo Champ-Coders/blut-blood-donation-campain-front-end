@@ -26,7 +26,7 @@ const HomeEvent: React.FC<HomeEventProps> = () => {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 mt-[100px]">
           {events.slice(0, 3).map((item) => (
             <EventCard key={item.id} item={item} />
           ))}
