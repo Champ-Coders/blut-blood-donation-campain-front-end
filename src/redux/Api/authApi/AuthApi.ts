@@ -68,6 +68,13 @@ export const authAPi = api.injectEndpoints({
       }),
       providesTags: [tagTypes.user],
     }),
+    changeRoleByAdmin: build.mutation({
+      query: (data) => ({
+        url: `${AUTH_URL}/change-role/${data}`,
+        method: "PATCH",
+      }),
+      invalidatesTags: [tagTypes.user],
+    }),
   }),
 });
 
@@ -77,4 +84,5 @@ export const {
   useUserProfileQuery,
   useChangePasswordMutation,
   useGetAllUsersQuery,
+  useChangeRoleByAdminMutation,
 } = authAPi;
