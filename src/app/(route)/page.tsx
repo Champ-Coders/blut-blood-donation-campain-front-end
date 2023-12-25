@@ -15,6 +15,7 @@ import VideoBanner from "@/components/Home/VideoBanner.jsx";
 import { FloatButton } from "antd";
 import { VerticalAlignTopOutlined } from "@ant-design/icons";
 import FaqQuestion from "@/components/Home/FaqQuestion";
+import ListOfHonorableBloodDonors from "@/components/Home/ListOfHonorableBloodDonors";
 
 export default function Home() {
   return (
@@ -23,7 +24,7 @@ export default function Home() {
       <VideoBanner />
       <BloodTypeDonors />
       <HomeEvent />
-      {/* <Blog /> */}
+      <ListOfHonorableBloodDonors />
       <HelpThePeopleInNeed />
       <Counter />
       <Services />
