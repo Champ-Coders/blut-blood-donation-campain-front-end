@@ -15,6 +15,7 @@ const config: Config = {
         "Player-Display": ["Playfair Display", "serif"],
         oswald: ["Oswald", "sans-serif"],
         playfair: ["Playfair Display", "serif"],
+        kalpurush: ["Kalpurush", "sans-serif"],
       },
       colors: {
         primary: "#ea062b",

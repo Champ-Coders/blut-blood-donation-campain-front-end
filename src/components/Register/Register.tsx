@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import { FaPhone, FaLocationDot, FaEnvelope } from "react-icons/fa6";
-import {  useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import InputField from "../InputField/InputField";
 import Link from "next/link";
 import MultiSelect from "../MultiSelector/MultiSelector";
@@ -55,7 +55,7 @@ const Register = () => {
   return (
     <div className="py-10 px-10 sm:px-24 mb-48">
       <div className="container mx-auto py-6 sm:py-12 px-0 sm:px-7 md:px-16 max-w-6xl flex justify-between lg:flex-row items-center gap-5 sm:gap-12 flex-col-reverse">
-        <div className="lg:w-1/2 w-full shadow-sm shadow-[rgba(0,0,0,0.1)] bg-white p-4 lg:p-8">
+        <div className="lg:w-1/2 w-full shadow-sm shadow-[rgba(0,0,0,0.1)] bg-white p-4 lg:p-8 border rounded-lg">
           <form className="block w-full" onSubmit={handleSubmit(onSubmit)}>
             <div className="flex w-full sm:flex-row flex-col mb-4 justify-between items-center gap-3 sm:gap-6">
               <InputField
@@ -173,11 +173,11 @@ const Register = () => {
 
         <div className="lg:w-1/2 lg:text-start text-center w-full">
           <p className="text-lg mb-4 font-bold text-primary">Register</p>
-          <h2 className="text-3xl font-bold font-poppins">
+          <h2 className="text-3xl font-bold font-playfair">
             {" "}
             Join Us, Save Lives. Connecting Communities through Blood Donation.
           </h2>
-          <p className="py-2">
+          <p className="py-2 text-gray-500 text-[14px]">
             Every drop of blood is a lifeline waiting to be extended. By
             donating blood, you become a beacon of hope, a silent hero, and a
             lifeline for those in need.{" "}

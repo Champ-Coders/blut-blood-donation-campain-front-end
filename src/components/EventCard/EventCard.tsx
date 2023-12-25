@@ -12,12 +12,12 @@ type EventCardProps = {
 
 const EventCard: React.FC<EventCardProps> = ({ item }) => {
   return (
-    <div className="">
+    <div className="border border-gray-200 rounded-lg hover:scale-105 transition-all duration-500 ease-in-out ">
       <div className="rounded-md overflow-hidden">
-        <div className="w-full h-[280px] ">
-          <Image className="w-full h-full" src={item.image} alt={item.title} />
+        <div className="w-full h-[200px] ">
+          <Image className="w-full h-full " src={item.image} alt={item.title} />
         </div>
-        <div>
+        <div className="text-[14px]">
           <div className="flex ">
             <p className="px-5 w-full py-[10px] bg-[#ea062b] flex items-center gap-2 text-white opacity-50">
               <BsCalendarDate />
@@ -29,23 +29,33 @@ const EventCard: React.FC<EventCardProps> = ({ item }) => {
             </p>
           </div>
           <div>
-            <p className="px-5 py-[10px] bg-[#ececec] text-black flex items-center gap-2 justify-center">
+            <p className="px-5 py-[10px] bg-[#ececec] text-black flex items-center gap-2 justify-center text-[14px]">
               <FaLocationDot className={"text-[#ea062b]"} />
               {item.location}
             </p>
           </div>
         </div>
       </div>
-      <div className="py-5 px-[30px] text-center">
-        <h3 className="my-[10px] text-2xl font-semibold text-black">
-          {item.title}
-        </h3>
-        <p className="mb-[14px] leading-[30px]">
-          {item.description.length > 100
-            ? item.description.slice(0, 100) + "..."
-            : item.description}
-        </p>
-        <Link className="text-[#ea062b]" href={`/event/${item.id}`}>
+      <div className="py-2 px-[20px] flex flex-col justify-between  ">
+        <div>
+          <h3 className="my-[10px] text-[18px] font-semibold text-black">
+            {item.title}
+          </h3>
+          <p className="mb-[14px] leading-[30px] text-[14px]">
+            {item.description.length > 100
+              ? item.description.slice(0, 100) + "..."
+              : item.description}
+          </p>
+        </div>
+        <Link
+          className="
+        text-[#ea062b]
+        no-underline hover:underline
+        
+
+           "
+          href={`/event/${item.id}`}
+        >
           Learn More
         </Link>
       </div>

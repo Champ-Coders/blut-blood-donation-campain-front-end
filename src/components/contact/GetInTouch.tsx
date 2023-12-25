@@ -1,5 +1,4 @@
-
-'use client'
+"use client";
 import React from "react";
 import TextAreaField from "../TextAreaField/TextAreaField";
 import InputField from "../InputField/InputField";
@@ -25,10 +24,10 @@ const GetInTouch: React.FC<GetInTouchProps> = () => {
     <div className="common">
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10  p-5 md:p-8 lg:p-16 shadow-[0px_9px_52px_0_rgba(0,0,0,.07)] rounded-lg">
         <div className="md:col-span-1 lg:col-span-7">
-          <h3 className="mb-6 lg:text-3xl font-semibold text-xl text-[#111]">
+          <h3 className="mb-6 lg:text-3xl font-semibold text-xl text-[#111] font-playfair">
             Get In Touch
           </h3>
-          <p className="lg:text-lg text-[#666] mb-7">
+          <p className=" text-[#666] mb-7 text-[14px]">
             On the other hand, we denounce with righteous indignation and
             dislike men who are so beguiled and righteous indignation and
             dislike men by the charms
@@ -97,14 +96,14 @@ const GetInTouch: React.FC<GetInTouchProps> = () => {
             <p className="font-semibold lg:text-lg mb-[23px]">
               Blood Excellence!
             </p>
-            <h4 className="text-lg lg:text-3xl font-semibold leading-normal mb-5">
+            <h4 className="text-lg lg:text-3xl font-semibold leading-normal mb-5 font-playfair">
               Expanded Blood Donate Services Here
             </h4>
-            <p className="lg:text-lg leading-normal">
+            <p className="text-[14px] leading-normal ">
               On the other hand, we denounce with righteous indignation and
               dislike men who are so beguiled and demoralized by the charms{" "}
             </p>
-            <div className="mt-[55px] flex flex-col gap-5 lg:text-lg leading-normal font-medium">
+            <div className="mt-[55px] flex flex-col gap-5 text-[14px] leading-normal font-medium">
               <p className="flex items-center gap-3">
                 <FaPhoneAlt />
                 Emergency Line: (002)

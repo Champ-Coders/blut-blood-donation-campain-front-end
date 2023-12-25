@@ -17,34 +17,12 @@ export const NavList: INav[] = [
     children: [],
   },
   {
-    name: "Campaign",
-    path: "/campaign",
+    name: "Donors",
+    path: "/donors",
     children: [
       {
-        name: "Campaign Grid",
-        path: "/campaign",
-      },
-      {
-        name: "Campaign List",
-        path: "/campaign-list",
-      },
-      {
-        name: "Campaign Details",
-        path: "/campaign-details",
-      },
-    ],
-  },
-  {
-    name: "Pages",
-    path: "/pages",
-    children: [
-      {
-        name: "About Us",
-        path: "/about",
-      },
-      {
-        name: "Register Now",
-        path: "/register",
+        name: "Donor List",
+        path: "/donor-list",
       },
       {
         name: "Donate Now",
@@ -55,20 +33,7 @@ export const NavList: INav[] = [
   {
     name: "Blog",
     path: "/blog",
-    children: [
-      {
-        name: "Blog Grid",
-        path: "/blog",
-      },
-      {
-        name: "Blog List",
-        path: "/blog-list",
-      },
-      {
-        name: "Blog Details",
-        path: "/blog-details",
-      },
-    ],
+    children: [],
   },
   {
     name: "Contact",

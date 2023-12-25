@@ -107,6 +107,28 @@ const AllUsers = () => {
       title: "Status",
       dataIndex: "status",
       sorter: (a: any, b: any) => a.status - b.status,
+      render: function (data: any) {
+        if (data === "pending") {
+          return (
+            <p className="bg-blue-300 text-blue-600 rounded-xl text-center">
+              Pending
+            </p>
+          );
+        } else if (data === "accept") {
+          return (
+            <p className="bg-green-300 text-green-600 rounded-xl text-center">
+              Accept
+            </p>
+          );
+        }
+        return (
+          <p>
+            <p className=" bg-red-300 text-red-600 rounded-xl text-center">
+              Canceled
+            </p>
+          </p>
+        );
+      },
     },
   ];
   return (

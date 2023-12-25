@@ -50,7 +50,7 @@ const AllUsers = () => {
   const [acceptByAdmin] = useAcceptRequestByAdminMutation(undefined);
 
   const accept = async (id: string) => {
-    const res = await acceptByAdmin(id);
+    const res: any = await acceptByAdmin(id);
     if (res?.data?.statusCode == 200) {
       message.success(
         `${res?.data?.data?.name} is now ${res?.data?.data?.role}.`
@@ -119,6 +119,28 @@ const AllUsers = () => {
       title: "Status",
       dataIndex: "status",
       sorter: (a: any, b: any) => a.status - b.status,
+      render: function (data: any) {
+        if (data === "pending") {
+          return (
+            <p className="bg-blue-300 text-blue-600 rounded-xl text-center">
+              Pending
+            </p>
+          );
+        } else if (data === "accept") {
+          return (
+            <p className="bg-green-300 text-green-600 rounded-xl text-center">
+              Accept
+            </p>
+          );
+        }
+        return (
+          <p>
+            <p className=" bg-red-300 text-red-600 rounded-xl text-center">
+              Canceled
+            </p>
+          </p>
+        );
+      },
     },
     {
       title: "Action",
@@ -133,7 +155,7 @@ const AllUsers = () => {
             onConfirm={() => accept(data)}
             onCancel={() => message.error("Cancel request...")}
           >
-            <button className="w-full rounded-md bg-primary px-2 py-1 text-sm font-semibold text-white shadow-sm  focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary  hover:bg-white hover:text-primary transition duration-300 ease-in-out">
+            <button className="w-full rounded-md bg-primary hover:bg-black px-2 py-1 text-sm font-semibold text-white shadow-sm  focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary   hover:text-white transition duration-300 ease-in-out">
               Accept
             </button>
           </Popconfirm>
