@@ -1,7 +1,19 @@
 import React from "react";
 import Faq from "../Faq/Faq";
+import config from "@/config/config";
 
-const FaqQuestion = () => {
+async function getData() {
+  const res = await fetch(`${config.apiBaseUrl}/faqs`);
+  if (!res.ok) {
+    // This will activate the closest `error.js` Error Boundary
+    throw new Error("Failed to fetch data");
+  }
+  return res.json();
+}
+const FaqQuestion = async () => {
+  const faqs = await getData();
+  console.log("🚀 ~ file: FaqQuestion.tsx:15 ~ FaqQuestion ~ faqs:", faqs);
+
   return (
     <section className="relative z-20 overflow-hidden bg-white pb-12 p-10  ">
       <div className="container mx-auto">
@@ -22,35 +34,10 @@ const FaqQuestion = () => {
           </div>
         </div>
 
-        <div className="-mx-4 flex flex-wrap">
-          <div className="w-full px-4 lg:w-1/2">
-            <Faq
-              header="How long we deliver your first blog post?"
-              text="It takes 2-3 weeks to get your first blog post ready. That includes the in-depth research & creation of your monthly content marketing strategy that we do before writing your first blog post, Ipsum available ."
-            />
-            <Faq
-              header="How long we deliver your first blog post?"
-              text="It takes 2-3 weeks to get your first blog post ready. That includes the in-depth research & creation of your monthly content marketing strategy that we do before writing your first blog post, Ipsum available ."
-            />
-            <Faq
-              header="How long we deliver your first blog post?"
-              text="It takes 2-3 weeks to get your first blog post ready. That includes the in-depth research & creation of your monthly content marketing strategy that we do before writing your first blog post, Ipsum available ."
-            />
-          </div>
-          <div className="w-full px-4 lg:w-1/2">
-            <Faq
-              header="How long we deliver your first blog post?"
-              text="It takes 2-3 weeks to get your first blog post ready. That includes the in-depth research & creation of your monthly content marketing strategy that we do before writing your first blog post, Ipsum available ."
-            />
-            <Faq
-              header="How long we deliver your first blog post?"
-              text="It takes 2-3 weeks to get your first blog post ready. That includes the in-depth research & creation of your monthly content marketing strategy that we do before writing your first blog post, Ipsum available ."
-            />
-            <Faq
-              header="How long we deliver your first blog post?"
-              text="It takes 2-3 weeks to get your first blog post ready. That includes the in-depth research & creation of your monthly content marketing strategy that we do before writing your first blog post, Ipsum available ."
-            />
-          </div>
+        <div className="-mx-4 grid grid-cols-1 md:grid-cols-2 justify-between gap-10">
+          {faqs?.data.map((faq: any, i: number) => (
+            <Faq key={i} header={faq.title} text={faq.description} />
+          ))}
         </div>
       </div>
 
