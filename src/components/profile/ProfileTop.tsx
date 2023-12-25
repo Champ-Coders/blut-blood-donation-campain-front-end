@@ -1,0 +1,76 @@
+import Image from "next/image";
+import React from "react";
+import userBg from "../../../public/assets/banner/userBg.jpg";
+import userImage from "../../../public/assets/icon/userIcon.png";
+import Link from "next/link";
+import { PhoneOutlined, MessageOutlined } from "@ant-design/icons";
+import { IUser } from "@/interfaces/common";
+
+const ProfileTopSection = ({ userData }: { userData: IUser }) => {
+  return (
+    <div>
+      <div>
+        <Image
+          unoptimized
+          height={200}
+          width={300}
+          className="h-[30vh] w-full object-cover "
+          src={userBg}
+          alt="profilebanner"
+        />
+      </div>
+      <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 ">
+        <div className="-mt-12 sm:-mt-16 sm:flex sm:items-end sm:space-x-5">
+          <div className="flex">
+            <Image
+              height={100}
+              width={100}
+              className="h-24 w-24 rounded-full  bg-white  sm:h-32 sm:w-32"
+              src={userImage}
+              alt=""
+            />
+          </div>
+          <div className="mt-6 sm:flex sm:min-w-0 sm:flex-1 sm:items-center sm:justify-end sm:space-x-6 sm:pb-1">
+            <div className="mt-6 min-w-0 flex-1 sm:hidden md:block">
+              <h1 className="truncate text-2xl font-bold text-gray-900">
+                {userData?.name}
+              </h1>
+            </div>
+            <div className="mt-6 flex flex-col justify-stretch space-y-3 sm:flex-row sm:space-x-4 sm:space-y-0">
+              <Link
+                href={`https://wa.me/${userData?.phoneNumber}`}
+                target="_blank"
+                className="inline-flex justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+              >
+                <MessageOutlined
+                  className="-ml-0.5 mr-1.5 h-5 w-5 text-gray-400"
+                  aria-hidden="true"
+                />
+                <span>Message</span>
+              </Link>
+              <Link
+                href={`https://wa.me/${userData?.phoneNumber}`}
+                target="_blank"
+                // type="button"
+                className="inline-flex justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+              >
+                <PhoneOutlined
+                  className="-ml-0.5 mr-1.5 h-5 w-5 text-gray-400"
+                  aria-hidden="true"
+                />
+                <span>Call</span>
+              </Link>
+            </div>
+          </div>
+        </div>
+        <div className="mt-6 hidden min-w-0 flex-1 sm:block md:hidden">
+          <h1 className="truncate text-2xl font-bold text-gray-900">
+            {userData?.name}
+          </h1>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default ProfileTopSection;
