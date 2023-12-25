@@ -45,7 +45,7 @@ const Testimonials = () => {
         {testimonial.map((test: any) => (
           <SwiperSlide key={test.title}>
             <div className="min-h-[300px] text-start px-1">
-              <div className="arrow relative shadow-lg py-5 px-3 sm:py-8 sm:px-5 bg-white shadow-[rgba(0,0,0,.05)]">
+              <div className="arrow relative border shadow-lg py-5 px-3 sm:py-8 sm:px-5 bg-white shadow-[rgba(0,0,0,.05)]">
                 <p className="text-start mb-4">
                   <Rate disabled defaultValue={5} />
                 </p>

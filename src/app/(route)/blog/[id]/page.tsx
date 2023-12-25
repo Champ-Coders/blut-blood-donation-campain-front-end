@@ -5,6 +5,7 @@ import Breadcrumb from "@/components/UI/BreadCrumb";
 import BannerBreadcrumb from "@/components/UI/BannerBreadcrumb";
 import Button from "@/components/Button/Button";
 import config from "@/config/config";
+import Comments from "@/components/Comments/Comments";
 
 type BlogDetailProps = {
   params: { id: string };
@@ -40,7 +41,6 @@ const BlogDetail: React.FC<BlogDetailProps> = async ({
             },
           ]}
           title="Blog Detail"
-          image="/assets/blood-donor-bg.png"
         />
       </section>
       <section>
@@ -86,6 +86,10 @@ const BlogDetail: React.FC<BlogDetailProps> = async ({
               </div>
             </div>
           </div>
+
+          {/* Comments */}
+
+          <Comments />
         </div>
       </section>
     </main>
