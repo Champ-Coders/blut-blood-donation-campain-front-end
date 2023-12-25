@@ -18,7 +18,6 @@ const EventDetail: React.FC<EventDetailProps> = () => {
             },
           ]}
           title="Event Details"
-          image="/assets/blood-donor-bg.png"
         />
       </section>
       <section>
