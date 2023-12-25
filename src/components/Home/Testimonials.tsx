@@ -62,6 +62,7 @@ const Testimonials = () => {
                     height={70}
                     priority
                     alt="text"
+                    className="w-14 h-14 lg:w-[70px] lg:h-[70px]"
                   />
                 </div>
                 <span className="flex-grow flex flex-col pl-4">
