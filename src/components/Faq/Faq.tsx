@@ -20,7 +20,7 @@ const Faq = ({ header, text }: AccordionItemProps) => {
       >
         <div className="mr-5 flex h-10 w-full max-w-[40px] items-center justify-center rounded-lg bg-primary/5 text-primary dark:bg-white/5">
           <svg
-            className={`fill-primary stroke-primary duration-200 ease-in-out ${
+            className={`fill-primary stroke-primary duration-500 ease-in-out ${
               active ? "rotate-180" : ""
             }`}
             width="17"
@@ -44,7 +44,7 @@ const Faq = ({ header, text }: AccordionItemProps) => {
       </button>
 
       <div
-        className={`pl-[62px] duration-200 ease-in-out ${
+        className={`pl-[62px] duration-500 ease-in-out ${
           active ? "block" : "hidden"
         }`}
       >

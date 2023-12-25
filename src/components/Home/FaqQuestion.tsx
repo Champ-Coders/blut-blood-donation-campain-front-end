@@ -12,11 +12,10 @@ async function getData() {
 }
 const FaqQuestion = async () => {
   const faqs = await getData();
-  console.log("🚀 ~ file: FaqQuestion.tsx:15 ~ FaqQuestion ~ faqs:", faqs);
 
   return (
-    <section className="relative z-20 overflow-hidden bg-white pb-12 p-10  ">
-      <div className="container mx-auto">
+    <section className="relative z-20 overflow-hidden bg-white pb-12  ">
+      <div className="container mx-auto common">
         <div className="-mx-4 flex flex-wrap">
           <div className="w-full px-4">
             <div className="mx-auto mb-[60px] max-w-[520px] text-center lg:mb-20">
@@ -27,8 +26,8 @@ const FaqQuestion = async () => {
                 Any Questions? Look Here
               </h2>
               <p className="text-base text-body-color dark:text-dark-6">
-                There are many variations of passages of Lorem Ipsum available
-                but the majority have suffered alteration in some form.
+                Where you can find answers to the most common questions about
+                our products and services.
               </p>
             </div>
           </div>
