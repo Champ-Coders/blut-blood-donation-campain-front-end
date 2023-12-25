@@ -85,6 +85,7 @@ const ServiceDetail = (props: IProps) => {
         </div>
       </section>
     </main>
+
   )}
 
 export default ServiceDetail;

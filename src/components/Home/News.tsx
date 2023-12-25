@@ -1,9 +1,10 @@
 import React from "react";
 import NewsCard from "../NewsCard/NewsCard";
 import { IOurNews, IResponse } from "@/interfaces/common";
+import config from "@/config/config";
 
 async function getData() {
-  const res = await fetch("http://localhost:5000/api/v1/blog");
+  const res = await fetch(`${config.apiBaseUrl}/blog`);
   // The return value is *not* serialized
   // You can return Date, Map, Set, etc.
 
