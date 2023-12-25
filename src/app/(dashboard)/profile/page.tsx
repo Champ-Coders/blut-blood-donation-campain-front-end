@@ -17,18 +17,18 @@ export default function ProfilePage() {
   const userData: IUser = data?.data;
 
   return (
-    <div>
+    <div className="bg-slate-100">
       <ProfileTopSection userData={userData} />
 
       <section className="block lg:flex justify-between items-start gap-3">
-        <ProfileAside />
+        <ProfileAside userData={userData} />
         {/* //! Right Section */}
         <div className="w-full lg:w-[70%] flex flex-col  items-center ">
           <PersonalInfo userData={userData}></PersonalInfo>
           <div className="mx-1 lg:mx-auto my-2 sm:rounded-lg w-full lg:w-[45rem]">
             <ChangePasswordPage />
           </div>
-          <ProfileSession></ProfileSession>
+          <ProfileSession userData={userData}></ProfileSession>
         </div>
       </section>
     </div>

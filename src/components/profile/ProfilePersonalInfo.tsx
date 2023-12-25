@@ -8,7 +8,7 @@ const PersonalInfo = ({ userData }: { userData: IUser }) => {
     { day: "2-digit", month: "long", year: "numeric" }
   );
   return (
-    <div className=" max-w-2xl lg:max-w-[45rem] mx-1 lg:mx-auto my-2 lg:my-12 shadow overflow-hidden sm:rounded-lg">
+    <div className=" max-w-2xl lg:max-w-[45rem] mx-1 lg:mx-auto my-2 lg:my-12 shadow overflow-hidden sm:rounded-lg bg-white shadow-md">
       <div className="px-4 py-5 sm:px-6 ">
         <h3 className="text-xl leading-6 font-medium text-gray-900">
           Personal Information

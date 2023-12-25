@@ -8,24 +8,24 @@ import { IUser } from "@/interfaces/common";
 
 const ProfileTopSection = ({ userData }: { userData: IUser }) => {
   return (
-    <div>
+    <div className="bg-white">
       <div>
         <Image
           unoptimized
           height={200}
           width={300}
           className="h-[30vh] w-full object-cover "
-          src={userBg}
+          src={`https://img.freepik.com/free-photo/red-white-triangular-cardboard-sheets-with-copy-space_23-2148320474.jpg?size=626&ext=jpg&uid=R88795710&ga=GA1.1.347367071.1702385638&semt=ais`}
           alt="profilebanner"
         />
       </div>
-      <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 ">
+      <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 py-3">
         <div className="-mt-12 sm:-mt-16 sm:flex sm:items-end sm:space-x-5">
           <div className="flex">
             <Image
               height={100}
               width={100}
-              className="h-24 w-24 rounded-full  bg-white  sm:h-32 sm:w-32"
+              className="h-[7rem] w-[7rem] rounded-full  bg-white  sm:h-32 sm:w-32"
               src={userImage}
               alt=""
             />
