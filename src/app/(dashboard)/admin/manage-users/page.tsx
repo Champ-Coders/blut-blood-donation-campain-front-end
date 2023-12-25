@@ -4,9 +4,12 @@ import Breadcrumb from "@/components/UI/BreadCrumb";
 import Table from "@/components/UI/Table";
 import dayjs from "dayjs";
 
-import { Input } from "antd";
+import { Input, Popconfirm, message } from "antd";
 import { useState } from "react";
-import { useGetAllUsersQuery } from "@/redux/Api/authApi/AuthApi";
+import {
+  useChangeRoleByAdminMutation,
+  useGetAllUsersQuery,
+} from "@/redux/Api/authApi/AuthApi";
 import { useDebounced } from "@/redux/app/hook";
 
 const AllUsers = () => {
@@ -32,6 +35,7 @@ const AllUsers = () => {
   }
 
   // query and mutation
+  const [changeRoleByAdmin] = useChangeRoleByAdminMutation(undefined);
   const { data: users, isLoading } = useGetAllUsersQuery({ ...query });
   const meta = users?.data?.meta;
 
@@ -45,6 +49,16 @@ const AllUsers = () => {
     setSortBy(field as string);
     setSortOrder(order === "ascend" ? "asc" : "desc");
   };
+  const changeRole = async (id: string) => {
+    const res = await changeRoleByAdmin(id);
+    if (res?.data?.statusCode == 200) {
+      message.success(
+        `${res?.data?.data?.name} is now ${res?.data?.data?.role}.`
+      );
+    } else {
+      message.error(res?.error?.data?.message);
+    }
+  };
 
   const columns: any[] = [
     {
@@ -55,6 +69,19 @@ const AllUsers = () => {
       title: "Blood Group",
       dataIndex: "bloodGroup",
       sorter: (a: any, b: any) => a.bloodGroup - b.bloodGroup,
+    },
+    {
+      title: "Role",
+      dataIndex: "role",
+      onFilter: (value: string, record: any) =>
+        record.name.indexOf(value) === 0,
+      sorter: (a: any, b: any) => a.name.length - b.name.length,
+      sortDirections: ["descend", "ascend"],
+      render: function (data: any) {
+        if (data == "admin") {
+          return <p className="text-primary font-bold">Admin</p>;
+        } else return <p className="text-primary">Donor</p>;
+      },
     },
     {
       title: "Birth Date",
@@ -98,12 +125,24 @@ const AllUsers = () => {
       sorter: (a: any, b: any) => a.age - b.age,
     },
     {
-      title: "Role",
-      dataIndex: "role",
-      onFilter: (value: string, record: any) =>
-        record.name.indexOf(value) === 0,
-      sorter: (a: any, b: any) => a.name.length - b.name.length,
-      sortDirections: ["descend", "ascend"],
+      title: "Action",
+      dataIndex: "_id",
+      render: function (data: any) {
+        return (
+          <Popconfirm
+            title="Change role"
+            description="Are you sure to change the role?"
+            okText="Yes"
+            cancelText="No"
+            onConfirm={() => changeRole(data)}
+            onCancel={() => message.error("Cancel change...")}
+          >
+            <button className="w-full rounded-md bg-primary px-2 py-1 text-sm font-semibold text-white shadow-sm  focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary  hover:bg-white hover:text-primary transition duration-300 ease-in-out">
+              Change Role
+            </button>
+          </Popconfirm>
+        );
+      },
     },
   ];
   return (
