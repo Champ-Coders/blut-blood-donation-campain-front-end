@@ -4,10 +4,11 @@ import Breadcrumb from "@/components/UI/BreadCrumb";
 import Table from "@/components/UI/Table";
 import dayjs from "dayjs";
 
-import { Input } from "antd";
+import { Input, Popconfirm, message } from "antd";
 import { useState } from "react";
 import { useDebounced } from "@/redux/app/hook";
 import { useGetAllDonationInfoQuery } from "@/redux/Api/AuthApi";
+import { useAcceptRequestByAdminMutation } from "@/redux/Api/donationApi/DonationApi";
 
 const AllUsers = () => {
   const [page, setPage] = useState<number>(1);
@@ -21,12 +22,11 @@ const AllUsers = () => {
   query["page"] = page;
   query["sortBy"] = sortBy;
   query["sortOrder"] = sortOrder;
-
+  query.status = "pending";
   const debouncedSearchTerm = useDebounced({
     searchQuery: searchTerm,
     delay: 400,
   });
-
   if (!!debouncedSearchTerm) {
     query["searchTerm"] = debouncedSearchTerm;
   }
@@ -46,6 +46,18 @@ const AllUsers = () => {
     const { order, field } = sorter;
     setSortBy(field as string);
     setSortOrder(order === "ascend" ? "asc" : "desc");
+  };
+  const [acceptByAdmin] = useAcceptRequestByAdminMutation(undefined);
+
+  const accept = async (id: string) => {
+    const res = await acceptByAdmin(id);
+    if (res?.data?.statusCode == 200) {
+      message.success(
+        `${res?.data?.data?.name} is now ${res?.data?.data?.role}.`
+      );
+    } else {
+      message.error(res?.error?.data?.message);
+    }
   };
 
   const columns: any[] = [
@@ -108,6 +120,26 @@ const AllUsers = () => {
       dataIndex: "status",
       sorter: (a: any, b: any) => a.status - b.status,
     },
+    {
+      title: "Action",
+      dataIndex: "_id",
+      render: function (data: any) {
+        return (
+          <Popconfirm
+            title="Change role"
+            description="Are you sure to change the role?"
+            okText="Yes"
+            cancelText="No"
+            onConfirm={() => accept(data)}
+            onCancel={() => message.error("Cancel request...")}
+          >
+            <button className="w-full rounded-md bg-primary px-2 py-1 text-sm font-semibold text-white shadow-sm  focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary  hover:bg-white hover:text-primary transition duration-300 ease-in-out">
+              Accept
+            </button>
+          </Popconfirm>
+        );
+      },
+    },
   ];
   return (
     <div>
@@ -120,7 +152,7 @@ const AllUsers = () => {
         ]}
       />
 
-      <ActionBar title="All Donation">
+      <ActionBar title="All Donors">
         <Input
           type="text"
           allowClear
