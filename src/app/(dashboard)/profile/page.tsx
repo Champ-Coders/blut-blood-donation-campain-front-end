@@ -25,7 +25,7 @@ export default function ProfilePage() {
         {/* //! Right Section */}
         <div className="w-full lg:w-[70%] flex flex-col  items-center ">
           <PersonalInfo userData={userData}></PersonalInfo>
-          <div className="mx-1 lg:mx-auto my-2 sm:rounded-lg w-full lg:w-[45rem]">
+          <div className="  my-2 sm:rounded-lg w-full ">
             <ChangePasswordPage />
           </div>
           <ProfileSession userData={userData}></ProfileSession>

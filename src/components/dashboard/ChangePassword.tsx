@@ -59,7 +59,7 @@ const ChangePasswordPage = () => {
     }
   };
   return (
-    <div className="w-full bg-white  py-9 px-2 shadow-md mx-auto rounded">
+    <div className="w-full bg-white  py-9 px-5 shadow-md mx-auto rounded">
       <form className="" onSubmit={handleSubmit(onSubmit)}>
         <p className="text-xl mb-4 font-bold text-slate-700">
           Change Your Password

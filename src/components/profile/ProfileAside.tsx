@@ -7,6 +7,7 @@ import {
   AlertFilled,
   AccountBookFilled,
   DeleteFilled,
+  SettingOutlined
 } from "@ant-design/icons";
 import { IUser } from "@/interfaces/common";
 
@@ -17,36 +18,50 @@ const ProfileAside = ({ userData }: { userData: IUser }) => {
         className="flex gap-5 text-black text-[16px] font-[500]"
         href="/profile"
       >
-        <ProfileFilled />
+        <ProfileFilled style={{fontSize:"24px",color:"#ea062b"}} />
         <span>Profile</span>
       </Link>
       <Link
         className="flex gap-5 text-black text-[16px] font-[500]"
         href="/profile"
       >
-        <ReadFilled />
+        <ReadFilled style={{fontSize:"24px",color:"#ea062b"}} />
         <span>Basic Info</span>
       </Link>
       <Link
         className="flex gap-5 text-black text-[16px] font-[500]"
         href="/profile"
       >
-        <CaretUpFilled />
+        <CaretUpFilled style={{fontSize:"24px",color:"#ea062b"}} />
         <span>Change Password</span>
       </Link>
       <Link
         className="flex gap-5 text-black text-[16px] font-[500]"
         href="/profile"
       >
-        <AlertFilled />
+        <AlertFilled style={{fontSize:"24px",color:"#ea062b"}} />
         <span>Notificaction</span>
       </Link>
       <Link
         className="flex gap-5 text-black text-[16px] font-[500]"
         href="/profile"
       >
-        <AccountBookFilled />
+        <AccountBookFilled style={{fontSize:"24px",color:"#ea062b"}} />
         <span>Account</span>
+      </Link>
+      <Link
+        className="flex gap-5 text-black text-[16px] font-[500]"
+        href="/profile"
+      >
+        <SettingOutlined style={{fontSize:"24px",color:"#ea062b"}} />
+        <span>Setting</span>
+      </Link>
+      <Link
+        className="flex gap-5 text-black text-[16px] font-[500]"
+        href="/profile"
+      >
+        <DeleteFilled style={{fontSize:"24px",color:"#ea062b"}} />
+        <span>Delete Profile</span>
       </Link>
     </aside>
   );
