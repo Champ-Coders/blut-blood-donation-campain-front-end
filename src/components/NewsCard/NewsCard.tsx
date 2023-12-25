@@ -40,9 +40,14 @@ const NewsCard: React.FC<NewsCardProps> = ({ news }) => {
           <h3 className="text-2xl text-[#111111] font-bold mb-[9px]">
             {news?.title}
           </h3>
-          <p className="text-[#666] text-[14px]">
-            {news?.description.slice(0, 150)}
-          </p>
+          <p
+            dangerouslySetInnerHTML={{
+              __html: news?.description.slice(0, 150),
+            }}
+            className="text-[#666] text-[14px]"
+          />
+          {/* {news?.description.slice(0, 150)}
+          </p> */}
           <Link
             className="mt-[16px] flex gap-1 items-center font-bold hover:text-[#ea062b] transition duration-300"
             href={`blog/${news?.id}`}
