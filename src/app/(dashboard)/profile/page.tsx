@@ -10,6 +10,7 @@ import PersonalInfo from "@/components/profile/ProfilePersonalInfo";
 
 import ProfileSession from "@/components/profile/ProfileSession";
 import ProfileAside from "@/components/profile/ProfileAside";
+import ProfileAuthentication from "@/components/profile/ProfileAuthentication";
 
 export default function ProfilePage() {
   const { data } = useUserProfileQuery(null);
@@ -25,10 +26,12 @@ export default function ProfilePage() {
         {/* //! Right Section */}
         <div className="w-full lg:w-[70%] flex flex-col  items-center ">
           <PersonalInfo userData={userData}></PersonalInfo>
+          <ProfileAuthentication userData={userData} />
           <div className="  my-2 sm:rounded-lg w-full ">
             <ChangePasswordPage />
           </div>
           <ProfileSession userData={userData}></ProfileSession>
+         
         </div>
       </section>
     </div>
