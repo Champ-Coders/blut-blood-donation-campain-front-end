@@ -3,7 +3,7 @@ import blogImage1 from "../../public/assets/our-news/activity.png";
 import blogImage2 from "../../public/assets/our-news/helpless.png";
 import blogImage3 from "../../public/assets/our-news/poor.png";
 
-export const ourNews: IOurNews[] = [
+export const ourNews: any = [
   {
     id: "1",
     date: "18 Nov 2020",

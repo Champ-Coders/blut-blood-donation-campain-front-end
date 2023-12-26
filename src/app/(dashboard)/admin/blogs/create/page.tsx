@@ -1,6 +1,7 @@
 "use client";
 
 import InputField from "@/components/InputField/InputField";
+import ReactQuillText from "@/components/ReactQuill/ReactQuill";
 import TextAreaField from "@/components/TextAreaField/TextAreaField";
 import ActionBar from "@/components/UI/ActionBar";
 import Breadcrumb from "@/components/UI/BreadCrumb";
@@ -8,11 +9,15 @@ import config from "@/config/config";
 import { useAddBlogMutation } from "@/redux/Api/blogApi";
 import { getUserDataFromLC } from "@/utils/local-storage";
 import { Button, message } from "antd";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 
 const CreateBlog = () => {
   const userData = getUserDataFromLC() as any;
+  const [description, setDescription] = useState("");
+
   const [addBlog] = useAddBlogMutation();
+
   const {
     handleSubmit,
     register,
@@ -35,7 +40,7 @@ const CreateBlog = () => {
         if (imageData.success) {
           const newBlog = {
             title: data.title,
-            description: data.description,
+            description: description,
             image: imageData?.data?.url,
             user: userData?.id,
           };
@@ -68,7 +73,7 @@ const CreateBlog = () => {
       <ActionBar title="Create Blog">
         <form className="block w-full" onSubmit={handleSubmit(onSubmit)}>
           <div className="w-full">
-            <div className="my-[10px]  md:max-w-md mx-0">
+            <div className="my-[10px]  md:max-w-3xl mx-0">
               <InputField
                 name="title"
                 label="Title"
@@ -78,7 +83,7 @@ const CreateBlog = () => {
                 required
               />
             </div>
-            <div className="my-[10px] md:max-w-md mx-0">
+            {/* <div className="my-[10px] md:max-w-3xl mx-0">
               <TextAreaField
                 name="description"
                 register={register}
@@ -86,8 +91,17 @@ const CreateBlog = () => {
                 label="Description"
                 required
               />
+            </div> */}
+            <div className="my-[10px] md:max-w-3xl mx-0">
+              <ReactQuillText
+                label="Description"
+                required
+                setValue={setDescription}
+                value={description}
+              />
             </div>
-            <div className="my-[10px] md:max-w-md mx-0">
+
+            <div className="my-[10px] md:max-w-3xl mx-0">
               <InputField
                 name="image"
                 label="Image"
