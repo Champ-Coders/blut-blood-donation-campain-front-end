@@ -39,6 +39,7 @@ const Table = ({
       dataSource={dataSource}
       pagination={paginationConfig}
       onChange={onTableChange}
+      scroll={{x:1200}} //! Can use For responsive @sarwar
     />
   );
 };

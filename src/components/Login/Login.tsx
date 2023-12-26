@@ -20,16 +20,13 @@ const Login = () => {
   const router = useRouter();
 
   const onSubmit = async (data: any) => {
-    // Handle form submission logic here
-    // console.log("Form Data:", data);\
-
     try {
       const response = (await userLogin(data).unwrap()) as any;
-      // console.log(response, "resssssss");
+
       if (response?.success) {
         // console.log(response);
         message.success(response.message);
-        router.push("/dashboard");
+        router.push("/");
       } else {
         message.error(response?.message);
       }
@@ -41,13 +38,14 @@ const Login = () => {
   return (
     <div className="py-10 px-10 sm:px-24 mb-48">
       <div className="container mx-auto py-6 sm:py-12 px-0 sm:px-7 md:px-16 max-w-6xl flex justify-between lg:flex-row items-center gap-5 sm:gap-12 flex-col-reverse">
-        <div className="lg:w-1/2 w-full shadow-sm shadow-[rgba(0,0,0,0.1)] bg-white p-4 lg:p-8">
+        <div className="lg:w-1/2 w-full shadow-sm shadow-[rgba(0,0,0,0.1)] bg-white p-4 lg:p-8 border rounded">
           <form className="block w-full" onSubmit={handleSubmit(onSubmit)}>
             {/* Email */}
             <div className="w-full mb-3 sm:mb-6">
               <InputField
                 placeholder="Enter Your Email"
                 name={"email"}
+                label="Your Email Address"
                 type="email"
                 register={register}
                 required
@@ -58,6 +56,7 @@ const Login = () => {
             <div className="w-full mb-3 sm:mb-6">
               <InputField
                 placeholder="Enter Your Password"
+                label="Your Password"
                 name={"password"}
                 type="text"
                 register={register}
@@ -65,7 +64,9 @@ const Login = () => {
                 errors={errors}
               />
 
-              <p className="text-sm text-end pt-2">Forget Password</p>
+              <p className="text-sm text-end pt-2 cursor-pointer">
+                Forget Password
+              </p>
             </div>
 
             <div className="w-full">
@@ -89,10 +90,10 @@ const Login = () => {
 
         <div className="lg:w-1/2 lg:text-start text-center w-full">
           <p className="text-lg mb-4 font-bold text-primary">Log In</p>
-          <h2 className="text-3xl font-bold font-poppins">
+          <h2 className="text-3xl font-bold  font-playfair">
             Surging Together for Life. Donate Blood, Transform Futures
           </h2>
-          <p className="py-2">
+          <p className="py-2 text-[14px] text-gray-500">
             Every drop of blood is a lifeline waiting to be extended. By
             donating blood, you become a beacon of hope, a silent hero, and a
             lifeline for those in need.{" "}

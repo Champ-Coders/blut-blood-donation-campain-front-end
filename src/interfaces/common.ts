@@ -36,14 +36,28 @@ export interface ITeamMember {
 }
 
 export interface IOurNews {
-  id: string;
   date: string;
   comment: string;
   title: string;
-  image: StaticImageData;
   description: string;
+
+  _id: string;
+  image: string;
+  user: {
+    // Define the structure of the user object if needed
+  };
+  createdAt: string;
+  updatedAt: string;
+  __v: number;
+  id: string;
 }
-[];
+
+export interface IResponse<T> {
+  statusCode: number;
+  success: boolean;
+  message: string;
+  data: T;
+}
 
 export interface IEvent {
   id: string;
@@ -64,3 +78,29 @@ export interface IPopularCamp {
   timeSlot: string;
   address: string;
 }
+
+export type IUser = {
+  _id: string;
+  name: string;
+  phoneNumber: string;
+  email: string;
+  role: string;
+  bloodGroup: string;
+  address: string;
+  dateOfBirth: string; // Assuming the date is in ISO 8601 format
+  totalDonation: number;
+  totalReceived: number;
+  available: boolean;
+  notification: number;
+};
+
+export type IPerson = {
+  id: string;
+  name: string;
+  title: string;
+  role: string;
+  email: string;
+  telephone: string;
+  donation: number;
+  imageUrl: string;
+};

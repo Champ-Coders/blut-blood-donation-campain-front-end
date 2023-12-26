@@ -1,7 +1,6 @@
 import { FaHeart, FaPlay } from "react-icons/fa";
 import React from "react";
-import bg from "@/assets/home/blood-donor-bg.png";
-import Image from "next/image";
+import bg from "../../../public/assets/cover-sbda.jpg";
 import { CurrentBloodRequest } from "@/constants/CurrentBloodRequest";
 import { ICurrentBloodRequest } from "@/interfaces/common";
 import AppointmentForm from "../AppointmentForm/AppointmentForm";

@@ -4,15 +4,16 @@ import { MenuFoldOutlined, MenuUnfoldOutlined } from "@ant-design/icons";
 import { IoSearch } from "react-icons/io5";
 import { FaRegBell } from "react-icons/fa";
 
-import { Button } from "antd";
+import { Badge, Button, message } from "antd";
 import { Header } from "antd/es/layout/layout";
 import React, { Fragment, useState } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 
-// logo
 import Logo from "../../../public/assets/logo-light.png";
+import userImage from "../../../public/assets/icon/userIcon.png";
 import Image from "next/image";
-
+import { logout } from "@/utils/local-storage";
+import { useRouter } from "next/navigation";
 function classNames(...classes: any) {
   return classes.filter(Boolean).join(" ");
 }
@@ -24,6 +25,14 @@ const DashboardNavbar = ({
   collapsed: boolean;
   setCollapsed: any;
 }) => {
+  const router = useRouter();
+  const SignOutHandler = () => {
+    logout();
+    message.error("Successfully Sign Out");
+    router.push("/");
+    // window.location.reload();
+  };
+
   return (
     <Header
       style={{
@@ -92,22 +101,26 @@ const DashboardNavbar = ({
 
                 {/* notification */}
                 <div className="hidden lg:ml-4 lg:flex lg:items-center">
-                  <button
-                    type="button"
-                    className="flex-shrink-0 rounded-full bg-white p-1 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
-                  >
-                    <span className="sr-only">View notifications</span>
-                    <FaRegBell className="h-6 w-6" aria-hidden="true" />
-                  </button>
+                  <Badge count={99}>
+                    <button
+                      type="button"
+                      className="flex-shrink-0 rounded-full bg-white p-1 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+                    >
+                      <span className="sr-only">View notifications</span>
+                      <FaRegBell className="h-6 w-6" aria-hidden="true" />
+                    </button>
+                  </Badge>
 
                   {/* Profile dropdown */}
                   <Menu as="div" className="relative ml-4 flex-shrink-0">
                     <div>
                       <Menu.Button className="flex rounded-full bg-white text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2">
                         <span className="sr-only">Open user menu</span>
-                        <img
+                        <Image
+                          height={50}
+                          width={50}
                           className="h-8 w-8 rounded-full"
-                          src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                          src={userImage}
                           alt=""
                         />
                       </Menu.Button>
@@ -150,15 +163,15 @@ const DashboardNavbar = ({
                         </Menu.Item>
                         <Menu.Item>
                           {({ active }) => (
-                            <a
-                              href="#"
+                            <button
+                              onClick={SignOutHandler}
                               className={classNames(
                                 active ? "bg-gray-100" : "",
                                 "block px-4 py-2 text-sm text-gray-700"
                               )}
                             >
                               Sign out
-                            </a>
+                            </button>
                           )}
                         </Menu.Item>
                       </Menu.Items>

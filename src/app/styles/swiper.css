@@ -30,3 +30,11 @@
   border-style: solid;
   border-color: #fff rgba(0, 0, 0, 0) rgba(0, 0, 0, 0) #fff;
 }
+
+/* donar list slider code start*/
+/* Slider.css */
+.slider-item {
+  margin: 0 10px; /* Adjust the margin value as needed */
+}
+
+/* donar list slider code end */

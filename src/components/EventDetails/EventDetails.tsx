@@ -8,6 +8,7 @@ import { BsCalendar2Date } from "react-icons/bs";
 import { LuClock9 } from "react-icons/lu";
 import { IoLocationSharp } from "react-icons/io5";
 import { RiWhatsappFill } from "react-icons/ri";
+import Comments from "../Comments/Comments";
 
 type EventDetailsProps = {};
 
@@ -88,14 +89,16 @@ const EventDetails: React.FC<EventDetailsProps> = () => {
   ];
   return (
     <div>
-      <div className="common md:py-[100px]">
+      <div className="common pt-10 md:pb-[100px]">
         <div>
-          <Image
-            width={1200}
-            height={700}
-            src={image.src}
-            alt="details event image"
-          />
+          <div className="h-[400px] overflow-hidden">
+            <Image
+              width={1200}
+              height={400}
+              src={image.src}
+              alt="details event image"
+            />
+          </div>
           <div className="flex flex-col lg:flex-row gap-12 mt-14">
             <div className="w-full lg:w-[70%]">
               <div>
@@ -137,13 +140,16 @@ const EventDetails: React.FC<EventDetailsProps> = () => {
               </div>
             </div>
             <div className="w-full lg:w-[30%]">
-              <div className="flex flex-col gap-5">
+              <div className="flex flex-col gap-5 text-[14px]">
                 {information.map((item) => (
                   <div
                     className="flex justify-center items-center gap-5"
                     key={item.id}
                   >
-                    <item.icon size={40} className="text-[#ea062b] " />
+                    <div className="">
+                      <item.icon size={25} className="text-[#ea062b] " />
+                    </div>
+
                     <div>
                       <h4>{item.key}</h4>
                       <p>{item.value}</p>
@@ -153,11 +159,11 @@ const EventDetails: React.FC<EventDetailsProps> = () => {
               </div>
               <div className="mt-10 flex   flex-col gap-5 items-center justify-center lg:justify-normal">
                 <p className="text-[#7a7a7a] leading-6">Share This:</p>
-                <ul className="mt-5 flex gap-5 px-5">
+                <ul className=" flex gap-5 px-5">
                   {socialMedia.map((item) => (
                     <li
                       key={item.id}
-                      className="p-5 w-full bg-primary text-white rounded-lg  transition duration-500 ease-in-out hover:bg-white hover:text-primary cursor-pointer hover:shadow-[0px_9px_52px_0_rgba(0,0,0,.07)]"
+                      className="p-2 w-full bg-primary text-white rounded-md  transition duration-500 ease-in-out hover:bg-[#111] hover:text-white cursor-pointer hover:shadow-[0px_9px_52px_0_rgba(0,0,0,.07)]"
                     >
                       <item.icon className="text-2xl" />
                     </li>
@@ -167,6 +173,10 @@ const EventDetails: React.FC<EventDetailsProps> = () => {
             </div>
           </div>
         </div>
+
+        {/* comment */}
+
+        <Comments />
       </div>
     </div>
   );

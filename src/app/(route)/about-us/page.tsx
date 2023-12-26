@@ -1,9 +1,16 @@
+import CallNow from "@/components/Home/CallNow";
+import TeamMember from "@/components/Home/TeamMember";
 import BannerBreadcrumb from "@/components/UI/BannerBreadcrumb";
-import DonationProcess from "@/components/about/DonationProcess";
+import AboutTestimonials from "@/components/about/AboutTesimonials";
+import Counter from "@/components/about/Counter";
+import DonationProcessAbout from "@/components/about/DonationProcessAbout";
+import HelpThePeopleInNeedAbut from "@/components/about/HelpThePeopleInNeedAbut";
+import PopularCampaignsAbout from "@/components/about/PopularCampaignsAbout";
+import WhoWeAre from "@/components/about/WhoWeAre";
 
 const AboutPage = () => {
   return (
-    <div>
+    <main>
       <BannerBreadcrumb
         items={[
           {
@@ -11,11 +18,16 @@ const AboutPage = () => {
           },
         ]}
         title="About Us"
-        image="/assets/blood-donor-bg.png"
       />
-      <DonationProcess />
-      about
-    </div>
+      <WhoWeAre />
+      <Counter />
+      <HelpThePeopleInNeedAbut />
+      <PopularCampaignsAbout />
+      <AboutTestimonials />
+      <CallNow />
+      {/* <DonationProcessAbout /> */}
+      <TeamMember />
+    </main>
   );
 };
 

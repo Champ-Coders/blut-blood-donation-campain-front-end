@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import { FaPhone, FaLocationDot, FaEnvelope } from "react-icons/fa6";
-import { SubmitHandler, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import InputField from "../InputField/InputField";
 import Link from "next/link";
 import MultiSelect from "../MultiSelector/MultiSelector";
@@ -28,45 +28,40 @@ const Register = () => {
       email: data?.email,
       phoneNumber: data?.phoneNumber,
       password: data?.password,
-      bloodGroup: data?.bloodGroup.name,
+      bloodGroup: data?.bloodGroup?.name,
       dateOfBirth: data?.dateOfBirth,
       address: data?.address,
     };
-    console.log(registrationData);
+    // console.log(registrationData);
     try {
       const response = await userRegister(registrationData).unwrap();
 
       if (response?.success) {
         message.success(response.message);
-        router.push("/dashboard");
+        router.push("/profile");
       } else {
         message.error(response.message);
       }
     } catch (error: any) {
-      console.log(error);
-      message.error(error?.data?.message);
+      // console.log(error);
+
+      if (error?.data?.errorMessages) {
+        message.error(error?.data?.errorMessages[0]?.message);
+      } else if (error?.data?.message) {
+        message.error(error?.data?.message);
+      }
     }
   };
   return (
     <div className="py-10 px-10 sm:px-24 mb-48">
       <div className="container mx-auto py-6 sm:py-12 px-0 sm:px-7 md:px-16 max-w-6xl flex justify-between lg:flex-row items-center gap-5 sm:gap-12 flex-col-reverse">
-        <div className="lg:w-1/2 w-full shadow-sm shadow-[rgba(0,0,0,0.1)] bg-white p-4 lg:p-8">
+        <div className="lg:w-1/2 w-full shadow-sm shadow-[rgba(0,0,0,0.1)] bg-white p-4 lg:p-8 border rounded-lg">
           <form className="block w-full" onSubmit={handleSubmit(onSubmit)}>
             <div className="flex w-full sm:flex-row flex-col mb-4 justify-between items-center gap-3 sm:gap-6">
               <InputField
                 placeholder="Your Name"
+                label="Your Name"
                 name={"name"}
-                type="text"
-                register={register}
-                required
-                errors={errors}
-              />
-            </div>
-            {/* Phone */}
-            <div className="w-full mb-3 sm:mb-6">
-              <InputField
-                placeholder="Enter Your Phone Number"
-                name={"phoneNumber"}
                 type="text"
                 register={register}
                 required
@@ -77,8 +72,21 @@ const Register = () => {
             <div className="w-full mb-3 sm:mb-6">
               <InputField
                 placeholder="Enter Your Email"
+                label="Your Email Address"
                 name={"email"}
                 type="email"
+                register={register}
+                required
+                errors={errors}
+              />
+            </div>
+            {/* Phone */}
+            <div className="w-full mb-3 sm:mb-6">
+              <InputField
+                placeholder="Enter Your Phone Number"
+                name={"phoneNumber"}
+                label="Your Phone Number"
+                type="text"
                 register={register}
                 required
                 errors={errors}
@@ -88,6 +96,7 @@ const Register = () => {
             <div className="w-full mb-3 sm:mb-6">
               <InputField
                 placeholder="Enter Your Password"
+                label="Your Password"
                 name={"password"}
                 type="text"
                 register={register}
@@ -102,6 +111,7 @@ const Register = () => {
               <div className="flex w-full sm:flex-row flex-col mb-1 sm:mb-4 justify-between items-center gap-3 sm:gap-6">
                 <InputField
                   placeholder="Enter Your Date Of Birth"
+                  label="Your Date Of Birth"
                   name={"dateOfBirth"}
                   type="date"
                   register={register}
@@ -116,6 +126,7 @@ const Register = () => {
               <div className="flex w-full sm:flex-row flex-col mb-1 sm:mb-4 justify-between items-center gap-3 sm:gap-6">
                 <InputField
                   placeholder="Enter Your Address"
+                  label="Your Address"
                   name={"address"}
                   type="text"
                   register={register}
@@ -131,6 +142,7 @@ const Register = () => {
               <div className="flex w-full sm:flex-row flex-col mb-1 sm:mb-4 justify-between items-center gap-3 sm:gap-6">
                 <MultiSelect
                   placeholder="Blood Group"
+                  label="Select Your Blood Group"
                   name={"bloodGroup"}
                   options={blood_groups}
                   isMulti={false}
@@ -146,7 +158,7 @@ const Register = () => {
                 className="relative w-full rounded px-5 py-2 overflow-hidden group bg-primary  hover:bg-black text-white transition-all ease-out duration-300"
               >
                 <span className="absolute right-0 w-8 h-32 -mt-12 transition-all duration-1000 transform translate-x-10 bg-white opacity-10 rotate-12 group-hover:-translate-x-[550px] ease"></span>
-                <span className="relative">Submit</span>
+                <span className="relative">Sign Up</span>
               </button>
 
               <p className="text-gray-400 text-sm pt-4 text-center">
@@ -161,11 +173,11 @@ const Register = () => {
 
         <div className="lg:w-1/2 lg:text-start text-center w-full">
           <p className="text-lg mb-4 font-bold text-primary">Register</p>
-          <h2 className="text-3xl font-bold font-poppins">
+          <h2 className="text-3xl font-bold font-playfair">
             {" "}
             Join Us, Save Lives. Connecting Communities through Blood Donation.
           </h2>
-          <p className="py-2">
+          <p className="py-2 text-gray-500 text-[14px]">
             Every drop of blood is a lifeline waiting to be extended. By
             donating blood, you become a beacon of hope, a silent hero, and a
             lifeline for those in need.{" "}

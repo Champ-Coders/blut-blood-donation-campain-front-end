@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { Fragment } from "react";
 import Logo from "../../../../public/assets/logo-light.png";
 import userIcon from "../../../../public/assets/icon/userIcon.png";
 import Image from "next/image";
@@ -10,12 +10,33 @@ import Link from "next/link";
 import Drawers from "@/components/Drawer/Drawer";
 import { useUserProfileQuery } from "@/redux/Api/authApi/AuthApi";
 
-const MainHeader = () => {
-  const [open, setOpen] = React.useState(false);;
+import { Disclosure, Menu, Transition } from "@headlessui/react";
+import { logout } from "@/utils/local-storage";
+import { Badge, message } from "antd";
+import { useRouter } from "next/navigation";
+import { FaRegBell } from "react-icons/fa";
 
-  const {data} = useUserProfileQuery(null)
-  const userInfo = data?.data
+const MainHeader = () => {
+  const [open, setOpen] = React.useState(false);
+
+  const { data } = useUserProfileQuery(null);
+  const userInfo = data?.data;
+
+  function classNames(...classes: any) {
+    return classes.filter(Boolean).join(" ");
+  }
+
   // console.log(userInfo);
+
+  //! SignOut  section
+  const router = useRouter();
+
+  const SignOutHandler = () => {
+    logout();
+    message.error("Successfully Sign Out");
+    window.location.reload();
+    router.push("/");
+  };
 
   return (
     <div className=" items-center grid md:grid-cols-5 grid-cols-3 shadow justify-between bg-white">
@@ -46,11 +67,82 @@ const MainHeader = () => {
 
         {/* login button  */}
         {userInfo?.email ? (
-          <Link href="/dashboard" className=" px-5 py-2 ">
-            {/* <UserOutlined   className="text-[2rem] p-4" />
-             */}
-             <Image src={userIcon} height={40} width={40} alt="userIcon" />
-          </Link>
+          <div className="hidden lg:ml-4 lg:flex items-center gap-2">
+            <Badge count={99}>
+              <button
+                type="button"
+                className="flex-shrink-0 rounded-full bg-white p-1 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+              >
+                <span className="sr-only">View notifications</span>
+                <FaRegBell className="h-6 w-6" aria-hidden="true" />
+              </button>
+            </Badge>
+            <Menu as="div" className="relative ml-4 flex-shrink-0">
+              <div>
+                <Menu.Button className="flex rounded-full bg-white text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2">
+                  <span className="sr-only">Open user menu</span>
+                  <Image
+                    height={50}
+                    width={50}
+                    className="h-8 w-8 rounded-full"
+                    src={userIcon}
+                    alt="user"
+                  />
+                </Menu.Button>
+              </div>
+              <Transition
+                as={Fragment}
+                enter="transition ease-out duration-100"
+                enterFrom="transform opacity-0 scale-95"
+                enterTo="transform opacity-100 scale-100"
+                leave="transition ease-in duration-75"
+                leaveFrom="transform opacity-100 scale-100"
+                leaveTo="transform opacity-0 scale-95"
+              >
+                <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                  <Menu.Item>
+                    {({ active }) => (
+                      <Link
+                        href="/profile"
+                        className={classNames(
+                          active ? "bg-gray-100" : "",
+                          "block px-4 py-2 text-sm text-gray-700"
+                        )}
+                      >
+                        Your Profile
+                      </Link>
+                    )}
+                  </Menu.Item>
+                  <Menu.Item>
+                    {({ active }) => (
+                      <a
+                        href="#"
+                        className={classNames(
+                          active ? "bg-gray-100" : "",
+                          "block px-4 py-2 text-sm text-gray-700"
+                        )}
+                      >
+                        Settings
+                      </a>
+                    )}
+                  </Menu.Item>
+                  <Menu.Item>
+                    {({ active }) => (
+                      <button
+                        onClick={SignOutHandler}
+                        className={classNames(
+                          active ? "bg-gray-100" : "",
+                          "block px-4 py-2 text-sm text-gray-700  hover:bg-primary  hover:text-white  mb-0"
+                        )}
+                      >
+                        Sign out
+                      </button>
+                    )}
+                  </Menu.Item>
+                </Menu.Items>
+              </Transition>
+            </Menu>
+          </div>
         ) : (
           <Link href={"/login"}>
             <button className="bg-primary text-white px-5 py-2 rounded-lg border-2 border-primary hover:bg-white hover:text-primary">

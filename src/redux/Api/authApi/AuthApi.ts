@@ -3,6 +3,7 @@ import {
   setToLocalStorage,
 } from "./../../../utils/local-storage";
 import { api } from "../api";
+import { tagTypes } from "../tagsType";
 
 const AUTH_URL = "/users";
 
@@ -48,6 +49,32 @@ export const authAPi = api.injectEndpoints({
         };
       },
     }),
+    // ! change password
+    changePassword: build.mutation({
+      query: (passwordData) => ({
+        url: `${AUTH_URL}/change-password`,
+        method: "PATCH",
+        body: passwordData,
+        headers: {
+          Authorization: `${getFromLocalStorage("user")}`,
+        },
+      }),
+    }),
+    getAllUsers: build.query({
+      query: (data) => ({
+        url: `${AUTH_URL}/all-users`,
+        method: "GET",
+        params: data,
+      }),
+      providesTags: [tagTypes.user],
+    }),
+    changeRoleByAdmin: build.mutation({
+      query: (data) => ({
+        url: `${AUTH_URL}/change-role/${data}`,
+        method: "PATCH",
+      }),
+      invalidatesTags: [tagTypes.user],
+    }),
   }),
 });
 
@@ -55,4 +82,7 @@ export const {
   useUserLoginMutation,
   useUserRegisterMutation,
   useUserProfileQuery,
+  useChangePasswordMutation,
+  useGetAllUsersQuery,
+  useChangeRoleByAdminMutation,
 } = authAPi;
