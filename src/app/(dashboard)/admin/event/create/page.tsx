@@ -4,6 +4,7 @@ import InputField from "@/components/InputField/InputField";
 import TextAreaField from "@/components/TextAreaField/TextAreaField";
 import ActionBar from "@/components/UI/ActionBar";
 import Breadcrumb from "@/components/UI/BreadCrumb";
+import UploaderImage from "@/components/Uploader/UploaderImage";
 import config from "@/config/config";
 import { uploadImageBB } from "@/hooks/ImgbbUploader";
 import { useAddEventMutation } from "@/redux/Api/eventApi";
@@ -25,26 +26,28 @@ const CreateEvent = () => {
     register,
     reset,
     formState: { errors },
+    setValue,
   } = useForm();
 
   const onSubmit = async (data: any) => {
-    // console.log(data);
-    const { image, banner, ...others } = data;
-    // const image = data.image[0];
-    const imageUrl = await uploadImageBB(image[0]);
-    const bannerUrl = await uploadImageBB(banner[0]);
-    // console.log(imageUrl,bannerUrl);
+    console.log(data);
+    // const { image, banner, ...others } = data;
+    // // const image = data.image[0];
+    // const imageUrl = await uploadImageBB(image[0]);
+    // const bannerUrl = await uploadImageBB(banner[0]);
+    // // console.log(imageUrl,bannerUrl);
 
-    const eventData = { image: imageUrl, banner: bannerUrl, ...others };
+    // const eventData = { image: imageUrl, banner: bannerUrl, ...others };
 
     // console.log(eventData);
 
     message.loading("Creating Event.....");
     try {
-      const res = await addEvent(eventData).unwrap();
-        // console.log(res);
+      const res = await addEvent(data).unwrap();
+      // console.log(res);
       if (res?.success) {
         message.success("Event created successfully");
+        reset();
       } else if (res?.error?.data) {
         message.error(res?.error?.data?.message);
       } else {
@@ -54,7 +57,6 @@ const CreateEvent = () => {
       console.log(err);
 
       if (err?.data?.errorMessages) {
-        
         message.error(err?.data?.errorMessages[0]?.message);
       } else if (err?.data?.message) {
         message.error(err?.data.message);
@@ -62,7 +64,6 @@ const CreateEvent = () => {
         message.error("Could not create the event");
       }
     }
-    // reset();
   };
 
   return (
@@ -100,23 +101,19 @@ const CreateEvent = () => {
             </div>
 
             <div className="my-[10px] md:max-w-md mx-0">
-              <InputField
-                name="image"
-                label="Event Image"
-                type="file"
-                register={register}
-                errors={errors}
-                required
-              />
+              <label className="text-[13px] leading-6 font-inter text-gray-400 font-semibold capitalize">
+                Upload Image
+              </label>
+              <UploaderImage name="image" setValue={setValue} />
             </div>
             <div className="my-[10px] md:max-w-md mx-0">
-              <InputField
+              <label className="text-[13px] leading-6 font-inter text-gray-400 font-semibold capitalize">
+                Upload Event Banner
+              </label>
+              <UploaderImage
                 name="banner"
-                label="Event Banner"
-                type="file"
-                register={register}
-                errors={errors}
-                required
+                // register={register}
+                setValue={setValue}
               />
             </div>
             <div className="my-[10px] md:max-w-md mx-0">
