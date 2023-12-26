@@ -31,7 +31,7 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
         >
           <SideMenuUI
             data={{
-              itemsData: dashboardItems(USER_ROLE.admin),
+              itemsData: dashboardItems(USER_ROLE.patient),
               mainCss: "bg-white",
               menuCss: "bg-slate-50 text-primary my-5 font-[600]",
               subMenuCss: "hover:bg-primary hover:text-white",
