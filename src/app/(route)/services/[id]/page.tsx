@@ -26,7 +26,7 @@ const ServiceDetail = (props: IProps) => {
         />
       </section>
       <section>
-        <div className="common">
+        <div className="common ">
           <div className="grid grid-cols-1 md:grid-cols-6 lg:grid-cols-12 gap-5 md:gap-8">
             <div className="grid-cols-1 md:col-span-3 lg:col-span-8">
               <div>
@@ -84,7 +84,7 @@ const ServiceDetail = (props: IProps) => {
         </div>
       </section>
     </main>
-
-  )}
+  );
+};
 
 export default ServiceDetail;
