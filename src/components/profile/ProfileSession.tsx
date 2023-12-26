@@ -66,7 +66,7 @@ const ProfileSession = ({ userData }: { userData: IUser }) => {
       {sessionData.map((item, index) => {
         return (
           <div
-            className="flex items-center justify-between border-b py-4"
+            className="flex items-center justify-between border-t py-4"
             key={index}
           >
             <div className="flex items-center gap-2 text-[16px]">

@@ -49,11 +49,11 @@ const ProfileNotification = ({ userData }: { userData: IUser }) => {
         Choose how you receive notifications. These notification settings apply
         to the things you’re watching.
       </p>
-      
-      <div className="flex items-center justify-between border-b py-4">
-        <h3 className="text-[16px]">Activity</h3>
 
-        <div className="text-[#8690A5] flex justify-between gap-7">
+      <div className="flex items-center justify-between border-b py-4">
+        <h3 className="text-[16px] font-[550] text-[#26282cf6]">Activity</h3>
+
+        <div className="text-[#26282cf6] flex justify-between gap-7">
           <h1>Email</h1>
           <h1>Push</h1>
           <h1>SMS</h1>
@@ -64,11 +64,17 @@ const ProfileNotification = ({ userData }: { userData: IUser }) => {
       {notificationData.map((item, index) => {
         return (
           <div
-            className="flex items-center justify-between border-b py-4"
+            className="flex items-center justify-between border-b py-2"
             key={index}
           >
             <div className="flex flex-col justify-start items-start gap-2 ">
-              <h3 className="text-[16px]">{item?.activity}</h3>
+              <h3
+                className={`text-[16px] font-[550] text-[#26282cf6] ${
+                  item?.details || "text-[#8690A5] text-[14px]"
+                }`}
+              >
+                {item?.activity}
+              </h3>
               <p className="text-[#8690A5] text-[14px]">{item?.details}</p>
             </div>
             <div className="text-[#8690A5] flex gap-2">

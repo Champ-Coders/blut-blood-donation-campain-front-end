@@ -13,6 +13,7 @@ import ProfileAside from "@/components/profile/ProfileAside";
 import ProfileAuthentication from "@/components/profile/ProfileAuthentication";
 import ProfileAccount from "@/components/profile/ProfileAccount";
 import ProfileNotification from "@/components/profile/ProfileNotification";
+import ProfileDeleteAccount from "@/components/profile/ProfileDeleteAccount";
 
 export default function ProfilePage() {
   const { data } = useUserProfileQuery(null);
@@ -35,6 +36,7 @@ export default function ProfilePage() {
             <ChangePasswordPage />
           </div>
           <ProfileSession userData={userData}></ProfileSession>
+          <ProfileDeleteAccount userData={userData}></ProfileDeleteAccount>
         </div>
       </section>
     </div>
