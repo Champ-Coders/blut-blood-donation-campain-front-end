@@ -1,11 +1,5 @@
 import React from "react";
-import {
-  ChromeOutlined,
-  PhoneOutlined,
-  MobileOutlined,
-  LaptopOutlined,
-  ArrowRightOutlined,
-} from "@ant-design/icons";
+
 import { IUser } from "@/interfaces/common";
 
 const sessionData: {
@@ -33,7 +27,7 @@ const sessionData: {
 
 const ProfileAuthentication = ({ userData }: { userData: IUser }) => {
   return (
-    <div className="w-full flex flex-col gap-4 mt-8 px-5 shadow-x py-3 bg-white shadow-md rounded-md">
+    <div className="w-full flex flex-col gap-4 mt-8 px-5 shadow-x py-5 bg-white shadow-md rounded-md">
       <section className="flex justify-between items-center">
         <h2 className="text-xl mb-4 font-bold text-slate-700">
           Two-factor authentication

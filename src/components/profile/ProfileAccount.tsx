@@ -57,7 +57,7 @@ const accountData: {
 
 const ProfileAccount = ({ userData }: { userData: IUser }) => {
   return (
-    <div className="w-full flex flex-col gap-4 mt-8 px-5 shadow-x py-3 bg-white shadow-md rounded-md">
+    <div className="w-full flex flex-col gap-4 mt-8 px-5 shadow-x py-5 bg-white shadow-md rounded-md">
       <h2 className="text-xl mb-4 font-bold text-slate-700">Accounts</h2>
 
       <p className="text-[#8690A5] text-[16px]">

@@ -12,6 +12,7 @@ import ProfileSession from "@/components/profile/ProfileSession";
 import ProfileAside from "@/components/profile/ProfileAside";
 import ProfileAuthentication from "@/components/profile/ProfileAuthentication";
 import ProfileAccount from "@/components/profile/ProfileAccount";
+import ProfileNotification from "@/components/profile/ProfileNotification";
 
 export default function ProfilePage() {
   const { data } = useUserProfileQuery(null);
@@ -29,7 +30,7 @@ export default function ProfilePage() {
           <PersonalInfo userData={userData}></PersonalInfo>
           <ProfileAuthentication userData={userData} />
           <ProfileAccount userData={userData}></ProfileAccount>
-
+          <ProfileNotification userData={userData}></ProfileNotification>
           <div className="  my-2 sm:rounded-lg w-full ">
             <ChangePasswordPage />
           </div>
