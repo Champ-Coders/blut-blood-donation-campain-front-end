@@ -4,12 +4,18 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { IoIosArrowForward } from "react-icons/io";
 
+import { Noto_Sans_Bengali } from "next/font/google";
+
+const bengali = Noto_Sans_Bengali({ subsets: ["latin"] });
+
 import Slider from "react-slick";
 import { LuPhoneIncoming } from "react-icons/lu";
 import Image from "next/image";
 import Link from "next/link";
 import { IPerson } from "@/interfaces/common";
 import DonateCart from "../DonateList/DonateCart";
+
+import bg from "../../../public/assets/list blood donar/bg.jpg";
 
 type ListOfHonorableBloodDonorsProps = {};
 
@@ -110,7 +116,7 @@ const ListOfHonorableBloodDonors: React.FC<
   return (
     <section className="bg-[#f5f5f5]">
       <div className="common">
-        <div className="text-center mb-5 sm:mb-10">
+        <div className="text-center mb-5 sm:mb-20">
           <h3 className="text-base sm:text-xl text-primary font-medium mb-3 uppercase">
             DONATE NOW
           </h3>
@@ -118,10 +124,12 @@ const ListOfHonorableBloodDonors: React.FC<
             List of Honorable Blood Donors
           </h1>
         </div>
-        <div className="grid grid-cols-12 gap-10">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
           <div className="col-span-4">
-            <h4 className="text-xl font-bold mb-5 text-[#111] leading-normal">
-              Supreme blood donor
+            <h4
+              className={`${bengali.className} text-xl font-bold mb-5 text-[#111] leading-normal`}
+            >
+              সর্বোচ্চ রক্তদাতা
             </h4>
             <Slider {...settings}>
               {people.map((person) => (
@@ -130,8 +138,10 @@ const ListOfHonorableBloodDonors: React.FC<
             </Slider>
           </div>
           <div className="col-span-4">
-            <h4 className="text-xl font-bold mb-5 text-[#111] leading-normal">
-              Silver Club Member
+            <h4
+              className={`${bengali.className} text-xl font-bold mb-5 text-[#111] leading-normal`}
+            >
+              সিলভার ক্লাব মেম্বার
             </h4>
             <Slider {...settings}>
               {people.map((person) => (
@@ -140,8 +150,17 @@ const ListOfHonorableBloodDonors: React.FC<
             </Slider>
           </div>
           <div className="col-span-4">
-            <div className="bg-primary text-white p-5 ">
-              <h4 className="text-xl flex gap-4 flex-col mb-5">
+            <div
+              style={{
+                backgroundImage: `url(${bg.src})`,
+                backgroundRepeat: "no-repeat",
+                width: "100%",
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+              }}
+              className=" text-white rounded-md  p-5 md:px-10"
+            >
+              <h4 className="text-xl flex gap-5 flex-col mb-5">
                 <span>
                   Quantum is the lifeblood of voluntary blood donation programs
                 </span>
@@ -152,14 +171,28 @@ const ListOfHonorableBloodDonors: React.FC<
               <div>
                 {donateValue.map((donate) => (
                   <Link key={donate.id} href={`/donate-list`}>
-                    <div className="p-1 mb-2 bg-white flex items-center  gap-3 justify-between rounded-tl-[50px] rounded-bl-[50px] rounded-[50px 0 0 50px] ">
-                      <div className="flex gap-5 items-center">
-                        <p className="w-[50px] flex items-center justify-center h-[50px] bg-primary rounded-full">
-                          {donate.key}
-                        </p>
-                        <p className="text-[#111]">{donate.value}</p>
+                    <div className="">
+                      <div
+                        className="w-full h-full relative items-center justify-start overflow-hidden transition-all bg-white rounded hover:bg-white group 
+                      
+                      p-1 mb-2  flex  gap-3 rounded-tl-[50px] rounded-bl-[50px] 
+                      
+                      "
+                      >
+                        {/* purple box */}
+                        <div className="w-0 h-0 rounded rounded-tl-[50px] rounded-bl-[50px]  bg-[#111] absolute top-0 left-0 ease-out duration-500 transition-all group-hover:w-full group-hover:h-full -z-1"></div>
+                        <div className="w-full text-wite transition-colors duration-300 ease-in-out group-hover:text-primary z-10 flex justify-between items-center ">
+                          <div className="flex gap-5 items-center">
+                            <p className="w-[50px] flex items-center justify-center h-[50px] bg-primary group-hover:bg-white rounded-full">
+                              {donate.key}
+                            </p>
+                            <p className="text-[#111] group-hover:text-white">
+                              {donate.value}
+                            </p>
+                          </div>
+                          <IoIosArrowForward className="text-[#111] group-hover:text-white" />
+                        </div>
                       </div>
-                      <IoIosArrowForward className="text-[#111]" />
                     </div>
                   </Link>
                 ))}
