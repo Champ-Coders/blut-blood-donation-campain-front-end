@@ -1,8 +1,6 @@
 "use client";
-
 import InputField from "@/components/InputField/InputField";
 import ReactQuillText from "@/components/ReactQuill/ReactQuill";
-import TextAreaField from "@/components/TextAreaField/TextAreaField";
 import ActionBar from "@/components/UI/ActionBar";
 import Breadcrumb from "@/components/UI/BreadCrumb";
 import config from "@/config/config";
@@ -16,7 +14,7 @@ const CreateBlog = () => {
   const userData = getUserDataFromLC() as any;
   const [description, setDescription] = useState("");
 
-  const [addBlog] = useAddBlogMutation();
+  const [addBlog, { isLoading }] = useAddBlogMutation();
 
   const {
     handleSubmit,
@@ -83,15 +81,7 @@ const CreateBlog = () => {
                 required
               />
             </div>
-            {/* <div className="my-[10px] md:max-w-3xl mx-0">
-              <TextAreaField
-                name="description"
-                register={register}
-                errors={errors}
-                label="Description"
-                required
-              />
-            </div> */}
+
             <div className="my-[10px] md:max-w-3xl mx-0">
               <ReactQuillText
                 label="Description"
@@ -113,7 +103,12 @@ const CreateBlog = () => {
             </div>
           </div>
 
-          <Button className="mt-2" type="primary" htmlType="submit">
+          <Button
+            className="mt-2"
+            type="primary"
+            htmlType="submit"
+            loading={isLoading}
+          >
             Create Blog
           </Button>
         </form>

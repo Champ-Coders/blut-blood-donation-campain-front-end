@@ -1,13 +1,13 @@
 import { jwtDecode } from "jwt-decode";
 export const setToLocalStorage = (key: string, token: string) => {
-  if (!key || typeof window === "undefined") {
+  if (!key && typeof window === "undefined") {
     return "";
   }
   return localStorage.setItem(key, token);
 };
 
 export const getFromLocalStorage = (key: string) => {
-  if (!key || typeof window === "undefined") {
+  if (!key && typeof window === "undefined") {
     return "";
   }
   return localStorage.getItem(key);
@@ -23,7 +23,7 @@ export const getUserDataFromLC = (): IUserInfo | null => {
 
   // console.log(token,"token of lc");
 
-  if (token) {
+  if (token && typeof window !== "undefined") {
     const userInfo: IUserInfo = jwtDecode(token);
     return userInfo;
   }
@@ -31,13 +31,12 @@ export const getUserDataFromLC = (): IUserInfo | null => {
 };
 
 export const removeFromLocalStorage = (key: string) => {
-  if (!key || typeof window === "undefined") {
+  if (!key && typeof window === "undefined") {
     return;
   }
   localStorage.removeItem(key);
 };
 
-
 export const logout = () => {
-  removeFromLocalStorage("user"); // Assuming "user" is the key for the authentication 
+  removeFromLocalStorage("user"); // Assuming "user" is the key for the authentication
 };
