@@ -24,7 +24,7 @@ export default function ProfilePage() {
     <div className="bg-slate-100">
       <ProfileTopSection userData={userData} />
 
-      <section className="block lg:flex justify-between items-start gap-3">
+      <section className="block lg:flex justify-between items-start gap-3 relative px-5">
         <ProfileAside userData={userData} />
         {/* //! Right Section */}
         <div className="w-full lg:w-[70%] flex flex-col  items-center ">

@@ -19,7 +19,7 @@ export const dashboardItems = (role: USER_ROLE) => {
   // ! common sidebar for every user
   const defaultSidebarItems: MenuProps["items"] = [
     {
-      label: <button className="bg-red-600">Profile</button>,
+      label: <button className="bg-red-60">Profile</button>,
       key: "profile",
       icon: (
         <UserSwitchOutlined
