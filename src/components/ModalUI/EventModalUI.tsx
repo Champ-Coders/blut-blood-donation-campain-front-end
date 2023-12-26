@@ -6,6 +6,7 @@ import { useUpdateEventMutation } from "@/redux/Api/eventApi";
 import { Button, Modal, message } from "antd";
 import TextAreaField from "../TextAreaField/TextAreaField";
 import { uploadImageBB } from "@/hooks/ImgbbUploader";
+import UploaderImage from "../Uploader/UploaderImage";
 
 const EventModalUI = ({
   modalId,
@@ -25,6 +26,7 @@ const EventModalUI = ({
     register,
     reset,
     formState: { errors },
+    setValue,
   } = useForm();
 
   // console.log(editEvent);
@@ -38,18 +40,18 @@ const EventModalUI = ({
   const [updateEvent] = useUpdateEventMutation();
 
   const onSubmit = async (data: any) => {
-    const { image, banner, ...others } = data;
-    // const image = data.image[0];
-    // console.log(data);
+    // const { image, banner, ...others } = data;
+    // // const image = data.image[0];
+    // // console.log(data);
 
-    let updateImage = editEvent.image;
-    if (typeof image !== "string") {
-      updateImage = await uploadImageBB(image[0]);
-    }
-    let updateBanner = editEvent.banner;
-    if (typeof banner !== "string") {
-      updateBanner = await uploadImageBB(banner[0]);
-    }
+    // let updateImage = editEvent.image;
+    // if (typeof image !== "string") {
+    //   updateImage = await uploadImageBB(image[0]);
+    // }
+    // let updateBanner = editEvent.banner;
+    // if (typeof banner !== "string") {
+    //   updateBanner = await uploadImageBB(banner[0]);
+    // }
 
     // if (typeof banner !== "string") {
     //   banner = await uploadImageBB(banner[0]);
@@ -61,12 +63,13 @@ const EventModalUI = ({
     const updateData = {
       title: data?.title || editEvent?.title,
       description: data?.description || editEvent?.description,
-      image: updateImage,
-      banner: updateBanner,
+      image: data?.image || editEvent?.image,
+      banner: data?.banner || editEvent?.banner,
       event_time: data?.event_time || editEvent?.event_time,
       event_date: data?.event_date || editEvent?.event_date,
       location: data?.location || editEvent?.location,
-    };
+    }
+
     // console.log(updateData);
 
     message.loading("Updating Event.....");
@@ -77,7 +80,7 @@ const EventModalUI = ({
       }).unwrap();
       if (res?.success) {
         message.success("Event updated successfully");
-        setIsModalOpen(false)
+        setIsModalOpen(false);
       } else if (res?.error?.data) {
         message.error(res?.error?.data?.message);
       } else {
@@ -96,6 +99,8 @@ const EventModalUI = ({
     }
     // reset();
   };
+
+  console.log(editEvent);
 
   return (
     <Modal
@@ -132,24 +137,27 @@ const EventModalUI = ({
           </div>
 
           <div className="my-[10px] md:max-w-md mx-0">
-            <InputField
+            <label className="text-[13px] leading-6 font-inter text-gray-400 font-semibold capitalize">
+              Upload Event Image
+            </label>
+            <UploaderImage
               name="image"
-              label="Event Image"
-              type="file"
-              register={register}
-              // defaultValue={editEvent?.image}
-              errors={errors}
-              // required
+              // register={register}
+
+              setValue={setValue}
+              defaultValue={editEvent?.image}
             />
           </div>
           <div className="my-[10px] md:max-w-md mx-0">
-            <InputField
+            <label className="text-[13px] leading-6 font-inter text-gray-400 font-semibold capitalize">
+              Upload Event Banner
+            </label>
+            <UploaderImage
               name="banner"
-              label="Event Banner"
-              type="file"
-              register={register}
-              errors={errors}
-              // required
+              // defaultValue
+              // register={register}
+              defaultValue={editEvent?.banner}
+              setValue={setValue}
             />
           </div>
           <div className="my-[10px] md:max-w-md mx-0">
