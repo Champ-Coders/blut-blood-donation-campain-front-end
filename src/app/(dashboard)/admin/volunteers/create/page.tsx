@@ -16,7 +16,7 @@ const CreateVolunteer = () => {
     register,
     reset,
     formState: { errors },
-    setValue
+    setValue,
   } = useForm();
 
   const onSubmit = async (data: any) => {
@@ -24,10 +24,10 @@ const CreateVolunteer = () => {
       name: data.name,
       designation: data.designation,
       image: data.image,
-      facebook:data.facebook,
-      linkedin:data.linkedin,
-      github:data.github,
-      instagram:data.instagram,
+      facebook: data.facebook,
+      linkedin: data.linkedin,
+      github: data.github,
+      instagram: data.instagram,
     };
 
     message.loading("Creating Volunteer.....");
@@ -55,11 +55,18 @@ const CreateVolunteer = () => {
       <ActionBar title="Create Volunteer">
         <form className="block w-full" onSubmit={handleSubmit(onSubmit)}>
           <div className="w-full">
+            <div className="my-[10px] md:max-w-md mx-0">
+              <label className="text-[13px] leading-6 font-inter text-gray-400 font-semibold capitalize">
+                Upload Image
+              </label>
+              <UploaderImage name="image" setValue={setValue} />
+            </div>
             <div className="my-[10px]  md:max-w-md mx-0">
               <InputField
                 name="name"
                 label="Name"
                 type="text"
+                placeholder="Enter Name"
                 register={register}
                 errors={errors}
                 required
@@ -70,22 +77,19 @@ const CreateVolunteer = () => {
                 name="designation"
                 label="Designation"
                 type="text"
+                placeholder="Enter Designation"
                 register={register}
                 errors={errors}
                 required
               />
             </div>
-            <div className="my-[10px] md:max-w-md mx-0">
-            <label className="text-[13px] leading-6 font-inter text-gray-400 font-semibold capitalize">
-                Upload Image
-              </label>
-              <UploaderImage name="image" setValue={setValue} />
-            </div>
+
             <div className="my-[10px]  md:max-w-md mx-0">
               <InputField
                 name="facebook"
                 label="Facebook Link"
                 type="text"
+                placeholder="Enter Facebook Link"
                 register={register}
                 errors={errors}
                 required
@@ -96,6 +100,7 @@ const CreateVolunteer = () => {
                 name="linkedin"
                 label="Linkedin Link"
                 type="text"
+                placeholder="Enter Linkedin Link"
                 register={register}
                 errors={errors}
                 required
@@ -106,6 +111,7 @@ const CreateVolunteer = () => {
                 name="github"
                 label="Github Link"
                 type="text"
+                placeholder="Enter Github Link"
                 register={register}
                 errors={errors}
                 required
@@ -116,6 +122,7 @@ const CreateVolunteer = () => {
                 name="instagram"
                 label="Instagram Link"
                 type="text"
+                placeholder="Enter Instagram Link"
                 register={register}
                 errors={errors}
                 required

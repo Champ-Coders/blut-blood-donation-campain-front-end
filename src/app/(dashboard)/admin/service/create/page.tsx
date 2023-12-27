@@ -59,6 +59,12 @@ const CreateService = () => {
       <ActionBar title="Create Service">
         <form className="block w-full" onSubmit={handleSubmit(onSubmit)}>
           <div className="w-full">
+            <div className="my-[10px] md:max-w-md mx-0">
+              <label className="text-[13px] leading-6 font-inter text-gray-400 font-semibold capitalize">
+                Upload Image
+              </label>
+              <UploaderImage name="image" setValue={setValue} />
+            </div>
             <div className="my-[10px]  md:max-w-md mx-0">
               <InputField
                 name="title"
@@ -76,12 +82,6 @@ const CreateService = () => {
                 setValue={setDescription}
                 value={description}
               />
-            </div>
-            <div className="my-[10px] md:max-w-md mx-0">
-              <label className="text-[13px] leading-6 font-inter text-gray-400 font-semibold capitalize">
-                Upload Image
-              </label>
-              <UploaderImage name="image" setValue={setValue} />
             </div>
           </div>
 
