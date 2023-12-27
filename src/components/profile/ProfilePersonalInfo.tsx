@@ -1,8 +1,23 @@
+"use client";
 import { IUser } from "@/interfaces/common";
-import React from "react";
+import { Button } from "antd";
+import React, { useState } from "react";
+import ProfileUpdateModalUI from "../ModalUI/ProfileModal";
 
 const PersonalInfo = ({ userData }: { userData: IUser }) => {
-//   console.log(userData);
+
+  const [UserId, setUserId] = useState<string>("");
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [editUser, setEditUser] = useState({
+    title: "",
+    description: "",
+    banner: "",
+    image: "",
+    User_time: "",
+    User_date: "",
+    location: "",
+  });
+  //   console.log(userData);
   const formattedDate = new Date(userData?.dateOfBirth).toLocaleDateString(
     "en-US",
     { day: "2-digit", month: "long", year: "numeric" }
@@ -10,13 +25,43 @@ const PersonalInfo = ({ userData }: { userData: IUser }) => {
   return (
     <div className="max-w-full  mx-1 lg:mx-auto my-5  overflow-hidden sm:rounded-lg bg-white shadow-md">
       <div className="px-4 py-5 sm:px-6 ">
-        <h3 className="text-xl leading-6 font-medium text-gray-900">
-          Personal Information
-        </h3>
+        <div className="flex justify-between">
+          <h3 className="text-xl leading-6 font-medium text-gray-900">
+            Personal Information
+          </h3>
+
+          <Button
+            className="mr-[6px]"
+            onClick={() => {
+              // setUserId(selectedUser._id);
+              // setEditUser({
+              //   title: selectedUser?.title,
+              //   description: selectedUser?.description,
+              //   banner: selectedUser?.banner,
+              //   image: selectedUser?.image,
+              //   User_time: selectedUser?.User_time,
+              //   User_date: selectedUser?.User_date,
+              //   location: selectedUser?.location,
+              // });
+              // setIsModalOpen(true);
+            }}
+            type="default"
+          >
+            Update Profile
+          </Button>
+        </div>
         <p className="mt-1 max-w-2xl text-sm text-gray-500">
           Details and informations about user.
         </p>
       </div>
+
+      <ProfileUpdateModalUI
+        modalId={UserId}
+        setIsModalOpen={setIsModalOpen}
+        isModalOpen={isModalOpen}
+        editUser={editUser}
+        setEditUser={setEditUser}
+      ></ProfileUpdateModalUI>
       <div className="border-t border-gray-200">
         <dl>
           <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">

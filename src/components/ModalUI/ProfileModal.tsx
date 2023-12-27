@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import InputField from "../InputField/InputField";
 import { useForm } from "react-hook-form";
-import { useUpdateEventMutation } from "@/redux/Api/eventApi";
+
 import { Button, Modal, message } from "antd";
 import TextAreaField from "../TextAreaField/TextAreaField";
 import { uploadImageBB } from "@/hooks/ImgbbUploader";
@@ -13,14 +13,14 @@ const ProfileUpdateModalUI = ({
   modalId,
   isModalOpen,
   setIsModalOpen,
-  editEvent,
-  setEditEvent,
+  editUser,
+  setEditUser,
 }: {
   modalId: string;
   isModalOpen: any;
   setIsModalOpen: any;
-  editEvent: any;
-  setEditEvent: any;
+  editUser: any;
+  setEditUser: any;
 }) => {
   const {
     handleSubmit,
@@ -32,26 +32,26 @@ const ProfileUpdateModalUI = ({
 
   const [description, setDescription] = useState("");
 
-  // console.log(editEvent);
+  // console.log(editUser);
 
   useEffect(() => {
     if (isModalOpen) {
-      reset(editEvent);
+      reset(editUser);
     }
-  }, [editEvent, isModalOpen, reset]);
+  }, [editUser, isModalOpen, reset]);
 
-  const [updateEvent] = useUpdateEventMutation();
+  const [updateUser] = use();
 
   const onSubmit = async (data: any) => {
     // const { image, banner, ...others } = data;
     // // const image = data.image[0];
     // // console.log(data);
 
-    // let updateImage = editEvent.image;
+    // let updateImage = editUser.image;
     // if (typeof image !== "string") {
     //   updateImage = await uploadImageBB(image[0]);
     // }
-    // let updateBanner = editEvent.banner;
+    // let updateBanner = editUser.banner;
     // if (typeof banner !== "string") {
     //   updateBanner = await uploadImageBB(banner[0]);
     // }
@@ -64,30 +64,30 @@ const ProfileUpdateModalUI = ({
     // console.log(updateImage, updateBanner);
 
     const updateData = {
-      title: data?.title || editEvent?.title,
-      description: description || editEvent?.description,
-      image: data?.image || editEvent?.image,
-      banner: data?.banner || editEvent?.banner,
-      event_time: data?.event_time || editEvent?.event_time,
-      event_date: data?.event_date || editEvent?.event_date,
-      location: data?.location || editEvent?.location,
+      title: data?.title || editUser?.title,
+      description: description || editUser?.description,
+      image: data?.image || editUser?.image,
+      banner: data?.banner || editUser?.banner,
+      User_time: data?.User_time || editUser?.User_time,
+      User_date: data?.User_date || editUser?.User_date,
+      location: data?.location || editUser?.location,
     };
 
     // console.log(updateData);
 
-    message.loading("Updating Event.....");
+    message.loading("Updating User.....");
     try {
-      const res = await updateEvent({
+      const res = await updateUser({
         id: modalId,
         body: { ...updateData },
       }).unwrap();
       if (res?.success) {
-        message.success("Event updated successfully");
+        message.success("User updated successfully");
         setIsModalOpen(false);
       } else if (res?.error?.data) {
         message.error(res?.error?.data?.message);
       } else {
-        message.error("Could not update the event");
+        message.error("Could not update the User");
       }
     } catch (err: any) {
       console.log(err);
@@ -97,17 +97,17 @@ const ProfileUpdateModalUI = ({
       } else if (err?.data?.message) {
         message.error(err?.data.message);
       } else {
-        message.error("Could not update the event");
+        message.error("Could not update the User");
       }
     }
     // reset();
   };
 
-  console.log(editEvent);
+  console.log(editUser);
 
   return (
     <Modal
-      title="Edit Event"
+      title="Edit User"
       open={isModalOpen}
       onOk={() => setIsModalOpen(false)}
       onCancel={() => setIsModalOpen(false)}
@@ -122,7 +122,7 @@ const ProfileUpdateModalUI = ({
               label="Title"
               type="text"
               register={register}
-              defaultValue={editEvent?.title}
+              defaultValue={editUser?.title}
               errors={errors}
               // required
             />
@@ -131,7 +131,7 @@ const ProfileUpdateModalUI = ({
             <InputField
               name="location"
               label="Location"
-              defaultValue={editEvent?.location}
+              defaultValue={editUser?.location}
               type="text"
               register={register}
               errors={errors}
@@ -141,46 +141,46 @@ const ProfileUpdateModalUI = ({
 
           <div className="my-[10px] md:max-w-md mx-0">
             <label className="text-[13px] leading-6 font-inter text-gray-400 font-semibold capitalize">
-              Upload Event Image
+              Upload User Image
             </label>
             <UploaderImage
               name="image"
               // register={register}
 
               setValue={setValue}
-              defaultValue={editEvent?.image}
+              defaultValue={editUser?.image}
             />
           </div>
           <div className="my-[10px] md:max-w-md mx-0">
             <label className="text-[13px] leading-6 font-inter text-gray-400 font-semibold capitalize">
-              Upload Event Banner
+              Upload User Banner
             </label>
             <UploaderImage
               name="banner"
               // defaultValue
               // register={register}
-              defaultValue={editEvent?.banner}
+              defaultValue={editUser?.banner}
               setValue={setValue}
             />
           </div>
           <div className="my-[10px] md:max-w-md mx-0">
             <InputField
-              name="event_time"
-              label="Event Time"
+              name="User_time"
+              label="User Time"
               type="time"
               register={register}
-              // defaultValue={editEvent?.event_time}
+              // defaultValue={editUser?.User_time}
               errors={errors}
               // required
             />
           </div>
           <div className="my-[10px] md:max-w-md mx-0">
             <InputField
-              name="event_date"
-              label="Event Date"
+              name="User_date"
+              label="User Date"
               type="date"
               register={register}
-              defaultValue={editEvent?.event_date}
+              defaultValue={editUser?.User_date}
               errors={errors}
               // required
             />
@@ -196,7 +196,7 @@ const ProfileUpdateModalUI = ({
           </div>
         </div>
         <Button className="mt-2" type="primary" htmlType="submit">
-          Update Event
+          Update User
         </Button>
       </form>
     </Modal>

@@ -60,6 +60,16 @@ export const authAPi = api.injectEndpoints({
         },
       }),
     }),
+    userUpdateProfile: build.mutation({
+      query: (profileData) => ({
+        url: `${AUTH_URL}/profile`,
+        method: "PATCH",
+        body: profileData,
+        headers: {
+          Authorization: `${getFromLocalStorage("user")}`,
+        },
+      }),
+    }),
     getAllUsers: build.query({
       query: (data) => ({
         url: `${AUTH_URL}/all-users`,
@@ -85,4 +95,5 @@ export const {
   useChangePasswordMutation,
   useGetAllUsersQuery,
   useChangeRoleByAdminMutation,
+  useUserUpdateProfileMutation
 } = authAPi;
