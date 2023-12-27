@@ -7,13 +7,11 @@ import React, { useEffect } from "react";
 import { FaRegMessage } from "react-icons/fa6";
 
 const DraggableLiveModal = () => {
-  // const el = document.getElementById("messages");
-  // el.scrollTop = el.scrollHeight; convert it to react
-
-  useEffect(() => {
-    const el: any = document.getElementById("messages");
-    el.scrollTop = el.scrollHeight;
-  }, []);
+  
+  // useEffect(() => {
+  //   const el: any = document.getElementById("messages");
+  //   el.scrollTop = el.scrollHeight;
+  // }, []);
 
   return (
     <div>

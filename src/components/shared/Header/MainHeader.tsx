@@ -20,7 +20,6 @@ const MainHeader = () => {
   const [open, setOpen] = React.useState(false);
 
   const { data } = useUserProfileQuery(null);
-  console.log("🚀 ~ file: MainHeader.tsx:23 ~ MainHeader ~ data:", data)
   const userInfo = data?.data;
 
   function classNames(...classes: any) {

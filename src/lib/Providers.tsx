@@ -19,8 +19,6 @@ const Providers: React.FC<{ children: React.ReactNode }> = ({ children }) => {
         <Provider store={store}>{children}</Provider>
       </ConfigProvider>
     </StyledComponentsRegistry>
-    // <Provider store={store}>
-    // </Provider>
   );
 };
 
