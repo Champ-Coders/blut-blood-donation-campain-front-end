@@ -72,6 +72,9 @@ export const authAPi = api.injectEndpoints({
       query: (data) => ({
         url: `${AUTH_URL}/change-role/${data}`,
         method: "PATCH",
+        headers: {
+          Authorization: `${getFromLocalStorage("user")}`,
+        },
       }),
       invalidatesTags: [tagTypes.user],
     }),
