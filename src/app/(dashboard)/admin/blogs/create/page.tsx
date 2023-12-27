@@ -3,6 +3,7 @@ import InputField from "@/components/InputField/InputField";
 import ReactQuillText from "@/components/ReactQuill/ReactQuill";
 import ActionBar from "@/components/UI/ActionBar";
 import Breadcrumb from "@/components/UI/BreadCrumb";
+import UploaderImage from "@/components/Uploader/UploaderImage";
 import config from "@/config/config";
 import { useAddBlogMutation } from "@/redux/Api/blogApi";
 import { getUserDataFromLC } from "@/utils/local-storage";
@@ -21,35 +22,22 @@ const CreateBlog = () => {
     register,
     reset,
     formState: { errors },
+    setValue,
   } = useForm();
 
   const onSubmit = async (data: any) => {
-    const image = data.image[0];
-    const formData = new FormData();
-    formData.append("image", image);
-    const url = config.imageBbKey;
-
-    const imgFetch = await fetch(url, {
-      method: "POST",
-      body: formData,
-    })
-      .then((res) => res.json())
-      .then((imageData) => {
-        if (imageData.success) {
-          const newBlog = {
-            title: data.title,
-            description: description,
-            image: imageData?.data?.url,
-            user: userData?.id,
-          };
-          return newBlog;
-        }
-      });
-
     message.loading("Creating Blog.....");
+
+    const newBlog = {
+      title: data.title,
+      description: description,
+      image: data?.image,
+      user: userData?.id,
+    };
+    console.log(newBlog);
     try {
-      const res = await addBlog(imgFetch).unwrap();
-      if (res) {
+      const res = await addBlog(newBlog).unwrap();
+      if (res?.success) {
         message.success("Blog Create successfully");
       }
     } catch (err: any) {
@@ -91,15 +79,19 @@ const CreateBlog = () => {
               />
             </div>
 
-            <div className="my-[10px] md:max-w-3xl mx-0">
-              <InputField
+            <div className="my-[16px] md:max-w-3xl mx-0">
+              {/* <InputField
                 name="image"
                 label="Image"
                 type="file"
                 register={register}
                 errors={errors}
                 required
-              />
+              /> */}
+              <label className="text-[13px] leading-6 font-inter text-gray-400 font-semibold capitalize">
+                Upload Image
+              </label>
+              <UploaderImage name="image" setValue={setValue} />
             </div>
           </div>
 
