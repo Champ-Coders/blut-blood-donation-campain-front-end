@@ -22,7 +22,7 @@ export const NavList: INav[] = [
     children: [
       {
         name: "Donor List",
-        path: "/donate-list",
+        path: "/donor-list",
       },
       {
         name: "Donate Now",
