@@ -22,6 +22,7 @@ const FeedBackForum = () => {
     register,
     setValue,
     reset,
+
     formState: { errors },
   } = useForm();
 
@@ -32,8 +33,14 @@ const FeedBackForum = () => {
     value: service.id,
     label: service.title,
   }));
-
   const handleSubmitData = async (data: any) => {
+    if (!data.service) {
+      message.error("Please select a service");
+      return;
+    } else if (!data.rating) {
+      message.error("Please select a rating");
+      return;
+    }
     if (!userLoggedIn) {
       confirm({
         title: "Please Login First",
@@ -55,16 +62,11 @@ const FeedBackForum = () => {
           service: data.service.id,
           user: userLoggedIn.data._id,
         };
-        console.log("🚀 ~ file: FeedBackForum.tsx:58 ~ handleSubmitData ~ newReview:", newReview)
-
-
-        return
-
-        
-
         const res = await addReview(newReview).unwrap();
+
         if (res?.success) {
           message.success("Feedback Submitted Successfully");
+          reset();
         }
       } catch (error: any) {
         console.error(error?.data?.message || "Some thing was wrong");
@@ -107,20 +109,7 @@ const FeedBackForum = () => {
                 <span className="text-rose-500">*</span>
               </label>
 
-              <Form>
-                <Form.Item
-                  name="rating"
-                  // label="Rate"
-                  rules={[
-                    {
-                      required: true,
-                      message: "Please rate!",
-                    },
-                  ]}
-                >
-                  <Rate />
-                </Form.Item>
-              </Form>
+              <Rate allowHalf={true} onChange={(e) => setValue("rating", e)} />
             </div>
 
             <MultiSelect
