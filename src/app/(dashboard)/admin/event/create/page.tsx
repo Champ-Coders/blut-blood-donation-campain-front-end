@@ -1,6 +1,7 @@
 "use client";
 
 import InputField from "@/components/InputField/InputField";
+import ReactQuillText from "@/components/ReactQuill/ReactQuill";
 import TextAreaField from "@/components/TextAreaField/TextAreaField";
 import ActionBar from "@/components/UI/ActionBar";
 import Breadcrumb from "@/components/UI/BreadCrumb";
@@ -11,6 +12,7 @@ import { useAddEventMutation } from "@/redux/Api/eventApi";
 
 import { getUserDataFromLC } from "@/utils/local-storage";
 import { Button, message, DatePicker } from "antd";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { MdOutlineOtherHouses } from "react-icons/md";
 
@@ -21,6 +23,7 @@ const { RangePicker } = DatePicker;
 const CreateEvent = () => {
   const userData = getUserDataFromLC() as any;
   const [addEvent] = useAddEventMutation();
+  const [description, setDescription] = useState("");
   const {
     handleSubmit,
     register,
@@ -40,10 +43,14 @@ const CreateEvent = () => {
     // const eventData = { image: imageUrl, banner: bannerUrl, ...others };
 
     // console.log(eventData);
+    const eventData = {
+      description,
+      ...data
+    };
 
     message.loading("Creating Event.....");
     try {
-      const res = await addEvent(data).unwrap();
+      const res = await addEvent(eventData).unwrap();
       // console.log(res);
       if (res?.success) {
         message.success("Event created successfully");
@@ -136,13 +143,12 @@ const CreateEvent = () => {
                 required
               />
             </div>
-            <div className="my-[10px]  md:max-w-md mx-0">
-              <TextAreaField
-                name="description"
-                register={register}
-                errors={errors}
+            <div className="my-[10px] md:max-w-3xl mx-0">
+              <ReactQuillText
                 label="Description"
                 required
+                setValue={setDescription}
+                value={description}
               />
             </div>
           </div>
