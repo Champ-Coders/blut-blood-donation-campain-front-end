@@ -25,7 +25,7 @@ const ProfileUpdateModalUI = ({
   editUser: any;
   setEditUser: any;
 }) => {
-//   console.log(editUser);
+  //   console.log(editUser);
 
   const {
     handleSubmit,
@@ -49,10 +49,15 @@ const ProfileUpdateModalUI = ({
 
   const onSubmit = async (data: any) => {
     const updateData = {
-      ...data,
+      name: editUser.name ||data.name,
+      email: editUser?.email || data.email,
+      address: editUser?.address || data.address,
+      phoneNumber: editUser?.phoneNumber || data.phoneNumber,
+      dateOfBirth: editUser?.dateOfBirth || data.dateOfBirth,
+      bloodGroup: editUser?.bloodGroup || data.bloodGroup?.name,
     };
 
-    console.log(updateData,"updateData");
+    console.log(updateData, "updateData");
 
     message.loading("Updating User.....");
     // try {
@@ -79,11 +84,11 @@ const ProfileUpdateModalUI = ({
     // reset();
   };
 
-//   console.log(editUser);
+  //   console.log(editUser);
 
   return (
     <Modal
-      title="Edit User"
+      title="Update Profile"
       open={isModalOpen}
       onOk={() => setIsModalOpen(false)}
       onCancel={() => setIsModalOpen(false)}
@@ -100,7 +105,7 @@ const ProfileUpdateModalUI = ({
               type="text"
               register={register}
               defaultValue={editUser?.name}
-              required
+            //   required
               errors={errors}
             />
           </div>
@@ -113,7 +118,7 @@ const ProfileUpdateModalUI = ({
               defaultValue={editUser?.email}
               type="email"
               register={register}
-              required
+            //   required
               errors={errors}
             />
           </div>
@@ -126,7 +131,7 @@ const ProfileUpdateModalUI = ({
               defaultValue={editUser?.phoneNumber}
               type="text"
               register={register}
-              required
+            //   required
               errors={errors}
             />
           </div>
@@ -142,7 +147,7 @@ const ProfileUpdateModalUI = ({
                 defaultValue={editUser?.dateOfBirth}
                 type="date"
                 register={register}
-                required
+                // required
                 errors={errors}
               />
             </div>
@@ -157,7 +162,7 @@ const ProfileUpdateModalUI = ({
                 name={"address"}
                 type="text"
                 register={register}
-                required
+                // required
                 defaultValue={editUser?.address}
                 errors={errors}
               />
@@ -173,9 +178,12 @@ const ProfileUpdateModalUI = ({
                 label="Select Your Blood Group"
                 name={"bloodGroup"}
                 options={blood_groups}
-                defaultValue={editUser?.bloodGroup}
+                defaultValue={{
+                    label:editUser?.bloodGroup,
+                    value:editUser?.bloodGroup
+                }}
                 isMulti={false}
-                required={true}
+                // required={true}
                 setValue={setValue}
               />
             </div>
