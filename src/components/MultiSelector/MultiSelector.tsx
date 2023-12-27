@@ -78,7 +78,7 @@ const MultiSelect = ({
           <label
             className={`text-[13px] leading-6 font-inter text-gray-40 font-semibold capitalize`}
           >
-            {label} {required && <span className="text-rose-50">*</span>}
+            {label} {required && <span className="text-rose-500">*</span>}
           </label>
         </div>
       )}
