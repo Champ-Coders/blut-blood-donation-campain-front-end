@@ -87,9 +87,9 @@ const FeedBackForum = () => {
           title="map"
           scrolling="no"
           src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d116833.83187905555!2d90.33728821510793!3d23.780975728070462!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755b8b087026b81%3A0x8fa563bbdd5904c2!2z4Kai4Ka-4KaV4Ka-!5e0!3m2!1sbn!2sbd!4v1697518047346!5m2!1sbn!2sbd"
-          style={{
-            filter: "grayscale(1) contrast(1.2) opacity(0.4)",
-          }}
+
+
+          className=" filter grayscale-100 contrast-100 opacity-50"
         ></iframe>
       </div>
 

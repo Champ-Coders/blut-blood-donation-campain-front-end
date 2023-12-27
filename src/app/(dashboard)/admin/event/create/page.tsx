@@ -18,10 +18,10 @@ import { MdOutlineOtherHouses } from "react-icons/md";
 
 // import 'antd/dist/antd.css';
 
-const { RangePicker } = DatePicker;
+
 
 const CreateEvent = () => {
-  const userData = getUserDataFromLC() as any;
+ 
   const [addEvent] = useAddEventMutation();
   const [description, setDescription] = useState("");
   const {
@@ -91,6 +91,7 @@ const CreateEvent = () => {
                 name="title"
                 label="Title"
                 type="text"
+                placeholder="Enter Title"
                 register={register}
                 errors={errors}
                 required
@@ -101,6 +102,7 @@ const CreateEvent = () => {
                 name="location"
                 label="Location"
                 type="text"
+                placeholder="Enter Location"
                 register={register}
                 errors={errors}
                 required
@@ -128,6 +130,7 @@ const CreateEvent = () => {
                 name="event_time"
                 label="Event Time"
                 type="time"
+                placeholder="Enter Event Time"
                 register={register}
                 errors={errors}
                 required
@@ -138,6 +141,7 @@ const CreateEvent = () => {
                 name="event_date"
                 label="Event Date"
                 type="date"
+                placeholder="Enter Event Date"
                 register={register}
                 errors={errors}
                 required

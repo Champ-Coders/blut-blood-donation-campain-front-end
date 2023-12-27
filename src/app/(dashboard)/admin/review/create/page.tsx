@@ -14,9 +14,8 @@ import { Button, message } from "antd";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 
-
 const CreateReview = () => {
-  const {data:userData} = useUserProfileQuery({})
+  const { data: userData } = useUserProfileQuery({});
   const { data: services } = useServicesQuery(undefined);
   const [addReview] = useAddReviewMutation();
   const {
@@ -30,20 +29,18 @@ const CreateReview = () => {
 
   // console.log(userData?.data?._id,"userData");
 
-  const serviceOptions=services?.data?.map((service:any)=>(
-    {
-        value: service.id,
-        label: service.title,
-      }
-  ))
+  const serviceOptions = services?.data?.map((service: any) => ({
+    value: service.id,
+    label: service.title,
+  }));
 
   const onSubmit = async (data: any) => {
-      const newReview = {
-          review: description,
-          rating: Number(data.rating),
-          service:data.service.id,
-          user: userData?.data?._id,
-        };
+    const newReview = {
+      review: description,
+      rating: Number(data.rating),
+      service: data.service.id,
+      user: userData?.data?._id,
+    };
     message.loading("Creating Review.....");
     try {
       const res = await addReview(newReview).unwrap();
@@ -69,14 +66,6 @@ const CreateReview = () => {
       <ActionBar title="Create Review">
         <form className="block w-full" onSubmit={handleSubmit(onSubmit)}>
           <div className="w-full">
-          <div className="my-[10px] md:max-w-3xl mx-0">
-              <ReactQuillText
-                label="Review"
-                required
-                setValue={setDescription}
-                value={description}
-              />
-            </div>
             <div className="my-[10px]  md:max-w-md mx-0">
               <InputField
                 name="rating"
@@ -88,14 +77,22 @@ const CreateReview = () => {
               />
             </div>
             <div className="my-[10px]  md:max-w-md mx-0">
-               <MultiSelect
-                  label="Select Service"
-                  name="service"
-                  options={serviceOptions}
-                  isMulti={false}
-                  required={true}
-                  setValue={setValue}
-                />
+              <MultiSelect
+                label="Select Service"
+                name="service"
+                options={serviceOptions}
+                isMulti={false}
+                required={true}
+                setValue={setValue}
+              />
+            </div>
+            <div className="my-[10px] md:max-w-3xl mx-0">
+              <ReactQuillText
+                label="Review"
+                required
+                setValue={setDescription}
+                value={description}
+              />
             </div>
           </div>
 

@@ -20,7 +20,7 @@ const Login = () => {
   const router = useRouter();
 
   const onSubmit = async (data: any) => {
-    console.log(data);
+    
     try {
       const response = (await userLogin(data).unwrap()) 
       console.log(response);
