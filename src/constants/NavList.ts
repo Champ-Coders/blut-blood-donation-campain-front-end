@@ -25,6 +25,10 @@ export const NavList: INav[] = [
         path: "/donor-list",
       },
       {
+        name: "Donate List",
+        path: "/donate-list",
+      },
+      {
         name: "Donate Now",
         path: "/donate-now",
       },
