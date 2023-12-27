@@ -48,40 +48,41 @@ const ProfileUpdateModalUI = ({
   const [userUpdateProfile] = useUserUpdateProfileMutation();
 
   const onSubmit = async (data: any) => {
+    console.log(data);
     const updateData = {
-      name: editUser.name ||data.name,
-      email: editUser?.email || data.email,
-      address: editUser?.address || data.address,
-      phoneNumber: editUser?.phoneNumber || data.phoneNumber,
-      dateOfBirth: editUser?.dateOfBirth || data.dateOfBirth,
-      bloodGroup: editUser?.bloodGroup || data.bloodGroup?.name,
+      name: data.name || editUser.name,
+      email: data?.email || editUser.email,
+      address: data?.address || editUser.address,
+      phoneNumber: data?.phoneNumber || editUser.phoneNumber,
+      dateOfBirth: data?.dateOfBirth || editUser.dateOfBirth,
+      bloodGroup: data?.bloodGroup?.name || editUser.bloodGroup?.name,
     };
 
     console.log(updateData, "updateData");
 
     message.loading("Updating User.....");
-    // try {
-    //   const res = await userUpdateProfile(updateData).unwrap();
-    //   if (res?.success) {
-    //     message.success("User updated successfully");
-    //     setIsModalOpen(false);
-    //   } else if (res?.error?.data) {
-    //     message.error(res?.error?.data?.message);
-    //   } else {
-    //     message.error("Could not update the User");
-    //   }
-    // } catch (err: any) {
-    //   console.log(err);
+    try {
+      const res = await userUpdateProfile(updateData).unwrap();
+      if (res?.success) {
+        message.success("User updated successfully");
+        setIsModalOpen(false);
+      } else if (res?.error?.data) {
+        message.error(res?.error?.data?.message);
+      } else {
+        message.error("Could not update the User");
+      }
+    } catch (err: any) {
+      console.log(err);
 
-    //   if (err?.data?.errorMessages) {
-    //     message.error(err?.data?.errorMessages[0]?.message);
-    //   } else if (err?.data?.message) {
-    //     message.error(err?.data.message);
-    //   } else {
-    //     message.error("Could not update the User");
-    //   }
-    // }
-    // reset();
+      if (err?.data?.errorMessages) {
+        message.error(err?.data?.errorMessages[0]?.message);
+      } else if (err?.data?.message) {
+        message.error(err?.data.message);
+      } else {
+        message.error("Could not update the User");
+      }
+    }
+
   };
 
   //   console.log(editUser);
@@ -96,8 +97,9 @@ const ProfileUpdateModalUI = ({
       centered
     >
       <form className="block w-full" onSubmit={handleSubmit(onSubmit)}>
-        <div className="w-full">
-          <div className="flex w-full sm:flex-row flex-col mb-4 justify-between items-center gap-3 sm:gap-6">
+        <div className="w-full mb-3 sm:mb-6">
+          {/* nmae */}
+          <div className="flex ">
             <InputField
               placeholder="Your Name"
               label="Your Name"
@@ -105,10 +107,11 @@ const ProfileUpdateModalUI = ({
               type="text"
               register={register}
               defaultValue={editUser?.name}
-            //   required
+              //   required
               errors={errors}
             />
           </div>
+
           {/* Email */}
           <div className="w-full mb-3 sm:mb-6">
             <InputField
@@ -118,7 +121,7 @@ const ProfileUpdateModalUI = ({
               defaultValue={editUser?.email}
               type="email"
               register={register}
-            //   required
+              //   required
               errors={errors}
             />
           </div>
@@ -131,7 +134,7 @@ const ProfileUpdateModalUI = ({
               defaultValue={editUser?.phoneNumber}
               type="text"
               register={register}
-            //   required
+              //   required
               errors={errors}
             />
           </div>
@@ -179,14 +182,41 @@ const ProfileUpdateModalUI = ({
                 name={"bloodGroup"}
                 options={blood_groups}
                 defaultValue={{
-                    label:editUser?.bloodGroup,
-                    value:editUser?.bloodGroup
+                  label: editUser?.bloodGroup,
+                  value: editUser?.bloodGroup,
                 }}
                 isMulti={false}
                 // required={true}
                 setValue={setValue}
               />
             </div>
+          </div>
+
+          {/* village */}
+          <div className="flex ">
+            <InputField
+              placeholder="Your village"
+              label="Your village"
+              name={"village"}
+              type="text"
+              register={register}
+              defaultValue={editUser?.village}
+              //   required
+              errors={errors}
+            />
+          </div>
+          {/* post */}
+          <div className="flex ">
+            <InputField
+              placeholder="Your Post Office"
+              label="Your Post Office"
+              name={"post"}
+              type="text"
+              register={register}
+              defaultValue={editUser?.post}
+              //   required
+              errors={errors}
+            />
           </div>
         </div>
 
