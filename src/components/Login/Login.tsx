@@ -20,14 +20,16 @@ const Login = () => {
   const router = useRouter();
 
   const onSubmit = async (data: any) => {
+    console.log(data);
     try {
-      const response = (await userLogin(data).unwrap()) as any;
-
+      const response = (await userLogin(data).unwrap()) 
+      console.log(response);
       if (response?.success) {
         // console.log(response);
         message.success(response.message);
         router.push("/");
       } else {
+        console.log(response);
         message.error(response?.message);
       }
     } catch (error: any) {
