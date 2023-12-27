@@ -8,6 +8,7 @@ import TextAreaField from "../TextAreaField/TextAreaField";
 import { uploadImageBB } from "@/hooks/ImgbbUploader";
 import UploaderImage from "../Uploader/UploaderImage";
 import ReactQuillText from "../ReactQuill/ReactQuill";
+import { useUserUpdateProfileMutation } from "@/redux/Api/authApi/AuthApi";
 
 const ProfileUpdateModalUI = ({
   modalId,
@@ -40,28 +41,10 @@ const ProfileUpdateModalUI = ({
     }
   }, [editUser, isModalOpen, reset]);
 
-  const [updateUser] = use();
+  const [userUpdateProfile] = useUserUpdateProfileMutation()
 
   const onSubmit = async (data: any) => {
-    // const { image, banner, ...others } = data;
-    // // const image = data.image[0];
-    // // console.log(data);
 
-    // let updateImage = editUser.image;
-    // if (typeof image !== "string") {
-    //   updateImage = await uploadImageBB(image[0]);
-    // }
-    // let updateBanner = editUser.banner;
-    // if (typeof banner !== "string") {
-    //   updateBanner = await uploadImageBB(banner[0]);
-    // }
-
-    // if (typeof banner !== "string") {
-    //   banner = await uploadImageBB(banner[0]);
-    // }
-
-    // console.log(imageUrl,bannerUrl);
-    // console.log(updateImage, updateBanner);
 
     const updateData = {
       title: data?.title || editUser?.title,
@@ -71,16 +54,14 @@ const ProfileUpdateModalUI = ({
       User_time: data?.User_time || editUser?.User_time,
       User_date: data?.User_date || editUser?.User_date,
       location: data?.location || editUser?.location,
+      
     };
 
     // console.log(updateData);
 
     message.loading("Updating User.....");
     try {
-      const res = await updateUser({
-        id: modalId,
-        body: { ...updateData },
-      }).unwrap();
+      const res = await userUpdateProfile(updateData).unwrap();
       if (res?.success) {
         message.success("User updated successfully");
         setIsModalOpen(false);

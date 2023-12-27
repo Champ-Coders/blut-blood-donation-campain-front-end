@@ -5,17 +5,17 @@ import React, { useState } from "react";
 import ProfileUpdateModalUI from "../ModalUI/ProfileModal";
 
 const PersonalInfo = ({ userData }: { userData: IUser }) => {
+  console.log(userData);
 
   const [UserId, setUserId] = useState<string>("");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editUser, setEditUser] = useState({
-    title: "",
-    description: "",
-    banner: "",
-    image: "",
-    User_time: "",
-    User_date: "",
-    location: "",
+    name: "",
+    email: "",
+    address: "",
+    phoneNumber: "",
+    bloodGroup: "",
+    dateOfBirth: "",
   });
   //   console.log(userData);
   const formattedDate = new Date(userData?.dateOfBirth).toLocaleDateString(
@@ -33,17 +33,25 @@ const PersonalInfo = ({ userData }: { userData: IUser }) => {
           <Button
             className="mr-[6px]"
             onClick={() => {
-              // setUserId(selectedUser._id);
-              // setEditUser({
-              //   title: selectedUser?.title,
-              //   description: selectedUser?.description,
-              //   banner: selectedUser?.banner,
-              //   image: selectedUser?.image,
-              //   User_time: selectedUser?.User_time,
-              //   User_date: selectedUser?.User_date,
-              //   location: selectedUser?.location,
-              // });
-              // setIsModalOpen(true);
+              setUserId(userData._id);
+              setEditUser({
+                name: userData.name,
+                email: userData?.email,
+                address: userData?.address,
+                phoneNumber: userData?.phoneNumber,
+                dateOfBirth: userData?.dateOfBirth,
+                bloodGroup: userData?.bloodGroup,
+              });
+
+              // name: "Sarwar";
+              // email: "asik@gmail.com";
+              // address: "123 Main Street, Cityville";
+
+              // phoneNumber: "12345678904";
+              // bloodGroup: "A+";
+              // dateOfBirth: "1990-01-01T00:00:00.000Z";
+
+              setIsModalOpen(true);
             }}
             type="default"
           >
