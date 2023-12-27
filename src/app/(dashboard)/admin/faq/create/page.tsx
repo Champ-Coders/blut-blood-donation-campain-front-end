@@ -1,29 +1,38 @@
 "use client";
 
 import InputField from "@/components/InputField/InputField";
+import ReactQuillText from "@/components/ReactQuill/ReactQuill";
 import TextAreaField from "@/components/TextAreaField/TextAreaField";
 import ActionBar from "@/components/UI/ActionBar";
+import { useUserProfileQuery } from "@/redux/Api/authApi/AuthApi";
 import { useCreateFaqMutation } from "@/redux/Api/faqsApi";
 import { Button, message } from "antd";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 
 const CreateServicePage = () => {
   const [createFaq, { isLoading }] = useCreateFaqMutation();
+  const [description, setDescription] = useState("");
+  const {data:userData} = useUserProfileQuery({})
+  console.log(userData?.data?._id);
+
 
   const {
     handleSubmit,
     register,
     reset,
     formState: { errors },
+    setValue,
   } = useForm();
 
   const onSubmit = async (faqData: any) => {
     // Handle form submission logic here
     const data = {
       ...faqData,
-      user: "65816e02a2ae4b2e43381dc1",
+      user: userData?.data?._id,
+      description,
     };
-    // console.log("Form Data:", data);
+    console.log("Form Data:", data);
     try {
       const res = await createFaq(data);
       console.log("🚀 ~ file: page.tsx:28 ~ onSubmit ~ res:", res);
@@ -51,14 +60,13 @@ const CreateServicePage = () => {
               placeholder="Faqs Question"
             />
           </div>
-          <div className="my-[10px] md:max-w-md mx-0">
-            <TextAreaField
-              name="description"
-              register={register}
-              errors={errors}
-              label="Description of Faqs"
+
+          <div className="my-[10px] md:max-w-3xl mx-0">
+            <ReactQuillText
+              label="Description"
               required
-              placeholder="Description of Faqs"
+              setValue={setDescription}
+              value={description}
             />
           </div>
         </div>
