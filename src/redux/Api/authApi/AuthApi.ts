@@ -15,6 +15,7 @@ export const authAPi = api.injectEndpoints({
         method: "POST",
         body: loginData,
       }),
+      invalidatesTags: [tagTypes.user],
       onQueryStarted: async (loginData, { dispatch, queryFulfilled }) => {
         const response = await queryFulfilled;
         console.log(response, "response of login");
@@ -22,6 +23,7 @@ export const authAPi = api.injectEndpoints({
         setToLocalStorage("user", accessToken);
       },
     }),
+    
     userRegister: build.mutation({
       query: (registerData) => {
         console.log(registerData, "rrrrrrrr");
@@ -31,6 +33,7 @@ export const authAPi = api.injectEndpoints({
           body: registerData,
         };
       },
+      invalidatesTags: [tagTypes.user],
       onQueryStarted: async (registerData, { dispatch, queryFulfilled }) => {
         const response = await queryFulfilled;
         const accessToken = response.data.data.accessToken;
@@ -38,6 +41,7 @@ export const authAPi = api.injectEndpoints({
         // console.log(setToLCStorage);
       },
     }),
+    
     userProfile: build.query({
       query: () => {
         return {
@@ -48,6 +52,7 @@ export const authAPi = api.injectEndpoints({
           },
         };
       },
+      providesTags: [tagTypes.user],
     }),
     // ! change password
     changePassword: build.mutation({
@@ -59,6 +64,7 @@ export const authAPi = api.injectEndpoints({
           Authorization: `${getFromLocalStorage("user")}`,
         },
       }),
+      invalidatesTags: [tagTypes.user],
     }),
     userUpdateProfile: build.mutation({
       query: (profileData) => ({
@@ -69,6 +75,7 @@ export const authAPi = api.injectEndpoints({
           Authorization: `${getFromLocalStorage("user")}`,
         },
       }),
+      invalidatesTags: [tagTypes.user],
     }),
     getAllUsers: build.query({
       query: (data) => ({

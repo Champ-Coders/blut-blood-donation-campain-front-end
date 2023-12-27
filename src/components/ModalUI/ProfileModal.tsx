@@ -63,6 +63,7 @@ const ProfileUpdateModalUI = ({
     message.loading("Updating User.....");
     try {
       const res = await userUpdateProfile(updateData).unwrap();
+      console.log(res,"response");
       if (res?.success) {
         message.success("User updated successfully");
         setIsModalOpen(false);
