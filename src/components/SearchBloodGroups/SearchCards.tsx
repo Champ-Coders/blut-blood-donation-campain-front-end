@@ -87,7 +87,7 @@ const SearchCards: React.FC<SearchCardsProps> = () => {
           className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-3"
         >
           {searchPeople.length == 0 ? (
-            <p className="text-2xl font-bold text-center text-primary col-span-3">
+            <p className="text-2xl font-semibold text-center text-primary col-span-3">
               Not found
             </p>
           ) : (
