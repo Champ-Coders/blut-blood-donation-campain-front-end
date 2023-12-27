@@ -3,6 +3,7 @@
 import InputField from "@/components/InputField/InputField";
 import ActionBar from "@/components/UI/ActionBar";
 import Breadcrumb from "@/components/UI/BreadCrumb";
+import UploaderImage from "@/components/Uploader/UploaderImage";
 import config from "@/config/config";
 import { useAddVolunteerMutation } from "@/redux/Api/volunteerApi";
 import { Button, message } from "antd";
@@ -15,37 +16,23 @@ const CreateVolunteer = () => {
     register,
     reset,
     formState: { errors },
+    setValue
   } = useForm();
 
   const onSubmit = async (data: any) => {
-    const image = data.image[0];
-    const formData = new FormData();
-    formData.append("image", image);
-    const url = config.imageBbKey;
-
-    const imgFetch = await fetch(url, {
-      method: "POST",
-      body: formData,
-    })
-      .then((res) => res.json())
-      .then((imageData) => {
-        if (imageData.success) {
-          const newVolunteer = {
-            name: data.name,
-            designation: data.designation,
-            image: imageData?.data?.url,
-            facebook:data.facebook,
-            linkedin:data.linkedin,
-            github:data.github,
-            instagram:data.instagram,
-          };
-          return newVolunteer;
-        }
-      });
+    const newVolunteer = {
+      name: data.name,
+      designation: data.designation,
+      image: data.image,
+      facebook:data.facebook,
+      linkedin:data.linkedin,
+      github:data.github,
+      instagram:data.instagram,
+    };
 
     message.loading("Creating Volunteer.....");
     try {
-      const res = await addVolunteer(imgFetch).unwrap();
+      const res = await addVolunteer(newVolunteer).unwrap();
       if (res) {
         message.success("Volunteer Create successfully");
       }
@@ -89,14 +76,10 @@ const CreateVolunteer = () => {
               />
             </div>
             <div className="my-[10px] md:max-w-md mx-0">
-              <InputField
-                name="image"
-                label="Image"
-                type="file"
-                register={register}
-                errors={errors}
-                required
-              />
+            <label className="text-[13px] leading-6 font-inter text-gray-400 font-semibold capitalize">
+                Upload Image
+              </label>
+              <UploaderImage name="image" setValue={setValue} />
             </div>
             <div className="my-[10px]  md:max-w-md mx-0">
               <InputField

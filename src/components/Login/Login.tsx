@@ -5,7 +5,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import InputField from "../InputField/InputField";
 import Link from "next/link";
 import { useUserLoginMutation } from "@/redux/Api/authApi/AuthApi";
-import { message } from "antd";
+import { Button, message } from "antd";
 import { useRouter } from "next/navigation";
 
 const Login = () => {
@@ -20,14 +20,16 @@ const Login = () => {
   const router = useRouter();
 
   const onSubmit = async (data: any) => {
+    console.log(data);
     try {
-      const response = (await userLogin(data).unwrap()) as any;
-
+      const response = (await userLogin(data).unwrap()) 
+      console.log(response);
       if (response?.success) {
         // console.log(response);
         message.success(response.message);
         router.push("/");
       } else {
+        console.log(response);
         message.error(response?.message);
       }
     } catch (error: any) {
@@ -48,6 +50,7 @@ const Login = () => {
                 label="Your Email Address"
                 type="email"
                 register={register}
+                defaultValue={"admin@admin.com"}
                 required
                 errors={errors}
               />
@@ -60,6 +63,7 @@ const Login = () => {
                 name={"password"}
                 type="text"
                 register={register}
+                defaultValue={"admin"}
                 required
                 errors={errors}
               />
@@ -70,13 +74,14 @@ const Login = () => {
             </div>
 
             <div className="w-full">
-              <button
-                type="submit"
-                className="relative w-full rounded px-5 py-2 overflow-hidden group bg-primary  hover:bg-black text-white transition-all ease-out duration-300"
+              <Button
+                htmlType="submit"
+                loading={isLoading}
+                className="relative w-full rounded px-5  overflow-hidden group bg-primary  hover:bg-black text-white transition-all ease-out duration-300"
               >
                 <span className="absolute right-0 w-8 h-32 -mt-12 transition-all duration-1000 transform translate-x-10 bg-white opacity-10 rotate-12 group-hover:-translate-x-[550px] ease"></span>
                 <span className="relative">Submit</span>
-              </button>
+              </Button>
 
               <p className="text-gray-400 text-sm pt-4 text-center">
                 Do You have any account?

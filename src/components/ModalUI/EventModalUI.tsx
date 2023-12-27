@@ -7,6 +7,7 @@ import { Button, Modal, message } from "antd";
 import TextAreaField from "../TextAreaField/TextAreaField";
 import { uploadImageBB } from "@/hooks/ImgbbUploader";
 import UploaderImage from "../Uploader/UploaderImage";
+import ReactQuillText from "../ReactQuill/ReactQuill";
 
 const EventModalUI = ({
   modalId,
@@ -28,6 +29,8 @@ const EventModalUI = ({
     formState: { errors },
     setValue,
   } = useForm();
+
+  const [description, setDescription] = useState("");
 
   // console.log(editEvent);
 
@@ -62,13 +65,13 @@ const EventModalUI = ({
 
     const updateData = {
       title: data?.title || editEvent?.title,
-      description: data?.description || editEvent?.description,
+      description: description || editEvent?.description,
       image: data?.image || editEvent?.image,
       banner: data?.banner || editEvent?.banner,
       event_time: data?.event_time || editEvent?.event_time,
       event_date: data?.event_date || editEvent?.event_date,
       location: data?.location || editEvent?.location,
-    }
+    };
 
     // console.log(updateData);
 
@@ -182,14 +185,13 @@ const EventModalUI = ({
               // required
             />
           </div>
-          <div className="my-[10px] md:max-w-md mx-0">
-            <TextAreaField
-              name="description"
-              register={register}
-              defaultValue={editEvent?.description}
-              errors={errors}
+
+          <div className="my-[10px] md:max-w-3xl mx-0">
+            <ReactQuillText
               label="Description"
-              // required
+              required
+              setValue={setDescription}
+              value={description}
             />
           </div>
         </div>
