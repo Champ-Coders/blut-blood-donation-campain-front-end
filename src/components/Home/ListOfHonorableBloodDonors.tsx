@@ -124,7 +124,7 @@ const ListOfHonorableBloodDonors: React.FC<
             List of Honorable Blood Donors
           </h1>
         </div>
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
           <div className="col-span-4">
             <h4
               className={`${bengali.className} text-xl font-bold mb-5 text-[#111] leading-normal`}
@@ -160,13 +160,9 @@ const ListOfHonorableBloodDonors: React.FC<
               }}
               className=" text-white rounded-md  p-5 md:px-10"
             >
-              <h4 className="text-xl flex gap-5 flex-col mb-5">
-                <span>
-                  Quantum is the lifeblood of voluntary blood donation programs
-                </span>
-                <span className="font-semibold">
-                  List of Honorable Blood Donors
-                </span>
+              <h4 className="text-xl flex gap-5 flex-col mb-5 font-kalpurush ">
+                কোয়ান্টাম স্বেচ্ছা রক্তদান কার্যক্রমের প্রাণ সম্মানিত
+                রক্তদাতাদের তালিকা
               </h4>
               <div>
                 {donateValue.map((donate) => (
