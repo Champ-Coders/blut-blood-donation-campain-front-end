@@ -1,6 +1,7 @@
 "use client";
 
 import InputField from "@/components/InputField/InputField";
+import ReactQuillText from "@/components/ReactQuill/ReactQuill";
 import TextAreaField from "@/components/TextAreaField/TextAreaField";
 import ActionBar from "@/components/UI/ActionBar";
 import Breadcrumb from "@/components/UI/BreadCrumb";
@@ -11,16 +12,18 @@ import { useAddEventMutation } from "@/redux/Api/eventApi";
 
 import { getUserDataFromLC } from "@/utils/local-storage";
 import { Button, message, DatePicker } from "antd";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { MdOutlineOtherHouses } from "react-icons/md";
 
 // import 'antd/dist/antd.css';
 
-const { RangePicker } = DatePicker;
+
 
 const CreateEvent = () => {
-  const userData = getUserDataFromLC() as any;
+ 
   const [addEvent] = useAddEventMutation();
+  const [description, setDescription] = useState("");
   const {
     handleSubmit,
     register,
@@ -40,10 +43,14 @@ const CreateEvent = () => {
     // const eventData = { image: imageUrl, banner: bannerUrl, ...others };
 
     // console.log(eventData);
+    const eventData = {
+      description,
+      ...data
+    };
 
     message.loading("Creating Event.....");
     try {
-      const res = await addEvent(data).unwrap();
+      const res = await addEvent(eventData).unwrap();
       // console.log(res);
       if (res?.success) {
         message.success("Event created successfully");
@@ -84,6 +91,7 @@ const CreateEvent = () => {
                 name="title"
                 label="Title"
                 type="text"
+                placeholder="Enter Title"
                 register={register}
                 errors={errors}
                 required
@@ -94,6 +102,7 @@ const CreateEvent = () => {
                 name="location"
                 label="Location"
                 type="text"
+                placeholder="Enter Location"
                 register={register}
                 errors={errors}
                 required
@@ -121,6 +130,7 @@ const CreateEvent = () => {
                 name="event_time"
                 label="Event Time"
                 type="time"
+                placeholder="Enter Event Time"
                 register={register}
                 errors={errors}
                 required
@@ -131,18 +141,18 @@ const CreateEvent = () => {
                 name="event_date"
                 label="Event Date"
                 type="date"
+                placeholder="Enter Event Date"
                 register={register}
                 errors={errors}
                 required
               />
             </div>
-            <div className="my-[10px]  md:max-w-md mx-0">
-              <TextAreaField
-                name="description"
-                register={register}
-                errors={errors}
+            <div className="my-[10px] md:max-w-md mx-0">
+              <ReactQuillText
                 label="Description"
                 required
+                setValue={setDescription}
+                value={description}
               />
             </div>
           </div>

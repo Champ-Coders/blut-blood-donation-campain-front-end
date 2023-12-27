@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
@@ -65,7 +66,7 @@ const ReactQuillText = ({
         style={{ maxHeight: "400px" }}
         onChange={setValue}
         placeholder={"Write Something..."}
-        className="h-64 px-4 py-2 rounded-md border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent mb-[70px] "
+        className="h-64 py-2 rounded-md border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent mb-[70px] "
       />
     </div>
   );

@@ -10,46 +10,38 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import InputField from "@/components/InputField/InputField";
 import TextAreaField from "@/components/TextAreaField/TextAreaField";
-import { useDeleteReviewMutation, useReviewsQuery, useUpdateReviewMutation } from "@/redux/Api/reviewApi";
+import {
+  useDeleteReviewMutation,
+  useReviewsQuery,
+  useUpdateReviewMutation,
+} from "@/redux/Api/reviewApi";
 import MultiSelect from "@/components/MultiSelector/MultiSelector";
 import { useServicesQuery } from "@/redux/Api/serviceApi";
-
-const services = [
-    {
-        value: "serviceone",
-        label: "Service One",
-      },
-    {
-        value: "servicetwo",
-        label: "Service Two",
-      },
-    {
-        value: "servicethree",
-        label: "Service Three",
-      },
-]
 
 const AllReview = () => {
   const [searchText, setSearchText] = useState<string>("");
   const [reviewId, setReviewId] = useState<string>("");
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [editReview, setEditReview] = useState({ rating: 0, review: "" ,user:"",service:""});
+  const [editReview, setEditReview] = useState({
+    rating: 0,
+    review: "",
+    user: "",
+    service: "",
+  });
   const { data: services } = useServicesQuery(undefined);
   const {
     handleSubmit,
-    register,setValue,
+    register,
+    setValue,
     reset,
     formState: { errors },
   } = useForm();
 
-//   service option
-  const serviceOptions=services?.data?.map((service:any)=>(
-    {
-        value: service.id,
-        label: service.title,
-      }
-  ))
-
+  //   service option
+  const serviceOptions = services?.data?.map((service: any) => ({
+    value: service.id,
+    label: service.title,
+  }));
 
   // query and mutation
   const [updateReview] = useUpdateReviewMutation();
@@ -60,15 +52,14 @@ const AllReview = () => {
   const filteredReviewData = reviews?.data?.filter((review: any) => {
     const lowercaseSearchText = searchText.toLowerCase();
     return (
-        review?.review?.toLowerCase().includes(lowercaseSearchText) ||
-        review?.user?.name?.toLowerCase().includes(lowercaseSearchText) ||
-        review?.service?.title?.toLowerCase().includes(lowercaseSearchText) 
+      review?.review?.toLowerCase().includes(lowercaseSearchText) ||
+      review?.user?.name?.toLowerCase().includes(lowercaseSearchText) ||
+      review?.service?.title?.toLowerCase().includes(lowercaseSearchText)
     );
   });
 
   // Delete Review
   const deleteHandler = async (id: string) => {
-    message.loading("Deleting.....");
     try {
       const res = await deleteReview(id);
       if (res) {
@@ -82,10 +73,10 @@ const AllReview = () => {
   // Review Edit function
   const onSubmit = async (data: any) => {
     const updateData = {
-        review:data.review,
-        rating:Number(data.rating),
-        service:data.service.id
-    }
+      review: data.review,
+      rating: Number(data.rating),
+      service: data.service.id,
+    };
     message.loading("Update Review.....");
     try {
       const res = await updateReview({
@@ -139,10 +130,10 @@ const AllReview = () => {
               onClick={() => {
                 setReviewId(selectedReview.id);
                 setEditReview({
-                  rating:selectedReview?.rating,
+                  rating: selectedReview?.rating,
                   review: selectedReview?.review,
                   user: selectedReview?.user,
-                  service:selectedReview?.service?.title
+                  service: selectedReview?.service?.title,
                 });
                 setIsModalOpen(true);
               }}
@@ -229,15 +220,15 @@ const AllReview = () => {
               />
             </div>
             <div className="my-[10px]  md:max-w-md mx-0">
-               <MultiSelect
-                  label="Select Service"
-                  name="service"
-                  options={serviceOptions}
-                  isMulti={false}
-                  defaultValue={editReview.service}
-                  required={false}
-                  setValue={setValue}
-                />
+              <MultiSelect
+                label="Select Service"
+                name="service"
+                options={serviceOptions}
+                isMulti={false}
+                defaultValue={editReview.service}
+                required={false}
+                setValue={setValue}
+              />
             </div>
           </div>
           <Button className="mt-2" type="primary" htmlType="submit">

@@ -83,7 +83,7 @@ const UploaderImage = ({
   const [previewOpen, setPreviewOpen] = useState(false);
   const [previewImage, setPreviewImage] = useState(defaultValue || "");
 
-  console.log(previewImage);
+  // console.log(previewImage);
   const handlePreview = async (file: UploadFile) => {
     if (!file.url && !file.preview) {
       file.preview = await getBase64(file.originFileObj as RcFile);

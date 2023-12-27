@@ -1,7 +1,6 @@
 import DashboardCard from "@/components/DashboardCard/DashboardCard";
 import DashboardChart from "@/components/DashboardChart/DashboardChart";
 import RecentDonationCard from "@/components/RecentDonationCard/RecentDonationCard";
-import { title } from "process";
 import React from "react";
 
 type AdminPageProps = {

@@ -3,6 +3,7 @@
 import InputField from "@/components/InputField/InputField";
 import ActionBar from "@/components/UI/ActionBar";
 import Breadcrumb from "@/components/UI/BreadCrumb";
+import UploaderImage from "@/components/Uploader/UploaderImage";
 import config from "@/config/config";
 import { useAddVolunteerMutation } from "@/redux/Api/volunteerApi";
 import { Button, message } from "antd";
@@ -15,37 +16,23 @@ const CreateVolunteer = () => {
     register,
     reset,
     formState: { errors },
+    setValue,
   } = useForm();
 
   const onSubmit = async (data: any) => {
-    const image = data.image[0];
-    const formData = new FormData();
-    formData.append("image", image);
-    const url = config.imageBbKey;
-
-    const imgFetch = await fetch(url, {
-      method: "POST",
-      body: formData,
-    })
-      .then((res) => res.json())
-      .then((imageData) => {
-        if (imageData.success) {
-          const newVolunteer = {
-            name: data.name,
-            designation: data.designation,
-            image: imageData?.data?.url,
-            facebook:data.facebook,
-            linkedin:data.linkedin,
-            github:data.github,
-            instagram:data.instagram,
-          };
-          return newVolunteer;
-        }
-      });
+    const newVolunteer = {
+      name: data.name,
+      designation: data.designation,
+      image: data.image,
+      facebook: data.facebook,
+      linkedin: data.linkedin,
+      github: data.github,
+      instagram: data.instagram,
+    };
 
     message.loading("Creating Volunteer.....");
     try {
-      const res = await addVolunteer(imgFetch).unwrap();
+      const res = await addVolunteer(newVolunteer).unwrap();
       if (res) {
         message.success("Volunteer Create successfully");
       }
@@ -68,11 +55,18 @@ const CreateVolunteer = () => {
       <ActionBar title="Create Volunteer">
         <form className="block w-full" onSubmit={handleSubmit(onSubmit)}>
           <div className="w-full">
+            <div className="my-[10px] md:max-w-md mx-0">
+              <label className="text-[13px] leading-6 font-inter text-gray-400 font-semibold capitalize">
+                Upload Image
+              </label>
+              <UploaderImage name="image" setValue={setValue} />
+            </div>
             <div className="my-[10px]  md:max-w-md mx-0">
               <InputField
                 name="name"
                 label="Name"
                 type="text"
+                placeholder="Enter Name"
                 register={register}
                 errors={errors}
                 required
@@ -83,26 +77,19 @@ const CreateVolunteer = () => {
                 name="designation"
                 label="Designation"
                 type="text"
+                placeholder="Enter Designation"
                 register={register}
                 errors={errors}
                 required
               />
             </div>
-            <div className="my-[10px] md:max-w-md mx-0">
-              <InputField
-                name="image"
-                label="Image"
-                type="file"
-                register={register}
-                errors={errors}
-                required
-              />
-            </div>
+
             <div className="my-[10px]  md:max-w-md mx-0">
               <InputField
                 name="facebook"
                 label="Facebook Link"
                 type="text"
+                placeholder="Enter Facebook Link"
                 register={register}
                 errors={errors}
                 required
@@ -113,6 +100,7 @@ const CreateVolunteer = () => {
                 name="linkedin"
                 label="Linkedin Link"
                 type="text"
+                placeholder="Enter Linkedin Link"
                 register={register}
                 errors={errors}
                 required
@@ -123,6 +111,7 @@ const CreateVolunteer = () => {
                 name="github"
                 label="Github Link"
                 type="text"
+                placeholder="Enter Github Link"
                 register={register}
                 errors={errors}
                 required
@@ -133,6 +122,7 @@ const CreateVolunteer = () => {
                 name="instagram"
                 label="Instagram Link"
                 type="text"
+                placeholder="Enter Instagram Link"
                 register={register}
                 errors={errors}
                 required

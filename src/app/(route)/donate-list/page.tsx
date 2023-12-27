@@ -112,7 +112,7 @@ const DonateList: React.FC<DonateListProps> = () => {
         <div className="common">
           <div className="div">
             <div className="mb-3">
-              <div className="w-1/3 mx-auto relative mb-4 flex flex-wrap items-stretch rounded-full">
+              <div className=" w-full lg:w-1/3 mx-auto relative mb-4 flex flex-wrap items-stretch rounded-full">
                 <input
                   type="search"
                   className="relative m-0 -mr-0.5 block min-w-0 flex-auto rounded-l border border-solid border-primary bg-transparent bg-clip-padding px-3 py-[0.25rem] text-base font-normal leading-[1.6] text-neutral-700 outline-none transition duration-200 ease-in-out focus:z-[3] focus:border-primary focus:text-neutral-700 focus:shadow-[inset_0_0_0_1px_rgb(59,113,202)] focus:outline-none rounded-tl-full rounded-bl-full"
@@ -144,7 +144,7 @@ const DonateList: React.FC<DonateListProps> = () => {
               </div>
             </div>
             <h3 className="mb-10 text-3xl text-[#111] font-semibold">
-              Regularly new
+              প্লাটিনাম ক্লাবে নতুন
             </h3>
             <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3">
               {people.slice(0, 6).map((person) => (
@@ -159,7 +159,7 @@ const DonateList: React.FC<DonateListProps> = () => {
         <div className="common">
           <div className="div">
             <h3 className="mb-10 text-3xl text-[#111] font-semibold">
-              More blood donors regularly
+              প্লাটিনাম ক্লাবে আরো রক্তদাতা
             </h3>
             <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
               {people.map((person) => (

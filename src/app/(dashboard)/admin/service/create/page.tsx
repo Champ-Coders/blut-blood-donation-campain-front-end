@@ -1,51 +1,42 @@
 "use client";
 
 import InputField from "@/components/InputField/InputField";
+import ReactQuillText from "@/components/ReactQuill/ReactQuill";
 import TextAreaField from "@/components/TextAreaField/TextAreaField";
 import ActionBar from "@/components/UI/ActionBar";
 import Breadcrumb from "@/components/UI/BreadCrumb";
+import UploaderImage from "@/components/Uploader/UploaderImage";
 import config from "@/config/config";
 import { useAddServiceMutation } from "@/redux/Api/serviceApi";
 import { getUserDataFromLC } from "@/utils/local-storage";
 import { Button, message } from "antd";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 
 const CreateService = () => {
   const userData = getUserDataFromLC() as any;
   const [addService] = useAddServiceMutation();
+
+  const [description, setDescription] = useState("");
   const {
     handleSubmit,
     register,
     reset,
     formState: { errors },
+    setValue,
   } = useForm();
 
   const onSubmit = async (data: any) => {
-    const image = data.image[0];
-    const formData = new FormData();
-    formData.append("image", image);
-    const url = config.imageBbKey;
-
-    const imgFetch = await fetch(url, {
-      method: "POST",
-      body: formData,
-    })
-      .then((res) => res.json())
-      .then((imageData) => {
-        if (imageData.success) {
-          const newBlog = {
-            title: data.title,
-            description: data.description,
-            image: imageData?.data?.url,
-            user: userData?.id,
-          };
-          return newBlog;
-        }
-      });
+    const serviceData = {
+      title: data.title,
+      description,
+      image: data?.image,
+      user: userData?.id,
+    };
 
     message.loading("Creating Service.....");
     try {
-      const res = await addService(imgFetch).unwrap();
+      const res = await addService(serviceData).unwrap();
       if (res) {
         message.success("Service Create successfully");
       }
@@ -68,6 +59,12 @@ const CreateService = () => {
       <ActionBar title="Create Service">
         <form className="block w-full" onSubmit={handleSubmit(onSubmit)}>
           <div className="w-full">
+            <div className="my-[10px] md:max-w-md mx-0">
+              <label className="text-[13px] leading-6 font-inter text-gray-400 font-semibold capitalize">
+                Upload Image
+              </label>
+              <UploaderImage name="image" setValue={setValue} />
+            </div>
             <div className="my-[10px]  md:max-w-md mx-0">
               <InputField
                 name="title"
@@ -78,23 +75,12 @@ const CreateService = () => {
                 required
               />
             </div>
-            <div className="my-[10px] md:max-w-md mx-0">
-              <TextAreaField
-                name="description"
-                register={register}
-                errors={errors}
+            <div className="my-[10px] md:max-w-3xl mx-0">
+              <ReactQuillText
                 label="Description"
                 required
-              />
-            </div>
-            <div className="my-[10px] md:max-w-md mx-0">
-              <InputField
-                name="image"
-                label="Image"
-                type="file"
-                register={register}
-                errors={errors}
-                required
+                setValue={setDescription}
+                value={description}
               />
             </div>
           </div>

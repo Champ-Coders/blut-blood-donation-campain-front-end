@@ -5,6 +5,9 @@ import InputField from "../InputField/InputField";
 import MultiSelect from "../MultiSelector/MultiSelector";
 import { blood_groups } from "@/constants/Register";
 import TextAreaField from "../TextAreaField/TextAreaField";
+import { useRequestForDonateMutation } from "@/redux/Api/donationApi/DonationApi";
+import { useRouter } from "next/navigation";
+import { message } from "antd";
 
 type DonationFormProps = {};
 
@@ -15,10 +18,23 @@ const DonationForm: React.FC<DonationFormProps> = () => {
     setValue,
     formState: { errors },
   } = useForm();
+  const [donate] = useRequestForDonateMutation(undefined);
+  const router = useRouter();
 
-  const onSubmit = (data: any) => {
-    // Handle form submission logic here
-    console.log("Form Data:", data);
+  const onSubmit = async (data: any) => {
+    data.bag = parseInt(data.bag);
+    data.bloodGroup = data.bloodGroup.name;
+    const res: any = await donate({ data });
+    try {
+      if (res?.data?.success) {
+        message.success(res?.data.message);
+        router.push("/");
+      } else {
+        message.error(res?.error?.data?.message);
+      }
+    } catch (error: any) {
+      // message.error(error?.data?.message);
+    }
   };
 
   return (
@@ -33,7 +49,7 @@ const DonationForm: React.FC<DonationFormProps> = () => {
           <div className="flex w-full sm:flex-row flex-col mb-1 sm:mb-4 justify-between items-center gap-3 sm:gap-6">
             <MultiSelect
               placeholder="Enter Your Blood Group"
-              name={"blood_group"}
+              name={"bloodGroup"}
               options={blood_groups}
               isMulti={false}
               required={true}
@@ -51,17 +67,17 @@ const DonationForm: React.FC<DonationFormProps> = () => {
         <div className="flex-grow mb-4 w-full">
           <div className="flex w-full sm:flex-row flex-col mb-1 sm:mb-4 justify-between items-center gap-3 sm:gap-6">
             <InputField
-              placeholder="First Name"
-              name={"first_name"}
+              placeholder="Full Name"
+              name={"name"}
               type="text"
               register={register}
               required
               errors={errors}
             />
             <InputField
-              placeholder="Last Name"
-              name={"last_name"}
-              type="text"
+              placeholder="Total Bag"
+              name={"bag"}
+              type="number"
               required
               register={register}
               errors={errors}
@@ -71,15 +87,15 @@ const DonationForm: React.FC<DonationFormProps> = () => {
         <div className="flex-grow mb-4 w-full">
           <div className="flex w-full sm:flex-row flex-col mb-1 sm:mb-4 justify-between items-center gap-3 sm:gap-6">
             <InputField
-              placeholder="Email"
-              name={"email"}
-              type="email"
+              placeholder="Phone Number"
+              name={"phoneNumber"}
+              type="text"
               register={register}
               required
               errors={errors}
             />
             <InputField
-              placeholder="Address"
+              placeholder="Your Location"
               name={"address"}
               type="text"
               required
@@ -94,7 +110,7 @@ const DonationForm: React.FC<DonationFormProps> = () => {
               rows={6}
               register={register}
               placeholder="Case Description"
-              name="message"
+              name="details"
             />
           </div>
         </div>

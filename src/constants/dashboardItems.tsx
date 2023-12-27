@@ -19,7 +19,7 @@ export const dashboardItems = (role: USER_ROLE) => {
   // ! common sidebar for every user
   const defaultSidebarItems: MenuProps["items"] = [
     {
-      label: <button className="bg-red-600">Profile</button>,
+      label: <button className="bg-red-60">Profile</button>,
       key: "profile",
       icon: (
         <UserSwitchOutlined
@@ -342,26 +342,6 @@ export const dashboardItems = (role: USER_ROLE) => {
       ],
     },
   ];
-  // ! donar SidebarItems
-  const donarSidebarItems: MenuProps["items"] = [
-    {
-      label: (
-        <Link className="" href={`/${role}/admin`}>
-          Manage Admin
-        </Link>
-      ),
-      icon: (
-        <AlipayCircleFilled
-          style={{
-            fontSize: "18px",
-            // marginRight:"5px"
-            // borderRadius: "10px",
-          }}
-        />
-      ),
-      key: `/${role}/admin`,
-    },
-  ];
 
   // ! PatientSidebar ITems
   const patientSidebarItems: MenuProps["items"] = [
@@ -421,6 +401,5 @@ export const dashboardItems = (role: USER_ROLE) => {
   ];
 
   if (role === USER_ROLE.admin) return adminSidebarItems;
-  else if (role === USER_ROLE.donar) return donarSidebarItems;
-  else if (role === USER_ROLE.patient) return patientSidebarItems;
+  else if (role === USER_ROLE.user) return patientSidebarItems;
 };

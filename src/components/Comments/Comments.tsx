@@ -6,8 +6,18 @@ import { BsFillTagFill } from "react-icons/bs";
 import { FaPaperclip, FaRegUserCircle } from "react-icons/fa";
 import { IoChatbubbleEllipses } from "react-icons/io5";
 import { useForm } from "react-hook-form";
+import { message } from "antd";
 
-const activity = [
+type IActivity = {
+  id?: number;
+  type: string;
+  person: { name: string; href: string };
+  imageUrl?: string;
+  comment?: string;
+  date: string;
+};
+
+const activity: IActivity[] = [
   {
     id: 1,
     type: "comment",
@@ -31,32 +41,55 @@ const activity = [
 ];
 
 const Comments = () => {
+  const [comment, setComment] = React.useState(activity);
+
   const { data } = useUserProfileQuery(null);
   const userInfo = data?.data;
- 
 
   const {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm();
   const onSubmit = (data: any) => {
-    console.log(data);
+    // if (!userInfo) {
+    //   message.error("Please login first");
+    //   return;
+    // }
+
+    const newComment = {
+      id: comment.length + 1,
+      type: "comment",
+      person: {
+        name: userInfo?.name ?? "Md Mahafujur Rahaman Masud",
+        href: "#",
+      },
+      imageUrl:
+        userInfo?.image ?? "https://i.ibb.co/YcjhGgs/IMG-20231111-142014-1.jpg",
+      comment: data.comment,
+      date: "now",
+    };
+
+    setComment([...comment, newComment]);
+
+    // reset comment
+    data.comment = "";
+    reset();
   };
 
- 
   return (
     <div>
       <p className="font-playfair text-3xl font-semibold my-[20px]">
-        Reviews - ({activity?.length})
+        Reviews - ({comment?.length})
       </p>
 
       <div className="flow-root  md:w-4/6">
         <ul role="list" className="-mb-8">
-          {activity.map((activityItem, activityItemIdx) => (
+          {comment?.map((activityItem, activityItemIdx) => (
             <li key={activityItem.id}>
               <div className="relative pb-8">
-                {activityItemIdx !== activity.length - 1 ? (
+                {activityItemIdx !== comment.length - 1 ? (
                   <span
                     className="absolute left-5 top-5 -ml-px h-full w-0.5 bg-gray-200"
                     aria-hidden="true"
