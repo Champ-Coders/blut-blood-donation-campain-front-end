@@ -10,7 +10,7 @@ const AvailableDonorLink = [
   },
   {
     name: "Search Blood Groups",
-    link: "/searchBloodGroups",
+    link: "/search-blood-groups",
     logo: "https://i.ibb.co/bLrRsBC/b-search.png",
   },
   {
