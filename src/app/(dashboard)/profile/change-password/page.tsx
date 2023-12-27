@@ -2,7 +2,6 @@
 import InputField from "@/components/InputField/InputField";
 import { useChangePasswordMutation } from "@/redux/Api/authApi/AuthApi";
 import { message } from "antd";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 
 import React from "react";

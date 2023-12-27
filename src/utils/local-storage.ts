@@ -21,8 +21,6 @@ type IUserInfo = {
 export const getUserDataFromLC = (): IUserInfo | null => {
   const token = getFromLocalStorage("user");
 
-  // console.log(token,"token of lc");
-
   if (token && typeof window !== "undefined") {
     const userInfo: IUserInfo = jwtDecode(token);
     return userInfo;
