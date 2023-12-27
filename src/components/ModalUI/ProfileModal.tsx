@@ -9,6 +9,8 @@ import { uploadImageBB } from "@/hooks/ImgbbUploader";
 import UploaderImage from "../Uploader/UploaderImage";
 import ReactQuillText from "../ReactQuill/ReactQuill";
 import { useUserUpdateProfileMutation } from "@/redux/Api/authApi/AuthApi";
+import MultiSelect from "../MultiSelector/MultiSelector";
+import { blood_groups } from "@/constants/Register";
 
 const ProfileUpdateModalUI = ({
   modalId,
@@ -23,6 +25,8 @@ const ProfileUpdateModalUI = ({
   editUser: any;
   setEditUser: any;
 }) => {
+//   console.log(editUser);
+
   const {
     handleSubmit,
     register,
@@ -41,50 +45,41 @@ const ProfileUpdateModalUI = ({
     }
   }, [editUser, isModalOpen, reset]);
 
-  const [userUpdateProfile] = useUserUpdateProfileMutation()
+  const [userUpdateProfile] = useUserUpdateProfileMutation();
 
   const onSubmit = async (data: any) => {
-
-
     const updateData = {
-      title: data?.title || editUser?.title,
-      description: description || editUser?.description,
-      image: data?.image || editUser?.image,
-      banner: data?.banner || editUser?.banner,
-      User_time: data?.User_time || editUser?.User_time,
-      User_date: data?.User_date || editUser?.User_date,
-      location: data?.location || editUser?.location,
-      
+      ...data,
     };
 
-    // console.log(updateData);
+    console.log(updateData,"updateData");
 
     message.loading("Updating User.....");
-    try {
-      const res = await userUpdateProfile(updateData).unwrap();
-      if (res?.success) {
-        message.success("User updated successfully");
-        setIsModalOpen(false);
-      } else if (res?.error?.data) {
-        message.error(res?.error?.data?.message);
-      } else {
-        message.error("Could not update the User");
-      }
-    } catch (err: any) {
-      console.log(err);
+    // try {
+    //   const res = await userUpdateProfile(updateData).unwrap();
+    //   if (res?.success) {
+    //     message.success("User updated successfully");
+    //     setIsModalOpen(false);
+    //   } else if (res?.error?.data) {
+    //     message.error(res?.error?.data?.message);
+    //   } else {
+    //     message.error("Could not update the User");
+    //   }
+    // } catch (err: any) {
+    //   console.log(err);
 
-      if (err?.data?.errorMessages) {
-        message.error(err?.data?.errorMessages[0]?.message);
-      } else if (err?.data?.message) {
-        message.error(err?.data.message);
-      } else {
-        message.error("Could not update the User");
-      }
-    }
+    //   if (err?.data?.errorMessages) {
+    //     message.error(err?.data?.errorMessages[0]?.message);
+    //   } else if (err?.data?.message) {
+    //     message.error(err?.data.message);
+    //   } else {
+    //     message.error("Could not update the User");
+    //   }
+    // }
     // reset();
   };
 
-  console.log(editUser);
+//   console.log(editUser);
 
   return (
     <Modal
@@ -97,87 +92,98 @@ const ProfileUpdateModalUI = ({
     >
       <form className="block w-full" onSubmit={handleSubmit(onSubmit)}>
         <div className="w-full">
-          <div className="my-[10px]  md:max-w-md mx-0">
+          <div className="flex w-full sm:flex-row flex-col mb-4 justify-between items-center gap-3 sm:gap-6">
             <InputField
-              name="title"
-              label="Title"
+              placeholder="Your Name"
+              label="Your Name"
+              name={"name"}
               type="text"
               register={register}
-              defaultValue={editUser?.title}
+              defaultValue={editUser?.name}
+              required
               errors={errors}
-              // required
             />
           </div>
-          <div className="my-[10px]  md:max-w-md mx-0">
+          {/* Email */}
+          <div className="w-full mb-3 sm:mb-6">
             <InputField
-              name="location"
-              label="Location"
-              defaultValue={editUser?.location}
+              placeholder="Enter Your Email"
+              label="Your Email Address"
+              name={"email"}
+              defaultValue={editUser?.email}
+              type="email"
+              register={register}
+              required
+              errors={errors}
+            />
+          </div>
+          {/* Phone */}
+          <div className="w-full mb-3 sm:mb-6">
+            <InputField
+              placeholder="Enter Your Phone Number"
+              name={"phoneNumber"}
+              label="Your Phone Number"
+              defaultValue={editUser?.phoneNumber}
               type="text"
               register={register}
-              errors={errors}
               required
-            />
-          </div>
-
-          <div className="my-[10px] md:max-w-md mx-0">
-            <label className="text-[13px] leading-6 font-inter text-gray-400 font-semibold capitalize">
-              Upload User Image
-            </label>
-            <UploaderImage
-              name="image"
-              // register={register}
-
-              setValue={setValue}
-              defaultValue={editUser?.image}
-            />
-          </div>
-          <div className="my-[10px] md:max-w-md mx-0">
-            <label className="text-[13px] leading-6 font-inter text-gray-400 font-semibold capitalize">
-              Upload User Banner
-            </label>
-            <UploaderImage
-              name="banner"
-              // defaultValue
-              // register={register}
-              defaultValue={editUser?.banner}
-              setValue={setValue}
-            />
-          </div>
-          <div className="my-[10px] md:max-w-md mx-0">
-            <InputField
-              name="User_time"
-              label="User Time"
-              type="time"
-              register={register}
-              // defaultValue={editUser?.User_time}
               errors={errors}
-              // required
-            />
-          </div>
-          <div className="my-[10px] md:max-w-md mx-0">
-            <InputField
-              name="User_date"
-              label="User Date"
-              type="date"
-              register={register}
-              defaultValue={editUser?.User_date}
-              errors={errors}
-              // required
             />
           </div>
 
-          <div className="my-[10px] md:max-w-3xl mx-0">
-            <ReactQuillText
-              label="Description"
-              required
-              setValue={setDescription}
-              value={description}
-            />
+          {/* Date of Birth*/}
+
+          <div className="flex-grow w-full mb-4">
+            <div className="flex w-full sm:flex-row flex-col mb-1 sm:mb-4 justify-between items-center gap-3 sm:gap-6">
+              <InputField
+                placeholder="Enter Your Date Of Birth"
+                label="Your Date Of Birth"
+                name={"dateOfBirth"}
+                defaultValue={editUser?.dateOfBirth}
+                type="date"
+                register={register}
+                required
+                errors={errors}
+              />
+            </div>
+          </div>
+          {/*address*/}
+
+          <div className="flex w-full sm:flex-row flex-col mb-4 justify-between items-center gap-3 sm:gap-6">
+            <div className="flex w-full sm:flex-row flex-col mb-1 sm:mb-4 justify-between items-center gap-3 sm:gap-6">
+              <InputField
+                placeholder="Enter Your Address"
+                label="Your Address"
+                name={"address"}
+                type="text"
+                register={register}
+                required
+                defaultValue={editUser?.address}
+                errors={errors}
+              />
+            </div>
+          </div>
+
+          {/* Blood Group */}
+
+          <div className="flex-grow w-full">
+            <div className="flex w-full sm:flex-row flex-col mb-1 sm:mb-4 justify-between items-center gap-3 sm:gap-6">
+              <MultiSelect
+                placeholder="Blood Group"
+                label="Select Your Blood Group"
+                name={"bloodGroup"}
+                options={blood_groups}
+                defaultValue={editUser?.bloodGroup}
+                isMulti={false}
+                required={true}
+                setValue={setValue}
+              />
+            </div>
           </div>
         </div>
+
         <Button className="mt-2" type="primary" htmlType="submit">
-          Update User
+          Update Profile
         </Button>
       </form>
     </Modal>
