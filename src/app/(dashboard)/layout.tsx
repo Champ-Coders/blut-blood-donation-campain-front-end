@@ -3,10 +3,11 @@ import SideMenuUI from "@/components/UI/SideMenuUI";
 import DashboardNavbar from "@/components/dashboard/DashboardNavbar";
 import DashboardSidebar from "@/components/dashboard/DashboardSider";
 import { dashboardItems } from "@/constants/dashboardItems";
-import { USER_ROLE } from "@/constants/userRole";
+import { useUserProfileQuery } from "@/redux/Api/authApi/AuthApi";
 import { Drawer, Layout } from "antd";
 import useBreakpoint from "antd/lib/grid/hooks/useBreakpoint";
 import React, { useState } from "react";
+import LoadingPage from "../loading";
 
 const { Content } = Layout;
 
@@ -15,6 +16,14 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
 
   const screens = useBreakpoint();
   //  !screens is a hooks of ant design for responsive conditionals
+
+  const { data, isLoading } = useUserProfileQuery(undefined, {
+    refetchOnMountOrArgChange: true,
+  });
+
+  if (isLoading) return <LoadingPage />;
+
+  const USER_ROLE = data?.data?.role;
 
   return (
     <Layout
@@ -31,7 +40,7 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
         >
           <SideMenuUI
             data={{
-              itemsData: dashboardItems(USER_ROLE.admin),
+              itemsData: dashboardItems(USER_ROLE),
               mainCss: "bg-white",
               menuCss: "bg-slate-50 text-primary my-5 font-[600]",
               subMenuCss: "hover:bg-primary hover:text-white",
@@ -42,7 +51,11 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
       ) : (
         <section>
           {/*//! for small & medium device drawer */}
-          <DashboardSidebar collapsed={collapsed} setCollapsed={setCollapsed} />
+          <DashboardSidebar
+            collapsed={collapsed}
+            setCollapsed={setCollapsed}
+            role={USER_ROLE}
+          />
         </section>
       )}
       {/* //! Main Content of dashboard with dashboard navbar */}

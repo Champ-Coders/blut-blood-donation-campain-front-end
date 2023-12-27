@@ -2,18 +2,21 @@
 
 import InputField from "@/components/InputField/InputField";
 import MultiSelect from "@/components/MultiSelector/MultiSelector";
+import ReactQuillText from "@/components/ReactQuill/ReactQuill";
 import TextAreaField from "@/components/TextAreaField/TextAreaField";
 import ActionBar from "@/components/UI/ActionBar";
 import Breadcrumb from "@/components/UI/BreadCrumb";
+import { useUserProfileQuery } from "@/redux/Api/authApi/AuthApi";
 import { useAddReviewMutation } from "@/redux/Api/reviewApi";
 import { useServicesQuery } from "@/redux/Api/serviceApi";
 import { getUserDataFromLC } from "@/utils/local-storage";
 import { Button, message } from "antd";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 
 
 const CreateReview = () => {
-  const userData = getUserDataFromLC() as any;
+  const {data:userData} = useUserProfileQuery({})
   const { data: services } = useServicesQuery(undefined);
   const [addReview] = useAddReviewMutation();
   const {
@@ -23,7 +26,9 @@ const CreateReview = () => {
     reset,
     formState: { errors },
   } = useForm();
+  const [description, setDescription] = useState("");
 
+  // console.log(userData?.data?._id,"userData");
 
   const serviceOptions=services?.data?.map((service:any)=>(
     {
@@ -34,10 +39,10 @@ const CreateReview = () => {
 
   const onSubmit = async (data: any) => {
       const newReview = {
-          review: data.review,
+          review: description,
           rating: Number(data.rating),
           service:data.service.id,
-          user: userData?.id,
+          user: userData?.data?._id,
         };
     message.loading("Creating Review.....");
     try {
@@ -64,13 +69,12 @@ const CreateReview = () => {
       <ActionBar title="Create Review">
         <form className="block w-full" onSubmit={handleSubmit(onSubmit)}>
           <div className="w-full">
-            <div className="my-[10px] md:max-w-md mx-0">
-              <TextAreaField
-                name="review"
-                register={register}
-                errors={errors}
+          <div className="my-[10px] md:max-w-3xl mx-0">
+              <ReactQuillText
                 label="Review"
                 required
+                setValue={setDescription}
+                value={description}
               />
             </div>
             <div className="my-[10px]  md:max-w-md mx-0">

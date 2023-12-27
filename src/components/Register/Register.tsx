@@ -5,10 +5,15 @@ import { useForm } from "react-hook-form";
 import InputField from "../InputField/InputField";
 import Link from "next/link";
 import MultiSelect from "../MultiSelector/MultiSelector";
-import { blood_groups } from "@/constants/Register";
+import {
+  bangladeshDistricts,
+  blood_groups,
+  divisions,
+} from "@/constants/Register";
 import { useUserRegisterMutation } from "@/redux/Api/authApi/AuthApi";
 import { message } from "antd";
 import { useRouter } from "next/navigation";
+import UploaderImage from "../Uploader/UploaderImage";
 
 const Register = () => {
   const {
@@ -24,6 +29,7 @@ const Register = () => {
 
   const onSubmit = async (data: any) => {
     const registrationData = {
+      imgUrl: data?.imgUrl,
       name: data?.name,
       email: data?.email,
       phoneNumber: data?.phoneNumber,
@@ -32,7 +38,9 @@ const Register = () => {
       dateOfBirth: data?.dateOfBirth,
       address: data?.address,
     };
-    // console.log(registrationData);
+    registrationData.address.division = data?.division?.name;
+    registrationData.address.district = data?.district?.name;
+    console.log(registrationData);
     try {
       const response = await userRegister(registrationData).unwrap();
 
@@ -57,6 +65,12 @@ const Register = () => {
       <div className="container mx-auto py-6 sm:py-12 px-0 sm:px-7 md:px-16 max-w-6xl flex justify-between lg:flex-row items-center gap-5 sm:gap-12 flex-col-reverse">
         <div className="lg:w-1/2 w-full shadow-sm shadow-[rgba(0,0,0,0.1)] bg-white p-4 lg:p-8 border rounded-lg">
           <form className="block w-full" onSubmit={handleSubmit(onSubmit)}>
+            <div className="my-[10px] md:max-w-md mx-0">
+              <label className="text-[13px] leading-6 font-inter text-gray-400 font-semibold capitalize">
+                Upload Image
+              </label>
+              <UploaderImage name="imgUrl" setValue={setValue} />
+            </div>
             <div className="flex w-full sm:flex-row flex-col mb-4 justify-between items-center gap-3 sm:gap-6">
               <InputField
                 placeholder="Your Name"
@@ -104,9 +118,7 @@ const Register = () => {
                 errors={errors}
               />
             </div>
-
             {/* Date of Birth*/}
-
             <div className="flex-grow w-full mb-4">
               <div className="flex w-full sm:flex-row flex-col mb-1 sm:mb-4 justify-between items-center gap-3 sm:gap-6">
                 <InputField
@@ -121,13 +133,12 @@ const Register = () => {
               </div>
             </div>
             {/*address*/}
-
             <div className="flex w-full sm:flex-row flex-col mb-4 justify-between items-center gap-3 sm:gap-6">
               <div className="flex w-full sm:flex-row flex-col mb-1 sm:mb-4 justify-between items-center gap-3 sm:gap-6">
                 <InputField
-                  placeholder="Enter Your Address"
-                  label="Your Address"
-                  name={"address"}
+                  placeholder="Enter Your Village"
+                  label="Your Village"
+                  name={"address.village"}
                   type="text"
                   register={register}
                   required
@@ -135,9 +146,59 @@ const Register = () => {
                 />
               </div>
             </div>
-
+            <div className="flex w-full sm:flex-row flex-col mb-4 justify-between items-center gap-3 sm:gap-6">
+              <div className="flex w-full sm:flex-row flex-col mb-1 sm:mb-4 justify-between items-center gap-3 sm:gap-6">
+                <InputField
+                  placeholder="Enter Your Post Office"
+                  label="Your Post Office"
+                  name={"address.postOffice"}
+                  type="text"
+                  register={register}
+                  required
+                  errors={errors}
+                />
+              </div>
+            </div>
+            <div className="flex w-full sm:flex-row flex-col mb-4 justify-between items-center gap-3 sm:gap-6">
+              <div className="flex w-full sm:flex-row flex-col mb-1 sm:mb-4 justify-between items-center gap-3 sm:gap-6">
+                <InputField
+                  placeholder="Enter Your Thana"
+                  label="Your Thana"
+                  name={"address.thana"}
+                  type="text"
+                  register={register}
+                  required
+                  errors={errors}
+                />
+              </div>
+            </div>
+            <div className="flex w-full sm:flex-row flex-col mb-4 justify-between items-center gap-3 sm:gap-6">
+              <div className="flex w-full sm:flex-row flex-col mb-1 sm:mb-4 justify-between items-center gap-3 sm:gap-6">
+                <MultiSelect
+                  placeholder="Enter Your District"
+                  label="Your District"
+                  name={"district"}
+                  options={bangladeshDistricts}
+                  isMulti={false}
+                  required={true}
+                  setValue={setValue}
+                />
+              </div>
+            </div>
+            <div className="flex w-full sm:flex-row flex-col mb-4 justify-between items-center gap-3 sm:gap-6">
+              <div className="flex w-full sm:flex-row flex-col mb-1 sm:mb-4 justify-between items-center gap-3 sm:gap-6">
+                <MultiSelect
+                  placeholder="Enter Your Division"
+                  label="Your Division"
+                  name={"division"}
+                  options={divisions}
+                  isMulti={false}
+                  required={true}
+                  setValue={setValue}
+                />
+              </div>
+            </div>
             {/* Blood Group */}
-
             <div className="flex-grow w-full">
               <div className="flex w-full sm:flex-row flex-col mb-1 sm:mb-4 justify-between items-center gap-3 sm:gap-6">
                 <MultiSelect
@@ -151,7 +212,6 @@ const Register = () => {
                 />
               </div>
             </div>
-
             <div className="w-full">
               <button
                 type="submit"

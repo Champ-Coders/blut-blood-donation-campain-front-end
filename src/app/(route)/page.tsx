@@ -16,6 +16,7 @@ import { FloatButton } from "antd";
 import { VerticalAlignTopOutlined } from "@ant-design/icons";
 import FaqQuestion from "@/components/Home/FaqQuestion";
 import ListOfHonorableBloodDonors from "@/components/Home/ListOfHonorableBloodDonors";
+import FeedBackForum from "@/components/FeedBackForum/FeedBackForum";
 
 export default function Home() {
   return (
@@ -36,6 +37,8 @@ export default function Home() {
       <News />
 
       <FaqQuestion />
+
+      <FeedBackForum />
 
       {/* floating icon */}
       <FloatButton.BackTop

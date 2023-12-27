@@ -16,9 +16,11 @@ const { Sider } = Layout;
 const DashboardSidebar = ({
   collapsed,
   setCollapsed,
+  role,
 }: {
   collapsed: boolean;
   setCollapsed: any;
+  role: any;
 }) => {
   const menuClass: string = "";
   return (
@@ -68,7 +70,7 @@ const DashboardSidebar = ({
         </section>
       ) : (
         // <UserOutlined className="text-2xl ml-7 mt-3" />
-        <Link  href={"/"}>
+        <Link href={"/"}>
           <Image
             src={logo}
             alt="logo"
@@ -81,7 +83,7 @@ const DashboardSidebar = ({
 
       <SideMenuUI
         data={{
-          itemsData: dashboardItems(USER_ROLE.admin),
+          itemsData: dashboardItems(role),
           mainCss: `bg-white font-oswald pt-[20px] text-[14px] ${
             collapsed || ""
           }`,

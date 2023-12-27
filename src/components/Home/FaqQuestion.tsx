@@ -62,9 +62,9 @@ const FaqQuestion = async () => {
               y2="-418.681"
               gradientUnits="userSpaceOnUse"
             >
-              <stop stop-color="red" stop-opacity="0.36" />
-              <stop offset="1" stop-color="#ea062b" stop-opacity="0" />
-              <stop offset="1" stop-color="#ea062b" stop-opacity="0.096144" />
+              <stop stopColor="red" stopOpacity="0.36" />
+              <stop offset="1" stopColor="#ea062b" stopOpacity="0" />
+              <stop offset="1" stopColor="#ea062b" stopOpacity="0.096144" />
             </linearGradient>
           </defs>
         </svg>

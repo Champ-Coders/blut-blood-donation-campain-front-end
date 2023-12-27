@@ -1,11 +1,9 @@
 "use client";
-
 import InputField from "@/components/InputField/InputField";
 import ReactQuillText from "@/components/ReactQuill/ReactQuill";
-import TextAreaField from "@/components/TextAreaField/TextAreaField";
 import ActionBar from "@/components/UI/ActionBar";
 import Breadcrumb from "@/components/UI/BreadCrumb";
-import config from "@/config/config";
+import UploaderImage from "@/components/Uploader/UploaderImage";
 import { useAddBlogMutation } from "@/redux/Api/blogApi";
 import { getUserDataFromLC } from "@/utils/local-storage";
 import { Button, message } from "antd";
@@ -16,42 +14,29 @@ const CreateBlog = () => {
   const userData = getUserDataFromLC() as any;
   const [description, setDescription] = useState("");
 
-  const [addBlog] = useAddBlogMutation();
+  const [addBlog, { isLoading }] = useAddBlogMutation();
 
   const {
     handleSubmit,
     register,
     reset,
     formState: { errors },
+    setValue,
   } = useForm();
 
   const onSubmit = async (data: any) => {
-    const image = data.image[0];
-    const formData = new FormData();
-    formData.append("image", image);
-    const url = config.imageBbKey;
-
-    const imgFetch = await fetch(url, {
-      method: "POST",
-      body: formData,
-    })
-      .then((res) => res.json())
-      .then((imageData) => {
-        if (imageData.success) {
-          const newBlog = {
-            title: data.title,
-            description: description,
-            image: imageData?.data?.url,
-            user: userData?.id,
-          };
-          return newBlog;
-        }
-      });
-
     message.loading("Creating Blog.....");
+
+    const newBlog = {
+      title: data.title,
+      description: description,
+      image: data?.image,
+      user: userData?.id,
+    };
+    console.log(newBlog);
     try {
-      const res = await addBlog(imgFetch).unwrap();
-      if (res) {
+      const res = await addBlog(newBlog).unwrap();
+      if (res?.success) {
         message.success("Blog Create successfully");
       }
     } catch (err: any) {
@@ -83,15 +68,7 @@ const CreateBlog = () => {
                 required
               />
             </div>
-            {/* <div className="my-[10px] md:max-w-3xl mx-0">
-              <TextAreaField
-                name="description"
-                register={register}
-                errors={errors}
-                label="Description"
-                required
-              />
-            </div> */}
+
             <div className="my-[10px] md:max-w-3xl mx-0">
               <ReactQuillText
                 label="Description"
@@ -101,19 +78,28 @@ const CreateBlog = () => {
               />
             </div>
 
-            <div className="my-[10px] md:max-w-3xl mx-0">
-              <InputField
+            <div className="my-[16px] md:max-w-3xl mx-0">
+              {/* <InputField
                 name="image"
                 label="Image"
                 type="file"
                 register={register}
                 errors={errors}
                 required
-              />
+              /> */}
+              <label className="text-[13px] leading-6 font-inter text-gray-400 font-semibold capitalize">
+                Upload Image
+              </label>
+              <UploaderImage name="image" setValue={setValue} />
             </div>
           </div>
 
-          <Button className="mt-2" type="primary" htmlType="submit">
+          <Button
+            className="mt-2"
+            type="primary"
+            htmlType="submit"
+            loading={isLoading}
+          >
             Create Blog
           </Button>
         </form>

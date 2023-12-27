@@ -2,14 +2,20 @@
 
 import { Badge, FloatButton, Tooltip } from "antd";
 import Image from "next/image";
-import React from "react";
+import React, { useState } from "react";
 import LiveChatImage from "../../../public//assets/live-chat-icon.png";
 import Popovers from "../Popover/Popover";
 import DraggableLiveModal from "./DraggableLiveModal";
-import { FaMinus } from "react-icons/fa";
+
 
 const LiveChatButton = () => {
   const [open, setOpen] = React.useState(false);
+
+
+ 
+
+
+
   return (
     <>
       <Popovers
@@ -17,9 +23,9 @@ const LiveChatButton = () => {
         open={open}
         placement="leftTop"
         title={
-          <div className="p-2 shadow-lg">
+          <span>
             {/* header */}
-            <div className="flex justify-between items-center ">
+            {/* <div className="flex justify-between items-center ">
               <div className="font-bold md:text-3xl text-lg font-playfair">
                 Live Chat
               </div>
@@ -31,10 +37,10 @@ const LiveChatButton = () => {
                   <FaMinus />
                 </div>
               </Tooltip>
-            </div>
+            </div> */}
 
             {/* body */}
-            <div className="h-[60px] w-full md:my-[30px] mt-[10px] flex flex-col justify-center items-center ">
+            {/* <div className="h-[60px] w-full md:my-[30px] mt-[10px] flex flex-col justify-center items-center ">
               <Badge size="default" status="success" dot>
                 <Image
                   src={"https://i.ibb.co/YcjhGgs/IMG-20231111-142014-1.jpg"}
@@ -46,8 +52,13 @@ const LiveChatButton = () => {
               </Badge>
 
               <h3 className="mt-2 font-inter text-sm">Md Mahafujur Rahaman</h3>
-            </div>
-          </div>
+            </div> */}
+
+            {/* Chat */}
+
+            
+           
+          </span>
         }
         trigger="click"
         body={DraggableLiveModal}
