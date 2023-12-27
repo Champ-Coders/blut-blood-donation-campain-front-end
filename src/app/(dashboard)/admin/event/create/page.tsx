@@ -143,7 +143,7 @@ const CreateEvent = () => {
                 required
               />
             </div>
-            <div className="my-[10px] md:max-w-3xl mx-0">
+            <div className="my-[10px] md:max-w-md mx-0">
               <ReactQuillText
                 label="Description"
                 required
