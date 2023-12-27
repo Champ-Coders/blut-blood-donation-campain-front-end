@@ -4,7 +4,6 @@ import ReactQuillText from "@/components/ReactQuill/ReactQuill";
 import ActionBar from "@/components/UI/ActionBar";
 import Breadcrumb from "@/components/UI/BreadCrumb";
 import UploaderImage from "@/components/Uploader/UploaderImage";
-import config from "@/config/config";
 import { useAddBlogMutation } from "@/redux/Api/blogApi";
 import { getUserDataFromLC } from "@/utils/local-storage";
 import { Button, message } from "antd";
