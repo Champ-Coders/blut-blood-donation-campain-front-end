@@ -2,17 +2,22 @@
 
 import InputField from "@/components/InputField/InputField";
 import MultiSelect from "@/components/MultiSelector/MultiSelector";
-import ReactQuillText from "@/components/ReactQuill/ReactQuill";
-import TextAreaField from "@/components/TextAreaField/TextAreaField";
+import dynamic from "next/dynamic";
 import ActionBar from "@/components/UI/ActionBar";
 import Breadcrumb from "@/components/UI/BreadCrumb";
 import { useUserProfileQuery } from "@/redux/Api/authApi/AuthApi";
 import { useAddReviewMutation } from "@/redux/Api/reviewApi";
 import { useServicesQuery } from "@/redux/Api/serviceApi";
-import { getUserDataFromLC } from "@/utils/local-storage";
 import { Button, message } from "antd";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+
+const ReactQuillText = dynamic(
+  () => import("@/components/ReactQuill/ReactQuill"),
+  {
+    ssr: false,
+  }
+);
 
 const CreateReview = () => {
   const { data: userData } = useUserProfileQuery({});

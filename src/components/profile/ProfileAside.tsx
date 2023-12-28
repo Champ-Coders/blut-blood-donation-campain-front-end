@@ -82,7 +82,8 @@ const profileData: {
     ),
     title: "Delete",
     link: "/profile",
-  },{
+  },
+  {
     icon: (
       <SettingOutlined
         style={{
@@ -92,15 +93,15 @@ const profileData: {
     ),
     title: "Settings",
     link: "/profile",
-  }
+  },
 ];
 const ProfileAside = ({ userData }: { userData: IUser }) => {
   return (
-    <aside className="sticky top-0 w-full lg:w-[30%] flex flex-col gap-5  py-[3rem] mt-5 bg-white shadow-md px-3">
+    <aside className="sticky top-0 w-full lg:w-[30%] flex flex-col gap-5  py-3 mt-5 bg-white shadow-md px-3 rounded-lg">
       {profileData.map((item, index) => {
         return (
           <Link
-            className="flex gap-5 text-black text-[16px] font-[500] px-3  py-2 hover:bg-slate-200"
+            className="flex gap-5 text-black text-[16px] font-[500] px-3  py-2 hover:bg-slate-200 rounded-lg"
             href={item?.link}
             key={index + 1}
           >

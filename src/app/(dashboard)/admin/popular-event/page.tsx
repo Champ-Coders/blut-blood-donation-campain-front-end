@@ -11,7 +11,14 @@ import {
   useEventsQuery,
   useUpdateEventMutation,
 } from "@/redux/Api/eventApi";
-import EventModalUI from "@/components/ModalUI/EventModalUI";
+import dynamic from "next/dynamic";
+
+const EventModalUI = dynamic(
+  () => import("@/components/ModalUI/EventModalUI"),
+  {
+    ssr: false,
+  }
+);
 
 const AllPopularEvents = () => {
   const [searchText, setSearchText] = useState<string>("");

@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
 import React, { Fragment } from "react";
 import Logo from "../../../../public/assets/logo-light.png";
@@ -16,8 +17,14 @@ import { Badge, message } from "antd";
 import { useRouter } from "next/navigation";
 import { FaRegBell } from "react-icons/fa";
 
+import Popovers from "@/components/Popover/Popover";
+import { INotification } from "@/constants/INotification";
+import { IoChatboxEllipsesSharp } from "react-icons/io5";
+import Notification from "@/components/Notification/Notification";
+
 const MainHeader = () => {
   const [open, setOpen] = React.useState(false);
+  const [isOpenNotification, setIsOpenNotification] = React.useState(false);
 
   const { data } = useUserProfileQuery(null);
   const userInfo = data?.data;
@@ -68,15 +75,7 @@ const MainHeader = () => {
         {/* login button  */}
         {userInfo?.email ? (
           <div className="hidden lg:ml-4 lg:flex items-center gap-2">
-            <Badge count={99}>
-              <button
-                type="button"
-                className="flex-shrink-0 rounded-full bg-white p-1 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
-              >
-                <span className="sr-only">View notifications</span>
-                <FaRegBell className="h-6 w-6" aria-hidden="true" />
-              </button>
-            </Badge>
+            <Notification />
             <Menu as="div" className="relative ml-4 flex-shrink-0">
               <div>
                 <Menu.Button className="flex rounded-full bg-white text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2">
@@ -85,7 +84,7 @@ const MainHeader = () => {
                     height={50}
                     width={50}
                     className="h-8 w-8 rounded-full"
-                    src={userIcon}
+                    src={userInfo?.imgUrl ?? userIcon}
                     alt="user"
                   />
                 </Menu.Button>
