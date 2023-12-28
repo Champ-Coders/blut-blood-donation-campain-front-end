@@ -14,6 +14,7 @@ export const contactApi = api.injectEndpoints({
         };
       },
       providesTags: [tagTypes.contact],
+      
     }),
     // get single
     Contact: build.query({

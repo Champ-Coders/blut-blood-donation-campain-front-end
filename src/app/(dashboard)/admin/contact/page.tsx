@@ -46,6 +46,7 @@ const AllContact = () => {
   const [updateContact] = useUpdateContactMutation();
   const [deleteContact] = useDeleteContactMutation();
   const { data: Contacts } = useContactsQuery(undefined);
+  //   console.log("🚀 ~ file: page.tsx:49 ~ AllContact ~ Contacts:", Contacts)
 
   // filter Contact by Contact, service titlee, user name
   const filteredContactData = Contacts?.data?.filter((Contact: any) => {
@@ -199,11 +200,11 @@ const AllContact = () => {
           <div className="w-full">
             <div className="my-[10px] mx-0">
               <TextAreaField
-                name="Contact"
+                name="subject"
                 register={register}
                 errors={errors}
                 defaultValue={editContact?.subject}
-                label="Contact"
+                label="Subject"
                 rows={4}
               />
             </div>
