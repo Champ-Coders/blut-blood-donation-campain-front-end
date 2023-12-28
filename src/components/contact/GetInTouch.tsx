@@ -33,63 +33,65 @@ const GetInTouch: React.FC<GetInTouchProps> = () => {
             dislike men by the charms
           </p>
 
-          <div className="flex-grow mb-4 w-full">
-            <div className="flex w-full sm:flex-row flex-col mb-1 sm:mb-4 justify-between items-center gap-3 sm:gap-6">
-              <InputField
-                placeholder="First Name"
-                name={"first_name"}
-                type="text"
-                register={register}
-                required
-                errors={errors}
-              />
-              <InputField
-                placeholder="Last Name"
-                name={"last_name"}
-                type="text"
-                required
-                register={register}
-                errors={errors}
-              />
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <div className="flex-grow mb-4 w-full">
+              <div className="flex w-full sm:flex-row flex-col mb-1 sm:mb-4 justify-between items-center gap-3 sm:gap-6">
+                <InputField
+                  placeholder="First Name"
+                  name={"first_name"}
+                  type="text"
+                  register={register}
+                  required
+                  errors={errors}
+                />
+                <InputField
+                  placeholder="Last Name"
+                  name={"last_name"}
+                  type="text"
+                  required
+                  register={register}
+                  errors={errors}
+                />
+              </div>
             </div>
-          </div>
-          <div className="flex-grow mb-4 w-full">
-            <div className="flex w-full sm:flex-row flex-col mb-1 sm:mb-4 justify-between items-center gap-3 sm:gap-6">
-              <InputField
-                placeholder="Email"
-                name={"email"}
-                type="email"
-                register={register}
-                required
-                errors={errors}
-              />
-              <InputField
-                placeholder="Subject"
-                name={"subject"}
-                type="text"
-                required
-                register={register}
-                errors={errors}
-              />
+            <div className="flex-grow mb-4 w-full">
+              <div className="flex w-full sm:flex-row flex-col mb-1 sm:mb-4 justify-between items-center gap-3 sm:gap-6">
+                <InputField
+                  placeholder="Email"
+                  name={"email"}
+                  type="email"
+                  register={register}
+                  required
+                  errors={errors}
+                />
+                <InputField
+                  placeholder="Subject"
+                  name={"subject"}
+                  type="text"
+                  required
+                  register={register}
+                  errors={errors}
+                />
+              </div>
             </div>
-          </div>
-          <div className="w-full">
-            <div className="flex w-full sm:flex-row flex-col mb-1 sm:mb-4 justify-between items-center gap-3 sm:gap-6">
-              <TextAreaField
-                rows={6}
-                register={register}
-                placeholder="Case Description"
-                name="message"
-              />
+            <div className="w-full">
+              <div className="flex w-full sm:flex-row flex-col mb-1 sm:mb-4 justify-between items-center gap-3 sm:gap-6">
+                <TextAreaField
+                  rows={6}
+                  register={register}
+                  placeholder="Case Description"
+                  name="message"
+                />
+              </div>
             </div>
-          </div>
-          <button
-            type="submit"
-            className="py-[15px] px-5 border group bg-primary  hover:bg-black text-white transition-all ease-out duration-300 w-full flex justify-between"
-          >
-            <span className="relative">Submit Request</span>
-            <FaArrowRightLong />
-          </button>
+            <button
+              type="submit"
+              className="py-[15px] px-5 border group bg-primary  hover:bg-black text-white transition-all ease-out duration-300 w-full flex justify-between"
+            >
+              <span className="relative">Submit Request</span>
+              <FaArrowRightLong />
+            </button>
+          </form>
         </div>
         <div className="md:col-span-1 lg:col-span-5">
           <div className="bg-[#ea062b] px-[30px] py-[60px] text-white">
