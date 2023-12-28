@@ -85,7 +85,7 @@ const MainHeader = () => {
                     height={50}
                     width={50}
                     className="h-8 w-8 rounded-full"
-                    src={userIcon}
+                    src={userInfo?.imgUrl ?? userIcon}
                     alt="user"
                   />
                 </Menu.Button>

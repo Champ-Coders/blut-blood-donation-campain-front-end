@@ -6,7 +6,7 @@ import { FaRegBell } from "react-icons/fa";
 
 import { Badge, Button, message } from "antd";
 import { Header } from "antd/es/layout/layout";
-import React, { Fragment, useState } from "react";
+import React, { Fragment } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 
 import Logo from "../../../public/assets/logo-light.png";
@@ -14,6 +14,7 @@ import userImage from "../../../public/assets/icon/userIcon.png";
 import Image from "next/image";
 import { logout } from "@/utils/local-storage";
 import { useRouter } from "next/navigation";
+import { useUserProfileQuery } from "@/redux/Api/authApi/AuthApi";
 function classNames(...classes: any) {
   return classes.filter(Boolean).join(" ");
 }
@@ -25,6 +26,9 @@ const DashboardNavbar = ({
   collapsed: boolean;
   setCollapsed: any;
 }) => {
+  const { data } = useUserProfileQuery(null);
+  const userInfo = data?.data;
+
   const router = useRouter();
   const SignOutHandler = () => {
     logout();
@@ -120,7 +124,7 @@ const DashboardNavbar = ({
                           height={50}
                           width={50}
                           className="h-8 w-8 rounded-full"
-                          src={userImage}
+                          src={userInfo?.imgUrl ?? userImage}
                           alt=""
                         />
                       </Menu.Button>
