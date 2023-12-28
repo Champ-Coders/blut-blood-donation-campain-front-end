@@ -6,7 +6,7 @@ import { BsFillTagFill } from "react-icons/bs";
 import { FaPaperclip, FaRegUserCircle } from "react-icons/fa";
 import { IoChatbubbleEllipses } from "react-icons/io5";
 import { useForm } from "react-hook-form";
-import { message } from "antd";
+import { Empty, message } from "antd";
 
 import UserIcon from "../../../public/assets/icon/userIcon.png";
 
@@ -19,31 +19,19 @@ type IActivity = {
   date: string;
 };
 
-const activity: IActivity[] = [
-  {
-    id: 1,
-    type: "comment",
-    person: { name: "Eduardo Benz", href: "#" },
-    imageUrl:
-      "https://images.unsplash.com/photo-1520785643438-5bf77931f493?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=256&h=256&q=80",
-    comment:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tincidunt nunc ipsum tempor purus vitae id. Morbi in vestibulum nec varius. Et diam cursus quis sed purus nam. ",
-    date: "2023-12-28T08:01:40.125Z",
-  },
-  {
-    id: 4,
-    type: "comment",
-    person: { name: "Jason Meyers", href: "#" },
-    imageUrl:
-      "https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=256&h=256&q=80",
-    comment:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tincidunt nunc ipsum tempor purus vitae id. Morbi in vestibulum nec varius. Et diam cursus quis sed purus nam. Scelerisque amet elit non sit ut tincidunt condimentum. Nisl ultrices eu venenatis diam.",
-    date: "2023-10-28T08:01:40.125Z",
-  },
-];
+const activity: IActivity[] = [];
 
 const Comments = () => {
   const [comment, setComment] = React.useState(activity);
+
+  // get comment from local storage
+  React.useEffect(() => {
+    const localComment = localStorage.getItem("comment");
+    if (localComment) {
+      const localCommentParse = JSON.parse(localComment);
+      setComment(localCommentParse);
+    }
+  }, []);
 
   const { data } = useUserProfileQuery(null);
   const userInfo = data?.data;
@@ -73,6 +61,17 @@ const Comments = () => {
     };
 
     setComment([...comment, newComment]);
+    // set LocalStorage
+    const localComment = localStorage.getItem("comment");
+    if (localComment) {
+      const localCommentParse = JSON.parse(localComment);
+      localStorage.setItem(
+        "comment",
+        JSON.stringify([...localCommentParse, newComment])
+      );
+    } else {
+      localStorage.setItem("comment", JSON.stringify([newComment]));
+    }
 
     // reset comment
     data.comment = "";
@@ -87,114 +86,138 @@ const Comments = () => {
 
       <div className="flow-root  md:w-4/6">
         <ul role="list" className="-mb-8">
-          {comment?.map((activityItem, activityItemIdx) => (
-            <li key={activityItem.id}>
-              <div className="relative pb-8">
-                {activityItemIdx !== comment.length - 1 ? (
-                  <span
-                    className="absolute left-5 top-5 -ml-px h-full w-0.5 bg-gray-200"
-                    aria-hidden="true"
-                  />
-                ) : null}
-                <div className="relative flex items-start space-x-3">
-                  {activityItem.type === "comment" ? (
-                    <>
-                      <div className="relative">
-                        <Image
-                          className="flex h-10 w-10 items-center justify-center rounded-full bg-gray-400 ring-8 ring-white"
-                          src={activityItem.imageUrl!}
-                          alt=""
-                          width={40}
-                          height={40}
-                        />
-
-                        <span className="absolute -bottom-0.5 -right-1 rounded-tl bg-white px-0.5 py-px">
-                          <IoChatbubbleEllipses
-                            className="h-5 w-5 text-gray-400"
-                            aria-hidden="true"
+          {comment.length === 0 ? (
+            <div className="mb-[20px]">
+              <Empty description="No comment" />
+            </div>
+          ) : (
+            comment?.map((activityItem, activityItemIdx) => (
+              <li key={activityItem.id}>
+                <div className="relative pb-8">
+                  {activityItemIdx !== comment.length - 1 ? (
+                    <span
+                      className="absolute left-5 top-5 -ml-px h-full w-0.5 bg-gray-200"
+                      aria-hidden="true"
+                    />
+                  ) : null}
+                  <div className="relative flex items-start space-x-3">
+                    {activityItem.type === "comment" ? (
+                      <>
+                        <div className="relative">
+                          <Image
+                            className="flex h-10 w-10 items-center justify-center rounded-full bg-gray-400 ring-8 ring-white"
+                            src={activityItem.imageUrl!}
+                            alt=""
+                            width={40}
+                            height={40}
                           />
-                        </span>
-                      </div>
-                      <div className="min-w-0 flex-1">
-                        <div>
-                          <div className="text-sm">
-                            <a
-                              href={activityItem.person.href}
-                              className="font-medium text-gray-900"
-                            >
-                              {activityItem.person.name}
-                            </a>
-                          </div>
-                          <p className="mt-0.5 text-sm text-gray-500">
-                            Commented {activityItem.date}
-                          </p>
-                        </div>
-                        <div className="mt-2 text-sm text-gray-700">
-                          <p>{activityItem.comment}</p>
-                        </div>
-                      </div>
-                    </>
-                  ) : activityItem.type === "assignment" ? (
-                    <>
-                      <div>
-                        <div className="relative px-1">
-                          <div className="flex h-8 w-8 items-center justify-center rounded-full bg-gray-100 ring-8 ring-white">
-                            <FaRegUserCircle
-                              className="h-5 w-5 text-gray-500"
+
+                          <span className="absolute -bottom-0.5 -right-1 rounded-tl bg-white px-0.5 py-px">
+                            <IoChatbubbleEllipses
+                              className="h-5 w-5 text-gray-400"
                               aria-hidden="true"
                             />
-                          </div>
-                        </div>
-                      </div>
-                      <div className="min-w-0 flex-1 py-1.5">
-                        <div className="text-sm text-gray-500">
-                          <a
-                            href={activityItem.person.href}
-                            className="font-medium text-gray-900"
-                          >
-                            {activityItem.person.name}
-                          </a>{" "}
-                          assigned{" "}
-                          <span className="whitespace-nowrap">
-                            {activityItem.date}
                           </span>
+                          {/* delete */}
                         </div>
-                      </div>
-                    </>
-                  ) : activityItem.type === "tags" ? (
-                    <>
-                      <div>
-                        <div className="relative px-1">
-                          <div className="flex h-8 w-8 items-center justify-center rounded-full bg-gray-100 ring-8 ring-white">
-                            <BsFillTagFill
-                              className="h-5 w-5 text-gray-500"
-                              aria-hidden="true"
-                            />
+                        <div className="min-w-0 flex-1">
+                          <div>
+                            <div className="text-sm">
+                              <a
+                                href={activityItem.person.href}
+                                className="font-medium text-gray-900"
+                              >
+                                {activityItem.person.name}
+                              </a>
+                            </div>
+                            <p className="mt-0.5 text-sm text-gray-500">
+                              Commented {activityItem.date} {}
+                              <span>
+                                <button
+                                  className="text-red-400 ml-2"
+                                  onClick={() => {
+                                    const newComment = comment.filter(
+                                      (item) => item.id !== activityItem.id
+                                    );
+                                    setComment(newComment);
+                                    localStorage.setItem(
+                                      "comment",
+                                      JSON.stringify(newComment)
+                                    );
+                                  }}
+                                >
+                                  Delete
+                                </button>
+                              </span>
+                            </p>
+                          </div>
+                          <div className="mt-2 text-sm text-gray-700">
+                            <p>{activityItem.comment}</p>
                           </div>
                         </div>
-                      </div>
-                      <div className="min-w-0 flex-1 py-0">
-                        <div className="text-sm leading-8 text-gray-500">
-                          <span className="mr-0.5">
+                      </>
+                    ) : activityItem.type === "assignment" ? (
+                      <>
+                        <div>
+                          <div className="relative px-1">
+                            <div className="flex h-8 w-8 items-center justify-center rounded-full bg-gray-100 ring-8 ring-white">
+                              <FaRegUserCircle
+                                className="h-5 w-5 text-gray-500"
+                                aria-hidden="true"
+                              />
+                            </div>
+                          </div>
+                        </div>
+                        <div className="min-w-0 flex-1 py-1.5">
+                          <div className="text-sm text-gray-500">
                             <a
                               href={activityItem.person.href}
                               className="font-medium text-gray-900"
                             >
                               {activityItem.person.name}
                             </a>{" "}
-                            added tags
-                          </span>{" "}
-                          <span className="whitespace-nowrap">
-                            {activityItem.date}
-                          </span>
+                            assigned{" "}
+                            <span className="whitespace-nowrap">
+                              {activityItem.date}
+                            </span>
+                          </div>
                         </div>
-                      </div>
-                    </>
-                  ) : null}
+                      </>
+                    ) : activityItem.type === "tags" ? (
+                      <>
+                        <div>
+                          <div className="relative px-1">
+                            <div className="flex h-8 w-8 items-center justify-center rounded-full bg-gray-100 ring-8 ring-white">
+                              <BsFillTagFill
+                                className="h-5 w-5 text-gray-500"
+                                aria-hidden="true"
+                              />
+                            </div>
+                          </div>
+                        </div>
+                        <div className="min-w-0 flex-1 py-0">
+                          <div className="text-sm leading-8 text-gray-500">
+                            <span className="mr-0.5">
+                              <a
+                                href={activityItem.person.href}
+                                className="font-medium text-gray-900"
+                              >
+                                {activityItem.person.name}
+                              </a>{" "}
+                              added tags
+                            </span>{" "}
+                            <span className="whitespace-nowrap">
+                              {activityItem.date}
+                            </span>
+                          </div>
+                        </div>
+                      </>
+                    ) : null}
+                  </div>
                 </div>
-              </div>
-            </li>
-          ))}
+              </li>
+            ))
+          )}
         </ul>
 
         {/* New comment form */}
