@@ -21,6 +21,7 @@ const Register = () => {
     handleSubmit,
     setValue,
     formState: { errors },
+    reset,
   } = useForm();
 
   const [userRegister, { isLoading }] = useUserRegisterMutation();
@@ -40,12 +41,13 @@ const Register = () => {
     };
     registrationData.address.division = data?.division?.name;
     registrationData.address.district = data?.district?.name;
-    console.log(registrationData);
+
     try {
       const response = await userRegister(registrationData).unwrap();
 
       if (response?.success) {
         message.success(response.message);
+        reset();
         router.push("/profile");
       } else {
         message.error(response.message);
@@ -211,6 +213,7 @@ const Register = () => {
           <div className="w-full">
             <Button
               htmlType="submit"
+              loading={isLoading}
               className="relative w-full rounded px-5  overflow-hidden group bg-primary  hover:bg-black text-white transition-all ease-out duration-300"
             >
               <span className="absolute right-0 w-8 h-32 -mt-12 transition-all duration-1000 transform translate-x-10 bg-white opacity-10 rotate-12 group-hover:-translate-x-[550px] ease"></span>
