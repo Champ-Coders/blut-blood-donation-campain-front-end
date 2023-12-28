@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { SubmitHandler, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import InputField from "../InputField/InputField";
 import MultiSelect from "../MultiSelector/MultiSelector";
 import TextAreaField from "../TextAreaField/TextAreaField";
@@ -8,7 +8,6 @@ import TextAreaField from "../TextAreaField/TextAreaField";
 import { useRouter } from "next/navigation";
 import { useRequestForBloodMutation } from "@/redux/Api/donationApi/DonationApi";
 import { Button, message } from "antd";
-import { blood_groups } from "@/constants/Register";
 
 const AppointmentForm = ({ availableDonor }: any) => {
   const {
