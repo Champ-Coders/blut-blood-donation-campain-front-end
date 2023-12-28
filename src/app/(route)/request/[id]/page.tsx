@@ -60,6 +60,7 @@ const DonateNow = ({ params }: { params: { id: string } }) => {
                   isMulti={false}
                   required={true}
                   setValue={setValue}
+                  label="Blood Group"
                 />
                 <InputField
                   placeholder="Total Bag"

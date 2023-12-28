@@ -99,10 +99,10 @@ const BloodOwner = async () => {
           {/* form */}
           <div className="bg-white py-[35px] px-[25px] shadow-[0px_9px_52px_0px_rgba(0,0,0,.07)] w-full">
             <h3 className="text-[30px] text-[#111111] font-bold capitalize mb-[30px]">
-              Request Appointment Here
+              Request for Blood Here
             </h3>
             <div className="w-full">
-              <AppointmentForm />
+              <AppointmentForm availableDonor={availableDonor} />
             </div>
           </div>
         </div>
