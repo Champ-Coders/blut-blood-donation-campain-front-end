@@ -4,11 +4,23 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "../../app/styles/swiper.css";
 import { Autoplay } from "swiper/modules";
-import { testimonial } from "@/constants/Testimonial";
 import { Rate } from "antd";
 import Image from "next/image";
+import { useReviewsQuery } from "@/redux/Api/reviewApi";
+
+import UserIcon from "../../../public/assets/icon/userIcon.png";
+
+type Testimonial = {
+  _id: string;
+  review: string;
+  rating: number;
+  user?: any;
+  service?: any;
+};
 
 const Testimonials = () => {
+  const { data: reviews } = useReviewsQuery(undefined);
+
   return (
     <div className="container mx-auto max-w-7xl px-5 md:px-14 lg:px-24 py-10 mt-10 sm:py-16">
       <div className="text-center mb-5 sm:mb-10">
@@ -42,35 +54,34 @@ const Testimonials = () => {
         modules={[Autoplay]}
         className="mySwiper"
       >
-        {testimonial.map((test: any) => (
-          <SwiperSlide key={test.title}>
+        {reviews?.data?.map((test: Testimonial) => (
+          <SwiperSlide key={test?._id}>
             <div className="min-h-[300px] text-start px-1">
-              <div className="arrow relative border shadow-lg py-5 px-3 sm:py-8 sm:px-5 bg-white shadow-[rgba(0,0,0,.05)]">
+              <div className="arrow relative border shadow-lg py-5 px-3 sm:py-8 sm:px-5 bg-white shadow-[rgba(0,0,0,.05)] h-[250px]">
                 <p className="text-start mb-4">
-                  <Rate disabled defaultValue={5} />
+                  <Rate disabled defaultValue={test?.rating} />
                 </p>
                 <p className="leading-relaxed text-sm lg:text-base mb-6">
-                  {test.des}
+                  {test?.review}
                 </p>
               </div>
 
               <div className="inline-flex px-5 mt-7 items-center">
-                <div className="w-14 h-14 lg:w-[70px] lg:h-[70px]">
+              
                   <Image
-                    src={test.image}
+                    src={test?.user?.image ?? UserIcon}
                     width={70}
                     height={70}
                     priority
                     alt="text"
-                    className="w-14 h-14 lg:w-[70px] lg:h-[70px]"
+                    className="w-14 h-14 lg:w-[40px] lg:h-[40px]"
                   />
-                </div>
                 <span className="flex-grow flex flex-col pl-4">
-                  <span className="text-xl lg:text-2xl font-roboto text-black font-bold">
-                    {test.title}
+                  <span className="text-xl font-roboto text-black font-bold">
+                    {test?.user?.name}
                   </span>
                   <span className="text-[#666] text-base font-poppins ">
-                    {test.designation}
+                    {test?.user?.role}
                   </span>
                 </span>
               </div>
