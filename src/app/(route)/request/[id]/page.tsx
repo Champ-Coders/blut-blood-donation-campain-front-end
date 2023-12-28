@@ -70,6 +70,9 @@ const DonateNow = ({ params }: { params: { id: string } }) => {
                   register={register}
                   errors={errors}
                   label="Need bag (1 - 2)"
+                  validation={{
+                    validate: (value: number) => value == 1 || value == 2,
+                  }}
                 />
               </div>
             </div>

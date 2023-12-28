@@ -4,10 +4,10 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import InputField from "../InputField/InputField";
 import MultiSelect from "../MultiSelector/MultiSelector";
 import TextAreaField from "../TextAreaField/TextAreaField";
-import Button from "../Button/Button";
+
 import { useRouter } from "next/navigation";
 import { useRequestForBloodMutation } from "@/redux/Api/donationApi/DonationApi";
-import { message } from "antd";
+import { Button, message } from "antd";
 import { blood_groups } from "@/constants/Register";
 
 const AppointmentForm = ({ availableDonor }: any) => {
@@ -18,13 +18,17 @@ const AppointmentForm = ({ availableDonor }: any) => {
     formState: { errors },
     reset,
   } = useForm();
-  const [request] = useRequestForBloodMutation(undefined);
+  const [request, { isLoading }] = useRequestForBloodMutation(undefined);
   const router = useRouter();
 
-  const onSubmit = async (data: any) => {
-    data.bag = parseInt(data.bag);
-    data.bloodGroup = data?.bloodGroup?.name;
-    data.donnerId = data?.bloodGroup?.id;
+  const onSubmit = async (datas: any) => {
+    const data = {
+      bag: parseInt(datas.bag),
+      donnerId: datas?.bloodGroup?.id,
+      bloodGroup: datas?.bloodGroup?.name,
+      expectedDate: datas?.expectedDate?.toString(),
+      patientDetails: datas?.patientDetails,
+    };
     const res: any = await request({ data });
     try {
       if (res?.data?.success) {
@@ -99,13 +103,14 @@ const AppointmentForm = ({ availableDonor }: any) => {
             />
           </div>
         </div>
-        <button
-          type="submit"
-          className="relative max-w-md rounded px-5 py-2 overflow-hidden group bg-primary  hover:bg-black text-white transition-all ease-out duration-300"
+        <Button
+          htmlType="submit"
+          loading={isLoading}
+          className="relative max-w-md rounded px-5  overflow-hidden group bg-primary  hover:bg-black text-white transition-all ease-out duration-300"
         >
           <span className="absolute right-0 w-8 h-32 -mt-12 transition-all duration-1000 transform translate-x-10 bg-white opacity-10 rotate-12 group-hover:-translate-x-40 ease"></span>
           <span className="relative">Request</span>
-        </button>
+        </Button>
       </div>
     </form>
   );
