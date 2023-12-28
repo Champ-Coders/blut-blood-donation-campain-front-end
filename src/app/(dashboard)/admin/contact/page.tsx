@@ -108,11 +108,9 @@ const AllContact = () => {
     },
 
     {
-      title: "CreatedAt",
-      dataIndex: "createdAt",
-      render: function (data: any) {
-        return data && dayjs(data).format("MMM D, YYYY hh:mm A");
-      },
+      title: "Contact Message",
+      dataIndex: "message",
+    
     },
     {
       title: "Action",
