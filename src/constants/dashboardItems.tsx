@@ -11,6 +11,7 @@ import {
   UsergroupDeleteOutlined,
   ClusterOutlined,
   UserSwitchOutlined,
+  MessageOutlined,
 } from "@ant-design/icons";
 import Link from "next/link";
 import { USER_ROLE } from "./userRole";
@@ -310,37 +311,31 @@ export const dashboardItems = (role: USER_ROLE) => {
         },
       ],
     },
-    // {
-    //   label: <button className=" ">Manage NavItems</button>,
-    //   key: "manage-navItem",
-    //   icon: (
-    //     <ScheduleOutlined
-    //       style={{
-    //         fontSize: "18px",
-    //         // marginRight:"5px"
-    //         // borderRadius: "10px",
-    //       }}
-    //     />
-    //   ),
-    //   children: [
-    //     {
-    //       label: (
-    //         <Link className="" href={`/admin/navItem/create`}>
-    //           Create navItem
-    //         </Link>
-    //       ),
-    //       key: `/admin/navItem/create`,
-    //     },
-    //     {
-    //       label: (
-    //         <Link className="" href={`/admin/navItem`}>
-    //           navItem List
-    //         </Link>
-    //       ),
-    //       key: `/admin/navItem`,
-    //     },
-    //   ],
-    // },
+
+    {
+      label: <button className=" ">Manage Contact</button>,
+      key: "manage-contact",
+      icon: (
+        <MessageOutlined
+          style={{
+            fontSize: "18px",
+            // marginRight:"5px"
+            // borderRadius: "10px",
+          }}
+        />
+      ),
+      children: [
+        {
+          label: (
+            <Link className="" href={`/admin/contact`}>
+              Contact List
+            </Link>
+          ),
+          key: `/admin/contact`,
+        },
+     
+      ],
+    }
   ];
 
   // ! PatientSidebar ITems
