@@ -5,20 +5,58 @@ import InputField from "../InputField/InputField";
 import { useForm } from "react-hook-form";
 import { FaArrowRightLong, FaLocationDot } from "react-icons/fa6";
 import { FaClock, FaPhoneAlt } from "react-icons/fa";
+import { useAddContactMutation } from "@/redux/Api/contactApi";
+import { message } from "antd";
 
 type GetInTouchProps = {};
 
 const GetInTouch: React.FC<GetInTouchProps> = () => {
+  const [addContact] = useAddContactMutation();
+
   const {
     register,
     handleSubmit,
     setValue,
     formState: { errors },
+    reset,
   } = useForm();
 
-  const onSubmit = (data: any) => {
+  const onSubmit = async (data: any) => {
+    const contactData = {
+      email: data?.email,
+      name: {
+        first_name: data?.first_name,
+        last_name: data?.last_name,
+      },
+      message: data?.message,
+      subject: data?.subject,
+    };
     // Handle form submission logic here
-    console.log("Form Data:", data);
+    // console.log("Form Data:", contactData);
+
+    try {
+      message.loading("sending message");
+      const res = await addContact(contactData).unwrap();
+      // console.log(res);
+      if (res?.success) {
+        message.success("Contact created successfully");
+        reset();
+      } else if (res?.error?.data) {
+        message.error(res?.error?.data?.message);
+      } else {
+        message.error("Could not create the Contact");
+      }
+    } catch (err: any) {
+      console.log(err);
+
+      if (err?.data?.errorMessages) {
+        message.error(err?.data?.errorMessages[0]?.message);
+      } else if (err?.data?.message) {
+        message.error(err?.data.message);
+      } else {
+        message.error("Could not create the Contact");
+      }
+    }
   };
   return (
     <div className="common">

@@ -24,7 +24,7 @@ const AllContact = () => {
   const [ContactId, setContactId] = useState<string>("");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editContact, setEditContact] = useState({
-    email: 0,
+    email: "",
     subject: "",
   });
   const { data: services } = useServicesQuery(undefined);
@@ -73,9 +73,9 @@ const AllContact = () => {
   // Contact Edit function
   const onSubmit = async (data: any) => {
     const updateData = {
-      Contact: data.Contact,
-      rating: Number(data.rating),
-      service: data.service.id,
+      email: data.email,
+      subject: data.subject,
+   
     };
     message.loading("Update Contact.....");
     try {
