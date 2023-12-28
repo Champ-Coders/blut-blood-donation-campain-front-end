@@ -13,17 +13,19 @@ import TextAreaField from "@/components/TextAreaField/TextAreaField";
 
 import MultiSelect from "@/components/MultiSelector/MultiSelector";
 import { useServicesQuery } from "@/redux/Api/serviceApi";
-import { useContactsQuery, useDeleteContactMutation, useUpdateContactMutation } from "@/redux/Api/contactApi";
+import {
+  useContactsQuery,
+  useDeleteContactMutation,
+  useUpdateContactMutation,
+} from "@/redux/Api/contactApi";
 
 const AllContact = () => {
   const [searchText, setSearchText] = useState<string>("");
   const [ContactId, setContactId] = useState<string>("");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editContact, setEditContact] = useState({
-    rating: 0,
-    Contact: "",
-    user: "",
-    service: "",
+    email: 0,
+    subject: "",
   });
   const { data: services } = useServicesQuery(undefined);
   const {
@@ -49,9 +51,9 @@ const AllContact = () => {
   const filteredContactData = Contacts?.data?.filter((Contact: any) => {
     const lowercaseSearchText = searchText.toLowerCase();
     return (
-      Contact?.Contact?.toLowerCase().includes(lowercaseSearchText) ||
-      Contact?.user?.name?.toLowerCase().includes(lowercaseSearchText) ||
-      Contact?.service?.title?.toLowerCase().includes(lowercaseSearchText)
+      Contact?.name?.fist_name?.toLowerCase().includes(lowercaseSearchText) ||
+      Contact?.email?.toLowerCase().includes(lowercaseSearchText) ||
+      Contact?.subject?.toLowerCase().includes(lowercaseSearchText)
     );
   });
 
@@ -92,21 +94,18 @@ const AllContact = () => {
 
   const columns: any[] = [
     {
-      title: "Contact",
-      dataIndex: "Contact",
+      title: "User email",
+      dataIndex: "email",
     },
     {
-      title: "Rating",
-      dataIndex: "rating",
+      title: "User name",
+      dataIndex: ["name", "first_name"],
     },
     {
-      title: "Service",
-      dataIndex: ["service", "title"],
+      title: "Subject",
+      dataIndex: ["subject"],
     },
-    {
-      title: "User",
-      dataIndex: ["user", "name"],
-    },
+
     {
       title: "CreatedAt",
       dataIndex: "createdAt",
@@ -127,10 +126,8 @@ const AllContact = () => {
               onClick={() => {
                 setContactId(selectedContact.id);
                 setEditContact({
-                  rating: selectedContact?.rating,
-                  Contact: selectedContact?.Contact,
-                  user: selectedContact?.user,
-                  service: selectedContact?.service?.title,
+                  email: selectedContact?.email,
+                  subject: selectedContact?.subject,
                 });
                 setIsModalOpen(true);
               }}
@@ -205,30 +202,19 @@ const AllContact = () => {
                 name="Contact"
                 register={register}
                 errors={errors}
-                defaultValue={editContact?.Contact}
+                defaultValue={editContact?.subject}
                 label="Contact"
                 rows={4}
               />
             </div>
             <div className="my-[10px] mx-0">
               <InputField
-                name="rating"
-                label="Rating"
+                name="email"
+                label="email"
                 type="text"
-                defaultValue={editContact?.rating}
+                defaultValue={editContact?.email}
                 register={register}
                 errors={errors}
-              />
-            </div>
-            <div className="my-[10px]  md:max-w-md mx-0">
-              <MultiSelect
-                label="Select Service"
-                name="service"
-                options={serviceOptions}
-                isMulti={false}
-                defaultValue={editContact.service}
-                required={false}
-                setValue={setValue}
               />
             </div>
           </div>
