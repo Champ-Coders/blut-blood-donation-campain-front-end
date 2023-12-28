@@ -5,20 +5,58 @@ import InputField from "../InputField/InputField";
 import { useForm } from "react-hook-form";
 import { FaArrowRightLong, FaLocationDot } from "react-icons/fa6";
 import { FaClock, FaPhoneAlt } from "react-icons/fa";
+import { useAddContactMutation } from "@/redux/Api/contactApi";
+import { message } from "antd";
 
 type GetInTouchProps = {};
 
 const GetInTouch: React.FC<GetInTouchProps> = () => {
+  const [addContact] = useAddContactMutation();
+
   const {
     register,
     handleSubmit,
     setValue,
     formState: { errors },
+    reset,
   } = useForm();
 
-  const onSubmit = (data: any) => {
+  const onSubmit = async (data: any) => {
+    const contactData = {
+      email: data?.email,
+      name: {
+        first_name: data?.first_name,
+        last_name: data?.last_name,
+      },
+      message: data?.message,
+      subject: data?.subject,
+    };
     // Handle form submission logic here
-    console.log("Form Data:", data);
+    // console.log("Form Data:", contactData);
+
+    try {
+      message.loading("sending message");
+      const res = await addContact(contactData).unwrap();
+      // console.log(res);
+      if (res?.success) {
+        message.success("Contact created successfully");
+        reset();
+      } else if (res?.error?.data) {
+        message.error(res?.error?.data?.message);
+      } else {
+        message.error("Could not create the Contact");
+      }
+    } catch (err: any) {
+      console.log(err);
+
+      if (err?.data?.errorMessages) {
+        message.error(err?.data?.errorMessages[0]?.message);
+      } else if (err?.data?.message) {
+        message.error(err?.data.message);
+      } else {
+        message.error("Could not create the Contact");
+      }
+    }
   };
   return (
     <div className="common">
@@ -33,63 +71,65 @@ const GetInTouch: React.FC<GetInTouchProps> = () => {
             dislike men by the charms
           </p>
 
-          <div className="flex-grow mb-4 w-full">
-            <div className="flex w-full sm:flex-row flex-col mb-1 sm:mb-4 justify-between items-center gap-3 sm:gap-6">
-              <InputField
-                placeholder="First Name"
-                name={"first_name"}
-                type="text"
-                register={register}
-                required
-                errors={errors}
-              />
-              <InputField
-                placeholder="Last Name"
-                name={"last_name"}
-                type="text"
-                required
-                register={register}
-                errors={errors}
-              />
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <div className="flex-grow mb-4 w-full">
+              <div className="flex w-full sm:flex-row flex-col mb-1 sm:mb-4 justify-between items-center gap-3 sm:gap-6">
+                <InputField
+                  placeholder="First Name"
+                  name={"first_name"}
+                  type="text"
+                  register={register}
+                  required
+                  errors={errors}
+                />
+                <InputField
+                  placeholder="Last Name"
+                  name={"last_name"}
+                  type="text"
+                  required
+                  register={register}
+                  errors={errors}
+                />
+              </div>
             </div>
-          </div>
-          <div className="flex-grow mb-4 w-full">
-            <div className="flex w-full sm:flex-row flex-col mb-1 sm:mb-4 justify-between items-center gap-3 sm:gap-6">
-              <InputField
-                placeholder="Email"
-                name={"email"}
-                type="email"
-                register={register}
-                required
-                errors={errors}
-              />
-              <InputField
-                placeholder="Subject"
-                name={"subject"}
-                type="text"
-                required
-                register={register}
-                errors={errors}
-              />
+            <div className="flex-grow mb-4 w-full">
+              <div className="flex w-full sm:flex-row flex-col mb-1 sm:mb-4 justify-between items-center gap-3 sm:gap-6">
+                <InputField
+                  placeholder="Email"
+                  name={"email"}
+                  type="email"
+                  register={register}
+                  required
+                  errors={errors}
+                />
+                <InputField
+                  placeholder="Subject"
+                  name={"subject"}
+                  type="text"
+                  required
+                  register={register}
+                  errors={errors}
+                />
+              </div>
             </div>
-          </div>
-          <div className="w-full">
-            <div className="flex w-full sm:flex-row flex-col mb-1 sm:mb-4 justify-between items-center gap-3 sm:gap-6">
-              <TextAreaField
-                rows={6}
-                register={register}
-                placeholder="Case Description"
-                name="message"
-              />
+            <div className="w-full">
+              <div className="flex w-full sm:flex-row flex-col mb-1 sm:mb-4 justify-between items-center gap-3 sm:gap-6">
+                <TextAreaField
+                  rows={6}
+                  register={register}
+                  placeholder="Case Description"
+                  name="message"
+                />
+              </div>
             </div>
-          </div>
-          <button
-            type="submit"
-            className="py-[15px] px-5 border group bg-primary  hover:bg-black text-white transition-all ease-out duration-300 w-full flex justify-between"
-          >
-            <span className="relative">Submit Request</span>
-            <FaArrowRightLong />
-          </button>
+            <button
+              type="submit"
+              className="py-[15px] px-5 border group bg-primary  hover:bg-black text-white transition-all ease-out duration-300 w-full flex justify-between"
+            >
+              <span className="relative">Submit Request</span>
+              <FaArrowRightLong />
+            </button>
+          </form>
         </div>
         <div className="md:col-span-1 lg:col-span-5">
           <div className="bg-[#ea062b] px-[30px] py-[60px] text-white">

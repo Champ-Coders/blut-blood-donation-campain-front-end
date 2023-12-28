@@ -11,6 +11,7 @@ import {
   UsergroupDeleteOutlined,
   ClusterOutlined,
   UserSwitchOutlined,
+  MessageOutlined,
 } from "@ant-design/icons";
 import Link from "next/link";
 import { USER_ROLE } from "./userRole";
@@ -308,6 +309,30 @@ export const dashboardItems = (role: USER_ROLE) => {
           ),
           key: `/admin/review/create`,
         },
+      ],
+    },
+    {
+      label: <button className=" ">Manage Contact</button>,
+      key: "manage-contact",
+      icon: (
+        <MessageOutlined
+          style={{
+            fontSize: "18px",
+            // marginRight:"5px"
+            // borderRadius: "10px",
+          }}
+        />
+      ),
+      children: [
+        {
+          label: (
+            <Link className="" href={`/admin/contact`}>
+              Contact List
+            </Link>
+          ),
+          key: `/admin/contact`,
+        },
+     
       ],
     },
     {
