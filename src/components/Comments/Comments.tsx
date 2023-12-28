@@ -8,6 +8,8 @@ import { IoChatbubbleEllipses } from "react-icons/io5";
 import { useForm } from "react-hook-form";
 import { message } from "antd";
 
+import UserIcon from "../../../public/assets/icon/userIcon.png";
+
 type IActivity = {
   id?: number;
   type: string;
@@ -26,7 +28,7 @@ const activity: IActivity[] = [
       "https://images.unsplash.com/photo-1520785643438-5bf77931f493?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=256&h=256&q=80",
     comment:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tincidunt nunc ipsum tempor purus vitae id. Morbi in vestibulum nec varius. Et diam cursus quis sed purus nam. ",
-    date: "6d ago",
+    date: "2023-12-28T08:01:40.125Z",
   },
   {
     id: 4,
@@ -36,7 +38,7 @@ const activity: IActivity[] = [
       "https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=256&h=256&q=80",
     comment:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tincidunt nunc ipsum tempor purus vitae id. Morbi in vestibulum nec varius. Et diam cursus quis sed purus nam. Scelerisque amet elit non sit ut tincidunt condimentum. Nisl ultrices eu venenatis diam.",
-    date: "2h ago",
+    date: "2023-10-28T08:01:40.125Z",
   },
 ];
 
@@ -53,22 +55,21 @@ const Comments = () => {
     reset,
   } = useForm();
   const onSubmit = (data: any) => {
-    // if (!userInfo) {
-    //   message.error("Please login first");
-    //   return;
-    // }
+    if (!userInfo) {
+      message.error("Please login first");
+      return;
+    }
 
     const newComment = {
       id: comment.length + 1,
       type: "comment",
       person: {
-        name: userInfo?.name ?? "Md Mahafujur Rahaman Masud",
+        name: userInfo?.name,
         href: "#",
       },
-      imageUrl:
-        userInfo?.image ?? "https://i.ibb.co/YcjhGgs/IMG-20231111-142014-1.jpg",
+      imageUrl: userInfo?.imgUrl ?? UserIcon,
       comment: data.comment,
-      date: "now",
+      date: new Date().toLocaleDateString(),
     };
 
     setComment([...comment, newComment]);
@@ -202,7 +203,7 @@ const Comments = () => {
 
           <Image
             className="flex-none h-10 w-10 rounded-full bg-gray-50"
-            src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+            src={userInfo?.imgUrl ?? UserIcon.src}
             alt=""
             width={40}
             height={40}
