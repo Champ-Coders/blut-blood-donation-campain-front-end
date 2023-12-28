@@ -4,20 +4,17 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "../../app/styles/swiper.css";
 import { Autoplay } from "swiper/modules";
-import { Rate } from "antd";
 import Image from "next/image";
-import { popularCamps } from "@/constants/PopulerCam";
 import { FaCalendarDays, FaLocationDot } from "react-icons/fa6";
 import { FaClock } from "react-icons/fa";
 import { IPopularCamp } from "@/interfaces/common";
 import { useEventsQuery } from "@/redux/Api/eventApi";
+import LoadingPage from "@/app/loading";
 
 const PopularCampaigns = () => {
   const { data: Events, isLoading } = useEventsQuery(undefined);
-  console.log(
-    "🚀 ~ file: PopularCampaigns.tsx:17 ~ PopularCampaigns ~ Events:",
-    Events
-  );
+
+  if (isLoading) return <LoadingPage />;
 
   return (
     <div className="bg-[#f5f5f5]">
@@ -98,8 +95,8 @@ const PopularCampaigns = () => {
                       {camp?.title}
                     </h2>
                     <p className="text-base text-gray-700 leading-8 mb-5 max-h-[60px]">
-                      {camp?.description?.length > 50
-                        ? camp?.description?.slice(0, 50) + "..."
+                      {camp?.description?.length > 80
+                        ? camp?.description?.slice(0, 80) + "..."
                         : camp?.description}
                     </p>
                   </div>
