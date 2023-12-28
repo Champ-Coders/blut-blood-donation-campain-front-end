@@ -69,7 +69,7 @@ const BloodOwner = async () => {
         </div>
       </div>
       {/* bottom section start */}
-      <div className="common p-0 relative -top-[60px]">
+      <div className="common p-0 relative -top-[60px] ">
         <div className="flex flex-col lg:flex-row gap-10 ">
           <div className="bg-white py-[35px] px-[25px] shadow-[0px_9px_52px_0px_rgba(0,0,0,.07)] w-full">
             <h3 className="text-[30px] text-[#111111] font-bold capitalize">
@@ -86,7 +86,7 @@ const BloodOwner = async () => {
                       <FaHeart className="text-[#ea062b]" />
                       {item?.bloodGroup}
                     </span>{" "}
-                    ,{item?.address ?? "Full BD"} ,
+                    , {item?.address ?? "Full BD"} ,{" "}
                     {/* age ({item.dateOfBirth}) */}({" "}
                     {new Date().getFullYear() -
                       new Date(item?.dateOfBirth).getFullYear()}
