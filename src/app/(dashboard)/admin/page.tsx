@@ -1,7 +1,12 @@
+"use client";
+
 import DashboardCard from "@/components/DashboardCard/DashboardCard";
+
 import DashboardChart from "@/components/DashboardChart/DashboardChart";
+import PieChartExample from "@/components/DashboardChart/PieChart";
+import RadarChartExample from "@/components/DashboardChart/RadarChartExample";
+
 import RecentDonationCard from "@/components/RecentDonationCard/RecentDonationCard";
-import React from "react";
 
 type AdminPageProps = {
   title: string;
@@ -70,6 +75,14 @@ const RecentDonation = [
   },
 ];
 
+// Sample data
+const data: any = [
+  { name: "Group A", value: 400 },
+  { name: "Group B", value: 300 },
+  { name: "Group C", value: 300 },
+  { name: "Group D", value: 200 },
+];
+
 const AdminPage = () => {
   return (
     <div className="commonAdmin">
@@ -82,10 +95,9 @@ const AdminPage = () => {
       {/* card end */}
 
       {/* recent donations , Analysis  */}
-
-      <div className="my-[30px] md:flex justify-between gap-10">
+      <div className="my-[30px] md:grid grid-cols-12 justify-start items-start gap-10">
         {/* Recent Donations */}
-        <div>
+        <div className="col-span-12 md:col-span-4  h-full p-2 rounded-xl shadow-md">
           <div className="flex justify-between items-center mb-5">
             <h5 className="text-[24px] font-semibold font-playfair">
               Recent Donations
@@ -102,9 +114,7 @@ const AdminPage = () => {
           </div>
         </div>
 
-        {/* Analysis */}
-
-        <div>
+        <div className="col-span-12 md:col-span-8  h-full p-2 rounded-xl shadow-md">
           <div className="flex justify-between items-center mb-5">
             <h5 className="text-[24px] font-semibold font-playfair">
               Analysis
@@ -112,6 +122,28 @@ const AdminPage = () => {
           </div>
           {/* Analysis */}
           <DashboardChart />
+        </div>
+        {/* Analysis */}
+        <div className="col-span-12 md:col-span-5 h-[500px] p-2 rounded-xl shadow-md ">
+          <div className="flex justify-between items-center">
+            <h5 className="text-[24px] font-semibold font-playfair">
+              All Users Blood Group
+            </h5>
+          </div>
+          <div className="h-full w-full flex items-center justify-center">
+            <PieChartExample />
+          </div>
+        </div>
+        {/* Analysis */}
+        <div className="col-span-12 md:col-span-7 h-[500px] p-2 rounded-xl shadow-md ">
+          <div className="flex justify-between items-center">
+            <h5 className="text-[24px] font-semibold font-playfair">
+              Blood Collection Efficiency
+            </h5>
+          </div>
+          <div className="h-full w-full flex items-center justify-center">
+            <RadarChartExample />
+          </div>
         </div>
       </div>
     </div>
