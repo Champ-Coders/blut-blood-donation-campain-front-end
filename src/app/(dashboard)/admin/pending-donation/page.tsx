@@ -174,7 +174,7 @@ const AllUsers = () => {
         ]}
       />
 
-      <ActionBar title="All Donors">
+      <ActionBar title="Pending Donation">
         <Input
           type="text"
           allowClear
