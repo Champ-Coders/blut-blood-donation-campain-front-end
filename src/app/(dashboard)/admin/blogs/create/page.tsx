@@ -28,7 +28,7 @@ const CreateBlog = () => {
     message.loading("Creating Blog.....");
 
     const newBlog = {
-      title: data.title,
+    title: data.title,
       description: description,
       image: data?.image,
       user: userData?.id,
