@@ -5,14 +5,11 @@ import { useForm } from "react-hook-form";
 import MultiSelect from "../MultiSelector/MultiSelector";
 import Button from "../Button/Button";
 import { useAppDispatch } from "@/redux/app/hook";
-import {
-  ISearchPersonData,
-  searchData,
-} from "@/redux/Api/searchBloodGroug/searchBloodGroups";
+import { searchData } from "@/redux/Api/searchBloodGroug/searchBloodGroups";
 
-type SearchAndFilterProps = {};
+type DonateListSearchProps = {};
 
-const SearchAndFilter: React.FC<SearchAndFilterProps> = ({}) => {
+const DonateListSearch: React.FC<DonateListSearchProps> = () => {
   const dispatch = useAppDispatch();
   const {
     handleSubmit,
@@ -65,7 +62,7 @@ const SearchAndFilter: React.FC<SearchAndFilterProps> = ({}) => {
   return (
     <section>
       <div className="common">
-        <div className="m-2 ">
+        <div className="">
           <div className="rounded-xl border border-gray-200 bg-white p-6 shadow-lg">
             <h2 className="text-stone-700 text-xl font-bold">Apply filters</h2>
             <p className="mt-1 text-sm">Use filters to further refine search</p>
@@ -136,4 +133,4 @@ const SearchAndFilter: React.FC<SearchAndFilterProps> = ({}) => {
     </section>
   );
 };
-export default SearchAndFilter;
+export default DonateListSearch;

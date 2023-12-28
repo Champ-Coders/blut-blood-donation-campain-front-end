@@ -5,26 +5,39 @@ import Table from "@/components/UI/Table";
 import dayjs from "dayjs";
 
 import { Input, Popconfirm, message } from "antd";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   useChangeRoleByAdminMutation,
   useGetAllUsersQuery,
 } from "@/redux/Api/authApi/AuthApi";
-import { useDebounced } from "@/redux/app/hook";
+import { useAppSelector, useDebounced } from "@/redux/app/hook";
 import Link from "next/link";
+import SearchComponent from "@/components/SearchBloodGroups/SearchComponent";
+import DonateListSearch from "@/components/DonateList/DonateListSearch";
+import DonateList from "@/components/DonateList/DonateList";
 
 const AllUsers = () => {
+  const { area, bloodGroup, district, name } = useAppSelector(
+    (state) => state.search
+  );
   const [page, setPage] = useState<number>(1);
   const [size, setSize] = useState<number>(5);
   const [sortBy, setSortBy] = useState<string>("");
   const [sortOrder, setSortOrder] = useState<string>("");
   const [searchTerm, setSearchTerm] = useState<string>("");
+
   const query: Record<string, any> = {};
 
   query["limit"] = size;
   query["page"] = page;
   query["sortBy"] = sortBy;
   query["sortOrder"] = sortOrder;
+
+  useEffect(() => {
+    if (name) {
+      setSearchTerm(name);
+    }
+  }, [name]);
 
   const debouncedSearchTerm = useDebounced({
     searchQuery: searchTerm,
@@ -128,30 +141,21 @@ const AllUsers = () => {
     },
   ];
   return (
-    <div>
-      <ActionBar title="All Users">
-        <Input
-          type="text"
-          allowClear
-          size="middle"
-          placeholder="Search..."
-          onChange={(e) => setSearchTerm(e.target.value)}
-          value={searchTerm}
-          className="max-w-sm mr-4"
-        />
-      </ActionBar>
-      <Table
-        columns={columns}
-        dataSource={users?.data?.data}
-        loading={isLoading}
-        pageSize={size}
-        totalPages={meta?.total}
-        showSizeChanger={true}
-        onPaginationChange={onPaginationChange}
-        onTableChange={onTableChange}
-        showPagination={true}
-      />
-    </div>
+    <main>
+      <DonateListSearch />
+      {/*  <Table
+              columns={columns}
+              dataSource={users?.data?.data}
+              loading={isLoading}
+              pageSize={size}
+              totalPages={meta?.total}
+              showSizeChanger={true}
+              onPaginationChange={onPaginationChange}
+              onTableChange={onTableChange}
+              showPagination={true}
+            /> */}
+      <DonateList data={users?.data?.data} />
+    </main>
   );
 };
 export default AllUsers;

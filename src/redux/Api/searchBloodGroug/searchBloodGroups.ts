@@ -6,14 +6,14 @@ interface IDistrict {
   name: string;
 }
 
-interface IPerson {
+export interface ISearchPersonData {
   name: string;
   bloodGroup: string;
   area: string;
   district: IDistrict;
 }
 
-const initialState: IPerson = {
+const initialState: ISearchPersonData = {
   name: "",
   bloodGroup: "",
   area: "",
@@ -27,8 +27,8 @@ export const searchSlice = createSlice({
   name: "search",
   initialState,
   reducers: {
-    // search data by IPerson
-    searchData: (state, action: PayloadAction<IPerson>) => {
+    // search data by ISearchPersonData
+    searchData: (state, action: PayloadAction<ISearchPersonData>) => {
       state.name = action.payload.name;
       state.bloodGroup = action.payload.bloodGroup;
       state.area = action.payload.area;
