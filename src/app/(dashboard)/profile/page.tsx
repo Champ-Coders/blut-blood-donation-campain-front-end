@@ -29,12 +29,12 @@ export default function ProfilePage() {
         {/* //! Right Section */}
         <div className="w-full lg:w-[70%] flex flex-col  items-center ">
           <PersonalInfo userData={userData}></PersonalInfo>
-          <ProfileAuthentication userData={userData} />
-          <ProfileAccount userData={userData}></ProfileAccount>
-          <ProfileNotification userData={userData}></ProfileNotification>
           <div className="  my-2 sm:rounded-lg w-full ">
             <ChangePasswordPage />
           </div>
+          <ProfileAuthentication userData={userData} />
+          <ProfileAccount userData={userData}></ProfileAccount>
+          <ProfileNotification userData={userData}></ProfileNotification>
           <ProfileSession userData={userData}></ProfileSession>
           <ProfileDeleteAccount userData={userData}></ProfileDeleteAccount>
         </div>

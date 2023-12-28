@@ -2,9 +2,9 @@ import React from "react";
 import {
   ChromeOutlined,
   PhoneOutlined,
-  MobileOutlined,
   LaptopOutlined,
-  ArrowRightOutlined,
+  CheckOutlined,
+  CloseOutlined,
 } from "@ant-design/icons";
 import { IUser } from "@/interfaces/common";
 import { Switch } from "antd";
@@ -73,7 +73,7 @@ const ProfileAccount = ({ userData }: { userData: IUser }) => {
             <div className="flex items-center gap-2 text-[16px]">
               {item?.icon}
               <section>
-                <h2 className="text-xl font-[550]">{item?.name}</h2>
+                <h2 className="text-xl font-[550] font-oswald">{item?.name}</h2>
                 <p className="text-[14px] text-[#8690A5]">{item?.type}</p>
               </section>
             </div>
@@ -81,7 +81,12 @@ const ProfileAccount = ({ userData }: { userData: IUser }) => {
             <div className="text-[#8690A5] flex gap-2">
               {item?.status && <h3>Enabled</h3>}
 
-              <Switch defaultChecked={item?.status ? true : false} />
+              <Switch
+                defaultChecked={item?.status ? true : false}
+                checkedChildren={<CheckOutlined />}
+                unCheckedChildren={<CloseOutlined />}
+               
+              />
             </div>
           </div>
         );

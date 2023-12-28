@@ -1,12 +1,12 @@
 /* eslint-disable @next/next/no-img-element */
 import { MenuFoldOutlined, MenuUnfoldOutlined } from "@ant-design/icons";
 
-import { IoSearch } from "react-icons/io5";
+import { IoChatboxEllipsesSharp, IoSearch } from "react-icons/io5";
 import { FaRegBell } from "react-icons/fa";
 
 import { Badge, Button, message } from "antd";
 import { Header } from "antd/es/layout/layout";
-import React, { Fragment, useState } from "react";
+import React, { Fragment } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 
 import Logo from "../../../public/assets/logo-light.png";
@@ -14,6 +14,11 @@ import userImage from "../../../public/assets/icon/userIcon.png";
 import Image from "next/image";
 import { logout } from "@/utils/local-storage";
 import { useRouter } from "next/navigation";
+import { useUserProfileQuery } from "@/redux/Api/authApi/AuthApi";
+import Popovers from "../Popover/Popover";
+import Link from "next/link";
+import { INotification } from "@/constants/INotification";
+import Notification from "../Notification/Notification";
 function classNames(...classes: any) {
   return classes.filter(Boolean).join(" ");
 }
@@ -25,6 +30,9 @@ const DashboardNavbar = ({
   collapsed: boolean;
   setCollapsed: any;
 }) => {
+  const { data } = useUserProfileQuery(null);
+  const userInfo = data?.data;
+
   const router = useRouter();
   const SignOutHandler = () => {
     logout();
@@ -101,15 +109,7 @@ const DashboardNavbar = ({
 
                 {/* notification */}
                 <div className="hidden lg:ml-4 lg:flex lg:items-center">
-                  <Badge count={99}>
-                    <button
-                      type="button"
-                      className="flex-shrink-0 rounded-full bg-white p-1 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
-                    >
-                      <span className="sr-only">View notifications</span>
-                      <FaRegBell className="h-6 w-6" aria-hidden="true" />
-                    </button>
-                  </Badge>
+                  <Notification />
 
                   {/* Profile dropdown */}
                   <Menu as="div" className="relative ml-4 flex-shrink-0">
@@ -120,7 +120,7 @@ const DashboardNavbar = ({
                           height={50}
                           width={50}
                           className="h-8 w-8 rounded-full"
-                          src={userImage}
+                          src={userInfo?.imgUrl ?? userImage}
                           alt=""
                         />
                       </Menu.Button>

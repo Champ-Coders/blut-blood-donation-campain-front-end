@@ -1,7 +1,7 @@
 "use client";
 
 import InputField from "@/components/InputField/InputField";
-import ReactQuillText from "@/components/ReactQuill/ReactQuill";
+import dynamic from "next/dynamic";
 import ActionBar from "@/components/UI/ActionBar";
 import Breadcrumb from "@/components/UI/BreadCrumb";
 import UploaderImage from "@/components/Uploader/UploaderImage";
@@ -13,10 +13,14 @@ import { useForm } from "react-hook-form";
 
 // import 'antd/dist/antd.css';
 
-
+const ReactQuillText = dynamic(
+  () => import("@/components/ReactQuill/ReactQuill"),
+  {
+    ssr: false,
+  }
+);
 
 const CreateEvent = () => {
- 
   const [addEvent] = useAddEventMutation();
   const [description, setDescription] = useState("");
   const {
@@ -40,7 +44,7 @@ const CreateEvent = () => {
     // console.log(eventData);
     const eventData = {
       description,
-      ...data
+      ...data,
     };
 
     message.loading("Creating Event.....");

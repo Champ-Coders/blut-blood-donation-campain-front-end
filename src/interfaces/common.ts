@@ -84,6 +84,7 @@ export type IUser = {
   _id: string;
   name: string;
   phoneNumber: string;
+  imgUrl: string;
   email: string;
   role: string;
   bloodGroup: string;

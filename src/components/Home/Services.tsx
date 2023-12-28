@@ -5,8 +5,8 @@ import ServiceHeroUI from "../UI/ServiceHeroUI";
 import { useServicesQuery } from "@/redux/Api/serviceApi";
 
 const Services = () => {
-const {data:services}= useServicesQuery(undefined)
-  console.log(services)
+  const { data: services } = useServicesQuery(undefined);
+
   return (
     <div className="py-10 sm:pt-16 sm:pb-8 container mx-auto max-w-7xl">
       <section className="text-center">
@@ -20,7 +20,7 @@ const {data:services}= useServicesQuery(undefined)
             <ServiceHeroUI
               key={index}
               data={{
-                no: index+1,
+                no: index + 1,
                 title: service.title,
                 description: service.description,
                 link: `/services/${service.id}`,

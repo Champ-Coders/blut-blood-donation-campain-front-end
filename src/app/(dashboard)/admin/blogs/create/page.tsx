@@ -1,6 +1,6 @@
 "use client";
 import InputField from "@/components/InputField/InputField";
-import ReactQuillText from "@/components/ReactQuill/ReactQuill";
+import dynamic from "next/dynamic";
 import ActionBar from "@/components/UI/ActionBar";
 import Breadcrumb from "@/components/UI/BreadCrumb";
 import UploaderImage from "@/components/Uploader/UploaderImage";
@@ -9,6 +9,13 @@ import { getUserDataFromLC } from "@/utils/local-storage";
 import { Button, message } from "antd";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+
+const ReactQuillText = dynamic(
+  () => import("@/components/ReactQuill/ReactQuill"),
+  {
+    ssr: false,
+  }
+);
 
 const CreateBlog = () => {
   const userData = getUserDataFromLC() as any;
@@ -28,7 +35,7 @@ const CreateBlog = () => {
     message.loading("Creating Blog.....");
 
     const newBlog = {
-    title: data.title,
+      title: data.title,
       description: description,
       image: data?.image,
       user: userData?.id,
