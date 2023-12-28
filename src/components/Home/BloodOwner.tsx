@@ -4,8 +4,27 @@ import bg from "../../../public/assets/cover-sbda.jpg";
 import { CurrentBloodRequest } from "@/constants/CurrentBloodRequest";
 import { ICurrentBloodRequest } from "@/interfaces/common";
 import AppointmentForm from "../AppointmentForm/AppointmentForm";
+import { useGetAllUsersQuery } from "@/redux/Api/authApi/AuthApi";
+import config from "@/config/config";
 
-const BloodOwner = () => {
+async function getData() {
+  const res = await fetch(`${config.apiBaseUrl}/users/all-users`);
+
+  if (!res.ok) {
+    // This will activate the closest `error.js` Error Boundary
+    throw new Error("Failed to fetch data");
+  }
+
+  return res.json();
+}
+
+const BloodOwner = async () => {
+  const allBlood = await getData();
+
+  const availableDonor = allBlood?.data?.data?.filter((item: any) => {
+    return item?.available === true;
+  });
+
   return (
     <section className={`relative`}>
       <div
@@ -58,14 +77,20 @@ const BloodOwner = () => {
             </h3>
             <div className="w-full">
               <ul>
-                {CurrentBloodRequest.map((item: ICurrentBloodRequest) => (
+                {availableDonor?.map((item: any, i: number) => (
                   <li
-                    key={item.id}
+                    key={i}
                     className="flex items-center gap-[10px] border-b-[#11111140] border-b-[1px] py-[19px]"
                   >
-                    <FaHeart className="text-[#ea062b]" />
-                    {item.bloodGroup}
-                    {item.location} ({item.date})
+                    <span className="flex items-center gap-2">
+                      <FaHeart className="text-[#ea062b]" />
+                      {item?.bloodGroup}
+                    </span>{" "}
+                    ,{item?.address ?? "Full BD"} ,
+                    {/* age ({item.dateOfBirth}) */}({" "}
+                    {new Date().getFullYear() -
+                      new Date(item?.dateOfBirth).getFullYear()}
+                    ) years old
                   </li>
                 ))}
               </ul>
