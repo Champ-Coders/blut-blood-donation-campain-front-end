@@ -2,7 +2,7 @@
 import ActionBar from "@/components/UI/ActionBar";
 import Breadcrumb from "@/components/UI/BreadCrumb";
 import Table from "@/components/UI/Table";
-import dayjs from "dayjs";
+
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import { Button, Image, Input, Popconfirm, message } from "antd";
 import Link from "next/link";

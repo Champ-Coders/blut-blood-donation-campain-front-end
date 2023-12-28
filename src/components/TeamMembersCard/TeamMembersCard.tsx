@@ -9,10 +9,14 @@ type TeamMembersCardProps = {
 
 const TeamMembersCard: React.FC<TeamMembersCardProps> = ({ item }) => {
   return (
-    <div className="p-[25px] bg-white shadow-2xl rounded-xl group ">
+    <div className="p-[25px] bg-white shadow rounded-xl group border ">
       <div className=" ">
         <div className="relative">
-          <Image src={item.image} className="w-full h-[400px]" alt={item.name} />
+          <Image
+            src={item.image}
+            className="w-full h-[400px]"
+            alt={item.name}
+          />
           <div className="hidden group-hover:block transition duration-300 ease-in-out">
             <div className="absolute  top-[50%] w-full h-full z-10 ">
               <ul className="flex gap-2 rounded-3xl items-center justify-center">

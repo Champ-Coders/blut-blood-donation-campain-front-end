@@ -28,7 +28,7 @@ const CreateBlog = () => {
     message.loading("Creating Blog.....");
 
     const newBlog = {
-      title: data.title,
+    title: data.title,
       description: description,
       image: data?.image,
       user: userData?.id,
@@ -58,11 +58,18 @@ const CreateBlog = () => {
       <ActionBar title="Create Blog">
         <form className="block w-full" onSubmit={handleSubmit(onSubmit)}>
           <div className="w-full">
+            <div className="my-[16px] md:max-w-3xl mx-0">
+              <label className="text-[13px] leading-6 font-inter text-gray-400 font-semibold capitalize">
+                Upload Image
+              </label>
+              <UploaderImage name="image" setValue={setValue} />
+            </div>
             <div className="my-[10px]  md:max-w-3xl mx-0">
               <InputField
                 name="title"
                 label="Title"
                 type="text"
+                placeholder="Enter Title"
                 register={register}
                 errors={errors}
                 required
@@ -76,21 +83,6 @@ const CreateBlog = () => {
                 setValue={setDescription}
                 value={description}
               />
-            </div>
-
-            <div className="my-[16px] md:max-w-3xl mx-0">
-              {/* <InputField
-                name="image"
-                label="Image"
-                type="file"
-                register={register}
-                errors={errors}
-                required
-              /> */}
-              <label className="text-[13px] leading-6 font-inter text-gray-400 font-semibold capitalize">
-                Upload Image
-              </label>
-              <UploaderImage name="image" setValue={setValue} />
             </div>
           </div>
 

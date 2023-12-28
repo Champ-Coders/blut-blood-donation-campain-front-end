@@ -14,24 +14,23 @@ const Banner = () => {
 
   const totalSlides = bannerCarousel.length;
 
-  const next = () => {
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % totalSlides);
-  };
+  // const next = () => {
+  //   setCurrentIndex((prevIndex) => (prevIndex + 1) % totalSlides);
+  // };
 
   const previous = () => {
     setCurrentIndex((prevIndex) => (prevIndex - 1 + totalSlides) % totalSlides);
   };
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      next();
-    }, 5000);
+  // useEffect(() => {
+  //   const interval = setInterval(() => {
+  //     next();
+  //   }, 5000);
 
-    return () => clearInterval(interval);
-  }, [currentIndex]);
+  //   return () => clearInterval(interval);
+  // }, [currentIndex, next]);
   return (
     <div className="relative">
-
       {/* banner */}
       <div className="relative">
         <div className="overflow-hidden">
@@ -79,17 +78,13 @@ const Banner = () => {
 
         <button
           className="absolute bottom-1/3 sm:bottom-1/2 right-8 text-primary hover:text-white hover:bg-primary font-bold px-3 py-2 border-primary border"
-          onClick={next}
+          // onClick={next}
         >
           <RightOutlined />
         </button>
       </div>
 
-
       {/* Register */}
-
-
-
 
       <div className="flex w-full md:w-5/6 mx-0 md:mx-auto sm:flex-row flex-col text-white cursor-pointer absolute sm:-bottom-20 -bottom-48 left-0 right-0">
         <div className="bg-black hover:bg-primary px-10 w-full h-44">

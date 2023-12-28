@@ -10,7 +10,7 @@ import Link from "next/link";
 import Drawers from "@/components/Drawer/Drawer";
 import { useUserProfileQuery } from "@/redux/Api/authApi/AuthApi";
 
-import {  Menu, Transition } from "@headlessui/react";
+import { Menu, Transition } from "@headlessui/react";
 import { logout } from "@/utils/local-storage";
 import { Badge, message } from "antd";
 import { useRouter } from "next/navigation";

@@ -72,11 +72,12 @@ export interface IEvent {
 
 export interface IPopularCamp {
   title: string;
-  des: string;
+  description: string;
   image: StaticImageData;
-  date: string;
-  timeSlot: string;
-  address: string;
+  event_date: string;
+  event_time: string;
+  location: string;
+  banner: string;
 }
 
 export type IUser = {
