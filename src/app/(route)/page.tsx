@@ -24,8 +24,8 @@ export default function Home() {
       {/* <Banner /> */}
       <VideoBanner />
       <BloodTypeDonors />
-      <HomeEvent />
       <ListOfHonorableBloodDonors />
+      <HomeEvent />
       <HelpThePeopleInNeed />
       <Counter />
       <Services />
