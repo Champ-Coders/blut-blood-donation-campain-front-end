@@ -35,11 +35,8 @@ export default function Home() {
       <BloodOwner />
       <TeamMember />
       <News />
-
       <FaqQuestion />
-
       <FeedBackForum />
-
       {/* floating icon */}
       <FloatButton.BackTop
         shape="square"
