@@ -2,16 +2,47 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
 
+import { ILiveChat, LiveChatData } from "@/constants/ILiveChat";
+import { useUserProfileQuery } from "@/redux/Api/authApi/AuthApi";
+import { message } from "antd";
 import Image from "next/image";
 import React, { useEffect } from "react";
+import { useForm } from "react-hook-form";
 import { FaRegMessage } from "react-icons/fa6";
+import InputEmoji from "react-input-emoji";
 
 const DraggableLiveModal = () => {
-  
-  // useEffect(() => {
-  //   const el: any = document.getElementById("messages");
-  //   el.scrollTop = el.scrollHeight;
-  // }, []);
+  const { data } = useUserProfileQuery(null);
+  const userInfo = data?.data;
+  const [chatMessages, setChatMessages] = React.useState<any>(LiveChatData);
+
+  const { register, handleSubmit, reset, setValue } = useForm();
+
+  const onSubmit = (data: any) => {
+    if (!userInfo) {
+      return message.error("Please login first");
+    }
+    const newMessage = {
+      id: chatMessages.length + 1,
+      message: data.message,
+      time: new Date().toLocaleTimeString(),
+      avatar: userInfo?.imgUrl,
+      status: "online",
+      type: "comment",
+    };
+
+    setChatMessages([...chatMessages, newMessage]);
+
+    // clear input
+    reset();
+  };
+
+  const scroll = React.useRef<HTMLDivElement>(null);
+
+  // always scroll to bottom when new message added
+  useEffect(() => {
+    scroll.current?.scrollIntoView({ behavior: "smooth" });
+  }, [chatMessages]);
 
   return (
     <div>
@@ -109,198 +140,53 @@ const DraggableLiveModal = () => {
           id="messages"
           className="flex flex-col space-y-4 p-3 overflow-y-auto scrollbar-thumb-blue scrollbar-thumb-rounded scrollbar-track-blue-lighter scrollbar-w-2 scrolling-touch "
         >
-          <div className="chat-message">
-            <div className="flex items-end">
-              <div className="flex flex-col space-y-2 text-xs max-w-xs mx-2 order-2 items-start">
-                <div>
-                  <span className="px-4 py-2 rounded-lg inline-block rounded-bl-none bg-gray-300 text-gray-600">
-                    Can be verified on any platform using docker
-                  </span>
+          {chatMessages
+            ?.sort((a: any, b: any) => a.id - b.id)
+            .map((liveChat: ILiveChat) => (
+              <div ref={scroll} key={liveChat.id} className="chat-message">
+                <div
+                  className={`flex ${
+                    liveChat.type === "reply"
+                      ? "items-end "
+                      : "  items-end justify-end"
+                  } `}
+                >
+                  <div
+                    className={`flex flex-col space-y-2 text-xs max-w-xs mx-2 ${
+                      liveChat.type === "reply"
+                        ? "order-2 items-start  "
+                        : " order-1 items-end"
+                    } `}
+                  >
+                    <div>
+                      <span
+                        className={`px-4 py-2 rounded-lg inline-block ${
+                          liveChat.type === "reply"
+                            ? "rounded-br-none bg-primary text-white "
+                            : "   order-1 items-end"
+                        }  rounded-bl-none bg-gray-300 text-gray-600`}
+                      >
+                        {liveChat.message}
+                      </span>
+                    </div>
+                  </div>
+                  <img
+                    src={liveChat.avatar}
+                    alt="My profile"
+                    className={`w-6 h-6 rounded-full ${
+                      liveChat.type === "reply" ? "order-1" : "  order-2"
+                    } `}
+                  />
                 </div>
               </div>
-              <img
-                src="https://i.ibb.co/YcjhGgs/IMG-20231111-142014-1.jpg"
-                alt="My profile"
-                className="w-6 h-6 rounded-full order-1"
-              />
-            </div>
-          </div>
-          <div className="chat-message">
-            <div className="flex items-end justify-end">
-              <div className="flex flex-col space-y-2 text-xs max-w-xs mx-2 order-1 items-end">
-                <div>
-                  <span className="px-4 py-2 rounded-lg inline-block rounded-br-none bg-primary text-white ">
-                    Your error message says permission denied, npm global
-                    installs must be given root privileges.
-                  </span>
-                </div>
-              </div>
-              <img
-                src="https://i.ibb.co/R05Xxhv/medical.jpg"
-                alt="My profile"
-                className="w-6 h-6 rounded-full order-2"
-              />
-            </div>
-          </div>
-          <div className="chat-message">
-            <div className="flex items-end">
-              <div className="flex flex-col space-y-2 text-xs max-w-xs mx-2 order-2 items-start">
-                <div>
-                  <span className="px-4 py-2 rounded-lg inline-block bg-gray-300 text-gray-600">
-                    Command was run with root privileges. I'm sure about that.
-                  </span>
-                </div>
-                <div>
-                  <span className="px-4 py-2 rounded-lg inline-block bg-gray-300 text-gray-600">
-                    I've update the description so it's more obviously now
-                  </span>
-                </div>
-                <div>
-                  <span className="px-4 py-2 rounded-lg inline-block bg-gray-300 text-gray-600">
-                    FYI https://askubuntu.com/a/700266/510172
-                  </span>
-                </div>
-                <div>
-                  <span className="px-4 py-2 rounded-lg inline-block rounded-bl-none bg-gray-300 text-gray-600">
-                    Check the line above (it ends with a # so, I'm running it as
-                    root )<pre># npm install -g @vue/devtools</pre>
-                  </span>
-                </div>
-              </div>
-              <img
-                src="https://i.ibb.co/YcjhGgs/IMG-20231111-142014-1.jpg"
-                alt="My profile"
-                className="w-6 h-6 rounded-full order-1"
-              />
-            </div>
-          </div>
-          <div className="chat-message">
-            <div className="flex items-end justify-end">
-              <div className="flex flex-col space-y-2 text-xs max-w-xs mx-2 order-1 items-end">
-                <div>
-                  <span className="px-4 py-2 rounded-lg inline-block rounded-br-none bg-primary text-white ">
-                    Any updates on this issue? I'm getting the same error when
-                    trying to install devtools. Thanks
-                  </span>
-                </div>
-              </div>
-              <img
-                src="https://i.ibb.co/R05Xxhv/medical.jpg"
-                alt="My profile"
-                className="w-6 h-6 rounded-full order-2"
-              />
-            </div>
-          </div>
-          <div className="chat-message">
-            <div className="flex items-end">
-              <div className="flex flex-col space-y-2 text-xs max-w-xs mx-2 order-2 items-start">
-                <div>
-                  <span className="px-4 py-2 rounded-lg inline-block rounded-bl-none bg-gray-300 text-gray-600">
-                    Thanks for your message David. I thought I'm alone with this
-                    issue. Please, ? the issue to support it :)
-                  </span>
-                </div>
-              </div>
-              <img
-                src="https://i.ibb.co/YcjhGgs/IMG-20231111-142014-1.jpg"
-                alt="My profile"
-                className="w-6 h-6 rounded-full order-1"
-              />
-            </div>
-          </div>
-          <div className="chat-message">
-            <div className="flex items-end justify-end">
-              <div className="flex flex-col space-y-2 text-xs max-w-xs mx-2 order-1 items-end">
-                <div>
-                  <span className="px-4 py-2 rounded-lg inline-block bg-primary text-white ">
-                    Are you using sudo?
-                  </span>
-                </div>
-                <div>
-                  <span className="px-4 py-2 rounded-lg inline-block rounded-br-none bg-primary text-white ">
-                    Run this command sudo chown -R `whoami` /Users//.npm-global/
-                    then install the package globally without using sudo
-                  </span>
-                </div>
-              </div>
-              <img
-                src="https://i.ibb.co/R05Xxhv/medical.jpg"
-                alt="My profile"
-                className="w-6 h-6 rounded-full order-2"
-              />
-            </div>
-          </div>
-          <div className="chat-message">
-            <div className="flex items-end">
-              <div className="flex flex-col space-y-2 text-xs max-w-xs mx-2 order-2 items-start">
-                <div>
-                  <span className="px-4 py-2 rounded-lg inline-block bg-gray-300 text-gray-600">
-                    It seems like you are from Mac OS world. There is no /Users/
-                    folder on linux ?
-                  </span>
-                </div>
-                <div>
-                  <span className="px-4 py-2 rounded-lg inline-block rounded-bl-none bg-gray-300 text-gray-600">
-                    I have no issue with any other packages installed with root
-                    permission globally.
-                  </span>
-                </div>
-              </div>
-              <img
-                src="https://i.ibb.co/YcjhGgs/IMG-20231111-142014-1.jpg"
-                alt="My profile"
-                className="w-6 h-6 rounded-full order-1"
-              />
-            </div>
-          </div>
-          <div className="chat-message">
-            <div className="flex items-end justify-end">
-              <div className="flex flex-col space-y-2 text-xs max-w-xs mx-2 order-1 items-end">
-                <div>
-                  <span className="px-4 py-2 rounded-lg inline-block rounded-br-none bg-primary text-white ">
-                    yes, I have a mac. I never had issues with root permission
-                    as well, but this helped me to solve the problem
-                  </span>
-                </div>
-              </div>
-              <img
-                src="https://i.ibb.co/R05Xxhv/medical.jpg"
-                alt="My profile"
-                className="w-6 h-6 rounded-full order-2"
-              />
-            </div>
-          </div>
-          <div className="chat-message">
-            <div className="flex items-end">
-              <div className="flex flex-col space-y-2 text-xs max-w-xs mx-2 order-2 items-start">
-                <div>
-                  <span className="px-4 py-2 rounded-lg inline-block bg-gray-300 text-gray-600">
-                    I get the same error on Arch Linux (also with sudo)
-                  </span>
-                </div>
-                <div>
-                  <span className="px-4 py-2 rounded-lg inline-block bg-gray-300 text-gray-600">
-                    I also have this issue, Here is what I was doing until now:
-                    #1076
-                  </span>
-                </div>
-                <div>
-                  <span className="px-4 py-2 rounded-lg inline-block rounded-bl-none bg-gray-300 text-gray-600">
-                    even i am facing
-                  </span>
-                </div>
-              </div>
-              <img
-                src="https://i.ibb.co/YcjhGgs/IMG-20231111-142014-1.jpg"
-                alt="My profile"
-                className="w-6 h-6 rounded-full order-1"
-              />
-            </div>
-          </div>
+            ))}
         </div>
         {/* Message end */}
         {/* button */}
-        <div className="border-t-2 border-gray-200 px-4 pt-4 mb-2 sm:mb-0">
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          className="border-t-2 border-gray-200 px-4 pt-4 mb-2 sm:mb-0"
+        >
           <div className="relative flex">
             <span className="absolute inset-y-0 flex items-center">
               <button
@@ -323,73 +209,31 @@ const DraggableLiveModal = () => {
                 </svg>
               </button>
             </span>
-            <input
-              type="text"
-              placeholder="Write your message!"
-              className="w-full focus:outline-none focus:placeholder-gray-400 text-gray-600 placeholder-gray-600 pl-12 bg-gray-200 rounded-md py-3"
+        
+            <InputEmoji
+              onChange={(text) => setValue("message", text)}
+              cleanOnEnter
+              value=""
             />
-            <div className="absolute right-0 items-center inset-y-0 hidden sm:flex">
-              <button
-                type="button"
-                className="inline-flex items-center justify-center rounded-full h-10 w-10 transition duration-500 ease-in-out text-gray-500 hover:bg-gray-300 focus:outline-none"
+
+            <button
+              type="submit"
+              className="inline-flex items-center justify-center rounded-lg px-4 py-1 text-[12px] transition duration-500 ease-in-out text-white bg-primary hover:bg-black focus:outline-none"
+            >
+              <span className="font-bold">Send</span>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+                className="h-4 w-4 ml-2 transform rotate-90"
               >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  className="h-6 w-6 text-gray-600"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"
-                  ></path>
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"
-                  ></path>
-                </svg>
-              </button>
-              <button
-                type="button"
-                className="inline-flex items-center justify-center rounded-full h-10 w-10 transition duration-500 ease-in-out text-gray-500 hover:bg-gray-300 focus:outline-none"
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  className="h-6 w-6 text-gray-600"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                  ></path>
-                </svg>
-              </button>
-              <button
-                type="button"
-                className="inline-flex items-center justify-center rounded-lg px-4 py-3 transition duration-500 ease-in-out text-white bg-primary hover:bg-black focus:outline-none"
-              >
-                <span className="font-bold">Send</span>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-                  className="h-6 w-6 ml-2 transform rotate-90"
-                >
-                  <path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z"></path>
-                </svg>
-              </button>
-            </div>
+                <path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z"></path>
+              </svg>
+            </button>
+            {/* <div className="absolute right-0 items-center inset-y-0 hidden sm:flex">
+            </div> */}
           </div>
-        </div>
+        </form>
         {/* button end */}
       </div>
       <footer className="flex gap-1 text-center w-full items-center justify-around py-1 border-t">
