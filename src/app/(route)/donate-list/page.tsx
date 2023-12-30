@@ -1,6 +1,7 @@
 import Button from "@/components/Button/Button";
 import DonateCart from "@/components/DonateList/DonateCart";
 import BannerBreadcrumb from "@/components/UI/BannerBreadcrumb";
+import { people } from "@/constants/People";
 import Image from "next/image";
 import React from "react";
 import { LuPhoneIncoming } from "react-icons/lu";
@@ -8,96 +9,6 @@ import { LuPhoneIncoming } from "react-icons/lu";
 type DonateListProps = {};
 
 const DonateList: React.FC<DonateListProps> = () => {
-  const people = [
-    {
-      id: "1",
-      name: "Jane Cooper",
-      title: "Paradigm Representative",
-      role: "Admin",
-      email: "janecooper@example.com",
-      telephone: "+1-202-555-0170",
-      donation: 5,
-      imageUrl:
-        "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60",
-    },
-    {
-      id: "2",
-      name: "Jane Cooper",
-      title: "Paradigm Representative",
-      role: "Admin",
-      email: "janecooper@example.com",
-      telephone: "+1-202-555-0170",
-      donation: 5,
-      imageUrl:
-        "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60",
-    },
-    {
-      id: "3",
-      name: "Jane Cooper",
-      title: "Paradigm Representative",
-      role: "Admin",
-      email: "janecooper@example.com",
-      telephone: "+1-202-555-0170",
-      donation: 5,
-      imageUrl:
-        "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60",
-    },
-    {
-      id: "4",
-      name: "Jane Cooper",
-      title: "Paradigm Representative",
-      role: "Admin",
-      email: "janecooper@example.com",
-      telephone: "+1-202-555-0170",
-      donation: 5,
-      imageUrl:
-        "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60",
-    },
-    {
-      id: "5",
-      name: "Jane Cooper",
-      title: "Paradigm Representative",
-      role: "Admin",
-      email: "janecooper@example.com",
-      telephone: "+1-202-555-0170",
-      donation: 5,
-      imageUrl:
-        "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60",
-    },
-    {
-      id: "6",
-      name: "Jane Cooper",
-      title: "Paradigm Representative",
-      role: "Admin",
-      email: "janecooper@example.com",
-      telephone: "+1-202-555-0170",
-      donation: 5,
-      imageUrl:
-        "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60",
-    },
-    {
-      id: "7",
-      name: "Jane Cooper",
-      title: "Paradigm Representative",
-      role: "Admin",
-      email: "janecooper@example.com",
-      telephone: "+1-202-555-0170",
-      donation: 5,
-      imageUrl:
-        "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60",
-    },
-    {
-      id: "8",
-      name: "Jane Cooper",
-      title: "Paradigm Representative",
-      role: "Admin",
-      email: "janecooper@example.com",
-      telephone: "+1-202-555-0170",
-      donation: 5,
-      imageUrl:
-        "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60",
-    },
-  ];
   return (
     <main>
       <BannerBreadcrumb
