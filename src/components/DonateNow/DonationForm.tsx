@@ -18,13 +18,18 @@ const DonationForm: React.FC<DonationFormProps> = () => {
     setValue,
     formState: { errors },
   } = useForm();
-  const [donate] = useRequestForDonateMutation(undefined);
+  const [requestForDonate] = useRequestForDonateMutation(undefined);
   const router = useRouter();
 
   const onSubmit = async (data: any) => {
+    console.log("🚀 ~ file: DonationForm.tsx:25 ~ onSubmit ~ data:", data)
+
     data.bag = parseInt(data.bag);
     data.bloodGroup = data.bloodGroup.name;
-    const res: any = await donate({ data });
+    const res: any = await requestForDonate({ data });
+    
+    console.log("🚀 ~ file: DonationForm.tsx:28 ~ onSubmit ~ res:", res);
+
     try {
       if (res?.data?.success) {
         message.success(res?.data.message);
