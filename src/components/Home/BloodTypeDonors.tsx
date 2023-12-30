@@ -5,17 +5,17 @@ import CompatibleBloodTypeDonors from "../BloodDonorType/CompatibleBloodTypeDono
 const AvailableDonorLink = [
   {
     name: "Available Blood Groups",
-    link: "/availableDonors",
+    link: "/donor-list",
     logo: "https://i.ibb.co/KKYLv7k/b-group.png",
   },
   {
     name: "Search Blood Groups",
-    link: "/search-blood-groups",
+    link: "/donor-list",
     logo: "https://i.ibb.co/bLrRsBC/b-search.png",
   },
   {
     name: "Donor Registration",
-    link: "/donorRegistration",
+    link: "/donate-now",
     logo: "https://i.ibb.co/PCMNhK6/b-donor-reg.png",
   },
   {

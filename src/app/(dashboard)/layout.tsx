@@ -25,13 +25,13 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
 
   const USER_ROLE = data?.data?.role;
 
-  if (!USER_ROLE)
-    return {
-      redirect: {
-        destination: "/login",
-        permanent: false,
-      },
-    };
+  // if (!USER_ROLE)
+  //   return {
+  //     redirect: {
+  //       destination: "/login",
+  //       permanent: false,
+  //     },
+  //   };
 
   return (
     <Layout

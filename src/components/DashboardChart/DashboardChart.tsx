@@ -1,11 +1,11 @@
-"use client"
-import React, { useState } from "react";
+"use client";
 
+import { Overview } from "./overview";
 
 const DashboardChart = () => {
   return (
     <div>
-      
+      <Overview />
     </div>
   );
 };
