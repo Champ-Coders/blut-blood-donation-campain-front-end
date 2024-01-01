@@ -1,5 +1,5 @@
 import React from "react";
-import {  Popover } from "antd";
+import { Popover } from "antd";
 
 type PopoversProps = {
   body: React.ReactNode | any;
@@ -8,7 +8,19 @@ type PopoversProps = {
   open: boolean;
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
   children: React.ReactNode;
-  placement: "topLeft" | "top" | "topRight" | "leftTop" | "left" | "leftBottom" | "rightTop" | "right" | "rightBottom" | "bottomLeft" | "bottom" | "bottomRight" ;
+  placement:
+    | "topLeft"
+    | "top"
+    | "topRight"
+    | "leftTop"
+    | "left"
+    | "leftBottom"
+    | "rightTop"
+    | "right"
+    | "rightBottom"
+    | "bottomLeft"
+    | "bottom"
+    | "bottomRight";
 };
 
 const Popovers = ({
@@ -24,7 +36,7 @@ const Popovers = ({
     <Popover
       placement={placement}
       content={body}
-      title={title}
+      title={<p className="p-2 text-[18px] font-semibold">{title}</p>}
       trigger={trigger}
       open={open}
       onOpenChange={() => setOpen(!open)}

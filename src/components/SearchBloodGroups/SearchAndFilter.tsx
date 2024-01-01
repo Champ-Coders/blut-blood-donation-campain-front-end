@@ -5,11 +5,23 @@ import { useForm } from "react-hook-form";
 import MultiSelect from "../MultiSelector/MultiSelector";
 import Button from "../Button/Button";
 import { useAppDispatch } from "@/redux/app/hook";
-import { searchData } from "@/redux/Api/searchBloodGroug/searchBloodGroups";
+import {
+  ISearchPersonData,
+  searchData,
+} from "@/redux/Api/searchBloodGroug/searchBloodGroups";
 
 type SearchAndFilterProps = {};
 
-const SearchAndFilter: React.FC<SearchAndFilterProps> = () => {
+const SearchAndFilter: React.FC<SearchAndFilterProps> = ({}) => {
+  const dispatch = useAppDispatch();
+  const {
+    handleSubmit,
+    register,
+    reset,
+    setValue,
+    formState: { errors },
+  } = useForm();
+
   const districtOptions = [
     {
       value: "1",
@@ -44,20 +56,12 @@ const SearchAndFilter: React.FC<SearchAndFilterProps> = () => {
       label: "Mymensingh",
     },
   ];
-  const dispatch = useAppDispatch();
-
-  const {
-    handleSubmit,
-    register,
-    reset,
-    setValue,
-    formState: { errors },
-  } = useForm();
 
   const onSubmit = async (data: any) => {
     dispatch(searchData(data));
     reset();
   };
+
   return (
     <section>
       <div className="common">
@@ -112,7 +116,10 @@ const SearchAndFilter: React.FC<SearchAndFilterProps> = () => {
                 </div>
               </div>
               <div className="mt-6 grid w-full grid-cols-2 justify-end space-x-4 md:flex">
-                <button className="active:scale-95 rounded-lg bg-gray-200 px-8 py-2 font-medium text-gray-600 outline-none focus:ring hover:opacity-90">
+                <button
+                  onClick={reset}
+                  className="active:scale-95 rounded-lg bg-gray-200 px-8 py-2 font-medium text-gray-600 outline-none focus:ring hover:opacity-90"
+                >
                   Reset
                 </button>
                 <Button

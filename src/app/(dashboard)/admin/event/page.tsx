@@ -1,19 +1,27 @@
 "use client";
-import ActionBar from "@/components/UI/ActionBar";
-import Breadcrumb from "@/components/UI/BreadCrumb";
-import Table from "@/components/UI/Table";
-import dayjs from "dayjs";
+import { BsCalendarCheck } from "react-icons/bs";
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import { Button, Image, Input, Popconfirm, message } from "antd";
 import Link from "next/link";
 import { useState } from "react";
+import Breadcrumb from "@/components/UI/BreadCrumb";
+import Table from "@/components/UI/Table";
+import ActionBar from "@/components/UI/ActionBar";
+
+import dynamic from "next/dynamic";
+
 import {
   useDeleteEventMutation,
   useEventsQuery,
   useUpdateEventMutation,
 } from "@/redux/Api/eventApi";
-import EventModalUI from "@/components/ModalUI/EventModalUI";
-import { BsCalendarCheck } from "react-icons/bs";
+
+const EventModalUI = dynamic(
+  () => import("@/components/ModalUI/EventModalUI"),
+  {
+    ssr: false,
+  }
+);
 
 const AllEvents = () => {
   const [searchText, setSearchText] = useState<string>("");

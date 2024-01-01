@@ -1,8 +1,7 @@
 "use client";
 
 import InputField from "@/components/InputField/InputField";
-import ReactQuillText from "@/components/ReactQuill/ReactQuill";
-import TextAreaField from "@/components/TextAreaField/TextAreaField";
+import dynamic from "next/dynamic";
 import ActionBar from "@/components/UI/ActionBar";
 import { useUserProfileQuery } from "@/redux/Api/authApi/AuthApi";
 import { useCreateFaqMutation } from "@/redux/Api/faqsApi";
@@ -10,12 +9,18 @@ import { Button, message } from "antd";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 
+const ReactQuillText = dynamic(
+  () => import("@/components/ReactQuill/ReactQuill"),
+  {
+    ssr: false,
+  }
+);
+
 const CreateServicePage = () => {
   const [createFaq, { isLoading }] = useCreateFaqMutation();
   const [description, setDescription] = useState("");
-  const {data:userData} = useUserProfileQuery({})
+  const { data: userData } = useUserProfileQuery({});
   console.log(userData?.data?._id);
-
 
   const {
     handleSubmit,

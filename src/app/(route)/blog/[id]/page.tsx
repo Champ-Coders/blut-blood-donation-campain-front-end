@@ -1,9 +1,6 @@
 import React from "react";
-import image from "../../../../../public/assets/our-news/activity.png";
 import Image from "next/image";
-import Breadcrumb from "@/components/UI/BreadCrumb";
 import BannerBreadcrumb from "@/components/UI/BannerBreadcrumb";
-import Button from "@/components/Button/Button";
 import config from "@/config/config";
 import Comments from "@/components/Comments/Comments";
 
@@ -121,7 +118,7 @@ const BlogDetail: React.FC<BlogDetailProps> = async ({
               className="grid-cols-1 md:col-span-3 lg:col-span-4
              h-screen sticky top-24"
             >
-              <div className="hidden py-2 xl:col-span-3 lg:col-span-4 md:hidden lg:block">
+              <div className="hidden py-2 xl:col-span-3 lg:col-span-4  md:block">
                 <div className="mb-8 space-x-5 border-b-2 border-opacity-10 ">
                   <button
                     type="button"

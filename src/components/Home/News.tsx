@@ -1,24 +1,25 @@
 import React from "react";
 import NewsCard from "../NewsCard/NewsCard";
-import { IOurNews, IResponse } from "@/interfaces/common";
-import config from "@/config/config";
+import { IOurNews } from "@/interfaces/common";
 import Link from "next/link";
+import { useBlogsQuery } from "@/redux/Api/blogApi";
 
-async function getData() {
-  const res = await fetch(`${config.apiBaseUrl}/blog`);
-  // The return value is *not* serialized
-  // You can return Date, Map, Set, etc.
+// async function getData() {
+//   const res = await fetch(`${config.apiBaseUrl}/blog`);
+//   // The return value is *not* serialized
+//   // You can return Date, Map, Set, etc.
 
-  if (!res.ok) {
-    // This will activate the closest `error.js` Error Boundary
-    throw new Error("Failed to fetch data");
-  }
+//   if (!res.ok) {
+//     // This will activate the closest `error.js` Error Boundary
+//     throw new Error("Failed to fetch data");
+//   }
 
-  return res.json();
-}
+//   return res.json();
+// }
 
 const News = async () => {
-  const ourNews = await getData();
+  const { data: ourNews } = useBlogsQuery(undefined);
+  // const ourNews = await getData();
 
   return (
     <section className=" ">

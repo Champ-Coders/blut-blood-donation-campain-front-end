@@ -1,27 +1,29 @@
+"use client";
 import React from "react";
 import NewsCard from "../NewsCard/NewsCard";
-import { ourNews } from "@/constants/OurNews";
 import { IOurNews } from "@/interfaces/common";
-import config from "@/config/config";
 import Image from "next/image";
 import Link from "next/link";
+import { useBlogsQuery } from "@/redux/Api/blogApi";
 
 type AllBlogProps = {};
 
-async function getData() {
-  const res = await fetch(`${config.apiBaseUrl}/blog`);
-  // The return value is *not* serialized
-  // You can return Date, Map, Set, etc.
+// async function getData() {
+//   const res = await fetch(`${config.apiBaseUrl}/blog`);
+//   // The return value is *not* serialized
+//   // You can return Date, Map, Set, etc.
 
-  if (!res.ok) {
-    // This will activate the closest `error.js` Error Boundary
-    throw new Error("Failed to fetch data");
-  }
+//   if (!res.ok) {
+//     // This will activate the closest `error.js` Error Boundary
+//     throw new Error("Failed to fetch data");
+//   }
 
-  return res.json();
-}
-const AllBlog: React.FC<AllBlogProps> = async () => {
-  const ourNews = await getData();
+//   return res.json();
+// }
+const AllBlog: React.FC<AllBlogProps> = () => {
+  // const ourNews = await getData();
+  const { data: ourNews } = useBlogsQuery(undefined);
+
   return (
     <>
       {/* <section className="bg-[#f5f5f5] pt-10 pb-40">

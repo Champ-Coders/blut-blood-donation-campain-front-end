@@ -50,7 +50,7 @@ const ProfileAuthentication = ({ userData }: { userData: IUser }) => {
 
             <button className="">
               <span className="text-slate-600">{item?.key}</span>
-              <button className="px-3 py-2 ml-2 w-[6rem] bg-white border-[1px] border-primary font-semibold rounded-md">
+              <button className="px-3 py-2 ml-2 w-[6rem] bg-white border-[1px] border-primary hover:bg-black font-semibold rounded-md hover:text-white hover:border-black">
                 {item?.status}
               </button>
             </button>

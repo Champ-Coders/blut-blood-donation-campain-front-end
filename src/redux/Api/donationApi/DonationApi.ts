@@ -6,6 +6,7 @@ import { api } from "../api";
 import { tagTypes } from "../tagsType";
 
 const DONATION_URL = "/donation";
+
 const DONATION_RECEIVE_URL = "/receive";
 
 export const donationAPi = api.injectEndpoints({

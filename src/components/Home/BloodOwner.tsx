@@ -1,11 +1,28 @@
 import { FaHeart, FaPlay } from "react-icons/fa";
 import React from "react";
 import bg from "../../../public/assets/cover-sbda.jpg";
-import { CurrentBloodRequest } from "@/constants/CurrentBloodRequest";
-import { ICurrentBloodRequest } from "@/interfaces/common";
 import AppointmentForm from "../AppointmentForm/AppointmentForm";
+import { useGetAllUsersQuery } from "@/redux/Api/authApi/AuthApi";
 
-const BloodOwner = () => {
+// async function getData() {
+//   const res = await fetch(`${config.apiBaseUrl}/users/all-users`);
+
+//   if (!res.ok) {
+//     // This will activate the closest `error.js` Error Boundary
+//     throw new Error("Failed to fetch data");
+//   }
+
+//   return res.json();
+// }
+
+const BloodOwner = async () => {
+  // const allBlood = await getData();
+  const { data: allBlood } = useGetAllUsersQuery(undefined);
+
+  const availableDonor = allBlood?.data?.data?.filter((item: any) => {
+    return item?.available === true;
+  });
+
   return (
     <section className={`relative`}>
       <div
@@ -50,7 +67,7 @@ const BloodOwner = () => {
         </div>
       </div>
       {/* bottom section start */}
-      <div className="common p-0 relative -top-[60px]">
+      <div className="common p-0 relative -top-[60px] ">
         <div className="flex flex-col lg:flex-row gap-10 ">
           <div className="bg-white py-[35px] px-[25px] shadow-[0px_9px_52px_0px_rgba(0,0,0,.07)] w-full">
             <h3 className="text-[30px] text-[#111111] font-bold capitalize">
@@ -58,14 +75,20 @@ const BloodOwner = () => {
             </h3>
             <div className="w-full">
               <ul>
-                {CurrentBloodRequest.map((item: ICurrentBloodRequest) => (
+                {availableDonor?.map((item: any, i: number) => (
                   <li
-                    key={item.id}
+                    key={i}
                     className="flex items-center gap-[10px] border-b-[#11111140] border-b-[1px] py-[19px]"
                   >
-                    <FaHeart className="text-[#ea062b]" />
-                    {item.bloodGroup}
-                    {item.location} ({item.date})
+                    <span className="flex items-center gap-2">
+                      <FaHeart className="text-[#ea062b]" />
+                      {item?.bloodGroup}
+                    </span>{" "}
+                    , {item?.address ?? "Full BD"} ,{" "}
+                    {/* age ({item.dateOfBirth}) */}({" "}
+                    {new Date().getFullYear() -
+                      new Date(item?.dateOfBirth).getFullYear()}
+                    ) years old
                   </li>
                 ))}
               </ul>
@@ -74,10 +97,10 @@ const BloodOwner = () => {
           {/* form */}
           <div className="bg-white py-[35px] px-[25px] shadow-[0px_9px_52px_0px_rgba(0,0,0,.07)] w-full">
             <h3 className="text-[30px] text-[#111111] font-bold capitalize mb-[30px]">
-              Request Appointment Here
+              Request for Blood Here
             </h3>
             <div className="w-full">
-              <AppointmentForm />
+              <AppointmentForm availableDonor={availableDonor} />
             </div>
           </div>
         </div>

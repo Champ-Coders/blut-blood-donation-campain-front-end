@@ -1,27 +1,26 @@
 "use client";
 
 import InputField from "@/components/InputField/InputField";
-import ReactQuillText from "@/components/ReactQuill/ReactQuill";
-import TextAreaField from "@/components/TextAreaField/TextAreaField";
+import dynamic from "next/dynamic";
 import ActionBar from "@/components/UI/ActionBar";
 import Breadcrumb from "@/components/UI/BreadCrumb";
 import UploaderImage from "@/components/Uploader/UploaderImage";
-import config from "@/config/config";
-import { uploadImageBB } from "@/hooks/ImgbbUploader";
-import { useAddEventMutation } from "@/redux/Api/eventApi";
 
-import { getUserDataFromLC } from "@/utils/local-storage";
-import { Button, message, DatePicker } from "antd";
+import { useAddEventMutation } from "@/redux/Api/eventApi";
+import { Button, message } from "antd";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { MdOutlineOtherHouses } from "react-icons/md";
 
 // import 'antd/dist/antd.css';
 
-
+const ReactQuillText = dynamic(
+  () => import("@/components/ReactQuill/ReactQuill"),
+  {
+    ssr: false,
+  }
+);
 
 const CreateEvent = () => {
- 
   const [addEvent] = useAddEventMutation();
   const [description, setDescription] = useState("");
   const {
@@ -45,7 +44,7 @@ const CreateEvent = () => {
     // console.log(eventData);
     const eventData = {
       description,
-      ...data
+      ...data,
     };
 
     message.loading("Creating Event.....");

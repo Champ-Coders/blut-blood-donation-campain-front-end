@@ -18,7 +18,7 @@ const HomeEvent: React.FC<HomeEventProps> = () => {
           </div>
 
           <div className="hidden md:flex justify-end -mt-[60px] mb-10">
-            <Link href="/events">
+            <Link href="/event">
               <span className="bg-[#EA062B] text-white py-3 px-5 rounded-full hover:bg-[#111111] transition duration-300">
                 View All
               </span>
