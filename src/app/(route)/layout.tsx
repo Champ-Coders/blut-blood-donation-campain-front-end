@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 
 import Providers from "@/lib/Providers";
+
 import HeaderPage from "@/components/shared/Header/Header";
 import FooterPage from "@/components/shared/Footer/Footer";
 import LiveChatButton from "@/components/Live-Chat/LiveChatButton";
@@ -27,7 +28,7 @@ export default function RootLayout({
           <FooterPage />
           {/* floating icon */}
 
-          <LiveChatButton/>
+          <LiveChatButton />
         </body>
       </html>
     </Providers>

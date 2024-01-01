@@ -13,10 +13,10 @@ type DonorLinkProps = {
 const DonorLink = ({ availableDonorLink }: DonorLinkProps) => {
   return (
     <div className="bg-primary grid lg:grid-cols-4  grid-cols-2 commonGap">
-      {availableDonorLink.map((donorLink) => (
+      {availableDonorLink.map((donorLink,i) => (
         <Link
           href={donorLink.link}
-          key={donorLink.name}
+          key={i}
           className="group border-2"
         >
           <div className="flex flex-col items-center justify-center p-4">
