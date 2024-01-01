@@ -1,7 +1,6 @@
 import React from "react";
 import NewsCard from "../NewsCard/NewsCard";
-import { IOurNews, IResponse } from "@/interfaces/common";
-import config from "@/config/config";
+import { IOurNews } from "@/interfaces/common";
 import Link from "next/link";
 import { useBlogsQuery } from "@/redux/Api/blogApi";
 

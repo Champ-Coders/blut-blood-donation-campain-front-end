@@ -1,5 +1,4 @@
 "use client";
-import dynamic from "next/dynamic";
 
 import VideoBanner from "@/components/Home/VideoBanner.jsx";
 import BloodTypeDonors from "@/components/Home/BloodTypeDonors";
@@ -35,13 +34,14 @@ export default function Home() {
       <BloodOwner />
       <TeamMember />
       <News />
-      {/* <FaqQuestion /> */}
+      <FaqQuestion />
       <FeedBackForum />
 
       {/* floating icon */}
       <FloatButton.BackTop
         shape="square"
         type="primary"
+        className="!bg-primary"
         style={{ right: 24 }}
         icon={<VerticalAlignTopOutlined />}
       />
