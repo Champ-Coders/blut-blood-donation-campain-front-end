@@ -1,6 +1,5 @@
 import { FaHeart, FaPlay } from "react-icons/fa";
 import React from "react";
-import bg from "../../../public/assets/cover-sbda.jpg";
 import AppointmentForm from "../AppointmentForm/AppointmentForm";
 import { useGetAllUsersQuery } from "@/redux/Api/authApi/AuthApi";
 
@@ -24,11 +23,11 @@ const BloodOwner = async () => {
   });
 
   return (
-    <section className={`relative`}>
+    <section className={`relative mt-[150px]`}>
       <div
         style={{
           // backgroundImage
-          backgroundImage: `url(${bg.src})`,
+          backgroundImage: `url(https://i.ibb.co/ScS9jyZ/tp227-socialmedia-10-googlefocus.jpg)`,
           backgroundSize: "cover",
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",
@@ -69,7 +68,7 @@ const BloodOwner = async () => {
       {/* bottom section start */}
       <div className="common p-0 relative -top-[60px] ">
         <div className="flex flex-col lg:flex-row gap-10 ">
-          <div className="bg-white py-[35px] px-[25px] shadow-[0px_9px_52px_0px_rgba(0,0,0,.07)] w-full">
+          <div className="bg-white py-[35px] px-[25px] shadow-[0px_9px_52px_0px_rgba(0,0,0,.07)] w-full rounded-lg border border-primary/20 ">
             <h3 className="text-[30px] text-[#111111] font-bold capitalize">
               current blood request
             </h3>
@@ -95,7 +94,7 @@ const BloodOwner = async () => {
             </div>
           </div>
           {/* form */}
-          <div className="bg-white py-[35px] px-[25px] shadow-[0px_9px_52px_0px_rgba(0,0,0,.07)] w-full">
+          <div className="bg-white py-[35px] px-[25px] shadow-[0px_9px_52px_0px_rgba(0,0,0,.07)] w-full rounded-lg border border-primary/20 ">
             <h3 className="text-[30px] text-[#111111] font-bold capitalize mb-[30px]">
               Request for Blood Here
             </h3>
