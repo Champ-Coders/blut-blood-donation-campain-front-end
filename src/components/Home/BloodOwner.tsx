@@ -1,25 +1,23 @@
 import { FaHeart, FaPlay } from "react-icons/fa";
 import React from "react";
 import bg from "../../../public/assets/cover-sbda.jpg";
-import { CurrentBloodRequest } from "@/constants/CurrentBloodRequest";
-import { ICurrentBloodRequest } from "@/interfaces/common";
 import AppointmentForm from "../AppointmentForm/AppointmentForm";
 import { useGetAllUsersQuery } from "@/redux/Api/authApi/AuthApi";
-import config from "@/config/config";
 
-async function getData() {
-  const res = await fetch(`${config.apiBaseUrl}/users/all-users`);
+// async function getData() {
+//   const res = await fetch(`${config.apiBaseUrl}/users/all-users`);
 
-  if (!res.ok) {
-    // This will activate the closest `error.js` Error Boundary
-    throw new Error("Failed to fetch data");
-  }
+//   if (!res.ok) {
+//     // This will activate the closest `error.js` Error Boundary
+//     throw new Error("Failed to fetch data");
+//   }
 
-  return res.json();
-}
+//   return res.json();
+// }
 
 const BloodOwner = async () => {
-  const allBlood = await getData();
+  // const allBlood = await getData();
+  const { data: allBlood } = useGetAllUsersQuery(undefined);
 
   const availableDonor = allBlood?.data?.data?.filter((item: any) => {
     return item?.available === true;

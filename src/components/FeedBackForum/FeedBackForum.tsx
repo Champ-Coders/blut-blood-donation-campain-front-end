@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { Button, Modal, Rate, message, Form } from "antd";
+import { Button, Modal, Rate, message } from "antd";
 const { confirm } = Modal;
 import { ExclamationCircleFilled } from "@ant-design/icons";
 

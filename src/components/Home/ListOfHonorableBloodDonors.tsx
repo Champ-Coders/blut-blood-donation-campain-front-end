@@ -9,10 +9,7 @@ import { Noto_Sans_Bengali } from "next/font/google";
 const bengali = Noto_Sans_Bengali({ subsets: ["latin"] });
 
 import Slider from "react-slick";
-import { LuPhoneIncoming } from "react-icons/lu";
-import Image from "next/image";
 import Link from "next/link";
-import { IPerson } from "@/interfaces/common";
 import DonateCart from "../DonateList/DonateCart";
 
 import bg from "../../../public/assets/list blood donar/bg.jpg";

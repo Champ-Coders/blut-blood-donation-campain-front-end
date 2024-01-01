@@ -6,41 +6,49 @@ import React from "react";
 
 const CompatibleBloodType = [
   {
+    id: 1,
     bloodType: "A+",
     donateBloodTo: "A+, AB+",
     receiveBloodFrom: "A+, A-, O+, O-",
   },
   {
+    id: 2,
     bloodType: "A-",
     donateBloodTo: "A+, A-, AB+, AB-",
     receiveBloodFrom: "A-, O-",
   },
   {
+    id: 3,
     bloodType: "B+",
     donateBloodTo: "B+, AB+",
     receiveBloodFrom: "B+, B-, O+, O-",
   },
   {
+    id: 4,
     bloodType: "B-",
     donateBloodTo: "B+, B-, AB+, AB-",
     receiveBloodFrom: "B-, O-",
   },
   {
+    id: 5,
     bloodType: "AB+",
     donateBloodTo: "AB+",
     receiveBloodFrom: "Everyone",
   },
   {
+    id: 6,
     bloodType: "AB-",
     donateBloodTo: "AB+, AB-",
     receiveBloodFrom: "AB-, A-, B-, O-",
   },
   {
+    id: 7,
     bloodType: "O+",
     donateBloodTo: "A+, B+, AB+, O+",
     receiveBloodFrom: "O+, O-",
   },
   {
+    id: 8,
     bloodType: "O-",
     donateBloodTo: "Everyone",
     receiveBloodFrom: "O-",
@@ -139,6 +147,8 @@ const CompatibleBloodTypeDonors = () => {
           className="w-[600px] shadow rounded-lg"
         />
       </div>
+
+      
     </div>
   );
 };
