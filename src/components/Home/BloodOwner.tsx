@@ -23,7 +23,7 @@ const BloodOwner = async () => {
   });
 
   return (
-    <section className={`relative`}>
+    <section className={`relative mt-[50px]`}>
       <div
         style={{
           // backgroundImage
