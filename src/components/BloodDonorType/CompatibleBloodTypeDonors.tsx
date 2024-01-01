@@ -147,6 +147,8 @@ const CompatibleBloodTypeDonors = () => {
           className="w-[600px] shadow rounded-lg"
         />
       </div>
+
+      
     </div>
   );
 };
