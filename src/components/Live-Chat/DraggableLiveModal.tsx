@@ -4,12 +4,16 @@
 
 import { ILiveChat, LiveChatData } from "@/constants/ILiveChat";
 import { useUserProfileQuery } from "@/redux/Api/authApi/AuthApi";
+import socket from "@/socket/socket";
+
+// import { socket } from "@/socket";
 import { message } from "antd";
 import Image from "next/image";
 import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { FaRegMessage } from "react-icons/fa6";
 import InputEmoji from "react-input-emoji";
+
 
 const DraggableLiveModal = () => {
   const { data } = useUserProfileQuery(null);
@@ -18,7 +22,15 @@ const DraggableLiveModal = () => {
 
   const { register, handleSubmit, reset, setValue } = useForm();
 
+  // const socket = io.connect("http://localhost:5000/");
+  // console.log("🚀 ~ file: DraggableLiveModal.tsx:24 ~ DraggableLiveModal ~ socket:", socket)
+
+  
+
   const onSubmit = (data: any) => {
+   
+    //! take message from input
+
     if (!userInfo) {
       return message.error("Please login first");
     }
@@ -31,10 +43,8 @@ const DraggableLiveModal = () => {
       type: "comment",
     };
 
-    setChatMessages([...chatMessages, newMessage]);
+    socket.emit("send-message", newMessage);
 
-    // clear input
-    reset();
   };
 
   const scroll = React.useRef<HTMLDivElement>(null);
@@ -185,7 +195,7 @@ const DraggableLiveModal = () => {
         {/* button */}
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="border-t-2 border-gray-200 px-4 pt-4 mb-2 sm:mb-0"
+          className="border-t-2 border-gray-200 bg-red-300 px-4 pt-4 mb-2 sm:mb-0"
         >
           <div className="relative flex">
             <span className="absolute inset-y-0 flex items-center">
@@ -209,7 +219,7 @@ const DraggableLiveModal = () => {
                 </svg>
               </button>
             </span>
-        
+            {/* chat input */}
             <InputEmoji
               onChange={(text) => setValue("message", text)}
               cleanOnEnter
