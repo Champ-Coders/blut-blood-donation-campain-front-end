@@ -1,7 +1,16 @@
+"use client";
 import { Image } from "antd";
 import React from "react";
+import { useForm } from "react-hook-form";
 
 export default function ChatContainer() {
+  const { register, handleSubmit, reset, setValue } = useForm();
+
+  const onSubmit = (data: any) => {
+    console.log("🚀 ~ file: ChatContainer.tsx:12 ~ onSubmit ~ data:", data);
+  };
+
+  
   return (
     <div className=" flex-1 bg-blue-200">
       <header className="bg-white p-4 text-gray-700">
@@ -51,7 +60,20 @@ export default function ChatContainer() {
             </p>
           </div>
         </div>
-
+        <div className="flex justify-end mb-4 cursor-pointer">
+          <div className="flex max-w-96 bg-indigo-500 text-white rounded-lg p-3 gap-3">
+            <p>
+              Hi Alice! I m good, just finished a great book. How about you?
+            </p>
+          </div>
+          <div className="w-9 h-9 rounded-full flex items-center justify-center ml-2">
+            <Image
+              src="https://placehold.co/200x/b7a8ff/ffffff.svg?text=ʕ•́ᴥ•̀ʔ&font=Lato"
+              alt="My Avatar"
+              className="w-8 h-8 rounded-full"
+            />
+          </div>
+        </div>
         <div className="flex justify-end mb-4 cursor-pointer">
           <div className="flex max-w-96 bg-indigo-500 text-white rounded-lg p-3 gap-3">
             <p>
@@ -82,7 +104,20 @@ export default function ChatContainer() {
             </p>
           </div>
         </div>
-
+        <div className="flex justify-end mb-4 cursor-pointer">
+          <div className="flex max-w-96 bg-indigo-500 text-white rounded-lg p-3 gap-3">
+            <p>
+              Hi Alice! I m good, just finished a great book. How about you?
+            </p>
+          </div>
+          <div className="w-9 h-9 rounded-full flex items-center justify-center ml-2">
+            <Image
+              src="https://placehold.co/200x/b7a8ff/ffffff.svg?text=ʕ•́ᴥ•̀ʔ&font=Lato"
+              alt="My Avatar"
+              className="w-8 h-8 rounded-full"
+            />
+          </div>
+        </div>
         <div className="flex justify-end mb-4 cursor-pointer">
           <div className="flex max-w-96 bg-indigo-500 text-white rounded-lg p-3 gap-3">
             <p>Of course! I ll drop it off at your place tomorrow.</p>
@@ -95,7 +130,20 @@ export default function ChatContainer() {
             />
           </div>
         </div>
-
+        <div className="flex justify-end mb-4 cursor-pointer">
+          <div className="flex max-w-96 bg-indigo-500 text-white rounded-lg p-3 gap-3">
+            <p>
+              Hi Alice! I m good, just finished a great book. How about you?
+            </p>
+          </div>
+          <div className="w-9 h-9 rounded-full flex items-center justify-center ml-2">
+            <Image
+              src="https://placehold.co/200x/b7a8ff/ffffff.svg?text=ʕ•́ᴥ•̀ʔ&font=Lato"
+              alt="My Avatar"
+              className="w-8 h-8 rounded-full"
+            />
+          </div>
+        </div>
         <div className="flex mb-4 cursor-pointer">
           <div className="w-9 h-9 rounded-full flex items-center justify-center mr-2">
             <Image
@@ -108,7 +156,20 @@ export default function ChatContainer() {
             <p className="text-gray-700">Thanks, you re the best!</p>
           </div>
         </div>
-
+        <div className="flex justify-end mb-4 cursor-pointer">
+          <div className="flex max-w-96 bg-indigo-500 text-white rounded-lg p-3 gap-3">
+            <p>
+              Hi Alice! I m good, just finished a great book. How about you?
+            </p>
+          </div>
+          <div className="w-9 h-9 rounded-full flex items-center justify-center ml-2">
+            <Image
+              src="https://placehold.co/200x/b7a8ff/ffffff.svg?text=ʕ•́ᴥ•̀ʔ&font=Lato"
+              alt="My Avatar"
+              className="w-8 h-8 rounded-full"
+            />
+          </div>
+        </div>
         <div className="flex justify-end mb-4 cursor-pointer">
           <div className="flex max-w-96 bg-indigo-500 text-white rounded-lg p-3 gap-3">
             <p>Anytime! Let me know how you like it. 😊</p>
@@ -162,21 +223,27 @@ export default function ChatContainer() {
         </div>
       </div>
 
-      <footer className="bg-white border-t border-gray-300 p-4 
-    //   absolute bottom-0 w-[60%]
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="bg-white border-t border-gray-300 p-4 
+      absolute bottom-0 w-[80%]
       
-      ">
+      "
+      >
         <div className="flex items-center">
           <input
             type="text"
             placeholder="Type a message..."
             className="w-full p-2 rounded-md border border-gray-400 focus:outline-none focus:border-blue-500"
           />
-          <button className="bg-indigo-500 text-white px-4 py-2 rounded-md ml-2">
+          <button
+            type="submit"
+            className="bg-indigo-500 text-white px-4 py-2 rounded-md ml-2"
+          >
             Send
           </button>
         </div>
-      </footer>
+      </form>
     </div>
   );
 }
