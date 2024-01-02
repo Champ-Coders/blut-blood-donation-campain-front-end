@@ -71,6 +71,7 @@ export interface IEvent {
 }
 
 export interface IPopularCamp {
+  id: string;
   title: string;
   description: string;
   image: StaticImageData;

@@ -1,47 +1,20 @@
-import one from "../../../public/assets/about/collection.png";
-import two from "../../../public/assets/about/checking.png";
-import three from "../../../public/assets/about/camp.png";
+"use client";
 
 import React from "react";
-import Image, { StaticImageData } from "next/image";
+import Image from "next/image";
 import { FaCalendarAlt } from "react-icons/fa";
+import { useEventsQuery } from "@/redux/Api/eventApi";
+import LoadingPage from "@/app/loading";
+import { IPopularCamp } from "@/interfaces/common";
 
 type PopularCampaignsAboutProps = {};
 
-type IData = {
-  id: string;
-  title: string;
-  des: string;
-  image: StaticImageData;
-  date?: string;
-};
-
 const PopularCampaignsAbout: React.FC<PopularCampaignsAboutProps> = () => {
-  const data: IData[] = [
-    {
-      id: "1",
-      title: "Blood Group Collection",
-      des: "Lorem ipsum dolor sit elit consectetur adipiscing ipsum elit, sed do incididunt et dolore adipiscing magna aliqua ipsum dolor sit elit consectetur adipiscing ipsum elit, sed do magna aliqua ipsum dolor sit elit consectetur adipiscing.",
-      image: one,
-    },
-    {
-      id: "2",
-      title: "Free Group Checking",
-      des: "Lorem ipsum dolor sit consectetur adipiscing elit, sed do incididunt et dolore magna aliqua consectetur.",
-      image: two,
-      date: "13 February, 2023",
-    },
-    {
-      id: "3",
-      title: "Blood Donation Camp",
-      des: "Lorem ipsum dolor sit consectetur adipiscing elit, sed do incididunt et dolore magna aliqua consectetur.",
-      image: three,
-      date: "13 February, 2023",
-    },
-  ];
+  const { data: Events, isLoading } = useEventsQuery(undefined);
 
+  if (isLoading) return <LoadingPage />;
   return (
-    <section className="bg-[#f5f5f5]">
+    <section>
       <div className="common py-[116px] ">
         <div className="text-center mb-5 sm:mb-10">
           <h3 className="text-base sm:text-xl text-primary font-medium mb-3 uppercase">
@@ -52,7 +25,7 @@ const PopularCampaignsAbout: React.FC<PopularCampaignsAboutProps> = () => {
           </h1>
         </div>
         <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-4 ">
-          {data.map((item) => (
+          {Events?.data?.map((item: IPopularCamp) => (
             <div
               key={item.id}
               className={`${
@@ -60,18 +33,22 @@ const PopularCampaignsAbout: React.FC<PopularCampaignsAboutProps> = () => {
               } bg-white p-5 rounded-lg shadow-[0px_9px_52px_0px_rgba(0,0,0,.07)]`}
             >
               <div>
+                {/* 238x225 */}
+                
                 <Image
-                  className="w-full h-full mb-7"
+                  className="w-full h-[300px] mb-7"
                   src={item.image}
                   alt={item.title}
+                  width={500}
+                  height={300}
                 />
               </div>
               <div>
-                {item?.date && (
+                {item?.event_date && (
                   <div className="text-[#666] text-sm font-bold mb-2 flex items-center gap-5">
                     <p className="flex items-center gap-2">
                       <FaCalendarAlt className="text-primary" />
-                      <span>{item?.date}</span>
+                      <span>{item?.event_date}</span>
                     </p>
                   </div>
                 )}
@@ -82,7 +59,9 @@ const PopularCampaignsAbout: React.FC<PopularCampaignsAboutProps> = () => {
                 >
                   {item.title}
                 </h3>
-                <p className="text-lg text-[#666] leading-7">{item.des}</p>
+                <p className="text-lg text-[#666] leading-7">
+                  {item.description}
+                </p>
               </div>
             </div>
           ))}

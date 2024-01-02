@@ -16,7 +16,7 @@ const TermsAndCondition = () => {
         {/* <!-- Content Container --> */}
         <div className="mx-auto w-full max-w-5xl py-12 md:py-16 lg:py-20">
           {/* <!-- Component --> */}
-          <div className="flex flex-col items-center gap-y-14">
+          <div className="flex flex-col items-center  gap-y-14">
             <p className="max-w-3xl text-center text-sm sm:text-base">
               Blut Blood Bank is a platform that connects blood donors with
               blood recipients. The platform is designed to help people find

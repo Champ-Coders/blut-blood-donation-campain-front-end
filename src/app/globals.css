@@ -150,5 +150,3 @@ body {
   box-shadow: 0 calc(var(--_radius) * 2) 0 var(--color-card);
   pointer-events: none;
 }
-
-
