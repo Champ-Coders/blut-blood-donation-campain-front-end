@@ -14,7 +14,6 @@ import { useForm } from "react-hook-form";
 import { FaRegMessage } from "react-icons/fa6";
 import InputEmoji from "react-input-emoji";
 
-
 const DraggableLiveModal = () => {
   const { data } = useUserProfileQuery(null);
   const userInfo = data?.data;
@@ -25,10 +24,7 @@ const DraggableLiveModal = () => {
   // const socket = io.connect("http://localhost:5000/");
   // console.log("🚀 ~ file: DraggableLiveModal.tsx:24 ~ DraggableLiveModal ~ socket:", socket)
 
-  
-
   const onSubmit = (data: any) => {
-   
     //! take message from input
 
     if (!userInfo) {
@@ -38,13 +34,12 @@ const DraggableLiveModal = () => {
       id: chatMessages.length + 1,
       message: data.message,
       time: new Date().toLocaleTimeString(),
-      avatar: userInfo?.imgUrl,
+      img: userInfo?.imgUrl || "",
       status: "online",
       type: "comment",
     };
-
+    console.log(newMessage);
     socket.emit("send-message", newMessage);
-
   };
 
   const scroll = React.useRef<HTMLDivElement>(null);
