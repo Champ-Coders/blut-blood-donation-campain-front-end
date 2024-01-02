@@ -75,7 +75,7 @@ const columns = [
 
 const CompatibleBloodTypeDonors = () => {
   return (
-    <div className="relative my-[50px]">
+    <div className="relative my-[50px] border-b border-primary/30 ">
       <Image
         src="https://i.ibb.co/hHCs4hf/4414663.jpg"
         className="absolute inset-0 h-full w-full object-cover"
