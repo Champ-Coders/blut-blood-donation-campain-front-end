@@ -3,7 +3,6 @@ import PopularCampaigns from "@/components/Home/PopularCampaigns";
 import TeamMember from "@/components/Home/TeamMember";
 import Testimonials from "@/components/Home/Testimonials";
 import BannerBreadcrumb from "@/components/UI/BannerBreadcrumb";
-import AboutTestimonials from "@/components/about/AboutTesimonials";
 import Counter from "@/components/about/Counter";
 import HelpThePeopleInNeedAbut from "@/components/about/HelpThePeopleInNeedAbut";
 import WhoWeAre from "@/components/about/WhoWeAre";

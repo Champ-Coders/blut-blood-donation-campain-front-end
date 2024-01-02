@@ -38,7 +38,7 @@ const Testimonials = () => {
             />
           </svg>
         </span>
-        <span className="hidden sm:block -z-10 absolute -right-[80px] opacity-20 -bottom-[120px] rounded-full  bg-primary/40 p-6 text-9xl text-white">
+        <span className="hidden sm:block -z-10 absolute lg:-right-[80px] md:-right-[20px] opacity-20 -bottom-[120px] rounded-full  bg-primary/40 p-6 text-9xl text-white">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             aria-hidden="true"

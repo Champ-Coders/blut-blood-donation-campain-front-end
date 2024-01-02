@@ -55,7 +55,7 @@ const PopularCampaigns = () => {
           </svg>
         </div>
         <svg
-          className="scale-[5] text-primary/10 pointer-events-none absolute right-5 bottom-6 text-9xl"
+          className="scale-[5] text-primary/10 pointer-events-none absolute right-3 bottom-6 text-9xl"
           xmlns="http://www.w3.org/2000/svg"
           aria-hidden="true"
           role="img"
