@@ -1,16 +1,15 @@
 import { jwtDecode } from "jwt-decode";
 export const setToLocalStorage = (key: string, token: string) => {
-  if (!key && typeof window === "undefined") {
-    return "";
+  if (typeof window !== "undefined") {
+    localStorage.setItem(key, token);
   }
-  return localStorage.setItem(key, token);
 };
 
 export const getFromLocalStorage = (key: string) => {
-  if (!key && typeof window === "undefined") {
-    return "";
+  if (typeof window !== "undefined") {
+    return localStorage.getItem(key);
   }
-  return localStorage.getItem(key);
+  return null;
 };
 
 type IUserInfo = {
@@ -29,10 +28,9 @@ export const getUserDataFromLC = (): IUserInfo | null => {
 };
 
 export const removeFromLocalStorage = (key: string) => {
-  if (!key && typeof window === "undefined") {
-    return;
+  if (typeof window !== "undefined") {
+    localStorage.removeItem(key);
   }
-  localStorage.removeItem(key);
 };
 
 export const logout = () => {
