@@ -199,7 +199,7 @@ const ListOfHonorableBloodDonors: React.FC<
 
       {/* test */}
       <section className="relative overflow-hidden  py-12 sm:py-16 lg:py-20">
-        <div className="absolute h-96 w-[600px] scale-125 -right-8 -bottom-10 hidden lg:block">
+        <div className="absolute h-96 w-[520px] scale-125 -right-8 -bottom-10 hidden lg:block">
           <div className="absolute h-96 w-[550px] rounded-2xl border-4 border-primary/30"></div>
           <div className="absolute h-96 w-[550px] translate-x-3 translate-y-3 rounded-2xl border-4 border-primary/30"></div>
           <div className="absolute h-96 w-[550px] translate-x-6 translate-y-6 rounded-2xl border-4 border-primary/30"></div>
@@ -219,7 +219,7 @@ const ListOfHonorableBloodDonors: React.FC<
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
               <div className="col-span-4">
                 <h4
-                  className={`${bengali.className} text-xl font-bold mb-5 text-[#111] leading-normal`}
+                  className={`font-kalpurush text-xl font-bold mb-5 text-[#111] leading-normal`}
                 >
                   সর্বোচ্চ রক্তদাতা
                 </h4>
