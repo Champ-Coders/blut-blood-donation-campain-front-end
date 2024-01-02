@@ -36,14 +36,14 @@ const DonateCart: React.FC<DonateCartProps> = ({ person }) => {
                 </dd>
                 <dt className="sr-only">Role</dt>
                 <dd className="mt-3">
-                  <span className="inline-flex items-center rounded-full bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20 ">
+                  <span className="inline-flex items-center rounded-full bg-rose-50 px-2 py-1 text-xs font-medium text-primary ring-1 ring-inset ring-rose-600/20 ">
                     {person?.totalDonation} time donate
                   </span>
                 </dd>
               </dl>
             </div>
             <div>
-              <div className="-mt-px flex divide-x divide-gray-200">
+              <div className="-mt-px flex divide-x divide-gray-200 border-t">
                 <div className="flex w-0 flex-1">
                   <a
                     href={`mailto:${person?.email}`}

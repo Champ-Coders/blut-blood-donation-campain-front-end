@@ -1,6 +1,5 @@
 "use client";
 import LoadingPage from "@/app/loading";
-import Button from "@/components/Button/Button";
 import DonateCart from "@/components/DonateList/DonateCart";
 import BannerBreadcrumb from "@/components/UI/BannerBreadcrumb";
 import { IUser } from "@/interfaces/common";
@@ -20,7 +19,12 @@ const DonateList: React.FC<DonateListProps> = () => {
     .filter((user: IUser) => user.totalDonation !== 0)
     .sort((a: IUser, b: IUser) => b.totalDonation - a.totalDonation);
   return (
-    <main>
+    <main
+      style={{
+        backgroundImage:
+          "url(https://sandbox.elemisthemes.com/assets/img/map.png)",
+      }}
+    >
       <BannerBreadcrumb
         items={[
           {
@@ -79,7 +83,7 @@ const DonateList: React.FC<DonateListProps> = () => {
       <section>
         <div className="common">
           <div className="div">
-            <h3 className="mb-10 text-3xl text-[#111] font-semibold">
+            <h3 className="mb-10 text-3xl text-[#111] font-semibold font-kalpurush">
               প্লাটিনাম ক্লাব
             </h3>
             <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
