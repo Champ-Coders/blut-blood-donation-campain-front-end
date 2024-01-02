@@ -126,7 +126,7 @@ const CompatibleBloodTypeDonors = () => {
                   <p className="font-playfair">Compatible Blood Type Donors</p>
                 )}
                 pagination={false}
-                className="overflow-hidden rounded-xl border-t-4 border-primary/70 bg-white  shadow-2xl shadow-primary/40 "
+                className="overflow-hidden rounded-xl border-t-4 border-primary/70  shadow-2xl shadow-primary/40 "
               />
             </div>
           </div>
