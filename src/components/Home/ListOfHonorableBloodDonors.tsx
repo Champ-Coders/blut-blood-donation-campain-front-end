@@ -28,46 +28,43 @@ const ListOfHonorableBloodDonors: React.FC<
     cssEase: "linear",
   };
 
-
-  const donateValue = [
-    {
-      id: "1",
-      key: "50",
-      value: "97",
-    },
-    {
-      id: "2",
-      key: "25",
-      value: "25555",
-    },
-    {
-      id: "3",
-      key: "10",
-      value: "11765",
-    },
-    {
-      id: "4",
-      key: "3",
-      value: "45198",
-    },
-  ];
-
   const { data: users, isLoading } = useGetAllUsersQuery(undefined);
 
   if (isLoading) {
     return <LoadingPage />;
   }
 
-
   const sortedUsers = users?.data?.data
     .filter((user: IUser) => user.totalDonation !== 0)
     .sort((a: IUser, b: IUser) => b.totalDonation - a.totalDonation);
 
-  if (sortedUsers) {
-    console.log(sortedUsers);
-  } else {
-    console.log("No users to sort.");
-  }
+  const donateValue: {
+    id: string;
+    key: number | undefined;
+    club: string;
+  }[] = [
+    {
+      id: "1",
+      key: sortedUsers.length,
+
+      club: "Highest",
+    },
+    {
+      id: "2",
+      key: users?.data?.data?.length,
+      club: "Silver",
+    },
+    {
+      id: "3",
+      key: 0,
+      club: "Gold",
+    },
+    {
+      id: "4",
+      key: 0,
+      club: "Diamond",
+    },
+  ];
 
   return (
     <>
@@ -145,11 +142,16 @@ const ListOfHonorableBloodDonors: React.FC<
                             <div className="w-0 h-0 rounded rounded-tl-[50px] rounded-bl-[50px]  bg-[#111] absolute top-0 left-0 ease-out duration-500 transition-all group-hover:w-full group-hover:h-full -z-1"></div>
                             <div className="w-full text-wite transition-colors duration-300 ease-in-out group-hover:text-primary z-10 flex justify-between items-center ">
                               <div className="flex gap-5 items-center">
-                                <p className="w-[50px] flex items-center justify-center h-[50px] bg-primary group-hover:bg-white rounded-full">
-                                  {donate.key}
+                                <p className="w-[50px] flex items-center flex-col justify-center h-[50px] bg-primary group-hover:bg-white rounded-full">
+                                  {/* <span className="text-[14px]">
+                                    {donate.key}
+                                  </span> */}
+                                  <span className="text-[12px]">
+                                    {donate.club}
+                                  </span>
                                 </p>
                                 <p className="text-[#111] group-hover:text-white">
-                                  {donate.value}
+                                  {donate.key}
                                 </p>
                               </div>
                               <IoIosArrowForward className="text-[#111] group-hover:text-white" />
