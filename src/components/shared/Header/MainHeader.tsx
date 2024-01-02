@@ -37,7 +37,7 @@ const MainHeader = () => {
   const SignOutHandler = () => {
     logout();
     message.error("Successfully Sign Out");
-    router.push("/");
+    router.push("/login");
   };
 
   return (
