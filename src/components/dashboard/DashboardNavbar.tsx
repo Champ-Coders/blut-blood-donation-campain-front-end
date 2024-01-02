@@ -37,8 +37,7 @@ const DashboardNavbar = ({
   const SignOutHandler = () => {
     logout();
     message.error("Successfully Sign Out");
-    router.push("/");
-    // window.location.reload();
+    router.push("/login");
   };
 
   return (
