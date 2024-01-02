@@ -51,8 +51,6 @@ const DraggableLiveModal = () => {
     scroll.current?.scrollIntoView({ behavior: "smooth" });
   }, [chatMessages]);
 
-
-
   return (
     <div>
       <div className="flex-1 p-2 justify-between flex flex-col h-[500px]">
