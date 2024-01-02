@@ -46,7 +46,7 @@ const Faq = ({ header, text }: AccordionItemProps) => {
           active ? "block" : "hidden"
         }`}
       >
-        <p className="py-3 text-base leading-relaxed text-body-color dark:text-dark-6">
+        <p className="py-3 text-base leading-relaxed text-body-color ">
           {text}
         </p>
       </div>
