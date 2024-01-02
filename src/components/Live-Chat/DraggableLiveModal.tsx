@@ -9,7 +9,7 @@ import socket from "@/socket/socket";
 // import { socket } from "@/socket";
 import { message } from "antd";
 import Image from "next/image";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { FaRegMessage } from "react-icons/fa6";
 import InputEmoji from "react-input-emoji";
@@ -50,6 +50,8 @@ const DraggableLiveModal = () => {
   useEffect(() => {
     scroll.current?.scrollIntoView({ behavior: "smooth" });
   }, [chatMessages]);
+
+
 
   return (
     <div>

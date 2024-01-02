@@ -10,13 +10,8 @@ export default function ChatContainer() {
     console.log("🚀 ~ file: ChatContainer.tsx:12 ~ onSubmit ~ data:", data);
   };
 
-  
   return (
-    <div className=" flex-1 bg-blue-200">
-      <header className="bg-white p-4 text-gray-700">
-        <h1 className="text-2xl font-semibold">Alice</h1>
-      </header>
-
+    <div>
       <div className="h-screen overflow-y-auto p-4 pb-36">
         <div className="flex mb-4 cursor-pointer">
           <div className="w-9 h-9 rounded-full flex items-center justify-center mr-2">

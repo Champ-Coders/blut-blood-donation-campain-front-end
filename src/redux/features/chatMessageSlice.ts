@@ -1,11 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 interface IMessage {
-  message: {}[];
+  messages: {}[];
 }
 
 const initialState: IMessage = {
-  message: [],
+  messages: [],
 };
 
 const chatMessageSlice = createSlice({
@@ -13,7 +13,7 @@ const chatMessageSlice = createSlice({
   initialState: initialState,
   reducers: {
     allUsers: (state) => {
-      state.message = state.message;
+      state.messages = state.messages;
     },
   },
 });

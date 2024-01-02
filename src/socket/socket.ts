@@ -11,4 +11,6 @@ const socket = io("http://localhost:5000", {
   query: { user: JSON.stringify(user) }, // Serialize user data here
 })
 
+
+
 export default socket;
