@@ -9,11 +9,10 @@ import socket from "@/socket/socket";
 // import { socket } from "@/socket";
 import { message } from "antd";
 import Image from "next/image";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { FaRegMessage } from "react-icons/fa6";
 import InputEmoji from "react-input-emoji";
-
 
 const DraggableLiveModal = () => {
   const { data } = useUserProfileQuery(null);
@@ -25,26 +24,24 @@ const DraggableLiveModal = () => {
   // const socket = io.connect("http://localhost:5000/");
   // console.log("🚀 ~ file: DraggableLiveModal.tsx:24 ~ DraggableLiveModal ~ socket:", socket)
 
-  
-
   const onSubmit = (data: any) => {
-   
     //! take message from input
 
     if (!userInfo) {
       return message.error("Please login first");
     }
     const newMessage = {
-      id: chatMessages.length + 1,
+      // id: chatMessages.length + 1,
       message: data.message,
       time: new Date().toLocaleTimeString(),
-      avatar: userInfo?.imgUrl,
+      img: userInfo?.imgUrl || "",
       status: "online",
       type: "comment",
+      email: userInfo?.email,
+      _id: userInfo?._id,
     };
-
+    console.log(newMessage);
     socket.emit("send-message", newMessage);
-
   };
 
   const scroll = React.useRef<HTMLDivElement>(null);

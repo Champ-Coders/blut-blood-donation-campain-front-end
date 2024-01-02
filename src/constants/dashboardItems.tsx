@@ -12,6 +12,7 @@ import {
   ClusterOutlined,
   UserSwitchOutlined,
   MessageOutlined,
+  MailOutlined,
 } from "@ant-design/icons";
 import Link from "next/link";
 import { USER_ROLE } from "./userRole";
@@ -313,10 +314,33 @@ export const dashboardItems = (role: USER_ROLE) => {
     },
 
     {
-      label: <button className=" ">Manage Contact</button>,
+      label: <button className=" "> Chat List</button>,
       key: "manage-contact",
       icon: (
         <MessageOutlined
+          style={{
+            fontSize: "18px",
+            // marginRight:"5px"
+            // borderRadius: "10px",
+          }}
+        />
+      ),
+      children: [
+        {
+          label: (
+            <Link className="" href={`/admin/chat`}>
+              Chat List
+            </Link>
+          ),
+          key: `/admin/chat`,
+        },
+      ],
+    },
+    {
+      label: <button className=" ">Manage Contact</button>,
+      key: "manage-contact",
+      icon: (
+        <MailOutlined
           style={{
             fontSize: "18px",
             // marginRight:"5px"
@@ -333,9 +357,8 @@ export const dashboardItems = (role: USER_ROLE) => {
           ),
           key: `/admin/contact`,
         },
-     
       ],
-    }
+    },
   ];
 
   // ! PatientSidebar ITems

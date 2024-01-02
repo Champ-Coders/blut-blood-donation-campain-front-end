@@ -66,6 +66,10 @@ const AllUsers = () => {
       dataIndex: "name",
     },
     {
+      title: "Email",
+      dataIndex: "email",
+    },
+    {
       title: "Blood Group",
       dataIndex: "bloodGroup",
       sorter: (a: any, b: any) => a.bloodGroup - b.bloodGroup,
