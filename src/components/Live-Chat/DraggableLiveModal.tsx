@@ -31,12 +31,14 @@ const DraggableLiveModal = () => {
       return message.error("Please login first");
     }
     const newMessage = {
-      id: chatMessages.length + 1,
+      // id: chatMessages.length + 1,
       message: data.message,
       time: new Date().toLocaleTimeString(),
       img: userInfo?.imgUrl || "",
       status: "online",
       type: "comment",
+      email: userInfo?.email,
+      _id: userInfo?._id,
     };
     console.log(newMessage);
     socket.emit("send-message", newMessage);
