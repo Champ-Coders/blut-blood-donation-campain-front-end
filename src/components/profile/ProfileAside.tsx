@@ -26,7 +26,7 @@ const profileData: {
       />
     ),
     title: "Profile",
-    link: "/profile/profile",
+    link: "/profile",
   },
   {
     icon: (

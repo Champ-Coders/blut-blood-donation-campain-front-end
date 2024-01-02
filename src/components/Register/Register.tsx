@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import { FaPhone, FaLocationDot, FaEnvelope } from "react-icons/fa6";
 import { useForm } from "react-hook-form";
 import InputField from "../InputField/InputField";
@@ -11,9 +11,10 @@ import {
   divisions,
 } from "@/constants/Register";
 import { useUserRegisterMutation } from "@/redux/Api/authApi/AuthApi";
-import { Button, message } from "antd";
+import { Button, Checkbox, message } from "antd";
 import { useRouter } from "next/navigation";
 import UploaderImage from "../Uploader/UploaderImage";
+import { CheckboxChangeEvent } from "antd/es/checkbox";
 
 const Register = () => {
   const {
@@ -23,6 +24,7 @@ const Register = () => {
     formState: { errors },
     reset,
   } = useForm();
+  const [check, setIsCheck] = useState(false);
 
   const [userRegister, { isLoading }] = useUserRegisterMutation();
 
@@ -210,6 +212,24 @@ const Register = () => {
               />
             </div>
           </div>
+
+          {/* terms and condition */}
+          <div className="flex items-center font-semibold text-xs mb-4">
+            <Checkbox
+              onChange={(e: CheckboxChangeEvent) =>
+                setIsCheck(e.target.checked)
+              }
+            >
+              I agree with
+            </Checkbox>
+            <Link
+              href={"/terms-and-condition"}
+              className="text-primary underline"
+            >
+              terms and conditions
+            </Link>
+          </div>
+
           <div className="w-full">
             <Button
               htmlType="submit"

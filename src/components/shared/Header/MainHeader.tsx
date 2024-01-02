@@ -9,25 +9,21 @@ import Dropdown from "@/components/Dropdown/Dropdown";
 import { SearchOutlined, MenuOutlined } from "@ant-design/icons";
 import Link from "next/link";
 import Drawers from "@/components/Drawer/Drawer";
-import { useUserProfileQuery } from "@/redux/Api/authApi/AuthApi";
 
 import { Menu, Transition } from "@headlessui/react";
-import { logout } from "@/utils/local-storage";
-import { Badge, message } from "antd";
+import { getUserDataFromLC, logout } from "@/utils/local-storage";
+import { message } from "antd";
 import { useRouter } from "next/navigation";
-import { FaRegBell } from "react-icons/fa";
 
-import Popovers from "@/components/Popover/Popover";
-import { INotification } from "@/constants/INotification";
-import { IoChatboxEllipsesSharp } from "react-icons/io5";
 import Notification from "@/components/Notification/Notification";
 
 const MainHeader = () => {
   const [open, setOpen] = React.useState(false);
-  const [isOpenNotification, setIsOpenNotification] = React.useState(false);
 
-  const { data } = useUserProfileQuery(null);
-  const userInfo = data?.data;
+  const userInfo: any = getUserDataFromLC();
+
+  // const { data } = useUserProfileQuery(null);
+  // const userInfo = data?.data;
 
   function classNames(...classes: any) {
     return classes.filter(Boolean).join(" ");
@@ -41,8 +37,7 @@ const MainHeader = () => {
   const SignOutHandler = () => {
     logout();
     message.error("Successfully Sign Out");
-    window.location.reload();
-    router.push("/");
+    router.push("/login");
   };
 
   return (
@@ -84,7 +79,7 @@ const MainHeader = () => {
                     height={50}
                     width={50}
                     className="h-8 w-8 rounded-full"
-                    src={userInfo?.imgUrl ?? userIcon}
+                    src={(userInfo?.imgUrl as any) ?? userIcon}
                     alt="user"
                   />
                 </Menu.Button>
