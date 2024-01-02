@@ -116,16 +116,19 @@ const ListOfHonorableBloodDonors: React.FC<
   }
 
   // sort by total donation
- const highestDonar = users?.data?.data?.sort((a: IUser, b: IUser) => {
-   return b.totalDonation - a.totalDonation;
- });
- console.log("🚀 ~ file: ListOfHonorableBloodDonors.tsx:122 ~ highestDonar ~ highestDonar:", highestDonar)
+  //  const higgest users?.data?.data?.sort((a: IUser, b: IUser) => {
+  //     return b.totalDonation - a.totalDonation;
+  //   });
 
+  const sortedUsers = users?.data?.data
+    .filter((user: IUser) => user.totalDonation !== 0)
+    .sort((a: IUser, b: IUser) => b.totalDonation - a.totalDonation);
 
-
-
-
-
+  if (sortedUsers) {
+    console.log(sortedUsers);
+  } else {
+    console.log("No users to sort.");
+  }
 
   return (
     <>
@@ -156,7 +159,7 @@ const ListOfHonorableBloodDonors: React.FC<
                   সর্বোচ্চ রক্তদাতা
                 </h4>
                 <Slider {...settings}>
-                  {users?.data?.data?.map((person: IUser) => (
+                  {sortedUsers?.map((person: IUser) => (
                     <DonateCart key={person._id} person={person} />
                   ))}
                 </Slider>

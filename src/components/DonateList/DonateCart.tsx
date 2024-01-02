@@ -10,7 +10,7 @@ type DonateCartProps = { person: IUser };
 
 const DonateCart: React.FC<DonateCartProps> = ({ person }) => {
   return (
-    <Link href={`donate-list/${person._id}`}>
+    <Link href={`donate-list/${person._id}`} >
       <div className="w-full h-full relative items-center justify-start overflow-hidden transition-all bg-white rounded  group p-1 mb-2  flex  gap-3 border border-primary">
         <div className="w-0 h-0  bg-primary absolute top-0 left-0 ease-out duration-500 transition-all group-hover:w-full group-hover:h-full -z-1"></div>
         <div className="w-full transition-colors duration-300 ease-in-out  z-10 flex justify-between items-center ">
