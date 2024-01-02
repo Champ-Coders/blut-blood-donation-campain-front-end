@@ -1,103 +1,24 @@
+"use client";
+import LoadingPage from "@/app/loading";
 import Button from "@/components/Button/Button";
 import DonateCart from "@/components/DonateList/DonateCart";
 import BannerBreadcrumb from "@/components/UI/BannerBreadcrumb";
-import Image from "next/image";
+import { IUser } from "@/interfaces/common";
+import { useGetAllUsersQuery } from "@/redux/Api/authApi/AuthApi";
 import React from "react";
-import { LuPhoneIncoming } from "react-icons/lu";
 
 type DonateListProps = {};
 
 const DonateList: React.FC<DonateListProps> = () => {
-  const people = [
-    {
-      id: "1",
-      name: "Jane Cooper",
-      title: "Paradigm Representative",
-      role: "Admin",
-      email: "janecooper@example.com",
-      telephone: "+1-202-555-0170",
-      donation: 5,
-      imageUrl:
-        "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60",
-    },
-    {
-      id: "2",
-      name: "Jane Cooper",
-      title: "Paradigm Representative",
-      role: "Admin",
-      email: "janecooper@example.com",
-      telephone: "+1-202-555-0170",
-      donation: 5,
-      imageUrl:
-        "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60",
-    },
-    {
-      id: "3",
-      name: "Jane Cooper",
-      title: "Paradigm Representative",
-      role: "Admin",
-      email: "janecooper@example.com",
-      telephone: "+1-202-555-0170",
-      donation: 5,
-      imageUrl:
-        "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60",
-    },
-    {
-      id: "4",
-      name: "Jane Cooper",
-      title: "Paradigm Representative",
-      role: "Admin",
-      email: "janecooper@example.com",
-      telephone: "+1-202-555-0170",
-      donation: 5,
-      imageUrl:
-        "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60",
-    },
-    {
-      id: "5",
-      name: "Jane Cooper",
-      title: "Paradigm Representative",
-      role: "Admin",
-      email: "janecooper@example.com",
-      telephone: "+1-202-555-0170",
-      donation: 5,
-      imageUrl:
-        "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60",
-    },
-    {
-      id: "6",
-      name: "Jane Cooper",
-      title: "Paradigm Representative",
-      role: "Admin",
-      email: "janecooper@example.com",
-      telephone: "+1-202-555-0170",
-      donation: 5,
-      imageUrl:
-        "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60",
-    },
-    {
-      id: "7",
-      name: "Jane Cooper",
-      title: "Paradigm Representative",
-      role: "Admin",
-      email: "janecooper@example.com",
-      telephone: "+1-202-555-0170",
-      donation: 5,
-      imageUrl:
-        "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60",
-    },
-    {
-      id: "8",
-      name: "Jane Cooper",
-      title: "Paradigm Representative",
-      role: "Admin",
-      email: "janecooper@example.com",
-      telephone: "+1-202-555-0170",
-      donation: 5,
-      imageUrl:
-        "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60",
-    },
-  ];
+  const { data: users, isLoading } = useGetAllUsersQuery(undefined);
+
+  if (isLoading) {
+    return <LoadingPage />;
+  }
+
+  const sortedUsers = users?.data?.data
+    .filter((user: IUser) => user.totalDonation !== 0)
+    .sort((a: IUser, b: IUser) => b.totalDonation - a.totalDonation);
   return (
     <main>
       <BannerBreadcrumb
@@ -143,12 +64,12 @@ const DonateList: React.FC<DonateListProps> = () => {
                 </button>
               </div>
             </div>
-            <h3 className="mb-10 text-3xl text-[#111] font-semibold">
-              প্লাটিনাম ক্লাবে নতুন
+            <h3 className="mb-10 text-3xl text-[#111] font-semibold font-kalpurush">
+              সর্বোচ্চ রক্তদাতা
             </h3>
             <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3">
-              {people.slice(0, 6).map((person) => (
-                <DonateCart key={person.id} person={person} />
+              {sortedUsers?.map((person: IUser) => (
+                <DonateCart key={person._id} person={person} />
               ))}
             </div>
           </div>
@@ -159,18 +80,18 @@ const DonateList: React.FC<DonateListProps> = () => {
         <div className="common">
           <div className="div">
             <h3 className="mb-10 text-3xl text-[#111] font-semibold">
-              প্লাটিনাম ক্লাবে আরো রক্তদাতা
+              প্লাটিনাম ক্লাব
             </h3>
             <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-              {people.map((person) => (
-                <DonateCart key={person.id} person={person} />
+              {users?.data?.data?.map((person: IUser) => (
+                <DonateCart key={person._id} person={person} />
               ))}
             </div>
-            <div className="flex justify-center">
+            {/* <div className="flex justify-center">
               <Button className="my-10 rounded-full font-bold " type="button">
                 More
               </Button>
-            </div>
+            </div> */}
           </div>
         </div>
       </section>
