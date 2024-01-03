@@ -21,7 +21,39 @@ type IActivity = {
 
 const activity: IActivity[] = [];
 
-const Comments = () => {
+const Comments = ({ id }: { id: string }) => {
+  /*! my code start code hasan rifat*/
+  /* 
+
+// get comment from backend
+   const { data: commentData } = useGetAllCommentQuery({}, {});
+   // create comment
+   const [createBlogComment] = useCreateBlogCommentMutation(); 
+   
+   // form
+   const onSubmit = async (data: any) => {
+    if (!userInfo) {
+      message.error("Please login first");
+      return;
+    }
+    // create comment
+    await createBlogComment({
+      blogId: id,
+      userId: userInfo._id,
+      comments: data.comment,
+    });
+
+
+    // set LocalStorage
+    const localComment = localStorage.getItem("comment");
+
+    // reset comment
+    data.comment = "";
+    reset();
+  };
+
+
+  end my code hasan rifat */
   const [comment, setComment] = React.useState(activity);
 
   // get comment from local storage
