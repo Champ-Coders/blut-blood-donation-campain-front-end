@@ -152,7 +152,6 @@ body {
 }
 
 .ql-toolbar {
-  /* border-redius top */
   border-top-left-radius: 10px !important;
   border-top-right-radius: 10px !important;
   background: #e7e7e7 !important;
