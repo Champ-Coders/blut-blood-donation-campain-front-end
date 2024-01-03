@@ -1,9 +1,13 @@
+import { useChatUsersQuery } from "@/redux/Api/ChatApi";
 import { Image } from "antd";
 import React from "react";
 
 export default function ChatSidebar() {
+  const { data } = useChatUsersQuery({});
+  console.log("🚀 ~ file: ChatSidebar.tsx:7 ~ ChatSidebar ~ data:", data);
+
   return (
-    <div className="w-[15%] lg:w-1/4 bg-white border-r border-gray-300">
+    <div className=" w-auto bg-white border-r border-gray-300">
       <header className="p-4 border-b border-gray-300 flex justify-between items-center bg-indigo-600 text-white">
         <h1 className="text-2xl font-semibold">Chat Web</h1>
         <div className="relative">

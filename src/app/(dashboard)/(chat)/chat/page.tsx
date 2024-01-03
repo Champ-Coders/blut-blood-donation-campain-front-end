@@ -6,7 +6,6 @@ import socket from "@/socket/socket";
 import React, { useEffect, useState } from "react";
 
 export default function ChatAdminnPage() {
-
   return (
     // <div className="flex h-screen overflow-hidden relative">
     //   <ChatSidebar />

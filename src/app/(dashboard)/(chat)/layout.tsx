@@ -8,12 +8,12 @@ export default function ChatLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div>
-     
+    <div className="w-full">
       <div className="flex h-screen overflow-hidden relative">
-        <ChatSidebar />
-        {children}
-        {/* <div className=""></div> */}
+        <div className="w-[100%] lg:w-1/4">
+          <ChatSidebar />
+        </div>
+        <div className="w-3/4">{children}</div>
       </div>
     </div>
   );
