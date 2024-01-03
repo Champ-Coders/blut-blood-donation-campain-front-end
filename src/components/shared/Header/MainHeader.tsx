@@ -41,7 +41,7 @@ const MainHeader = () => {
   };
 
   return (
-    <div className=" items-center grid md:grid-cols-5 grid-cols-3 shadow justify-between bg-white">
+    <div className=" items-center grid lg:grid-cols-5 grid-cols-2 shadow justify-between bg-white">
       <Link
         href={"/"}
         className="col-span-1 bg-primary flex justify-center py-4 px-2 "
@@ -62,7 +62,7 @@ const MainHeader = () => {
       </div>
 
       {/* search and Login  */}
-      <div className="flex  items-center gap-5 ml-auto col-span-2 w-full justify-center">
+      <div className="flex  items-center gap-5 ml-auto lg:col-span-2 w-full lg:justify-center justify-end pr-10 ">
         <button className="">
           <SearchOutlined className="text-[18px] p-4" />
         </button>
