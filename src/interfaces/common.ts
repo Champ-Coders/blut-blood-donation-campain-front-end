@@ -113,3 +113,16 @@ export type IPerson = {
   donation: number;
   imageUrl: string;
 };
+
+export type IVolunteers = {
+  id: string;
+  name: string;
+  designation: string;
+  image: StaticImageData;
+  linkedin: string;
+  facebook: string;
+  github: string;
+  instagram: string;
+  createdAt: string;
+  updatedAt: string;
+};
