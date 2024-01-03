@@ -1,58 +1,43 @@
+"use client";
 import React from "react";
 import Image from "next/image";
 import BannerBreadcrumb from "@/components/UI/BannerBreadcrumb";
-import config from "@/config/config";
+
 import Comments from "@/components/Comments/Comments";
 
 import userIcon from "../../../../../public/assets/icon/userIcon.png";
 import Link from "next/link";
+import { useBlogQuery, useBlogsQuery } from "@/redux/Api/blogApi";
+import LoadingPage from "@/app/loading";
 
 type BlogDetailProps = {
   params: { id: string };
 };
 
-async function getAllBlog() {
-  const res = await fetch(`${config.apiBaseUrl}/blog`);
-  // The return value is *not* serialized
-  // You can return Date, Map, Set, etc.
-
-  if (!res.ok) {
-    // This will activate the closest `error.js` Error Boundary
-    throw new Error("Failed to fetch data");
-  }
-
-  return res.json();
-}
-
-async function getData(id: string) {
-  const res = await fetch(`${config.apiBaseUrl}/blog/${id}`);
-
-  if (!res.ok) {
-    // This will activate the closest `error.js` Error Boundary
-    throw new Error("Failed to fetch data");
-  }
-
-  return res.json();
-}
-
-const BlogDetail: React.FC<BlogDetailProps> = async ({
+const BlogDetail: React.FC<BlogDetailProps> = ({
   params,
 }: {
   params: { id: string };
 }) => {
-  const newData = await getData(params.id);
+  // const newData = await getData(params.id);
+  const { data: newData, isLoading } = useBlogQuery(params.id);
   const data = newData?.data;
 
   // created at
   const createdTime: any = new Date(data?.createdAt).toDateString();
 
   // console.log(data);
-  const allBlog = await getAllBlog();
+  // const allBlog = await getAllBlog();
+  const { data: allBlog } = useBlogsQuery(undefined);
 
   // filter data allBlog.data !=== data._id
   const filterData = allBlog?.data?.filter(
     (item: any) => item._id !== data._id
   );
+
+  if (isLoading) {
+    return <LoadingPage />;
+  }
 
   return (
     <main>
@@ -180,7 +165,7 @@ const BlogDetail: React.FC<BlogDetailProps> = async ({
 
           {/* Comments */}
 
-          <Comments id={params.id} />
+          <Comments id={params.id} comment={data?.comments} />
         </div>
       </section>
     </main>

@@ -176,7 +176,7 @@ const EventDetails: React.FC<EventDetailsProps> = () => {
 
         {/* comment */}
 
-        <Comments />
+      
       </div>
     </div>
   );

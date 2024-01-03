@@ -20,7 +20,7 @@ const AvailableDonorLink = [
   },
   {
     name: "Search Donor",
-    link: "/searchDonor",
+    link: "/donor-list",
     logo: "https://i.ibb.co/nPR0F0W/b-donor-search.png",
   },
 ];

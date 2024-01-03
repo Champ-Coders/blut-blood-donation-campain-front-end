@@ -5,11 +5,9 @@ import React, { useState } from "react";
 import ProfileUpdateModalUI from "../ModalUI/ProfileModal";
 
 const PersonalInfo = ({ userData }: { userData: IUser }) => {
-  console.log(userData);
-
   const [UserId, setUserId] = useState<string>("");
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [editUser, setEditUser] = useState({
+  const [editUser, setEditUser] = useState<any>({
     name: "",
     email: "",
     address: "",
@@ -42,14 +40,6 @@ const PersonalInfo = ({ userData }: { userData: IUser }) => {
                 dateOfBirth: userData?.dateOfBirth,
                 bloodGroup: userData?.bloodGroup,
               });
-
-              // name: "Sarwar";
-              // email: "asik@gmail.com";
-              // address: "123 Main Street, Cityville";
-
-              // phoneNumber: "12345678904";
-              // bloodGroup: "A+";
-              // dateOfBirth: "1990-01-01T00:00:00.000Z";
 
               setIsModalOpen(true);
             }}

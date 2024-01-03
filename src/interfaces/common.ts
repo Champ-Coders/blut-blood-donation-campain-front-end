@@ -89,7 +89,13 @@ export type IUser = {
   email: string;
   role: string;
   bloodGroup: string;
-  address: string;
+  address?: {
+    district: string;
+    division: string;
+    postOffice: string;
+    thana: string;
+    village: string;
+  };
   dateOfBirth: string; // Assuming the date is in ISO 8601 format
   totalDonation: number;
   totalReceived: number;
@@ -106,4 +112,37 @@ export type IPerson = {
   telephone: string;
   donation: number;
   imageUrl: string;
+};
+
+export type IVolunteers = {
+  id: string;
+  name: string;
+  designation: string;
+  image: StaticImageData;
+  linkedin: string;
+  facebook: string;
+  github: string;
+  instagram: string;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type IBlog = {
+  id: string;
+  title: string;
+  description: string;
+  image: StaticImageData;
+  user: IUser;
+  link: string;
+  createdAt: string;
+  updatedAt: string;
+  Comments: IComments[];
+};
+
+export type IComments = {
+  _id: string;
+  comments: string;
+  userId: IUser;
+  createdAt: string;
+  updatedAt: string;
 };
