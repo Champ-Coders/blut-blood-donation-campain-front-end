@@ -1,11 +1,10 @@
 import CallNow from "@/components/Home/CallNow";
+import PopularCampaigns from "@/components/Home/PopularCampaigns";
 import TeamMember from "@/components/Home/TeamMember";
+import Testimonials from "@/components/Home/Testimonials";
 import BannerBreadcrumb from "@/components/UI/BannerBreadcrumb";
-import AboutTestimonials from "@/components/about/AboutTesimonials";
 import Counter from "@/components/about/Counter";
-import DonationProcessAbout from "@/components/about/DonationProcessAbout";
 import HelpThePeopleInNeedAbut from "@/components/about/HelpThePeopleInNeedAbut";
-import PopularCampaignsAbout from "@/components/about/PopularCampaignsAbout";
 import WhoWeAre from "@/components/about/WhoWeAre";
 
 const AboutPage = () => {
@@ -22,8 +21,10 @@ const AboutPage = () => {
       <WhoWeAre />
       <Counter />
       <HelpThePeopleInNeedAbut />
-      <PopularCampaignsAbout />
-      <AboutTestimonials />
+      {/* <PopularCampaignsAbout /> */}
+      <PopularCampaigns />
+      {/* <AboutTestimonials /> */}
+      <Testimonials />
       <CallNow />
       {/* <DonationProcessAbout /> */}
       <TeamMember />

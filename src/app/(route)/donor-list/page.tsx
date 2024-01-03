@@ -1,55 +1,120 @@
 "use client";
-import ActionBar from "@/components/UI/ActionBar";
-import Breadcrumb from "@/components/UI/BreadCrumb";
-import Table from "@/components/UI/Table";
-import dayjs from "dayjs";
 
-import { Input, Popconfirm, message } from "antd";
 import { useEffect, useState } from "react";
-import {
-  useChangeRoleByAdminMutation,
-  useGetAllUsersQuery,
-} from "@/redux/Api/authApi/AuthApi";
+import { useGetAllUsersQuery } from "@/redux/Api/authApi/AuthApi";
 import { useAppSelector, useDebounced } from "@/redux/app/hook";
-import Link from "next/link";
-import SearchComponent from "@/components/SearchBloodGroups/SearchComponent";
-import DonateListSearch from "@/components/DonateList/DonateListSearch";
-import DonateList from "@/components/DonateList/DonateList";
-import Image from "next/image";
-import { people } from "@/constants/People";
-import Button from "@/components/Button/Button";
 
-interface Person {
-  address: string;
-  _id: string;
-  name: string;
-  phoneNumber: string;
-  email: string;
-  role: string;
-  bloodGroup: string;
-  dateOfBirth: string;
-  totalDonation: number;
-  totalReceived: number;
-  available: boolean;
-  __v: number;
-}
+import DonateList from "@/components/DonateList/DonateList";
+import { IUser } from "@/interfaces/common";
+import LoadingPage from "@/app/loading";
+import Empty from "@/components/Empty/Empty";
+
+const paginationPages = [
+  {
+    id: 1,
+    name: "1",
+  },
+  {
+    id: 2,
+    name: "2",
+  },
+  {
+    id: 3,
+    name: "3",
+  },
+  {
+    id: 4,
+    name: "4",
+  },
+  {
+    id: 5,
+    name: "5",
+  },
+  {
+    id: 6,
+    name: "6",
+  },
+  {
+    id: 7,
+    name: "7",
+  },
+  {
+    id: 8,
+    name: "8",
+  },
+  {
+    id: 9,
+    name: "9",
+  },
+  {
+    id: 10,
+    name: "10",
+  },
+];
+
+const bloodGroups = [
+  {
+    id: 1,
+    name: "A+",
+  },
+  {
+    id: 2,
+    name: "A-",
+  },
+  {
+    id: 3,
+    name: "B+",
+  },
+  {
+    id: 4,
+    name: "B-",
+  },
+  {
+    id: 5,
+    name: "AB+",
+  },
+  {
+    id: 6,
+    name: "AB-",
+  },
+  {
+    id: 7,
+    name: "O+",
+  },
+  {
+    id: 8,
+    name: "O-",
+  },
+];
+
+// available,
+const Available = [
+  {
+    id: 1,
+    name: true,
+  },
+  {
+    id: 2,
+    name: false,
+  },
+];
 
 const AllUsers = () => {
-  const { area, bloodGroup, district, name } = useAppSelector(
-    (state) => state.search
-  );
+  const { area, district, name } = useAppSelector((state) => state.search);
   const [page, setPage] = useState<number>(1);
   const [size, setSize] = useState<number>(5);
-  const [sortBy, setSortBy] = useState<string>("");
-  const [sortOrder, setSortOrder] = useState<string>("");
+
   const [searchTerm, setSearchTerm] = useState<string>("");
+
+  const [bloodGroup, setBloodGroup] = useState<string | undefined>(undefined);
+  const [available, setAvailable] = useState<boolean | undefined>(undefined);
 
   const query: Record<string, any> = {};
 
   query["limit"] = size;
   query["page"] = page;
-  query["sortBy"] = sortBy;
-  query["sortOrder"] = sortOrder;
+  query["bloodGroup"] = bloodGroup;
+  query["available"] = available;
 
   useEffect(() => {
     if (name) {
@@ -67,173 +132,150 @@ const AllUsers = () => {
   }
 
   // query and mutation
-  const [changeRoleByAdmin] = useChangeRoleByAdminMutation(undefined);
   const { data: users, isLoading } = useGetAllUsersQuery({ ...query });
-  const meta = users?.data?.meta;
 
-  const onPaginationChange = (page: number, pageSize: number) => {
-    setPage(page);
-    setSize(pageSize);
+  // clear all
+  const clearAll = () => {
+    setSearchTerm("");
+    setBloodGroup(undefined);
   };
 
-  const onTableChange = (pagination: any, filter: any, sorter: any) => {
-    const { order, field } = sorter;
-    setSortBy(field as string);
-    setSortOrder(order === "ascend" ? "asc" : "desc");
-  };
-  const changeRole = async (id: string) => {
-    const res: any = await changeRoleByAdmin(id);
-    if (res?.data?.statusCode == 200) {
-      message.success(
-        `${res?.data?.data?.name} is now ${res?.data?.data?.role}.`
-      );
-    } else {
-      message.error(res?.error?.data?.message);
-    }
-  };
-
-  const columns: any[] = [
-    {
-      title: "Name",
-      dataIndex: "name",
-    },
-    {
-      title: "Blood Group",
-      dataIndex: "bloodGroup",
-      sorter: (a: any, b: any) => a.bloodGroup - b.bloodGroup,
-    },
-    {
-      title: "Birth Date",
-      dataIndex: "dateOfBirth",
-      sorter: (a: any, b: any) => a.dateOfBirth - b.dateOfBirth,
-
-      render: function (data: any) {
-        return data && dayjs(data).format("MMM D, YYYY");
-      },
-    },
-    {
-      title: "Total Donation",
-      dataIndex: "totalDonation",
-      sorter: (a: any, b: any) => a.totalDonation - b.totalDonation,
-    },
-    {
-      title: "Last Donation Date",
-      dataIndex: "lastDonation",
-      sorter: (a: any, b: any) => a.lastDonation - b.lastDonation,
-      render: function (data: any) {
-        if (data) {
-          return dayjs(data).format("MMM D, YYYY");
-        }
-        return "Not Donate Yet";
-      },
-    },
-    {
-      title: "Available",
-      dataIndex: "available",
-      sorter: (a: any, b: any) => a.available - b.available,
-      render: function (data: any) {
-        if (data) {
-          return "Yes";
-        }
-        return "No";
-      },
-    },
-    {
-      title: "Total Received",
-      dataIndex: "totalReceived",
-      sorter: (a: any, b: any) => a.age - b.age,
-    },
-    {
-      title: "Request for blood",
-      dataIndex: "_id",
-      render: function (data: any) {
-        return (
-          <Link
-            href={`/request/${data}`}
-            className="w-full rounded-md bg-primary px-2 py-1 text-sm font-semibold text-white shadow-sm  focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary  hover:bg-white hover:text-primary transition duration-300 ease-in-out"
-          >
-            Request
-          </Link>
-        );
-      },
-    },
-  ];
   return (
-    <main>
-      <DonateListSearch />
-      {/*  <Table
-              columns={columns}
-              dataSource={users?.data?.data}
-              loading={isLoading}
-              pageSize={size}
-              totalPages={meta?.total}
-              showSizeChanger={true}
-              onPaginationChange={onPaginationChange}
-              onTableChange={onTableChange}
-              showPagination={true}
-            /> */}
-      <DonateList data={users?.data?.data} />
-    </main>
+    <div className="common flex gap-10 flex-col lg:flex-row ">
+      {/* <!-- Filters --> */}
+      <div className=" mb-4 max-w-none lg:max-w-sm border-x px-5">
+        <form name="wf-form-Filter-2" method="get" className="flex-col gap-6">
+          {/* <!-- Filters title --> */}
+          <div className="mb-6 flex items-center justify-between py-4 [border-bottom:1px_solid_rgb(217,_217,_217)]">
+            <h5 className="text-xl font-bold">Filters</h5>
+            <button onClick={clearAll} className="text-sm">
+              <p>Clear all</p>
+            </button>
+          </div>
+          {/* <!-- Search input --> */}
+          <input
+            type="text"
+            className="mb-10 block h-9 min-h-[44px] w-full rounded-md border border-solid border-[#cccccc] bg-[#f2f2f7] bg-[16px_center] bg-no-repeat py-3 pl-11 pr-4 text-sm font-bold text-[#333333] [background-size:18px] [border-bottom:1px_solid_rgb(215,_215,_221)] focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 "
+            placeholder="Search"
+            onChange={(e) => setSearchTerm(e.target.value)}
+            style={{
+              backgroundImage:
+                "url('https://assets.website-files.com/6458c625291a94a195e6cf3a/64b7a3a33cd5dc368f46daaa_MagnifyingGlass.svg')",
+            }}
+          />
+          {/* <!-- Categories --> */}
+          <div className="flex flex-col gap-6">
+            <p className="font-semibold">Blood Group</p>
+            <div className="flex flex-wrap items-center gap-2">
+              {/* clear */}
+              <div
+                onClick={() => setBloodGroup(undefined)}
+                className={`flex h-9 w-14 cursor-pointer items-center justify-center rounded-md border border-solid ${
+                  !bloodGroup
+                    ? "bg-primary text-white"
+                    : "bg-[#f2f2f7] text-sm font-semibold"
+                }`}
+              >
+                <span>All</span>
+              </div>
+
+              {bloodGroups?.map((item) => (
+                <div
+                  key={item.id}
+                  onClick={() => setBloodGroup(item.name)}
+                  className={`flex h-9 w-14 cursor-pointer items-center justify-center rounded-md border border-solid ${
+                    bloodGroup === item.name
+                      ? "bg-primary text-white"
+                      : "bg-[#f2f2f7] text-sm font-semibold"
+                  }`}
+                >
+                  <span>{item.name}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+          {/* <!-- Divider --> */}
+          <div className="mb-6 mt-6 h-px w-full bg-[#d9d9d9]"></div>
+          {/* <!-- Rating --> */}
+          <div className="flex flex-col gap-6">
+            <p className="font-semibold">Available Blood </p>
+            <div className="flex flex-wrap gap-2 ">
+              {/* clear */}
+              <div
+                onClick={() => setAvailable(undefined)}
+                className={`flex h-9 w-14 cursor-pointer items-center justify-center rounded-md border border-solid ${
+                  available === undefined
+                    ? "bg-primary text-white"
+                    : "bg-[#f2f2f7] text-sm font-semibold"
+                }`}
+              >
+                <span>All</span>
+              </div>
+
+              {Available?.map((item) => (
+                <div
+                  key={item.id}
+                  onClick={() => setAvailable(item.name)}
+                  className={`flex h-9 w-24 cursor-pointer items-center justify-center rounded-md border border-solid ${
+                    available === item.name
+                      ? "bg-primary text-white"
+                      : "bg-[#f2f2f7] text-sm font-semibold"
+                  }`}
+                >
+                  <span>
+                    {item.name === true ? "Available" : "Unavailable"}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </form>
+      </div>
+      {/* <!-- Donor --> */}
+      <div className="w-full flex flex-col gap-2">
+        {isLoading ? (
+          <LoadingPage />
+        ) : users?.data?.data?.length === 0 ? (
+          <Empty title="Donor" />
+        ) : (
+          users?.data?.data?.map((item: IUser) => (
+            <DonateList key={item?._id} data={item} />
+          ))
+        )}
+
+        {/* <!-- Pagination --> */}
+        <div className="flex justify-between items-center flex-wrap gap-2 mt-5">
+          <button
+            onClick={() => setPage(page - 1)}
+            disabled={page === 1 && true}
+            className="flex justify-center items-center h-9 w-20 rounded-md border border-solid border-[#cccccc] text-sm font-semibold"
+          >
+            <span>Previous</span>
+          </button>
+          {paginationPages?.map((item) => (
+            <button
+              onClick={() => setPage(item.id)}
+              key={item.id}
+              className={`flex justify-center items-center h-9 w-9 rounded-md border border-solid ${
+                page == item.id ? "bg-primary text-white border-primary" : ""
+              }  border-[#cccccc] text-sm font-semibold hover:bg-primary hover:text-white transition-all duration-500 ease-in-out    `}
+            >
+              <span>{item.name}</span>
+            </button>
+          ))}
+          <button
+            onClick={() => setPage(page + 1)}
+            className="flex justify-center items-center h-9 w-16 rounded-md border border-solid border-[#cccccc] text-sm font-semibold"
+          >
+            <span>Next</span>
+          </button>
+
+          {/* <!-- End of Pagination --> */}
+
+          {/* <!-- End of Donor --> */}
+        </div>
+      </div>
+    </div>
   );
 };
 export default AllUsers;
-
-/* 
-
-  <section>
-        <div className="common">
-          <ul className="grid grid-cols-1 gap-6 ">
-            {users?.data?.data.map((person: Person) => (
-              <li
-                key={person.email}
-                className="col-span-1 divide-y divide-gray-200 rounded-lg bg-white shadow"
-              >
-                <div className="flex w-full items-center justify-between space-x-6 p-6">
-                  <div className="flex-1 flex gap-6 items-center  flex-row truncate">
-                    <div className="flex items-center space-x-3 ">
-                      <h3 className="truncate text-sm font-medium text-gray-900">
-                        Name {person.name}
-                      </h3>
-                      <span className="inline-flex flex-shrink-0 items-center rounded-full bg-green-50 px-1.5 py-0.5 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">
-                        {person.role}
-                      </span>
-                    </div>
-                    <p className="mt-1 truncate text-sm text-gray-500">
-                      Email {person.email}
-                    </p>
-                  </div>
-                  <div>
-                    <span className="text-sm font-medium text-gray-900">
-                      Blood Group {person.bloodGroup}
-                    </span>
-                  </div>
-
-                  <div>
-                    <p>Number {person.phoneNumber}</p>
-                  </div>
-                  <div>
-                    <p>Donation {person.totalDonation}</p>
-                  </div>
-                  <div>
-                    <p>Total Receive {person.totalReceived}</p>
-                  </div>
-                  <div>
-                    <Button type="submit" className="p-2">
-                      {person.available ? "Request" : "Unavailable"}
-                    </Button>
-                  </div>
-                <Image
-                    className="h-10 w-10 flex-shrink-0 rounded-full bg-gray-300"
-                    src={person.imageUrl ? person.imageUrl : people}
-                    height={40}
-                    width={40}
-                    alt=""
-                  />
-              }
-                  </div>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </section>
-*/

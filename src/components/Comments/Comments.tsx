@@ -6,9 +6,10 @@ import { BsFillTagFill } from "react-icons/bs";
 import { FaPaperclip, FaRegUserCircle } from "react-icons/fa";
 import { IoChatbubbleEllipses } from "react-icons/io5";
 import { useForm } from "react-hook-form";
-import { Empty, message } from "antd";
+import { message } from "antd";
 
 import UserIcon from "../../../public/assets/icon/userIcon.png";
+import Empty from "../Empty/Empty";
 
 type IActivity = {
   id?: number;
@@ -120,7 +121,7 @@ const Comments = ({ id }: { id: string }) => {
         <ul role="list" className="-mb-8">
           {comment.length === 0 ? (
             <div className="mb-[20px]">
-              <Empty description="No comment" />
+              <Empty title="Comment" />
             </div>
           ) : (
             comment?.map((activityItem, activityItemIdx) => (

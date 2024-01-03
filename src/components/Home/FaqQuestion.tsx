@@ -1,17 +1,18 @@
 import React from "react";
 import Faq from "../Faq/Faq";
-import config from "@/config/config";
+import { useFaqsQuery } from "@/redux/Api/faqsApi";
 
-async function getData() {
-  const res = await fetch(`${config.apiBaseUrl}/faqs`);
-  if (!res.ok) {
-    // This will activate the closest `error.js` Error Boundary
-    throw new Error("Failed to fetch data");
-  }
-  return res.json();
-}
+// async function getData() {
+//   const res = await fetch(`${config.apiBaseUrl}/faqs`);
+//   if (!res.ok) {
+//     // This will activate the closest `error.js` Error Boundary
+//     throw new Error("Failed to fetch data");
+//   }
+//   return res.json();
+// }
 const FaqQuestion = async () => {
-  const faqs = await getData();
+  // const faqs = await getData();
+  const { data: faqs } = useFaqsQuery(undefined);
 
   return (
     <section className="relative z-20 overflow-hidden bg-white pb-12  ">
@@ -22,10 +23,10 @@ const FaqQuestion = async () => {
               <span className="mb-2 block text-lg font-semibold text-primary">
                 FAQ
               </span>
-              <h2 className="mb-4 text-3xl font-bold text-dark dark:text-white sm:text-[40px]/[48px]">
+              <h2 className="mb-4 text-3xl font-bold text-dark  sm:text-[40px]/[48px]">
                 Any Questions? Look Here
               </h2>
-              <p className="text-base text-body-color dark:text-dark-6">
+              <p className="text-base text-body-color ">
                 Where you can find answers to the most common questions about
                 our products and services.
               </p>

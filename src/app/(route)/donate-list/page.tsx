@@ -1,16 +1,30 @@
-import Button from "@/components/Button/Button";
+"use client";
+import LoadingPage from "@/app/loading";
 import DonateCart from "@/components/DonateList/DonateCart";
 import BannerBreadcrumb from "@/components/UI/BannerBreadcrumb";
-import { people } from "@/constants/People";
-import Image from "next/image";
+import { IUser } from "@/interfaces/common";
+import { useGetAllUsersQuery } from "@/redux/Api/authApi/AuthApi";
 import React from "react";
-import { LuPhoneIncoming } from "react-icons/lu";
 
 type DonateListProps = {};
 
 const DonateList: React.FC<DonateListProps> = () => {
+  const { data: users, isLoading } = useGetAllUsersQuery(undefined);
+
+  if (isLoading) {
+    return <LoadingPage />;
+  }
+
+  const sortedUsers = users?.data?.data
+    .filter((user: IUser) => user.totalDonation !== 0)
+    .sort((a: IUser, b: IUser) => b.totalDonation - a.totalDonation);
   return (
-    <main>
+    <main
+      style={{
+        backgroundImage:
+          "url(https://sandbox.elemisthemes.com/assets/img/map.png)",
+      }}
+    >
       <BannerBreadcrumb
         items={[
           {
@@ -54,12 +68,12 @@ const DonateList: React.FC<DonateListProps> = () => {
                 </button>
               </div>
             </div>
-            <h3 className="mb-10 text-3xl text-[#111] font-semibold">
-              প্লাটিনাম ক্লাবে নতুন
+            <h3 className="mb-10 text-3xl text-[#111] font-semibold font-kalpurush">
+              সর্বোচ্চ রক্তদাতা
             </h3>
             <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3">
-              {people.slice(0, 6).map((person) => (
-                <DonateCart key={person.id} person={person} />
+              {sortedUsers?.map((person: IUser) => (
+                <DonateCart key={person._id} person={person} />
               ))}
             </div>
           </div>
@@ -69,19 +83,19 @@ const DonateList: React.FC<DonateListProps> = () => {
       <section>
         <div className="common">
           <div className="div">
-            <h3 className="mb-10 text-3xl text-[#111] font-semibold">
-              প্লাটিনাম ক্লাবে আরো রক্তদাতা
+            <h3 className="mb-10 text-3xl text-[#111] font-semibold font-kalpurush">
+              প্লাটিনাম ক্লাব
             </h3>
             <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-              {people.map((person) => (
-                <DonateCart key={person.id} person={person} />
+              {users?.data?.data?.map((person: IUser) => (
+                <DonateCart key={person._id} person={person} />
               ))}
             </div>
-            <div className="flex justify-center">
+            {/* <div className="flex justify-center">
               <Button className="my-10 rounded-full font-bold " type="button">
                 More
               </Button>
-            </div>
+            </div> */}
           </div>
         </div>
       </section>
