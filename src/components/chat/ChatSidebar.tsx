@@ -5,7 +5,7 @@ import Link from "next/link";
 import React from "react";
 
 export default function ChatSidebar() {
-  const { data } = useChatUsersQuery({});
+  const { data,isLoading } = useChatUsersQuery({});
   console.log("🚀 ~ file: ChatSidebar.tsx:7 ~ ChatSidebar ~ data:", data);
 
   const userData = data?.data;
@@ -63,11 +63,12 @@ export default function ChatSidebar() {
       </header>
 
       <div className="overflow-y-auto h-screen p-3 mb-9 pb-20">
+        {isLoading&&<h2>Loading user .............</h2>}
         {userData?.map((user: any, index: number) => {
           return (
             <div key={index}>
               <Link
-                href={`/chat/${user?._id}`}
+                href={`/chat/${user?._id}?name=${user?.name}`}
                 className="flex items-center mb-4 cursor-pointer hover:bg-gray-100 p-2 rounded-md"
               >
                 <div className="w-12 h-12 bg-gray-300 rounded-full mr-3">

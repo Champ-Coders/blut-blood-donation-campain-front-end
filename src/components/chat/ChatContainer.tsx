@@ -9,11 +9,15 @@ import InputField from "../InputField/InputField";
 import TextAreaField from "../TextAreaField/TextAreaField";
 
 export default function ChatContainer({ senderId }: { senderId: string }) {
+  // console.log("🚀 ~ file: ChatContainer.tsx:12 ~ ChatContainer ~ senderId:", senderId)
+
   const { data: userInfo } = useUserProfileQuery(null);
-  // console.log("🚀 ~ file: ChatContainer.tsx:15 ~ ChatContainer ~ userInfo:", userInfo)
+  console.log(
+    "🚀 ~ file: ChatContainer.tsx:15 ~ ChatContainer ~ userInfo:",
+    userInfo
+  );
 
   const { register, handleSubmit, reset, setValue } = useForm();
-
 
   const { data: messageData, refetch } = useGetMessageQuery(senderId);
 
@@ -80,7 +84,11 @@ export default function ChatContainer({ senderId }: { senderId: string }) {
                 <Image
                   height={50}
                   width={50}
-                  src={"https://i.ibb.co/YcjhGgs/IMG-20231111-142014-1.jpg"}
+                  src={
+                    liveChat.types === "reply"
+                      ? "https://i.ibb.co/VxhHWhd/professional-Side.png"
+                      : "https://i.ibb.co/YcjhGgs/IMG-20231111-142014-1.jpg"
+                  }
                   alt="My profile"
                   className={`w-6 h-6 rounded-full ${
                     liveChat?.types === "reply" ? "order-1" : "  order-2"

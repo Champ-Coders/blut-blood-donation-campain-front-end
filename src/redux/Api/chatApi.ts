@@ -17,7 +17,7 @@ export const ChatApi = api.injectEndpoints({
       providesTags: [tagTypes.chat],
     }),
     // get single
-       // ! for getting user Admin messsage//
+    // ! for getting user Admin messsage//
     getMessage: build.query({
       query: (senderId: string) => ({
         url: `${Chat_URL}/admin/${senderId}`,
@@ -25,7 +25,7 @@ export const ChatApi = api.injectEndpoints({
       }),
       providesTags: [tagTypes.chat],
     }),
-       // ! for getting user messsage//
+    // ! for getting user messsage//
     getUserMessage: build.query({
       query: (senderemail: string) => ({
         url: `${Chat_URL}/${senderemail}`,
@@ -45,7 +45,6 @@ export const ChatApi = api.injectEndpoints({
       }),
       invalidatesTags: [tagTypes.chat],
     }),
- 
 
     // getMessage: build.mutation({
     //   query: (data: any) => ({
@@ -76,5 +75,5 @@ export const {
   // useChatQuery,
   useDeleteChatMutation,
   // useGetMessageMutation,
-  useGetUserMessageQuery
+  useGetUserMessageQuery,
 } = ChatApi;

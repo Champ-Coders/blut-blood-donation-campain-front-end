@@ -177,14 +177,14 @@ const DraggableLiveModal = () => {
                 <div ref={scroll} key={liveChat?._id} className="chat-message">
                   <div
                     className={`flex ${
-                      liveChat?.types === "reply"
+                      liveChat?.types !== "reply"
                         ? "items-end "
                         : "  items-end justify-end"
                     } `}
                   >
                     <div
                       className={`flex flex-col space-y-2 text-xs max-w-xs mx-2 ${
-                        liveChat?.types === "reply"
+                        liveChat?.types !== "reply"
                           ? "order-2 items-start  "
                           : " order-1 items-end"
                       } `}
@@ -192,7 +192,7 @@ const DraggableLiveModal = () => {
                       <div>
                         <span
                           className={`px-4 py-2 rounded-lg inline-block ${
-                            liveChat?.types === "reply"
+                            liveChat?.types !== "reply"
                               ? "rounded-br-none bg-primary text-white "
                               : "   order-1 items-end"
                           }  rounded-bl-none bg-gray-300 text-gray-600`}
@@ -207,7 +207,7 @@ const DraggableLiveModal = () => {
                       src={"https://i.ibb.co/YcjhGgs/IMG-20231111-142014-1.jpg"}
                       alt="My profile"
                       className={`w-6 h-6 rounded-full ${
-                        liveChat?.types === "reply" ? "order-1" : "  order-2"
+                        liveChat?.types !== "reply" ? "order-1" : "  order-2"
                       } `}
                     />
                   </div>
