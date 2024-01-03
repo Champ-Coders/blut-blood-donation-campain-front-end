@@ -136,7 +136,7 @@ export type IBlog = {
   link: string;
   createdAt: string;
   updatedAt: string;
-  Comments: IComments[];
+  comments: IComments[];
 };
 
 export type IComments = {
