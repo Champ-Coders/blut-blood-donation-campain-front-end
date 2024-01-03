@@ -6,8 +6,11 @@ import { PhoneOutlined, MessageOutlined } from "@ant-design/icons";
 import { IUser } from "@/interfaces/common";
 
 import { VscGitPullRequestGoToChanges } from "react-icons/vsc";
+import { usePathname } from "next/navigation";
 
 const ProfileTopSection = ({ userData }: { userData: IUser }) => {
+  const pathName = usePathname();
+
   return (
     <div className="bg-white">
       <div>
@@ -67,9 +70,10 @@ const ProfileTopSection = ({ userData }: { userData: IUser }) => {
               </Link>
               <Link
                 href={`/request/${userData?._id}`}
-                
                 // type="button"
-                className="inline-flex justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+                className={`inline-flex justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 ${
+                  pathName === "/profile" ? "hidden" : ""
+                } `}
               >
                 <VscGitPullRequestGoToChanges
                   className="-ml-0.5 mr-1.5 h-5 w-5 text-gray-400"
