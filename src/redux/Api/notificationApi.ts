@@ -14,7 +14,7 @@ const notificationApi = api.injectEndpoints({
       providesTags: [tagTypes.faq],
     }),
 
-    // Faq   update
+    // Faq update
     updateNotifications: build.mutation({
       query: (id) => ({
         url: `${notification_URL}/${id}`,
@@ -25,4 +25,5 @@ const notificationApi = api.injectEndpoints({
   }),
 });
 
-export const {} = notificationApi;
+export const { useNotificationsQuery, useUpdateNotificationsMutation } =
+  notificationApi;
