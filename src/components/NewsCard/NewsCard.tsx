@@ -1,13 +1,13 @@
-import { IOurNews } from "@/interfaces/common";
+import { IBlog } from "@/interfaces/common";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
-import { FaClock, FaPlus } from "react-icons/fa";
+import { FaClock } from "react-icons/fa";
 import { IoLogoWechat } from "react-icons/io5";
 import { MdKeyboardDoubleArrowRight } from "react-icons/md";
 
 type NewsCardProps = {
-  news: IOurNews;
+  news: IBlog;
 };
 
 const NewsCard: React.FC<NewsCardProps> = ({ news }) => {
@@ -33,7 +33,7 @@ const NewsCard: React.FC<NewsCardProps> = ({ news }) => {
             <FaClock />
             {news?.createdAt ? date : "00-00-0000"}
             <IoLogoWechat />
-            comment {news?.comment ? news?.comment : 0}
+            comment {news?.comments?.length ? news?.comments?.length : 0}
           </p>
         </div>
         <div>

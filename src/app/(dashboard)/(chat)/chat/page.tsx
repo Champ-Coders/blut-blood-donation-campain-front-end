@@ -12,7 +12,8 @@ export default function ChatAdminnPage() {
     //   <ChatContainer />
     // </div>
     <div className="">
-      <h3>main chat page</h3>
+      {/* <h3>main chat page</h3> */}
+      <ChatContainer senderId="11111" />
     </div>
   );
 }

@@ -1,4 +1,3 @@
-import ChatContainer from "@/components/chat/ChatContainer";
 import ChatSidebar from "@/components/chat/ChatSidebar";
 import React from "react";
 
@@ -9,7 +8,7 @@ export default function ChatLayout({
 }) {
   return (
     <div className="w-full">
-      <div className="block lg:flex h-screen overflow-hidden relative">
+      <div className="flex h-screen overflow-hidden relative">
         <div className="w-[100%] lg:w-1/4">
           <ChatSidebar />
         </div>
@@ -18,3 +17,5 @@ export default function ChatLayout({
     </div>
   );
 }
+
+

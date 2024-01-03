@@ -1,9 +1,13 @@
 "use client";
+import LoadingPage from "@/app/loading";
 import InputField from "@/components/InputField/InputField";
 import MultiSelect from "@/components/MultiSelector/MultiSelector";
 import TextAreaField from "@/components/TextAreaField/TextAreaField";
 import { blood_groups } from "@/constants/Register";
+import { IUser } from "@/interfaces/common";
+import { useGetSingleUserQuery } from "@/redux/Api/authApi/AuthApi";
 import { useRequestForBloodMutation } from "@/redux/Api/donationApi/DonationApi";
+import { getUserDataFromLC } from "@/utils/local-storage";
 import { message } from "antd";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
@@ -17,6 +21,12 @@ const DonateNow = ({ params }: { params: { id: string } }) => {
   } = useForm();
   const [request] = useRequestForBloodMutation(undefined);
   const router = useRouter();
+
+  const { data, isLoading } = useGetSingleUserQuery(params.id);
+
+  const user = getUserDataFromLC();
+
+  const userData: IUser = data?.data;
 
   const onSubmit = async (data: any) => {
     data.bag = parseInt(data.bag);
@@ -36,6 +46,15 @@ const DonateNow = ({ params }: { params: { id: string } }) => {
     }
     router.push("/");
   };
+
+  if (isLoading) {
+    return <LoadingPage />;
+  }
+
+  if (!user) {
+    message.error("Please login first");
+    return router.push("/");
+  }
 
   return (
     <div className="py-10 px-10 sm:px-24 sm:py-16">
@@ -60,6 +79,10 @@ const DonateNow = ({ params }: { params: { id: string } }) => {
                   isMulti={false}
                   required={true}
                   setValue={setValue}
+                  defaultValue={{
+                    value: userData?.bloodGroup,
+                    label: userData?.bloodGroup,
+                  }}
                   label="Blood Group"
                 />
                 <InputField
