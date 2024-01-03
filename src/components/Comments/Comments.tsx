@@ -74,7 +74,7 @@ const Comments = ({ id, comment }: { id: string; comment: IComments[] }) => {
 
       <div className="flow-root  md:w-4/6">
         <ul role="list" className="-mb-8">
-          {comment.length === 0 ? (
+          {comment?.length === 0 ? (
             <div className="mb-[20px]">
               <Empty title="Comment" />
             </div>
@@ -82,7 +82,7 @@ const Comments = ({ id, comment }: { id: string; comment: IComments[] }) => {
             comment?.map((singleComment, index) => (
               <li key={singleComment._id}>
                 <div className="relative pb-8">
-                  {index !== comment.length - 1 ? (
+                  {index !== comment?.length - 1 ? (
                     <span
                       className="absolute left-5 top-5 -ml-px h-full w-0.5 bg-gray-200"
                       aria-hidden="true"
