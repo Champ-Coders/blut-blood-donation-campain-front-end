@@ -2,8 +2,9 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
 
-import { ILiveChat, LiveChatData } from "@/constants/ILiveChat";
+import { ILiveChat } from "@/constants/ILiveChat";
 import { useUserProfileQuery } from "@/redux/Api/authApi/AuthApi";
+import { useGetUserMessageQuery } from "@/redux/Api/chatApi";
 import socket from "@/socket/socket";
 
 // import { socket } from "@/socket";
@@ -17,13 +18,19 @@ import InputEmoji from "react-input-emoji";
 const DraggableLiveModal = () => {
   const { data } = useUserProfileQuery(null);
   const userInfo = data?.data;
-  const [chatMessages, setChatMessages] = React.useState<any>(LiveChatData);
 
   const { register, handleSubmit, reset, setValue } = useForm();
 
-  // const socket = io.connect("http://localhost:5000/");
-  // console.log("🚀 ~ file: DraggableLiveModal.tsx:24 ~ DraggableLiveModal ~ socket:", socket)
+  const {
+    data: MessageData,
+    refetch,
+    isLoading,
+  } = useGetUserMessageQuery(userInfo?.email);
+  // console.log("🚀 ~MessageData:", MessageData);
 
+  const [chatMessages, setChatMessages] = React.useState<any>(
+    MessageData?.data || []
+  );
   const onSubmit = (data: any) => {
     //! take message from input
 
@@ -36,21 +43,33 @@ const DraggableLiveModal = () => {
       time: new Date().toLocaleTimeString(),
       img: userInfo?.imgUrl || "",
       status: "online",
-      type: "comment",
+      types: "comment",
       email: userInfo?.email,
       _id: userInfo?._id,
     };
-    console.log(newMessage);
+    // console.log(newMessage);
     socket.emit("send-message", newMessage);
+    socket.on("update-message", (data) => {
+      // console.log("uuuuu", data);
+      reset();
+    });
   };
 
   const scroll = React.useRef<HTMLDivElement>(null);
 
   // always scroll to bottom when new message added
   useEffect(() => {
-    scroll.current?.scrollIntoView({ behavior: "smooth" });
-  }, [chatMessages]);
 
+    setChatMessages(MessageData?.data);
+    socket.on("update-message", (data) => {
+      console.log("uuuuuuuuuuuuuuuuuuuu", data);
+      scroll.current?.scrollIntoView({ behavior: "smooth" });
+      setChatMessages(MessageData?.data);
+      refetch();
+    });
+  }, [refetch, MessageData]);
+
+  // console.log(chatMessages);
   return (
     <div>
       <div className="flex-1 p-2 justify-between flex flex-col h-[500px]">
@@ -147,46 +166,55 @@ const DraggableLiveModal = () => {
           id="messages"
           className="flex flex-col space-y-4 p-3 overflow-y-auto scrollbar-thumb-blue scrollbar-thumb-rounded scrollbar-track-blue-lighter scrollbar-w-2 scrolling-touch "
         >
-          {chatMessages
-            ?.sort((a: any, b: any) => a.id - b.id)
-            .map((liveChat: ILiveChat) => (
-              <div ref={scroll} key={liveChat.id} className="chat-message">
-                <div
-                  className={`flex ${
-                    liveChat.type === "reply"
-                      ? "items-end "
-                      : "  items-end justify-end"
-                  } `}
-                >
+          {isLoading && <h2>Loadiing chat...........</h2>}
+          {
+            // chatMessages
+            //   ?.sort((a: any, b: any) => a.updatedAt - b.updatedAt)
+            chatMessages?.map((liveChat: ILiveChat) => {
+            
+
+              return (
+                <div ref={scroll} key={liveChat?._id} className="chat-message">
                   <div
-                    className={`flex flex-col space-y-2 text-xs max-w-xs mx-2 ${
-                      liveChat.type === "reply"
-                        ? "order-2 items-start  "
-                        : " order-1 items-end"
+                    className={`flex ${
+                      liveChat?.types === "reply"
+                        ? "items-end "
+                        : "  items-end justify-end"
                     } `}
                   >
-                    <div>
-                      <span
-                        className={`px-4 py-2 rounded-lg inline-block ${
-                          liveChat.type === "reply"
-                            ? "rounded-br-none bg-primary text-white "
-                            : "   order-1 items-end"
-                        }  rounded-bl-none bg-gray-300 text-gray-600`}
-                      >
-                        {liveChat.message}
-                      </span>
+                    <div
+                      className={`flex flex-col space-y-2 text-xs max-w-xs mx-2 ${
+                        liveChat?.types === "reply"
+                          ? "order-2 items-start  "
+                          : " order-1 items-end"
+                      } `}
+                    >
+                      <div>
+                        <span
+                          className={`px-4 py-2 rounded-lg inline-block ${
+                            liveChat?.types === "reply"
+                              ? "rounded-br-none bg-primary text-white "
+                              : "   order-1 items-end"
+                          }  rounded-bl-none bg-gray-300 text-gray-600`}
+                        >
+                          {liveChat?.message}
+                        </span>
+                      </div>
                     </div>
+                    <Image
+                      height={50}
+                      width={50}
+                      src={"https://i.ibb.co/YcjhGgs/IMG-20231111-142014-1.jpg"}
+                      alt="My profile"
+                      className={`w-6 h-6 rounded-full ${
+                        liveChat?.types === "reply" ? "order-1" : "  order-2"
+                      } `}
+                    />
                   </div>
-                  <img
-                    src={liveChat.avatar}
-                    alt="My profile"
-                    className={`w-6 h-6 rounded-full ${
-                      liveChat.type === "reply" ? "order-1" : "  order-2"
-                    } `}
-                  />
                 </div>
-              </div>
-            ))}
+              );
+            })
+          }
         </div>
         {/* Message end */}
         {/* button */}
