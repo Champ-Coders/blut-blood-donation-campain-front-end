@@ -89,7 +89,13 @@ export type IUser = {
   email: string;
   role: string;
   bloodGroup: string;
-  address: string;
+  address?: {
+    district: string;
+    division: string;
+    postOffice: string;
+    thana: string;
+    village: string;
+  };
   dateOfBirth: string; // Assuming the date is in ISO 8601 format
   totalDonation: number;
   totalReceived: number;
