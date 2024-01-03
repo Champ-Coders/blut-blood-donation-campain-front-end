@@ -6,7 +6,7 @@ import Link from "next/link";
 
 const DonateList = ({ data }: { data: IUser }) => {
   return (
-    <div className="bg-white shadow-md border p-3 rounded-lg  text-[14px] grid lg:grid-cols-4 justify-between items-center">
+    <div className="bg-white shadow-md border p-3 rounded-lg   text-[14px] grid md:grid-cols-4 grid-cols-2 justify-between items-center">
       {/* profile */}
 
       <div className="flex items-center flex-col md:flex-row ">
@@ -17,7 +17,7 @@ const DonateList = ({ data }: { data: IUser }) => {
           width={40}
           height={40}
         />
-        <div className="text-sm flex flex-col gap-1">
+        <div className="text-sm flex flex-col gap-1 ">
           <p className="text-gray-900 leading-none">{data?.name}</p>
           <p className="text-gray-600 text-[12px] ">{data?.email}</p>
           {/* Phone */}
@@ -51,7 +51,7 @@ const DonateList = ({ data }: { data: IUser }) => {
         // @ts-ignore
         data?.available === true ? (
           <Link
-            href={""}
+            href={`/request/${data?._id}`}
             className="bg-primary text-white px-4 py-2 rounded-md text-center"
           >
             Request
