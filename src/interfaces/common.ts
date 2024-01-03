@@ -126,3 +126,23 @@ export type IVolunteers = {
   createdAt: string;
   updatedAt: string;
 };
+
+export type IBlog = {
+  id: string;
+  title: string;
+  description: string;
+  image: StaticImageData;
+  user: IUser;
+  link: string;
+  createdAt: string;
+  updatedAt: string;
+  Comments: IComments[];
+};
+
+export type IComments = {
+  _id: string;
+  comments: string;
+  userId: IUser;
+  createdAt: string;
+  updatedAt: string;
+};

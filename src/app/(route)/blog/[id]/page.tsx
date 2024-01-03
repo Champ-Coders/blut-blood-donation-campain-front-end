@@ -8,6 +8,7 @@ import Comments from "@/components/Comments/Comments";
 import userIcon from "../../../../../public/assets/icon/userIcon.png";
 import Link from "next/link";
 import { useBlogQuery, useBlogsQuery } from "@/redux/Api/blogApi";
+import LoadingPage from "@/app/loading";
 
 type BlogDetailProps = {
   params: { id: string };
@@ -19,7 +20,7 @@ const BlogDetail: React.FC<BlogDetailProps> = ({
   params: { id: string };
 }) => {
   // const newData = await getData(params.id);
-  const { data: newData } = useBlogQuery(params.id);
+  const { data: newData, isLoading } = useBlogQuery(params.id);
   const data = newData?.data;
 
   // created at
@@ -33,6 +34,10 @@ const BlogDetail: React.FC<BlogDetailProps> = ({
   const filterData = allBlog?.data?.filter(
     (item: any) => item._id !== data._id
   );
+
+  if (isLoading) {
+    return <LoadingPage />;
+  }
 
   return (
     <main>
@@ -160,7 +165,7 @@ const BlogDetail: React.FC<BlogDetailProps> = ({
 
           {/* Comments */}
 
-          <Comments id={params.id} />
+          <Comments id={params.id} comment={data?.comments} />
         </div>
       </section>
     </main>

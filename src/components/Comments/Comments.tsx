@@ -2,14 +2,15 @@
 import { useUserProfileQuery } from "@/redux/Api/authApi/AuthApi";
 import Image from "next/image";
 import React from "react";
-import { BsFillTagFill } from "react-icons/bs";
-import { FaPaperclip, FaRegUserCircle } from "react-icons/fa";
+import { FaPaperclip } from "react-icons/fa";
 import { IoChatbubbleEllipses } from "react-icons/io5";
 import { useForm } from "react-hook-form";
 import { message } from "antd";
 
 import UserIcon from "../../../public/assets/icon/userIcon.png";
 import Empty from "../Empty/Empty";
+import { IComments } from "@/interfaces/common";
+import Link from "next/link";
 
 type IActivity = {
   id?: number;
@@ -22,7 +23,7 @@ type IActivity = {
 
 const activity: IActivity[] = [];
 
-const Comments = ({ id }: { id: string }) => {
+const Comments = ({ id, comment }: { id: string; comment: IComments[] }) => {
   /*! my code start code hasan rifat*/
   /* 
 
@@ -55,16 +56,7 @@ const Comments = ({ id }: { id: string }) => {
 
 
   end my code hasan rifat */
-  const [comment, setComment] = React.useState(activity);
-
-  // get comment from local storage
-  React.useEffect(() => {
-    const localComment = localStorage.getItem("comment");
-    if (localComment) {
-      const localCommentParse = JSON.parse(localComment);
-      setComment(localCommentParse);
-    }
-  }, []);
+  // const [comment, setComment] = React.useState(activity);
 
   const { data } = useUserProfileQuery(null);
   const userInfo = data?.data;
@@ -82,7 +74,7 @@ const Comments = ({ id }: { id: string }) => {
     }
 
     const newComment = {
-      id: comment.length + 1,
+      // id: comment.length + 1,
       type: "comment",
       person: {
         name: userInfo?.name,
@@ -93,7 +85,7 @@ const Comments = ({ id }: { id: string }) => {
       date: new Date().toLocaleDateString(),
     };
 
-    setComment([...comment, newComment]);
+    // setComment([...comment, newComment]);
     // set LocalStorage
     const localComment = localStorage.getItem("comment");
     if (localComment) {
@@ -114,7 +106,7 @@ const Comments = ({ id }: { id: string }) => {
   return (
     <div>
       <p className="font-playfair text-3xl font-semibold my-[20px]">
-        Reviews - ({comment?.length})
+        Comments - ({comment?.length})
       </p>
 
       <div className="flow-root  md:w-4/6">
@@ -124,71 +116,75 @@ const Comments = ({ id }: { id: string }) => {
               <Empty title="Comment" />
             </div>
           ) : (
-            comment?.map((activityItem, activityItemIdx) => (
-              <li key={activityItem.id}>
+            comment?.map((singleComment, index) => (
+              <li key={singleComment._id}>
                 <div className="relative pb-8">
-                  {activityItemIdx !== comment.length - 1 ? (
+                  {index !== comment.length - 1 ? (
                     <span
                       className="absolute left-5 top-5 -ml-px h-full w-0.5 bg-gray-200"
                       aria-hidden="true"
                     />
                   ) : null}
                   <div className="relative flex items-start space-x-3">
-                    {activityItem.type === "comment" ? (
-                      <>
-                        <div className="relative">
-                          <Image
-                            className="flex h-10 w-10 items-center justify-center rounded-full bg-gray-400 ring-8 ring-white"
-                            src={activityItem.imageUrl!}
-                            alt=""
-                            width={40}
-                            height={40}
-                          />
+                    <>
+                      <div className="relative">
+                        <Image
+                          className="flex h-10 w-10 items-center justify-center rounded-full bg-gray-400 ring-8 ring-white"
+                          src={singleComment?.userId?.imgUrl ?? UserIcon.src}
+                          alt=""
+                          width={40}
+                          height={40}
+                        />
 
-                          <span className="absolute -bottom-0.5 -right-1 rounded-tl bg-white px-0.5 py-px">
-                            <IoChatbubbleEllipses
-                              className="h-5 w-5 text-gray-400"
-                              aria-hidden="true"
-                            />
-                          </span>
-                          {/* delete */}
-                        </div>
-                        <div className="min-w-0 flex-1">
-                          <div>
-                            <div className="text-sm">
-                              <a
-                                href={activityItem.person.href}
-                                className="font-medium text-gray-900"
+                        <span className="absolute -bottom-0.5 -right-1 rounded-tl bg-white px-0.5 py-px">
+                          <IoChatbubbleEllipses
+                            className="h-5 w-5 text-gray-400"
+                            aria-hidden="true"
+                          />
+                        </span>
+                        {/* delete */}
+                      </div>
+                      <div className="min-w-0 flex-1">
+                        <div>
+                          <div className="text-sm">
+                            <Link
+                              href={`/donate-list/${singleComment?.userId?._id}`}
+                            >
+                              {singleComment?.userId?.name}
+                            </Link>
+                          </div>
+                          <p className="mt-0.5 text-sm text-gray-500">
+                            Commented{" "}
+                            {new Date(
+                              singleComment?.createdAt
+                            ).toLocaleDateString()}{" "}
+                            {}
+                            <span>
+                              <button
+                                className="text-red-400 ml-2"
+                                // onClick={() => {
+                                //   const newComment = comment.filter(
+                                //     (item) => item.id !== activityItem.id
+                                //   );
+                                //   setComment(newComment);
+                                //   localStorage.setItem(
+                                //     "comment",
+                                //     JSON.stringify(newComment)
+                                //   );
+                                // }}
                               >
-                                {activityItem.person.name}
-                              </a>
-                            </div>
-                            <p className="mt-0.5 text-sm text-gray-500">
-                              Commented {activityItem.date} {}
-                              <span>
-                                <button
-                                  className="text-red-400 ml-2"
-                                  onClick={() => {
-                                    const newComment = comment.filter(
-                                      (item) => item.id !== activityItem.id
-                                    );
-                                    setComment(newComment);
-                                    localStorage.setItem(
-                                      "comment",
-                                      JSON.stringify(newComment)
-                                    );
-                                  }}
-                                >
-                                  Delete
-                                </button>
-                              </span>
-                            </p>
-                          </div>
-                          <div className="mt-2 text-sm text-gray-700">
-                            <p>{activityItem.comment}</p>
-                          </div>
+                                Delete
+                              </button>
+                            </span>
+                          </p>
                         </div>
-                      </>
+                        <div className="mt-2 text-sm text-gray-700">
+                          <p>{singleComment?.comments}</p>
+                        </div>
+                      </div>
+                    </>
+                    {/* {activityItem.type === "comment" ? (
+                      
                     ) : activityItem.type === "assignment" ? (
                       <>
                         <div>
@@ -245,7 +241,7 @@ const Comments = ({ id }: { id: string }) => {
                           </div>
                         </div>
                       </>
-                    ) : null}
+                    ) : null} */}
                   </div>
                 </div>
               </li>
