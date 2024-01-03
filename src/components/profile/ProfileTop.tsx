@@ -1,6 +1,5 @@
 import Image from "next/image";
 import React from "react";
-import userBg from "../../../public/assets/banner/userBg.jpg";
 import userImage from "../../../public/assets/icon/userIcon.png";
 import Link from "next/link";
 import { PhoneOutlined, MessageOutlined } from "@ant-design/icons";
@@ -35,10 +34,9 @@ const ProfileTopSection = ({ userData }: { userData: IUser }) => {
               <h1 className="truncate text-2xl font-bold text-gray-900">
                 {userData?.name}
               </h1>
-              {/* role */}
+
               <div className="mt-2 flex items-center text-sm text-gray-500">
                 <span className="truncate">{userData?.role}</span>
-               
               </div>
             </div>
             <div className="mt-6 flex flex-col justify-stretch space-y-3 sm:flex-row sm:space-x-4 sm:space-y-0">

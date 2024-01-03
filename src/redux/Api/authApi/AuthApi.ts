@@ -23,7 +23,7 @@ export const authAPi = api.injectEndpoints({
         setToLocalStorage("user", accessToken);
       },
     }),
-    
+
     userRegister: build.mutation({
       query: (registerData) => {
         console.log(registerData, "rrrrrrrr");
@@ -41,7 +41,7 @@ export const authAPi = api.injectEndpoints({
         // console.log(setToLCStorage);
       },
     }),
-    
+
     userProfile: build.query({
       query: () => {
         return {
@@ -85,6 +85,16 @@ export const authAPi = api.injectEndpoints({
       }),
       providesTags: [tagTypes.user],
     }),
+
+    // get single user
+    getSingleUser: build.query({
+      query: (id) => ({
+        url: `${AUTH_URL}/single-user/${id}`,
+        method: "GET",
+      }),
+      providesTags: [tagTypes.user],
+    }),
+
     changeRoleByAdmin: build.mutation({
       query: (data) => ({
         url: `${AUTH_URL}/change-role/${data}`,
@@ -105,5 +115,6 @@ export const {
   useChangePasswordMutation,
   useGetAllUsersQuery,
   useChangeRoleByAdminMutation,
-  useUserUpdateProfileMutation
+  useUserUpdateProfileMutation,
+  useGetSingleUserQuery,
 } = authAPi;
