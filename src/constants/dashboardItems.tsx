@@ -328,7 +328,7 @@ export const dashboardItems = (role: USER_ROLE) => {
       children: [
         {
           label: (
-            <Link className="" href={`/admin/chat`}>
+            <Link className="" href={`/chat`}>
               Chat List
             </Link>
           ),

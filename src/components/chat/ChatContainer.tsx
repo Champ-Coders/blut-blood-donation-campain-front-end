@@ -11,7 +11,7 @@ export default function ChatContainer() {
   };
 
   return (
-    <div>
+    <div className="">
       <div className="h-screen overflow-y-auto p-4 pb-36">
         <div className="flex mb-4 cursor-pointer">
           <div className="w-9 h-9 rounded-full flex items-center justify-center mr-2">

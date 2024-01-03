@@ -8,7 +8,6 @@ interface IUser {
     _id: string;
   }[];
 }
-
 const initialState: IUser = {
   users: [],
 };
@@ -17,12 +16,12 @@ const chatUserSlice = createSlice({
   name: "users",
   initialState: initialState,
   reducers: {
-    allUsers: (state) => {
-      state.users = state.users;
+    setUsers: (state, actions) => {
+      state.users = actions.payload;
     },
   },
 });
 
-export const { allUsers } = chatUserSlice.actions;
+export const { setUsers } = chatUserSlice.actions;
 
 export default chatUserSlice.reducer;
