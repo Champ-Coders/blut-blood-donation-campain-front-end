@@ -150,3 +150,16 @@ body {
   box-shadow: 0 calc(var(--_radius) * 2) 0 var(--color-card);
   pointer-events: none;
 }
+
+.ql-toolbar {
+  /* border-redius top */
+  border-top-left-radius: 10px !important;
+  border-top-right-radius: 10px !important;
+  background: #e7e7e7 !important;
+}
+
+.ql-container {
+  /* border-redius bottom */
+  border-bottom-left-radius: 10px !important;
+  border-bottom-right-radius: 10px !important;
+}
