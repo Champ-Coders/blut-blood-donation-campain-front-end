@@ -7,6 +7,7 @@ import { useAppSelector, useDebounced } from "@/redux/app/hook";
 import DonateList from "@/components/DonateList/DonateList";
 import { IUser } from "@/interfaces/common";
 import LoadingPage from "@/app/loading";
+import Empty from "@/components/Empty/Empty";
 
 const paginationPages = [
   {
@@ -31,22 +32,54 @@ const paginationPages = [
   },
 ];
 
+const bloodGroups = [
+  {
+    id: 1,
+    name: "A+",
+  },
+  {
+    id: 2,
+    name: "A-",
+  },
+  {
+    id: 3,
+    name: "B+",
+  },
+  {
+    id: 4,
+    name: "B-",
+  },
+  {
+    id: 5,
+    name: "AB+",
+  },
+  {
+    id: 6,
+    name: "AB-",
+  },
+  {
+    id: 7,
+    name: "O+",
+  },
+  {
+    id: 8,
+    name: "O-",
+  },
+];
+
 const AllUsers = () => {
-  const { area, bloodGroup, district, name } = useAppSelector(
-    (state) => state.search
-  );
+  const { area, district, name } = useAppSelector((state) => state.search);
   const [page, setPage] = useState<number>(1);
   const [size, setSize] = useState<number>(10);
-  const [sortBy, setSortBy] = useState<string>("");
-  const [sortOrder, setSortOrder] = useState<string>("");
+
   const [searchTerm, setSearchTerm] = useState<string>("");
+  const [bloodGroup, setBloodGroup] = useState<string | undefined>(undefined);
 
   const query: Record<string, any> = {};
 
   query["limit"] = size;
   query["page"] = page;
-  query["sortBy"] = sortBy;
-  query["sortOrder"] = sortOrder;
+  query["bloodGroup"] = bloodGroup;
 
   useEffect(() => {
     if (name) {
@@ -83,7 +116,7 @@ const AllUsers = () => {
             type="text"
             className="mb-10 block h-9 min-h-[44px] w-full rounded-md border border-solid border-[#cccccc] bg-[#f2f2f7] bg-[16px_center] bg-no-repeat py-3 pl-11 pr-4 text-sm font-bold text-[#333333] [background-size:18px] [border-bottom:1px_solid_rgb(215,_215,_221)]"
             placeholder="Search"
-            // style="background-image: url('https://assets.website-files.com/6458c625291a94a195e6cf3a/64b7a3a33cd5dc368f46daaa_MagnifyingGlass.svg');"
+            onChange={(e) => setSearchTerm(e.target.value)}
             style={{
               backgroundImage:
                 "url('https://assets.website-files.com/6458c625291a94a195e6cf3a/64b7a3a33cd5dc368f46daaa_MagnifyingGlass.svg')",
@@ -91,63 +124,33 @@ const AllUsers = () => {
           />
           {/* <!-- Categories --> */}
           <div className="flex flex-col gap-6">
-            <p className="font-semibold">Categories</p>
+            <p className="font-semibold">Blood Group</p>
             <div className="flex flex-wrap items-center gap-2">
-              <a
-                href="#"
-                className="flex gap-3 rounded-md bg-[#f2f2f7] p-3 font-semibold"
+              {/* clear */}
+              <div
+                onClick={() => setBloodGroup(undefined)}
+                className={`flex h-9 w-14 cursor-pointer items-center justify-center rounded-md border border-solid ${
+                  !bloodGroup
+                    ? "bg-primary text-white"
+                    : "bg-[#f2f2f7] text-sm font-semibold"
+                }`}
               >
-                <img
-                  src="https://assets.website-files.com/6458c625291a94a195e6cf3a/64b7a3a33cd5dc368f46daab_design.svg"
-                  alt=""
-                  className="inline-block"
-                />
-                <p>Design</p>
-              </a>
-              <a
-                href="#"
-                className="flex gap-3 rounded-md bg-[#f2f2f7] p-3 font-semibold"
-              >
-                <img
-                  src="https://assets.website-files.com/6458c625291a94a195e6cf3a/64b7a3a33cd5dc368f46daae_illustration.svg"
-                  alt=""
-                  className="inline-block"
-                />
-                <p>Illustrations</p>
-              </a>
-              <a
-                href="#"
-                className="flex gap-3 rounded-md bg-[#f2f2f7] p-3 font-semibold"
-              >
-                <img
-                  src="https://assets.website-files.com/6458c625291a94a195e6cf3a/64b7a3a33cd5dc368f46daad_icons.svg"
-                  alt=""
-                  className="inline-block"
-                />
-                <p>Icons</p>
-              </a>
-              <a
-                href="#"
-                className="flex gap-3 rounded-md bg-[#f2f2f7] p-3 font-semibold"
-              >
-                <img
-                  src="https://assets.website-files.com/6458c625291a94a195e6cf3a/64b7a3a33cd5dc368f46daaf_plugins.svg"
-                  alt=""
-                  className="inline-block"
-                />
-                <p>Plugins</p>
-              </a>
-              <a
-                href="#"
-                className="flex gap-3 rounded-md bg-[#f2f2f7] p-3 font-semibold"
-              >
-                <img
-                  src="https://assets.website-files.com/6458c625291a94a195e6cf3a/64b7a3a33cd5dc368f46daac_color%20palette.svg"
-                  alt=""
-                  className="inline-block"
-                />
-                <p>Color Palette</p>
-              </a>
+                <span>All</span>
+              </div>
+
+              {bloodGroups?.map((item) => (
+                <div
+                  key={item.id}
+                  onClick={() => setBloodGroup(item.name)}
+                  className={`flex h-9 w-14 cursor-pointer items-center justify-center rounded-md border border-solid ${
+                    bloodGroup === item.name
+                      ? "bg-primary text-white"
+                      : "bg-[#f2f2f7] text-sm font-semibold"
+                  }`}
+                >
+                  <span>{item.name}</span>
+                </div>
+              ))}
             </div>
           </div>
           {/* <!-- Divider --> */}
@@ -305,7 +308,7 @@ const AllUsers = () => {
         {isLoading ? (
           <LoadingPage />
         ) : users?.data?.data?.length === 0 ? (
-          <h1 className="text-4xl text-center">No Donor Found</h1>
+          <Empty title="Donor" />
         ) : (
           users?.data?.data?.map((item: IUser) => (
             <DonateList key={item?._id} data={item} />
