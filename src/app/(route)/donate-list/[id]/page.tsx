@@ -49,7 +49,6 @@ export default function DonateListPerson({
   const { data } = useGetSingleUserQuery(params.id);
 
   const userData: IUser = data?.data;
-  console.log("🚀 ~ file: page.tsx:55 ~ userData:", userData);
 
   return (
     <main className="">
