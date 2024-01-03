@@ -15,12 +15,12 @@ type TeamMembersCardProps = {
 
 const TeamMembersCard: React.FC<TeamMembersCardProps> = ({ item }) => {
   return (
-    <div className="p-[25px] bg-white shadow rounded-xl group border ">
+    <div className="p-2 bg-white shadow rounded-xl group border ">
       <div className=" ">
         <div className="relative">
           <Image
             src={item?.image}
-            className="w-full h-[400px]"
+            className="w-full h-[350px] rounded-lg"
             alt={item?.name}
             layout="responsive"
             width={400}
@@ -64,13 +64,13 @@ const TeamMembersCard: React.FC<TeamMembersCardProps> = ({ item }) => {
                 </Link>
               </ul>
             </div>
-            <div className="bg-[#222222a6] w-full h-full absolute left-0 top-0"></div>
+            <div className="bg-[#222222a6] w-full h-full absolute left-0 top-0 rounded-lg"></div>
           </div>
         </div>
       </div>
       <div className="mt-[34px] text-center">
-        <h4 className="text-[#111] mb-5 text-2xl font-bold ">{item?.name}</h4>
-        <p className="text-[#666] text-lg">{item?.designation}</p>
+        <h4 className="text-[#111] mb-2 text-xl font-bold ">{item?.name}</h4>
+        <p className="text-[#666] text-base">{item?.designation}</p>
       </div>
     </div>
   );

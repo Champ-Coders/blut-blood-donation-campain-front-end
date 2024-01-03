@@ -17,7 +17,7 @@ const CallNow = () => {
         }}
         className={`bg-cover h-auto sm:h-[504px] relative py-[90px]`}
       >
-        <div className="absolute  h-auto inset-0 bg-black/80"></div>
+        <div className="absolute  h-auto inset-0 bg-black opacity-80"></div>
         <div className="w-full h-full font-poppins flex justify-center items-center">
           <div className="container group mx-auto px-4 max-w-[1130px] font-Player-Display">
             <div className="py-[70px] text-white border-[5px] sm:border-[10px] border-primary relative text-center block">
