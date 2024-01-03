@@ -1,7 +1,7 @@
 "use client";
 import ChatContainer from "@/components/chat/ChatContainer";
-import { useGetMessageMutation } from "@/redux/Api/chatApi";
-import { useUserProfileQuery } from "@/redux/Api/authApi/AuthApi";
+import { useSearchParams } from "next/navigation";
+
 import React from "react";
 
 export default function ChatMessagePage({
@@ -9,20 +9,19 @@ export default function ChatMessagePage({
 }: {
   params: { id: string };
 }) {
-  console.log(params);
-  const { data: userData } = useUserProfileQuery(null);
-  console.log("🚀 ~ file: page.tsx:13 ~ userData:", userData);
+  // console.log(params);
 
-  const [getMessage] = useGetMessageMutation();
+  const searchParams = useSearchParams();
 
-  const messageData = () => {};
+  const name = searchParams.get("name");
+  // console.log("🚀 ~ file: page.tsx:17 ~ name:", name);
 
   return (
-    <div className="w-full flex-1 bg-blue-100">
+    <div className="w-auto flex-1 bg-blue-100">
       <header className="bg-wwhite p-4 text-gray-700">
-        <h1 className="text-2xl font-semibold">Alice</h1>
+        <h1 className="text-2xl font-semibold">{name}</h1>
       </header>
-      <ChatContainer />
+      <ChatContainer senderId={params?.id} />
     </div>
   );
 }
