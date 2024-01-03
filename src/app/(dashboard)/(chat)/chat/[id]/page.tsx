@@ -1,6 +1,6 @@
 "use client";
 import ChatContainer from "@/components/chat/ChatContainer";
-import { useGetMessageMutation } from "@/redux/Api/ChatApi";
+import { useGetMessageMutation } from "@/redux/Api/chatApi";
 import { useUserProfileQuery } from "@/redux/Api/authApi/AuthApi";
 import React from "react";
 
