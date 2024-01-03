@@ -5,58 +5,20 @@ import React from "react";
 import { FaPaperclip } from "react-icons/fa";
 import { IoChatbubbleEllipses } from "react-icons/io5";
 import { useForm } from "react-hook-form";
-import { message } from "antd";
+import { Button, Popconfirm, message } from "antd";
 
 import UserIcon from "../../../public/assets/icon/userIcon.png";
 import Empty from "../Empty/Empty";
 import { IComments } from "@/interfaces/common";
 import Link from "next/link";
-
-type IActivity = {
-  id?: number;
-  type: string;
-  person: { name: string; href: string };
-  imageUrl?: string;
-  comment?: string;
-  date: string;
-};
-
-const activity: IActivity[] = [];
+import {
+  useCreateBlogCommentMutation,
+  useDeleteBlogCommentMutation,
+} from "@/redux/Api/blogCommentApi/blogCommentApi";
 
 const Comments = ({ id, comment }: { id: string; comment: IComments[] }) => {
-  /*! my code start code hasan rifat*/
-  /* 
-
-// get comment from backend
-   const { data: commentData } = useGetAllCommentQuery({}, {});
-   // create comment
-   const [createBlogComment] = useCreateBlogCommentMutation(); 
-   
-   // form
-   const onSubmit = async (data: any) => {
-    if (!userInfo) {
-      message.error("Please login first");
-      return;
-    }
-    // create comment
-    await createBlogComment({
-      blogId: id,
-      userId: userInfo._id,
-      comments: data.comment,
-    });
-
-
-    // set LocalStorage
-    const localComment = localStorage.getItem("comment");
-
-    // reset comment
-    data.comment = "";
-    reset();
-  };
-
-
-  end my code hasan rifat */
-  // const [comment, setComment] = React.useState(activity);
+  const [createBlogComment, { isLoading }] = useCreateBlogCommentMutation();
+  const [deleteBlogComment] = useDeleteBlogCommentMutation();
 
   const { data } = useUserProfileQuery(null);
   const userInfo = data?.data;
@@ -67,40 +29,41 @@ const Comments = ({ id, comment }: { id: string; comment: IComments[] }) => {
     formState: { errors },
     reset,
   } = useForm();
-  const onSubmit = (data: any) => {
+  const onSubmit = async (data: any) => {
     if (!userInfo) {
       message.error("Please login first");
       return;
     }
 
     const newComment = {
-      // id: comment.length + 1,
-      type: "comment",
-      person: {
-        name: userInfo?.name,
-        href: "#",
-      },
-      imageUrl: userInfo?.imgUrl ?? UserIcon,
-      comment: data.comment,
-      date: new Date().toLocaleDateString(),
+      userId: userInfo._id,
+      comments: data.comment,
+      blogId: id,
     };
 
-    // setComment([...comment, newComment]);
-    // set LocalStorage
-    const localComment = localStorage.getItem("comment");
-    if (localComment) {
-      const localCommentParse = JSON.parse(localComment);
-      localStorage.setItem(
-        "comment",
-        JSON.stringify([...localCommentParse, newComment])
-      );
-    } else {
-      localStorage.setItem("comment", JSON.stringify([newComment]));
-    }
+    try {
+      const res = await createBlogComment(newComment).unwrap();
 
-    // reset comment
-    data.comment = "";
-    reset();
+      if (res.status === 200) {
+        message.success("Comment added successfully");
+        reset();
+      }
+    } catch (error) {
+      console.log("🚀 ~ file: Comments.tsx:43 ~ onSubmit ~ error:", error);
+      message.error("Something went wrong");
+    }
+  };
+
+  const HandleDelete = async (id: string) => {
+    try {
+      const res = await deleteBlogComment(id).unwrap();
+      if (res.status === 200) {
+        message.success("Comment deleted successfully");
+      }
+    } catch (error) {
+      console.log("🚀 ~ file: Comments.tsx:43 ~ onSubmit ~ error:", error);
+      message.error("Something went wrong");
+    }
   };
 
   return (
@@ -159,22 +122,29 @@ const Comments = ({ id, comment }: { id: string; comment: IComments[] }) => {
                               singleComment?.createdAt
                             ).toLocaleDateString()}{" "}
                             {}
-                            <span>
-                              <button
-                                className="text-red-400 ml-2"
-                                // onClick={() => {
-                                //   const newComment = comment.filter(
-                                //     (item) => item.id !== activityItem.id
-                                //   );
-                                //   setComment(newComment);
-                                //   localStorage.setItem(
-                                //     "comment",
-                                //     JSON.stringify(newComment)
-                                //   );
-                                // }}
+                            <span
+                              className={
+                                singleComment?.userId?._id !== userInfo?._id
+                                  ? "hidden"
+                                  : "inline"
+                              }
+                            >
+                              <Popconfirm
+                                title="Delete this comment"
+                                description="Are you sure to delete this Comment?"
+                                onConfirm={() => {
+                                  HandleDelete(singleComment._id);
+                                }}
+                                onCancel={() => {
+                                  message.error("Comment not deleted");
+                                }}
+                                okText="Yes"
+                                cancelText="No"
                               >
-                                Delete
-                              </button>
+                                <button className="text-red-400 ml-2">
+                                  Delete
+                                </button>
+                              </Popconfirm>
                             </span>
                           </p>
                         </div>
@@ -291,12 +261,13 @@ const Comments = ({ id, comment }: { id: string; comment: IComments[] }) => {
                   </button>
                 </div>
               </div>
-              <button
-                type="submit"
-                className="rounded-md bg-primary px-2.5 py-1.5 text-sm font-semibold text-white  hover:bg-black "
+              <Button
+                loading={isLoading}
+                htmlType="submit"
+                className="rounded-md bg-primary  text-sm font-semibold text-white  hover:bg-black "
               >
                 Comment
-              </button>
+              </Button>
             </div>
           </form>
         </div>
