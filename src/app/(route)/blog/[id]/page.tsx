@@ -180,7 +180,7 @@ const BlogDetail: React.FC<BlogDetailProps> = async ({
 
           {/* Comments */}
 
-          <Comments />
+          <Comments id={params.id} />
         </div>
       </section>
     </main>
