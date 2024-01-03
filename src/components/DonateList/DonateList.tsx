@@ -9,7 +9,10 @@ const DonateList = ({ data }: { data: IUser }) => {
     <div className="bg-white shadow-md border p-3 rounded-lg   text-[14px] grid md:grid-cols-4 grid-cols-2 justify-between items-center">
       {/* profile */}
 
-      <div className="flex items-center flex-col md:flex-row ">
+      <Link
+        href={`/donate-list/${data._id}`}
+        className="flex items-center flex-col md:flex-row "
+      >
         <Image
           className="w-10 h-10 rounded-full mr-4"
           src={data?.imgUrl ?? NoImage}
@@ -25,7 +28,7 @@ const DonateList = ({ data }: { data: IUser }) => {
             {data?.phoneNumber}
           </p>
         </div>
-      </div>
+      </Link>
 
       {/* Blood Group */}
 

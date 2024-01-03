@@ -1,7 +1,10 @@
 "use client";
 
 import Image, { StaticImageData } from "next/image";
-import { useUserProfileQuery } from "@/redux/Api/authApi/AuthApi";
+import {
+  useGetSingleUserQuery,
+  useUserProfileQuery,
+} from "@/redux/Api/authApi/AuthApi";
 import { IUser } from "@/interfaces/common";
 import ProfileTopSection from "@/components/profile/ProfileTop";
 
@@ -19,7 +22,11 @@ type IReword = {
   id: string;
 };
 
-export default function DonateListPerson() {
+export default function DonateListPerson({
+  params,
+}: {
+  params: { id: string };
+}) {
   const reword: IReword[] = [
     {
       id: "1",
@@ -42,9 +49,10 @@ export default function DonateListPerson() {
       image: image4,
     },
   ];
-  const { data } = useUserProfileQuery(null);
+  const { data } = useGetSingleUserQuery(params.id);
 
   const userData: IUser = data?.data;
+  console.log("🚀 ~ file: page.tsx:55 ~ userData:", userData)
 
   return (
     <main className="bg-slate-100">
