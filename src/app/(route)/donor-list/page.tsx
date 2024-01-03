@@ -67,6 +67,18 @@ const bloodGroups = [
   },
 ];
 
+// available,
+const Available = [
+  {
+    id: 1,
+    name: true,
+  },
+  {
+    id: 2,
+    name: false,
+  },
+];
+
 const AllUsers = () => {
   const { area, district, name } = useAppSelector((state) => state.search);
   const [page, setPage] = useState<number>(1);
@@ -74,12 +86,14 @@ const AllUsers = () => {
 
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [bloodGroup, setBloodGroup] = useState<string | undefined>(undefined);
+  const [available, setAvailable] = useState<boolean | undefined>(undefined);
 
   const query: Record<string, any> = {};
 
   query["limit"] = size;
   query["page"] = page;
   query["bloodGroup"] = bloodGroup;
+  query["available"] = available;
 
   useEffect(() => {
     if (name) {
@@ -99,6 +113,12 @@ const AllUsers = () => {
   // query and mutation
   const { data: users, isLoading } = useGetAllUsersQuery({ ...query });
 
+  // clear all
+  const clearAll = () => {
+    setSearchTerm("");
+    setBloodGroup(undefined);
+  };
+
   return (
     <div className="common flex gap-10 flex-col lg:flex-row ">
       {/* <!-- Filters --> */}
@@ -107,9 +127,9 @@ const AllUsers = () => {
           {/* <!-- Filters title --> */}
           <div className="mb-6 flex items-center justify-between py-4 [border-bottom:1px_solid_rgb(217,_217,_217)]">
             <h5 className="text-xl font-bold">Filters</h5>
-            <a href="#" className="text-sm">
+            <button onClick={clearAll} className="text-sm">
               <p>Clear all</p>
-            </a>
+            </button>
           </div>
           {/* <!-- Search input --> */}
           <input
@@ -157,148 +177,35 @@ const AllUsers = () => {
           <div className="mb-6 mt-6 h-px w-full bg-[#d9d9d9]"></div>
           {/* <!-- Rating --> */}
           <div className="flex flex-col gap-6">
-            <p className="font-semibold">Rating</p>
-            <div className="flex flex-wrap gap-2 lg:justify-between">
-              <div className="flex h-9 w-14 cursor-pointer items-center justify-center rounded-md border border-solid border-[#cccccc] bg-[#f2f2f7] text-sm font-semibold">
-                <span>1</span>
+            <p className="font-semibold">Available Blood </p>
+            <div className="flex flex-wrap gap-2 ">
+              {/* clear */}
+              <div
+                onClick={() => setAvailable(undefined)}
+                className={`flex h-9 w-14 cursor-pointer items-center justify-center rounded-md border border-solid ${
+                  available === undefined
+                    ? "bg-primary text-white"
+                    : "bg-[#f2f2f7] text-sm font-semibold"
+                }`}
+              >
+                <span>All</span>
               </div>
-              <div className="flex h-9 w-14 cursor-pointer items-center justify-center rounded-md border border-solid border-[#cccccc] bg-black text-sm font-semibold text-white">
-                <span>2</span>
-              </div>
-              <div className="flex h-9 w-14 cursor-pointer items-center justify-center rounded-md border border-solid border-[#cccccc] bg-[#f2f2f7] text-sm font-semibold">
-                <span>3</span>
-              </div>
-              <div className="flex h-9 w-14 cursor-pointer items-center justify-center rounded-md border border-solid border-[#cccccc] bg-[#f2f2f7] text-sm font-semibold">
-                <span>4</span>
-              </div>
-              <div className="flex h-9 w-14 cursor-pointer items-center justify-center rounded-md border border-solid border-[#cccccc] bg-[#f2f2f7] text-sm font-semibold">
-                <span>5</span>
-              </div>
-            </div>
-          </div>
-          {/* <!-- Divider --> */}
-          <div className="mb-6 mt-6 h-px w-full bg-[#d9d9d9]"></div>
-          {/* <!-- FIlter One --> */}
-          <div className="flex flex-col gap-6">
-            <div className="flex cursor-pointer items-center justify-between py-4 [border-top:1px_solid_rgba(0,_0,_0,_0)] md:py-0">
-              <p className="font-semibold">FIlter One</p>
-              <a href="#" className="inline-block text-sm text-black">
-                <p>Clear</p>
-              </a>
-            </div>
-            <div className="flex flex-col gap-3">
-              <label className="flex items-center text-sm font-medium">
-                <div className="mr-3 h-5 w-5 cursor-pointer rounded-sm border border-solid bg-[#f2f2f7]"></div>
-                <span
-                  className="inline-block cursor-pointer"
-                  htmlFor="Filter-One-Option-1"
+
+              {Available?.map((item) => (
+                <div
+                  key={item.id}
+                  onClick={() => setAvailable(item.name)}
+                  className={`flex h-9 w-24 cursor-pointer items-center justify-center rounded-md border border-solid ${
+                    available === item.name
+                      ? "bg-primary text-white"
+                      : "bg-[#f2f2f7] text-sm font-semibold"
+                  }`}
                 >
-                  Option One
-                </span>
-              </label>
-              <label className="flex items-center text-sm font-medium">
-                <div className="mr-3 h-5 w-5 cursor-pointer rounded-sm border border-solid bg-[#f2f2f7]"></div>
-                <span
-                  className="inline-block cursor-pointer"
-                  htmlFor="Filter-One-Option-1"
-                >
-                  Option Two
-                </span>
-              </label>
-              <label className="flex items-center text-sm font-medium">
-                <div className="mr-3 h-5 w-5 cursor-pointer rounded-sm border border-solid bg-[#f2f2f7]"></div>
-                <span
-                  className="inline-block cursor-pointer"
-                  htmlFor="Filter-One-Option-1"
-                >
-                  Option Three
-                </span>
-              </label>
-              <label className="flex items-center text-sm font-medium">
-                <div className="mr-3 h-5 w-5 cursor-pointer rounded-sm border border-solid bg-[#f2f2f7]"></div>
-                <span
-                  className="inline-block cursor-pointer"
-                  htmlFor="Filter-One-Option-1"
-                >
-                  Option Four
-                </span>
-              </label>
-              <label className="flex items-center text-sm font-medium">
-                <div className="mr-3 h-5 w-5 cursor-pointer rounded-sm border border-solid bg-[#f2f2f7]"></div>
-                <span
-                  className="inline-block cursor-pointer"
-                  htmlFor="Filter-One-Option-1"
-                >
-                  Option Five
-                </span>
-              </label>
-            </div>
-          </div>
-          {/* <!-- Divider --> */}
-          <div className="mb-6 mt-6 h-px w-full bg-[#d9d9d9]"></div>
-          {/* <!-- FIlter Two --> */}
-          <div className="flex flex-col gap-6">
-            <div className="flex cursor-pointer items-center justify-between py-4 [border-top:1px_solid_rgba(0,_0,_0,_0)] md:py-0">
-              <p className="font-semibold">FIlter Two</p>
-              <a href="#" className="inline-block text-sm text-black">
-                <p>Clear</p>
-              </a>
-            </div>
-            <div className="flex flex-col gap-3">
-              <label className="flex items-center font-medium">
-                <div className="mr-3 mt-1 h-5 w-5 rounded-full border border-solid border-[#cccccc] bg-[#f2f2f7]"></div>
-                <span
-                  className="inline-block cursor-pointer"
-                  htmlFor="Filter-One-Option-1"
-                >
-                  All
-                </span>
-              </label>
-              <label className="flex items-center font-medium">
-                <div className="mr-3 mt-1 h-5 w-5 rounded-full border border-solid border-[#cccccc] bg-[#f2f2f7]"></div>
-                <span
-                  className="inline-block cursor-pointer"
-                  htmlFor="Filter-One-Option-1"
-                >
-                  Option One
-                </span>
-              </label>
-              <label className="flex items-center font-medium">
-                <div className="mr-3 mt-1 h-5 w-5 rounded-full border border-solid border-[#cccccc] bg-[#f2f2f7]"></div>
-                <span
-                  className="inline-block cursor-pointer"
-                  htmlFor="Filter-One-Option-1"
-                >
-                  Option Two
-                </span>
-              </label>
-              <label className="flex items-center font-medium">
-                <div className="mr-3 mt-1 h-5 w-5 rounded-full border border-solid border-[#cccccc] bg-[#f2f2f7]"></div>
-                <span
-                  className="inline-block cursor-pointer"
-                  htmlFor="Filter-One-Option-1"
-                >
-                  Option Three
-                </span>
-              </label>
-              <label className="flex items-center font-medium">
-                <div className="mr-3 mt-1 h-5 w-5 rounded-full border border-solid border-[#cccccc] bg-[#f2f2f7]"></div>
-                <span
-                  className="inline-block cursor-pointer"
-                  htmlFor="Filter-One-Option-1"
-                >
-                  Option Four
-                </span>
-              </label>
-              <label className="flex items-center font-medium">
-                <div className="mr-3 mt-1 h-5 w-5 rounded-full border border-solid border-[#cccccc] bg-[#f2f2f7]"></div>
-                <span
-                  className="inline-block cursor-pointer"
-                  htmlFor="Filter-One-Option-1"
-                >
-                  Option Five
-                </span>
-              </label>
+                  <span>
+                    {item.name === true ? "Available" : "Unavailable"}
+                  </span>
+                </div>
+              ))}
             </div>
           </div>
         </form>
