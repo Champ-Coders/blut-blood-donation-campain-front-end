@@ -38,7 +38,7 @@ const Testimonials = () => {
             />
           </svg>
         </span>
-        <span className="hidden sm:block -z-10 absolute -right-[80px] opacity-20 -bottom-[120px] rounded-full  bg-primary/40 p-6 text-9xl text-white">
+        <span className="hidden sm:block -z-10 absolute lg:-right-[27px] md:-right-[20px] opacity-20 -bottom-[120px] rounded-full  bg-primary/40 p-6 text-9xl text-white">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             aria-hidden="true"
@@ -90,7 +90,10 @@ const Testimonials = () => {
             className="mySwiper"
           >
             {reviews?.data?.map((test: Testimonial) => (
-              <SwiperSlide key={test?._id} className="mx-[20px] z-10 ">
+              <SwiperSlide
+                key={test?._id}
+                className="mx-[20px] h-[400px] z-10 "
+              >
                 <div className="flex flex-col rounded-xl h-[350px] border w-full border-primary/30 text-center shadow-xl shadow-primary/10">
                   <div className="relative flex flex-1 flex-col justify-between p-4  ">
                     <span className="absolute -left-5 -top-6 z-50 rounded-full border border-primary/30 bg-white p-3 text-5xl">

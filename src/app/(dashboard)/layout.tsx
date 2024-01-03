@@ -4,15 +4,17 @@ import DashboardNavbar from "@/components/dashboard/DashboardNavbar";
 import DashboardSidebar from "@/components/dashboard/DashboardSider";
 import { dashboardItems } from "@/constants/dashboardItems";
 import { useUserProfileQuery } from "@/redux/Api/authApi/AuthApi";
-import { Drawer, Layout } from "antd";
+import { Drawer, Layout, message } from "antd";
 import useBreakpoint from "antd/lib/grid/hooks/useBreakpoint";
 import React, { useState } from "react";
 import LoadingPage from "../loading";
+import { useRouter } from "next/navigation";
 
 const { Content } = Layout;
 
 const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
   const [collapsed, setCollapsed] = useState(false);
+  const router = useRouter();
 
   const screens = useBreakpoint();
   //  !screens is a hooks of ant design for responsive conditionals
@@ -25,13 +27,10 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
 
   const USER_ROLE = data?.data?.role;
 
-  // if (!USER_ROLE)
-  //   return {
-  //     redirect: {
-  //       destination: "/login",
-  //       permanent: false,
-  //     },
-  //   };
+  if (!data && !USER_ROLE && typeof window !== "undefined") {
+    message.error("You are not authorized user");
+    return router.push("/login");
+  }
 
   return (
     <Layout

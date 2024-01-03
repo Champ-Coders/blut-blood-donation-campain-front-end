@@ -1,7 +1,7 @@
 "use client";
 
 import Image, { StaticImageData } from "next/image";
-import { useUserProfileQuery } from "@/redux/Api/authApi/AuthApi";
+import { useGetSingleUserQuery } from "@/redux/Api/authApi/AuthApi";
 import { IUser } from "@/interfaces/common";
 import ProfileTopSection from "@/components/profile/ProfileTop";
 
@@ -19,7 +19,11 @@ type IReword = {
   id: string;
 };
 
-export default function DonateListPerson() {
+export default function DonateListPerson({
+  params,
+}: {
+  params: { id: string };
+}) {
   const reword: IReword[] = [
     {
       id: "1",
@@ -42,14 +46,14 @@ export default function DonateListPerson() {
       image: image4,
     },
   ];
-  const { data } = useUserProfileQuery(null);
+  const { data } = useGetSingleUserQuery(params.id);
 
   const userData: IUser = data?.data;
 
   return (
-    <main className="bg-slate-100">
+    <main className="">
       <ProfileTopSection userData={userData} />
-      <section className="">
+      {/* <section className="">
         <div className="common">
           <h4 className="text-2xl text-[#111] border-b-[3px] border-b-primary">
             Achievement
@@ -68,7 +72,78 @@ export default function DonateListPerson() {
             ))}
           </div>
         </div>
-      </section>
+      </section> */}
+
+      <div className="common bg-white">
+        {/* batch */}
+
+        {userData?.totalDonation > 0 ? (
+          <>
+            <p className="py-2 text-xl font-semibold">Batch</p>
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
+              <Image
+                width={140}
+                height={240}
+                src={image1}
+                alt="Lifelong Blood Donor"
+              />
+            </div>
+          </>
+        ) : null}
+
+        {/* name */}
+
+        <hr className="mt-2 mb-2" />
+        <p className="py-2 text-xl font-semibold">Email Address</p>
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
+          <p className="text-gray-600">
+            <strong>{userData?.email}</strong>
+          </p>
+        </div>
+        <hr className="mt-2 mb-2" />
+        <p className="py-2 text-xl font-semibold">Phone Number</p>
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
+          <p className="text-gray-600">
+            <strong>{userData?.phoneNumber}</strong>
+          </p>
+        </div>
+        {/* address */}
+        <hr className="mt-2 mb-2" />
+        <p className="py-2 text-xl font-semibold">Address</p>
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
+          <p className="text-gray-600">
+            <strong className="flex flex-wrap gap-3">
+              {userData?.address?.village},{userData?.address?.thana},
+              {userData?.address?.postOffice},{userData?.address?.district},
+              {userData?.address?.division}
+            </strong>
+          </p>
+        </div>
+
+        {/* blood group */}
+        <hr className="mt-2 mb-2" />
+        <p className="py-2 text-xl font-semibold">Blood Group</p>
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
+          <p className="text-gray-600">
+            <strong>{userData?.bloodGroup}</strong>
+          </p>
+        </div>
+
+        {/* birth day */}
+        <hr className="mt-2 mb-2" />
+        <p className="py-2 text-xl font-semibold">Birth Day</p>
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
+          <p className="text-gray-600">
+            <strong>
+              {new Date(userData?.dateOfBirth)
+                .toString()
+                .split(" ")
+                .slice(0, 4)
+                .join(" ")}
+            </strong>
+          </p>
+        </div>
+      </div>
     </main>
   );
 }

@@ -23,10 +23,10 @@ const FaqQuestion = async () => {
               <span className="mb-2 block text-lg font-semibold text-primary">
                 FAQ
               </span>
-              <h2 className="mb-4 text-3xl font-bold text-dark dark:text-white sm:text-[40px]/[48px]">
+              <h2 className="mb-4 text-3xl font-bold text-dark  sm:text-[40px]/[48px]">
                 Any Questions? Look Here
               </h2>
-              <p className="text-base text-body-color dark:text-dark-6">
+              <p className="text-base text-body-color ">
                 Where you can find answers to the most common questions about
                 our products and services.
               </p>

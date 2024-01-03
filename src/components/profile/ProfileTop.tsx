@@ -1,12 +1,16 @@
 import Image from "next/image";
 import React from "react";
-import userBg from "../../../public/assets/banner/userBg.jpg";
 import userImage from "../../../public/assets/icon/userIcon.png";
 import Link from "next/link";
 import { PhoneOutlined, MessageOutlined } from "@ant-design/icons";
 import { IUser } from "@/interfaces/common";
 
+import { VscGitPullRequestGoToChanges } from "react-icons/vsc";
+import { usePathname } from "next/navigation";
+
 const ProfileTopSection = ({ userData }: { userData: IUser }) => {
+  const pathName = usePathname();
+
   return (
     <div className="bg-white">
       <div>
@@ -19,7 +23,7 @@ const ProfileTopSection = ({ userData }: { userData: IUser }) => {
           alt="profilebanner"
         />
       </div>
-      <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 py-3">
+      <div className="common px-4 sm:px-6 lg:px-8 py-3">
         <div className="-mt-12 sm:-mt-16 sm:flex sm:items-end sm:space-x-5">
           <div className="flex">
             <Image
@@ -35,10 +39,9 @@ const ProfileTopSection = ({ userData }: { userData: IUser }) => {
               <h1 className="truncate text-2xl font-bold text-gray-900">
                 {userData?.name}
               </h1>
-              {/* role */}
+
               <div className="mt-2 flex items-center text-sm text-gray-500">
                 <span className="truncate">{userData?.role}</span>
-               
               </div>
             </div>
             <div className="mt-6 flex flex-col justify-stretch space-y-3 sm:flex-row sm:space-x-4 sm:space-y-0">
@@ -64,6 +67,19 @@ const ProfileTopSection = ({ userData }: { userData: IUser }) => {
                   aria-hidden="true"
                 />
                 <span>Call</span>
+              </Link>
+              <Link
+                href={`/request/${userData?._id}`}
+                // type="button"
+                className={`inline-flex justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 ${
+                  pathName === "/profile" ? "hidden" : ""
+                } `}
+              >
+                <VscGitPullRequestGoToChanges
+                  className="-ml-0.5 mr-1.5 h-5 w-5 text-gray-400"
+                  aria-hidden="true"
+                />
+                <span>Request For Blood</span>
               </Link>
             </div>
           </div>

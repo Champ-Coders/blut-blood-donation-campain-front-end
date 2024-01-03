@@ -1,9 +1,7 @@
 "use client";
 
-import Image from "next/image";
 import { useUserProfileQuery } from "@/redux/Api/authApi/AuthApi";
 import { IUser } from "@/interfaces/common";
-import Link from "next/link";
 import ChangePasswordPage from "@/components/dashboard/ChangePassword";
 import ProfileTopSection from "@/components/profile/ProfileTop";
 import PersonalInfo from "@/components/profile/ProfilePersonalInfo";

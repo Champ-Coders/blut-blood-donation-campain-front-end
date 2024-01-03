@@ -1,8 +1,13 @@
+"use client";
 import { TeamMembers } from "@/constants/TeamMembers";
 import React from "react";
 import TeamMembersCard from "../TeamMembersCard/TeamMembersCard";
+import { useVolunteersQuery } from "@/redux/Api/volunteerApi";
+import { IVolunteers } from "@/interfaces/common";
 
 const TeamMember = () => {
+  const { data } = useVolunteersQuery(undefined);
+
   return (
     <section>
       <div className=" !pt-0 common">
@@ -17,7 +22,7 @@ const TeamMember = () => {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-            {TeamMembers.map((item) => (
+            {data?.data?.slice(0, 2).map((item: IVolunteers) => (
               <TeamMembersCard item={item} key={item.id} />
             ))}
           </div>
