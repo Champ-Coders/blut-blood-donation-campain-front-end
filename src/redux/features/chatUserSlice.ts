@@ -8,7 +8,6 @@ interface IUser {
     _id: string;
   }[];
 }
-
 const initialState: IUser = {
   users: [],
 };

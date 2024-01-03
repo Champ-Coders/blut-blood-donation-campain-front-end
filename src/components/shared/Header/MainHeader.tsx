@@ -15,18 +15,14 @@ import { Menu, Transition } from "@headlessui/react";
 import { logout } from "@/utils/local-storage";
 import { Badge, message } from "antd";
 import { useRouter } from "next/navigation";
-import { FaRegBell } from "react-icons/fa";
 
-import Popovers from "@/components/Popover/Popover";
-import { INotification } from "@/constants/INotification";
-import { IoChatboxEllipsesSharp } from "react-icons/io5";
 import Notification from "@/components/Notification/Notification";
 
 const MainHeader = () => {
   const [open, setOpen] = React.useState(false);
   const [isOpenNotification, setIsOpenNotification] = React.useState(false);
 
-  const { data } = useUserProfileQuery(null);
+  const { refetch,data } = useUserProfileQuery(null);
   const userInfo = data?.data;
 
   function classNames(...classes: any) {
@@ -41,8 +37,9 @@ const MainHeader = () => {
   const SignOutHandler = () => {
     logout();
     message.error("Successfully Sign Out");
-    window.location.reload();
-    router.push("/");
+    // window.location.reload();
+    refetch()
+    // router.push("/");
   };
 
   return (
