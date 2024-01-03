@@ -9,7 +9,7 @@ const PersonalInfo = ({ userData }: { userData: IUser }) => {
 
   const [UserId, setUserId] = useState<string>("");
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [editUser, setEditUser] = useState({
+  const [editUser, setEditUser] = useState<any>({
     name: "",
     email: "",
     address: "",
