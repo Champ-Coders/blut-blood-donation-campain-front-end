@@ -17,9 +17,18 @@ export const ChatApi = api.injectEndpoints({
       providesTags: [tagTypes.chat],
     }),
     // get single
-    Chat: build.query({
-      query: (id: string) => ({
-        url: `${Chat_URL}/${id}`,
+    // ! for getting user Admin messsage//
+    getMessage: build.query({
+      query: (senderId: string) => ({
+        url: `${Chat_URL}/admin/${senderId}`,
+        method: "GET",
+      }),
+      providesTags: [tagTypes.chat],
+    }),
+    // ! for getting user messsage//
+    getUserMessage: build.query({
+      query: (senderemail: string) => ({
+        url: `${Chat_URL}/${senderemail}`,
         method: "GET",
       }),
       providesTags: [tagTypes.chat],
@@ -36,16 +45,15 @@ export const ChatApi = api.injectEndpoints({
       }),
       invalidatesTags: [tagTypes.chat],
     }),
-    // ! for getting user messsage//
 
-    getMessage: build.mutation({
-      query: (data: any) => ({
-        url: `${Chat_URL}/get-message`,
-        method: "PATCH",
-        body: data.body,
-      }),
-      invalidatesTags: [tagTypes.chat],
-    }),
+    // getMessage: build.mutation({
+    //   query: (data: any) => ({
+    //     url: `${Chat_URL}/get-message`,
+    //     method: "PATCH",
+    //     body: data.body,
+    //   }),
+    //   invalidatesTags: [tagTypes.chat],
+    // }),
     // delete
     deleteChat: build.mutation({
       query: (id: string) => {
@@ -62,8 +70,10 @@ export const ChatApi = api.injectEndpoints({
 
 export const {
   useChatUsersQuery,
+  useGetMessageQuery,
   useAddChatMutation,
-  useChatQuery,
+  // useChatQuery,
   useDeleteChatMutation,
-  useGetMessageMutation,
+  // useGetMessageMutation,
+  useGetUserMessageQuery,
 } = ChatApi;
