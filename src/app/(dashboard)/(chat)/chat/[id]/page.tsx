@@ -1,4 +1,7 @@
+"use client";
 import ChatContainer from "@/components/chat/ChatContainer";
+import { useGetMessageMutation } from "@/redux/Api/ChatApi";
+import { useUserProfileQuery } from "@/redux/Api/authApi/AuthApi";
 import React from "react";
 
 export default function ChatMessagePage({
@@ -7,6 +10,12 @@ export default function ChatMessagePage({
   params: { id: string };
 }) {
   console.log(params);
+  const { data: userData } = useUserProfileQuery(null);
+  console.log("🚀 ~ file: page.tsx:13 ~ userData:", userData);
+
+  const [getMessage] = useGetMessageMutation();
+
+  const messageData = () => {};
 
   return (
     <div className="w-full flex-1 bg-blue-100">
