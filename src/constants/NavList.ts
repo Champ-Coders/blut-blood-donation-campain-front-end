@@ -21,16 +21,16 @@ export const NavList: INav[] = [
     path: "/donor-list",
     children: [
       {
-        name: "Donor List",
+        name: "Donate Now",
+        path: "/donate-now",
+      },
+      {
+        name: "Request Blood",
         path: "/donor-list",
       },
       {
-        name: "Donate List",
+        name: "Donar List",
         path: "/donate-list",
-      },
-      {
-        name: "Donate Now",
-        path: "/donate-now",
       },
     ],
   },

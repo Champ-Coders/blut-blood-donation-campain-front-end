@@ -1,65 +1,71 @@
+import { IUser } from "@/interfaces/common";
 import React from "react";
+import NoImage from "../../../public/assets/icon/userIcon.png";
+import Image from "next/image";
+import Link from "next/link";
 
-interface UserInfo {
-  address: string;
-  _id: string;
-  name: string;
-  phoneNumber: string;
-  email: string;
-  role: string;
-  bloodGroup: string;
-  dateOfBirth: string;
-  totalDonation: number;
-  totalReceived: number;
-  available: boolean;
-  __v: number;
-}
-
-type DonateListProps = {
-  data: UserInfo[];
-};
-
-const DonateList: React.FC<DonateListProps> = ({ data }) => {
+const DonateList = ({ data }: { data: IUser }) => {
   return (
-    <section>
-      <div className="common">
-        <div>
-          {/* table head */}
-          <table className="min-w-full bg-primary hover:bg-white ease-out duration-500 transition-all hover:text-[#111] font-semibold rounded shadow-2xl text-white">
-            <thead>
-              <tr>
-                <th className="p-5">Name</th>
-                <th className="p-5">Email</th>
-                <th className="p-5">Blood Group</th>
-                <th className="p-5">Phone Number</th>
-                <th className="p-5">Total Donation</th>
-                <th className="p-5">Total Received</th>
-                <th className="p-5">Availability</th>
-              </tr>
-            </thead>
-            {/* table body */}
-            <tbody>
-              {data?.map((item: UserInfo) => (
-                <tr
-                  key={item._id}
-                  className="bg-[#111] hover:bg-primary ease-out duration-500 transition-all text-center text-white shadow-lg"
-                >
-                  <td className="p-5">{item.name}</td>
-                  <td className="p-5">{item.email}</td>
-                  <td className="p-5">{item.bloodGroup}</td>
-                  <td className="p-5">{item.phoneNumber}</td>
-                  <td className="p-5">{item.totalDonation}</td>
-                  <td className="p-5">{item.totalReceived}</td>
-                  <td className="p-5">
-                    {item.available ? "Available" : "Unavailable"}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+    <div className="bg-white shadow-md border p-3 rounded-lg   text-[14px] grid md:grid-cols-4 grid-cols-2 justify-between items-center">
+      {/* profile */}
+
+      <Link
+        href={`/donate-list/${data._id}`}
+        className="flex items-center flex-col md:flex-row "
+      >
+        <Image
+          className="w-10 h-10 rounded-full mr-4"
+          src={data?.imgUrl ?? NoImage}
+          alt="Avatar of Jonathan Reinink"
+          width={40}
+          height={40}
+        />
+        <div className="text-sm flex flex-col gap-1 ">
+          <p className="text-gray-900 leading-none">{data?.name}</p>
+          <p className="text-gray-600 text-[12px] ">{data?.email}</p>
+          {/* Phone */}
+          <p className="text-gray-900 leading-none text-[12px]">
+            {data?.phoneNumber}
+          </p>
         </div>
-      </div>
-    </section>
+      </Link>
+
+      {/* Blood Group */}
+
+      <p className="text-gray-900 leading-none text-center">
+        {data?.bloodGroup}
+      </p>
+
+      {/* Available */}
+      <p className="text-gray-900 leading-none">
+        {data?.available === true ? (
+          <span className="text-green-900 text-[12px] bg-green-200 rounded-full p-2">
+            Available
+          </span>
+        ) : (
+          <span className="text-red-500 text-[12px] bg-primary/30 rounded-full p-2 ">
+            Unavailable
+          </span>
+        )}
+      </p>
+
+      {/* request for blood */}
+      {
+        // @ts-ignore
+        data?.available === true ? (
+          <Link
+            href={`/request/${data?._id}`}
+            className="bg-primary text-white px-4 py-2 rounded-md text-center"
+          >
+            Request
+          </Link>
+        ) : (
+          <button className="bg-primary/30 text-white px-4 py-2 rounded-md text-center">
+            Request
+          </button>
+        )
+      }
+    </div>
   );
 };
 
