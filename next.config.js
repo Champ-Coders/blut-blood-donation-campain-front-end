@@ -10,7 +10,9 @@ const nextConfig = {
       "giphy.com",
       "picsum.photos",
       "images.unsplash.com",
-      "assets.website-files.com"
+      "assets.website-files.com",
+      'demos.creative-tim.com',
+      'img.freepik.com'
     ],
   },
   webpack: (config) => {
