@@ -6,6 +6,7 @@ const Chat_URL = "/chat";
 
 export const ChatApi = api.injectEndpoints({
   endpoints: (build) => ({
+    // ! for getting all user of
     ChatUsers: build.query({
       query: () => {
         return {
@@ -35,10 +36,11 @@ export const ChatApi = api.injectEndpoints({
       }),
       invalidatesTags: [tagTypes.chat],
     }),
-    // update
-    updateChat: build.mutation({
+    // ! for getting user messsage//
+
+    getMessage: build.mutation({
       query: (data: any) => ({
-        url: `${Chat_URL}/${data.id}`,
+        url: `${Chat_URL}/get-message`,
         method: "PATCH",
         body: data.body,
       }),
@@ -63,5 +65,5 @@ export const {
   useAddChatMutation,
   useChatQuery,
   useDeleteChatMutation,
-  useUpdateChatMutation,
+  useGetMessageMutation,
 } = ChatApi;

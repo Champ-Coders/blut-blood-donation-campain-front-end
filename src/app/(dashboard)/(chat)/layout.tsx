@@ -9,11 +9,11 @@ export default function ChatLayout({
 }) {
   return (
     <div className="w-full">
-      <div className="flex h-screen overflow-hidden relative">
+      <div className="block lg:flex h-screen overflow-hidden relative">
         <div className="w-[100%] lg:w-1/4">
           <ChatSidebar />
         </div>
-        <div className="w-3/4">{children}</div>
+        <div className="w-full lg:w-3/4">{children}</div>
       </div>
     </div>
   );
