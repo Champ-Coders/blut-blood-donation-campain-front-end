@@ -30,6 +30,26 @@ const paginationPages = [
     id: 5,
     name: "5",
   },
+  {
+    id: 6,
+    name: "6",
+  },
+  {
+    id: 7,
+    name: "7",
+  },
+  {
+    id: 8,
+    name: "8",
+  },
+  {
+    id: 9,
+    name: "9",
+  },
+  {
+    id: 10,
+    name: "10",
+  },
 ];
 
 const bloodGroups = [
@@ -82,9 +102,10 @@ const Available = [
 const AllUsers = () => {
   const { area, district, name } = useAppSelector((state) => state.search);
   const [page, setPage] = useState<number>(1);
-  const [size, setSize] = useState<number>(10);
+  const [size, setSize] = useState<number>(5);
 
   const [searchTerm, setSearchTerm] = useState<string>("");
+
   const [bloodGroup, setBloodGroup] = useState<string | undefined>(undefined);
   const [available, setAvailable] = useState<boolean | undefined>(undefined);
 
@@ -134,7 +155,7 @@ const AllUsers = () => {
           {/* <!-- Search input --> */}
           <input
             type="text"
-            className="mb-10 block h-9 min-h-[44px] w-full rounded-md border border-solid border-[#cccccc] bg-[#f2f2f7] bg-[16px_center] bg-no-repeat py-3 pl-11 pr-4 text-sm font-bold text-[#333333] [background-size:18px] [border-bottom:1px_solid_rgb(215,_215,_221)]"
+            className="mb-10 block h-9 min-h-[44px] w-full rounded-md border border-solid border-[#cccccc] bg-[#f2f2f7] bg-[16px_center] bg-no-repeat py-3 pl-11 pr-4 text-sm font-bold text-[#333333] [background-size:18px] [border-bottom:1px_solid_rgb(215,_215,_221)] focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 "
             placeholder="Search"
             onChange={(e) => setSearchTerm(e.target.value)}
             style={{
@@ -223,7 +244,7 @@ const AllUsers = () => {
         )}
 
         {/* <!-- Pagination --> */}
-        <div className="flex justify-center items-center gap-2 mt-5">
+        <div className="flex justify-between items-center flex-wrap gap-2 mt-5">
           <button
             onClick={() => setPage(page - 1)}
             disabled={page === 1 && true}
