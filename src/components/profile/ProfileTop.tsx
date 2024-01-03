@@ -1,6 +1,5 @@
 import Image from "next/image";
 import React from "react";
-import userBg from "../../../public/assets/banner/userBg.jpg";
 import userImage from "../../../public/assets/icon/userIcon.png";
 import Link from "next/link";
 import { PhoneOutlined, MessageOutlined } from "@ant-design/icons";
