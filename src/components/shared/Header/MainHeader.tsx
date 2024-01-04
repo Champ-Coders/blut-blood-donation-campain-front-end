@@ -10,17 +10,22 @@ import React, { Fragment } from "react";
 import userIcon from "../../../../public/assets/icon/userIcon.png";
 import Logo from "../../../../public/assets/logo-light.png";
 
-import { getUserDataFromLC, logout } from "@/utils/local-storage";
+import { logout } from "@/utils/local-storage";
 import { Menu, Transition } from "@headlessui/react";
 import { message } from "antd";
 import { useRouter } from "next/navigation";
 
 import Notification from "@/components/Notification/Notification";
+import { useUserProfileQuery } from "@/redux/Api/authApi/AuthApi";
 
 const MainHeader = () => {
   const [open, setOpen] = React.useState(false);
 
-  const userInfo: any = getUserDataFromLC();
+  const { data: user } = useUserProfileQuery(undefined, {
+    refetchOnMountOrArgChange: true,
+  })
+
+  const userInfo = user?.data;
 
   // const { data } = useUserProfileQuery(null);
   // const userInfo = data?.data;
