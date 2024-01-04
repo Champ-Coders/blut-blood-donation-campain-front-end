@@ -4,13 +4,10 @@ import Breadcrumb from "@/components/UI/BreadCrumb";
 import Table from "@/components/UI/Table";
 import dayjs from "dayjs";
 
-import { Button, Input, Popconfirm, message } from "antd";
+import { Input } from "antd";
 import { useState } from "react";
 import { useDebounced } from "@/redux/app/hook";
-import {
-  useAcceptRequestMutation,
-  useGetAllRequestQuery,
-} from "@/redux/Api/donationApi/DonationApi";
+import { useGetAllRequestHistoryQuery } from "@/redux/Api/donationApi/DonationApi";
 
 const AllUsers = () => {
   const [page, setPage] = useState<number>(1);
@@ -18,27 +15,24 @@ const AllUsers = () => {
   const [sortBy, setSortBy] = useState<string>("");
   const [sortOrder, setSortOrder] = useState<string>("");
   const [searchTerm, setSearchTerm] = useState<string>("");
-
   const query: Record<string, any> = {};
 
   query["limit"] = size;
   query["page"] = page;
   query["sortBy"] = sortBy;
   query["sortOrder"] = sortOrder;
-  query.status = "pending";
+
   const debouncedSearchTerm = useDebounced({
     searchQuery: searchTerm,
     delay: 400,
   });
+
   if (!!debouncedSearchTerm) {
     query["searchTerm"] = debouncedSearchTerm;
   }
 
   // query and mutation
-  const { data: donation, isLoading } = useGetAllRequestQuery(undefined);
-  const [acceptRequest, { isLoading: acceptLoading }] =
-    useAcceptRequestMutation(undefined);
-
+  const { data: donation, isLoading } = useGetAllRequestHistoryQuery(undefined);
   const meta = donation?.meta;
 
   // filter Blog by name and title
@@ -59,17 +53,6 @@ const AllUsers = () => {
     const { order, field } = sorter;
     setSortBy(field as string);
     setSortOrder(order === "ascend" ? "asc" : "desc");
-  };
-
-  const accept = async (id: string) => {
-    const res: any = await acceptRequest(id);
-    if (res?.data?.statusCode == 200) {
-      message.success(
-        `${res?.data?.data?.name} is now ${res?.data?.data?.role}.`
-      );
-    } else {
-      message.error(res?.error?.data?.message);
-    }
   };
 
   const columns: any[] = [
@@ -154,29 +137,6 @@ const AllUsers = () => {
         );
       },
     },
-    {
-      title: "Action",
-      dataIndex: "_id",
-      render: function (data: any) {
-        return (
-          <Popconfirm
-            title="Change role"
-            description="Are you sure to change the role?"
-            okText="Yes"
-            cancelText="No"
-            onConfirm={() => accept(data)}
-            onCancel={() => message.error("Cancel request...")}
-          >
-            <Button
-              loading={acceptLoading}
-              className="w-full rounded-md bg-primary hover:bg-black px-2 py-1 text-sm font-semibold text-white shadow-sm  focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary   hover:text-white transition duration-300 ease-in-out"
-            >
-              Accept
-            </Button>
-          </Popconfirm>
-        );
-      },
-    },
   ];
   return (
     <div>
@@ -189,7 +149,7 @@ const AllUsers = () => {
         ]}
       />
 
-      <ActionBar title="Pending Donation Request">
+      <ActionBar title="My Donation">
         <Input
           type="text"
           allowClear
