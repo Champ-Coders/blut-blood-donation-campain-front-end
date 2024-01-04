@@ -11,13 +11,15 @@ import { useForm } from "react-hook-form";
 import TextAreaField from "@/components/TextAreaField/TextAreaField";
 import {
   useDeleteReviewMutation,
-  useGetReviewsByUserIdQuery,
   useUpdateReviewMutation,
 } from "@/redux/Api/reviewApi";
 import MultiSelect from "@/components/MultiSelector/MultiSelector";
 import { useServicesQuery } from "@/redux/Api/serviceApi";
 import { getUserDataFromLC } from "@/utils/local-storage";
-import { useGetCommentsByUserIdQuery } from "@/redux/Api/blogCommentApi/blogCommentApi";
+import {
+  useDeleteBlogCommentMutation,
+  useGetCommentsByUserIdQuery,
+} from "@/redux/Api/blogCommentApi/blogCommentApi";
 
 const UserReview = () => {
   const [searchText, setSearchText] = useState<string>("");
@@ -49,13 +51,17 @@ const UserReview = () => {
   const user = getUserDataFromLC();
   const [updateReview, { isLoading: updateLoading }] =
     useUpdateReviewMutation();
-  const [deleteReview, { isLoading: deleteLoading }] =
-    useDeleteReviewMutation();
-  const { data: comments } = useGetCommentsByUserIdQuery(user?.id as string);
-  console.log("🚀 ~ file: page.tsx:55 ~ UserReview ~ comments:", comments);
+  // delete comments
+  const [deleteBlogComment, { isLoading: deleteLoading }] =
+    useDeleteBlogCommentMutation();
+
+  // get review by user id
+  const { data: comments, isLoading } = useGetCommentsByUserIdQuery(
+    user?.id as string
+  );
 
   // filter review by review, service titlee, user name
-  const filteredReviewData = comments?.data?.filter((review: any) => {
+  const filteredCommentsData = comments?.data?.filter((review: any) => {
     const lowercaseSearchText = searchText.toLowerCase();
     return (
       review?.comments?.toLowerCase().includes(lowercaseSearchText) ||
@@ -64,12 +70,12 @@ const UserReview = () => {
     );
   });
 
-  // Delete Review
+  // Delete comments
   const deleteHandler = async (id: string) => {
     try {
-      const res = await deleteReview(id);
+      const res = await deleteBlogComment(id);
       if (res) {
-        message.success("Review Deleted successfully");
+        message.success("Comments Deleted successfully");
       }
     } catch (err: any) {
       message.error(err.message);
@@ -101,20 +107,16 @@ const UserReview = () => {
 
   const columns: any[] = [
     {
-      title: "Review",
-      dataIndex: "review",
+      title: "Comments",
+      dataIndex: "comments",
     },
     {
-      title: "Rating",
-      dataIndex: "rating",
-    },
-    {
-      title: "Service",
-      dataIndex: ["service", "title"],
+      title: "Blog",
+      dataIndex: ["blogId", "title"],
     },
     {
       title: "User",
-      dataIndex: ["user", "name"],
+      dataIndex: ["userId", "name"],
     },
     {
       title: "CreatedAt",
@@ -126,7 +128,7 @@ const UserReview = () => {
     {
       title: "Action",
       render: function (data: any) {
-        const selectedReview = filteredReviewData.find(
+        const selectedReview = filteredCommentsData.find(
           (blog: any) => blog.id === data.id
         );
         return (
@@ -154,8 +156,8 @@ const UserReview = () => {
 
             <Popconfirm
               placement="topLeft"
-              title="Delete the Review"
-              description="Are you sure to delete this review?"
+              title="Delete the Comments"
+              description="Are you sure to delete this Comments?"
               onConfirm={() => deleteHandler(data?.id)}
               okText="Yes"
               cancelText="No"
@@ -191,7 +193,11 @@ const UserReview = () => {
           className="max-w-sm mr-4"
         />
       </ActionBar>
-      <Table columns={columns} dataSource={filteredReviewData} />
+      <Table
+        columns={columns}
+        dataSource={filteredCommentsData}
+        loading={isLoading}
+      />
 
       {/* Edit Modal */}
       <Modal
