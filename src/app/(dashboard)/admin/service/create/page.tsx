@@ -6,10 +6,11 @@ import ActionBar from "@/components/UI/ActionBar";
 import Breadcrumb from "@/components/UI/BreadCrumb";
 import UploaderImage from "@/components/Uploader/UploaderImage";
 import { useAddServiceMutation } from "@/redux/Api/serviceApi";
-import { getUserDataFromLC } from "@/utils/local-storage";
+
 import { Button, message } from "antd";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { useUserProfileQuery } from "@/redux/Api/authApi/AuthApi";
 const ReactQuillText = dynamic(
   () => import("@/components/ReactQuill/ReactQuill"),
   {
@@ -18,7 +19,11 @@ const ReactQuillText = dynamic(
 );
 
 const CreateService = () => {
-  const userData = getUserDataFromLC() as any;
+  const { data:userInfo, } = useUserProfileQuery(undefined, {
+    refetchOnMountOrArgChange: true,
+  });
+
+  const userData = userInfo?.data
   const [addService] = useAddServiceMutation();
 
   const [description, setDescription] = useState("");
