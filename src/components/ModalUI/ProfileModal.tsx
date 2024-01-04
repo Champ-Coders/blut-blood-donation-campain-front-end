@@ -48,8 +48,8 @@ const ProfileUpdateModalUI = ({
   const [userUpdateProfile] = useUserUpdateProfileMutation();
 
   const onSubmit = async (data: any) => {
-    console.log(data);
     const updateData = {
+      imgUrl: data?.imgUrl || editUser.imgUrl,
       name: data.name || editUser.name,
       email: data?.email || editUser.email,
       address: data?.address || editUser.address,
@@ -63,7 +63,7 @@ const ProfileUpdateModalUI = ({
     message.loading("Updating User.....");
     try {
       const res = await userUpdateProfile(updateData).unwrap();
-      console.log(res,"response");
+      console.log(res, "response");
       if (res?.success) {
         message.success("User updated successfully");
         setIsModalOpen(false);
@@ -83,7 +83,6 @@ const ProfileUpdateModalUI = ({
         message.error("Could not update the User");
       }
     }
-
   };
 
   //   console.log(editUser);
@@ -99,6 +98,13 @@ const ProfileUpdateModalUI = ({
     >
       <form className="block w-full" onSubmit={handleSubmit(onSubmit)}>
         <div className="w-full mb-3 sm:mb-6">
+          <div className="my-[10px] md:max-w-md mx-0">
+            <UploaderImage
+              name="imgUrl"
+              setValue={setValue}
+              defaultValue={editUser?.imgUrl}
+            />
+          </div>
           {/* nmae */}
           <div className="flex ">
             <InputField

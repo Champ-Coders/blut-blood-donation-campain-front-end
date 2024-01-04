@@ -32,14 +32,7 @@ const PersonalInfo = ({ userData }: { userData: IUser }) => {
             className="mr-[6px]"
             onClick={() => {
               setUserId(userData._id);
-              setEditUser({
-                name: userData.name,
-                email: userData?.email,
-                address: userData?.address,
-                phoneNumber: userData?.phoneNumber,
-                dateOfBirth: userData?.dateOfBirth,
-                bloodGroup: userData?.bloodGroup,
-              });
+              setEditUser(userData);
 
               setIsModalOpen(true);
             }}

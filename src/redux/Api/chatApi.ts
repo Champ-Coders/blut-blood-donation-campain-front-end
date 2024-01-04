@@ -12,6 +12,9 @@ export const ChatApi = api.injectEndpoints({
         return {
           url: `${Chat_URL}/all-user`,
           method: "GET",
+          headers: {
+            Authorization: `${getFromLocalStorage("user")}`,
+          },
         };
       },
       providesTags: [tagTypes.chat],
@@ -22,6 +25,9 @@ export const ChatApi = api.injectEndpoints({
       query: (senderId: string) => ({
         url: `${Chat_URL}/admin/${senderId}`,
         method: "GET",
+        headers: {
+          Authorization: `${getFromLocalStorage("user")}`,
+        },
       }),
       providesTags: [tagTypes.chat],
     }),
@@ -30,6 +36,9 @@ export const ChatApi = api.injectEndpoints({
       query: (senderemail: string) => ({
         url: `${Chat_URL}/${senderemail}`,
         method: "GET",
+        headers: {
+          Authorization: `${getFromLocalStorage("user")}`,
+        },
       }),
       providesTags: [tagTypes.chat],
     }),
@@ -37,6 +46,18 @@ export const ChatApi = api.injectEndpoints({
     addChat: build.mutation({
       query: (data: any) => ({
         url: `${Chat_URL}`,
+        method: "POST",
+        body: data,
+        headers: {
+          Authorization: `${getFromLocalStorage("user")}`,
+        },
+      }),
+      invalidatesTags: [tagTypes.chat],
+    }),
+    // ! for refresh chat
+    refreshChat: build.mutation({
+      query: (data: any) => ({
+        url: `${Chat_URL}/refresh`,
         method: "POST",
         body: data,
         headers: {
@@ -61,6 +82,9 @@ export const ChatApi = api.injectEndpoints({
         return {
           url: `${Chat_URL}/${id}`,
           method: "DELETE",
+          headers: {
+            Authorization: `${getFromLocalStorage("user")}`,
+          },
         };
       },
       invalidatesTags: [tagTypes.chat],
@@ -76,4 +100,5 @@ export const {
   useDeleteChatMutation,
   // useGetMessageMutation,
   useGetUserMessageQuery,
+  useRefreshChatMutation,
 } = ChatApi;

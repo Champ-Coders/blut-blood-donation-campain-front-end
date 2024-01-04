@@ -128,15 +128,15 @@ export type IVolunteers = {
 };
 
 export type IBlog = {
-  id: string;
+  _id: string;
   title: string;
   description: string;
   image: StaticImageData;
   user: IUser;
-  link: string;
+  link?: string;
   createdAt: string;
   updatedAt: string;
-  Comments: IComments[];
+  comments?: IComments[];
 };
 
 export type IComments = {

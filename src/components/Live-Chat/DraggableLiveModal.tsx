@@ -3,29 +3,37 @@
 "use client";
 
 import { ILiveChat } from "@/constants/ILiveChat";
+import { api } from "@/redux/Api/api";
 import { useUserProfileQuery } from "@/redux/Api/authApi/AuthApi";
-import { useGetUserMessageQuery } from "@/redux/Api/chatApi";
+import {
+  useGetUserMessageQuery,
+  useRefreshChatMutation,
+} from "@/redux/Api/chatApi";
 import socket from "@/socket/socket";
 
-// import { socket } from "@/socket";
 import { message } from "antd";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { FaRegMessage } from "react-icons/fa6";
 import InputEmoji from "react-input-emoji";
+import { useDispatch } from "react-redux";
+import ChatSkelleton from "../skeleton/ChatSkeleton";
+import userIcon from "../../../public/assets/icon/userIcon.png";
 
 const DraggableLiveModal = () => {
   const { data } = useUserProfileQuery(null);
   const userInfo = data?.data;
 
   const { register, handleSubmit, reset, setValue } = useForm();
-
+  const dispatch = useDispatch();
   const {
     data: MessageData,
     refetch,
     isLoading,
   } = useGetUserMessageQuery(userInfo?.email);
+
+  const [refreshChat] = useRefreshChatMutation();
   // console.log("🚀 ~MessageData:", MessageData);
 
   const [chatMessages, setChatMessages] = React.useState<any>(
@@ -36,40 +44,46 @@ const DraggableLiveModal = () => {
 
     if (!userInfo) {
       return message.error("Please login first");
+    } else {
+      const newMessage = {
+        // id: chatMessages.length + 1,
+        message: data.message,
+        time: new Date().toLocaleTimeString(),
+        img: userInfo?.imgUrl || "",
+        status: "online",
+        types: "comment",
+        email: userInfo?.email,
+        _id: userInfo?._id,
+      };
+      // console.log(newMessage);
+      socket.emit("send-message", newMessage);
+      socket.on("update-message", (data) => {
+        // console.log("uuuuu", data);
+        refreshChat(data);
+        reset();
+      });
     }
-    const newMessage = {
-      // id: chatMessages.length + 1,
-      message: data.message,
-      time: new Date().toLocaleTimeString(),
-      img: userInfo?.imgUrl || "",
-      status: "online",
-      types: "comment",
-      email: userInfo?.email,
-      _id: userInfo?._id,
-    };
-    // console.log(newMessage);
-    socket.emit("send-message", newMessage);
-    socket.on("update-message", (data) => {
-      // console.log("uuuuu", data);
-      reset();
-    });
   };
 
   const scroll = React.useRef<HTMLDivElement>(null);
 
-  // always scroll to bottom when new message added
+  //!  always scroll to bottom when new message added
   useEffect(() => {
-
     setChatMessages(MessageData?.data);
     socket.on("update-message", (data) => {
-      console.log("uuuuuuuuuuuuuuuuuuuu", data);
+      ///! for refresh and update message
+      // console.log("uuuuuuuuuuuuuuuuuuuu", data);
       scroll.current?.scrollIntoView({ behavior: "smooth" });
       setChatMessages(MessageData?.data);
-      refetch();
+      refreshChat(data);
+      // refetch();
+      //  dispatch(
+      //   api.endpoints.getUserMessage.ini
+      //  )
     });
-  }, [refetch, MessageData]);
+  }, [refetch, MessageData, dispatch, refreshChat]);
 
-  // console.log(chatMessages);
+  // console.log('messageData',chatMessages)
   return (
     <div>
       <div className="flex-1 p-2 justify-between flex flex-col h-[500px]">
@@ -83,7 +97,9 @@ const DraggableLiveModal = () => {
                 </svg>
               </span>
               <Image
-                src={"https://i.ibb.co/YcjhGgs/IMG-20231111-142014-1.jpg"}
+                src={
+                  "https://i.ibb.co/7xDVRjP/3d-illustration-businessman-with-headphone-blurred-background-business-concept.jpg"
+                }
                 alt="Live Chat"
                 width={4000}
                 height={4000}
@@ -92,12 +108,10 @@ const DraggableLiveModal = () => {
             </div>
             <div className="flex flex-col leading-tight">
               <div className="text-2xl mt-1 flex items-center">
-                <span className="text-gray-700 mr-3 text-[18px]">
-                  Md Mahafujur Rahaman
-                </span>
+                <span className="text-gray-700 mr-3 text-[18px]">Mr. Joe</span>
               </div>
               <span className="text-[12px] text-gray-600">
-                MERN Stack Developer
+                Coperative Officer
               </span>
             </div>
           </div>
@@ -166,13 +180,11 @@ const DraggableLiveModal = () => {
           id="messages"
           className="flex flex-col space-y-4 p-3 overflow-y-auto scrollbar-thumb-blue scrollbar-thumb-rounded scrollbar-track-blue-lighter scrollbar-w-2 scrolling-touch "
         >
-          {isLoading && <h2>Loadiing chat...........</h2>}
+          {isLoading || (chatMessages?.length < 1 && <ChatSkelleton />)}
           {
             // chatMessages
             //   ?.sort((a: any, b: any) => a.updatedAt - b.updatedAt)
             chatMessages?.map((liveChat: ILiveChat) => {
-            
-
               return (
                 <div ref={scroll} key={liveChat?._id} className="chat-message">
                   <div
@@ -204,7 +216,11 @@ const DraggableLiveModal = () => {
                     <Image
                       height={50}
                       width={50}
-                      src={"https://i.ibb.co/YcjhGgs/IMG-20231111-142014-1.jpg"}
+                      src={
+                        liveChat?.types === "reply"
+                          ? "https://i.ibb.co/7xDVRjP/3d-illustration-businessman-with-headphone-blurred-background-business-concept.jpg"
+                          : userIcon
+                      }
                       alt="My profile"
                       className={`w-6 h-6 rounded-full ${
                         liveChat?.types !== "reply" ? "order-1" : "  order-2"

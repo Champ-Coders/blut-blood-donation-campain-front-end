@@ -1,3 +1,4 @@
+import config from "@/config/config";
 import { io } from "socket.io-client";
 
 // const user = {
@@ -6,14 +7,9 @@ import { io } from "socket.io-client";
 //   name: "Sarwar Hossain",
 // };
 
-const socket = io("http://localhost:5000", {
+const socket = io(config.socketServerURL, {
   transports: ["websocket", "polling"],
   // query: { user: JSON.stringify(user) }, // Serialize user data here
-})
-
+});
 
 export default socket;
-
-
-
-

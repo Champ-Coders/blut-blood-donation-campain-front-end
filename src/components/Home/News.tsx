@@ -1,6 +1,6 @@
 import React from "react";
 import NewsCard from "../NewsCard/NewsCard";
-import { IOurNews } from "@/interfaces/common";
+import { IBlog } from "@/interfaces/common";
 import Link from "next/link";
 import { useBlogsQuery } from "@/redux/Api/blogApi";
 
@@ -42,7 +42,7 @@ const News = async () => {
           </div>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 mt-[100px]">
-          {ourNews?.data?.slice(0, 3).map((news: IOurNews) => {
+          {ourNews?.data?.slice(0, 3).map((news: IBlog) => {
             return <NewsCard news={news} key={news._id} />;
           })}
         </div>
