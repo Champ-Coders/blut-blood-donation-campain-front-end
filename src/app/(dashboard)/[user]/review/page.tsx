@@ -52,7 +52,9 @@ const UserReview = () => {
     useUpdateReviewMutation();
   const [deleteReview, { isLoading: deleteLoading }] =
     useDeleteReviewMutation();
-  const { data: reviews } = useGetReviewsByUserIdQuery(user?.id as string);
+  const { data: reviews, isLoading } = useGetReviewsByUserIdQuery(
+    user?.id as string
+  );
 
   // filter review by review, service titlee, user name
   const filteredReviewData = reviews?.data?.filter((review: any) => {
@@ -196,7 +198,11 @@ const UserReview = () => {
           </Link>
         </div> */}
       </ActionBar>
-      <Table columns={columns} dataSource={filteredReviewData} />
+      <Table
+        columns={columns}
+        dataSource={filteredReviewData}
+        loading={isLoading}
+      />
 
       {/* Edit Modal */}
       <Modal
