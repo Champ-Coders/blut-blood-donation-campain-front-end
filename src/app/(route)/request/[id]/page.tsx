@@ -5,9 +5,9 @@ import MultiSelect from "@/components/MultiSelector/MultiSelector";
 import TextAreaField from "@/components/TextAreaField/TextAreaField";
 import { blood_groups } from "@/constants/Register";
 import { IUser } from "@/interfaces/common";
-import { useGetSingleUserQuery } from "@/redux/Api/authApi/AuthApi";
+import { useGetSingleUserQuery, useUserProfileQuery } from "@/redux/Api/authApi/AuthApi";
 import { useRequestForBloodMutation } from "@/redux/Api/donationApi/DonationApi";
-import { getUserDataFromLC } from "@/utils/local-storage";
+
 import { message } from "antd";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
@@ -24,7 +24,11 @@ const DonateNow = ({ params }: { params: { id: string } }) => {
 
   const { data, isLoading } = useGetSingleUserQuery(params.id);
 
-  const user = getUserDataFromLC();
+  const { data:userInfo, } = useUserProfileQuery(undefined, {
+    refetchOnMountOrArgChange: true,
+  });
+
+  const user = userInfo?.data
 
   const userData: IUser = data?.data;
 

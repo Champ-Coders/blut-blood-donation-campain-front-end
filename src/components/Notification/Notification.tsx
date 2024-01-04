@@ -2,17 +2,22 @@
 /* eslint-disable @next/next/no-img-element */
 
 import { useNotificationsQuery } from "@/redux/Api/notificationApi";
-import { getUserDataFromLC } from "@/utils/local-storage";
+
 import { Badge } from "antd";
 import Link from "next/link";
 import React from "react";
 import { FaRegBell } from "react-icons/fa";
 import Popovers from "../Popover/Popover";
+import { useUserProfileQuery } from "@/redux/Api/authApi/AuthApi";
 
 const Notification = () => {
   // const {userId} =
 
-  const userInfo: any = getUserDataFromLC();
+  const { data:user, } = useUserProfileQuery(undefined, {
+    refetchOnMountOrArgChange: true,
+  });
+
+  const userInfo = user?.data
 
   const [isOpenNotification, setIsOpenNotification] = React.useState(false);
   const { data, isLoading } = useNotificationsQuery({});
