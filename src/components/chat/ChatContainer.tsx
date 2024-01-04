@@ -42,12 +42,12 @@ export default function ChatContainer({ senderId }: { senderId: string }) {
       email: userInfo?.data.email,
       _id: senderId,
     };
-    console.log(
-      "🚀 ~ file: ChatContainer.tsx:12 ~ onSubmit ~ data:",
-      data,
-      "and",
-      replyMessage
-    );
+    // console.log(
+    //   "🚀 ~ file: ChatContainer.tsx:12 ~ onSubmit ~ data:",
+    //   data,
+    //   "and",
+    //   replyMessage
+    // );
     socket.emit("send-message", replyMessage);
     reset();
     refreshChat(replyMessage);
@@ -57,7 +57,7 @@ export default function ChatContainer({ senderId }: { senderId: string }) {
     socket.on("update-message", (data) => {
       // scroll.current?.scrollIntoView({ behavior: "smooth" });
       // console.log("uuuuuuuuuuuuuuuuuuuu", data);
-      refetch();
+      // refetch();
       refreshChat(data);
     });
   }, [refetch, refreshChat]);
