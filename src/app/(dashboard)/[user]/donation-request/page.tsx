@@ -3,150 +3,179 @@ import ActionBar from "@/components/UI/ActionBar";
 import Breadcrumb from "@/components/UI/BreadCrumb";
 import Table from "@/components/UI/Table";
 import dayjs from "dayjs";
-import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
-import { Button, Input, Modal, Popconfirm, Rate, message } from "antd";
-import Link from "next/link";
+
+import { Button, Input, Popconfirm, message } from "antd";
 import { useState } from "react";
-import { useForm } from "react-hook-form";
-import InputField from "@/components/InputField/InputField";
-import TextAreaField from "@/components/TextAreaField/TextAreaField";
+import { useDebounced } from "@/redux/app/hook";
+import { useGetAllDonationInfoQuery } from "@/redux/Api/AuthApi";
 import {
-  useDeleteReviewMutation,
-  useGetReviewsByUserIdQuery,
-  useReviewsQuery,
-  useUpdateReviewMutation,
-} from "@/redux/Api/reviewApi";
-import MultiSelect from "@/components/MultiSelector/MultiSelector";
-import { useServicesQuery } from "@/redux/Api/serviceApi";
-import { getUserDataFromLC } from "@/utils/local-storage";
-import {
+  useAcceptRequestByAdminMutation,
+  useAcceptRequestMutation,
   useGetAllRequestQuery,
-  useGetDataQuery,
-  useRequestForBloodMutation,
 } from "@/redux/Api/donationApi/DonationApi";
 
-const DonationRequest = () => {
-  const [searchText, setSearchText] = useState<string>("");
-  const [requestId, setRequestId] = useState<string>("");
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [editRequest, setEditRequest] = useState({
-    userId: "",
-    patientDetails: "",
-    bloodGroup: "",
-    expectedDate: "",
-    bag: 0,
-    status: "",
+const AllUsers = () => {
+  const [page, setPage] = useState<number>(1);
+  const [size, setSize] = useState<number>(5);
+  const [sortBy, setSortBy] = useState<string>("");
+  const [sortOrder, setSortOrder] = useState<string>("");
+  const [searchTerm, setSearchTerm] = useState<string>("");
+
+  const query: Record<string, any> = {};
+
+  query["limit"] = size;
+  query["page"] = page;
+  query["sortBy"] = sortBy;
+  query["sortOrder"] = sortOrder;
+  query.status = "pending";
+  const debouncedSearchTerm = useDebounced({
+    searchQuery: searchTerm,
+    delay: 400,
   });
-
-  const { data: allRequest } = useGetAllRequestQuery(undefined);
-  const {
-    handleSubmit,
-    register,
-    setValue,
-    reset,
-    formState: { errors },
-  } = useForm();
-
-  //   service option
-  const requestOptions = allRequest?.data?.map((req: any) => ({
-    value: req.id,
-    label: req.title,
-  }));
+  if (!!debouncedSearchTerm) {
+    query["searchTerm"] = debouncedSearchTerm;
+  }
 
   // query and mutation
-  const user = getUserDataFromLC();
-  const [requestForBlood, { isLoading: updateLoading }] =
-    useRequestForBloodMutation();
+  const { data: donation, isLoading } = useGetAllRequestQuery(undefined);
+  const [acceptRequest, { isLoading: acceptLoading }] =
+    useAcceptRequestMutation(undefined);
 
-  const { data: allData } = useGetDataQuery({}, {});
+  const meta = donation?.meta;
 
-  // filter review by review, service titlee, user name
-  const testFindData = allData?.data?.filter((review: any) => {
-    const lowercaseSearchText = searchText.toLowerCase();
+  // filter Blog by name and title
+  const filteredBlogData = donation?.data?.filter((blood: any) => {
+    const lowercaseSearchText = searchTerm.toLowerCase();
     return (
-      review?.review?.toLowerCase().includes(lowercaseSearchText) ||
-      review?.user?.name?.toLowerCase().includes(lowercaseSearchText) ||
-      review?.service?.title?.toLowerCase().includes(lowercaseSearchText)
+      blood?.userId?.name?.toLowerCase().includes(lowercaseSearchText) ||
+      blood?.bloodGroup?.toLowerCase().includes(lowercaseSearchText)
     );
   });
 
-  // Request Edit function
-  const onSubmit = async (data: any) => {
-    const updateData = {
-      review: data.review,
-      rating: Number(data.rating),
-      service: data.service.id,
-    };
-    message.loading("Update Donation Request.....");
-    try {
-      const res = await requestForBlood({
-        id: requestId,
-        body: { ...updateData },
-      }).unwrap();
-      if (res) {
-        message.success("Donation Request Update successfully");
-        setIsModalOpen(false);
-      }
-    } catch (err: any) {
-      message.error(err.message);
+  const onPaginationChange = (page: number, pageSize: number) => {
+    setPage(page);
+    setSize(pageSize);
+  };
+
+  const onTableChange = (pagination: any, filter: any, sorter: any) => {
+    const { order, field } = sorter;
+    setSortBy(field as string);
+    setSortOrder(order === "ascend" ? "asc" : "desc");
+  };
+
+  const accept = async (id: string) => {
+    const res: any = await acceptRequest(id);
+    if (res?.data?.statusCode == 200) {
+      message.success(
+        `${res?.data?.data?.name} is now ${res?.data?.data?.role}.`
+      );
+    } else {
+      message.error(res?.error?.data?.message);
     }
-    reset();
   };
 
   const columns: any[] = [
     {
-      title: "User Name",
-      dataIndex: "userName",
-    },
-    {
-      title: "Patient Details",
-      dataIndex: "patientDetails",
+      title: "Donor Name",
+      dataIndex: "donnerId",
+      render: function (data: any) {
+        return data?.name;
+      },
     },
     {
       title: "Blood Group",
       dataIndex: "bloodGroup",
+      sorter: (a: any, b: any) => a.bloodGroup - b.bloodGroup,
     },
-
     {
-      title: "Expected Date",
+      title: "Last Donation Date",
+      dataIndex: "donnerId",
+      render: function (data: any) {
+        if (data) {
+          return dayjs(data?.lastDonation).format("MMM D, YYYY");
+        }
+        return "Not Donate Yet";
+      },
+    },
+    {
+      title: "Total Donation",
+      dataIndex: "donnerId",
+      render: function (data: any) {
+        return data?.totalDonation;
+      },
+    },
+    {
+      title: "Expect Date",
       dataIndex: "expectedDate",
       render: function (data: any) {
-        return data && dayjs(data).format("MMM D, YYYY hh:mm A");
+        return data && dayjs(data).format("MMM D, YYYY");
       },
     },
     {
-      title: "CreatedAt",
-      dataIndex: "createdAt",
+      title: "Requestor",
+      dataIndex: "userId",
       render: function (data: any) {
-        return data && dayjs(data).format("MMM D, YYYY hh:mm A");
+        return data?.name;
       },
     },
     {
-      title: "Blood Bag",
-      dataIndex: "bag",
+      title: "Received by Requestor",
+      dataIndex: "userId",
+      render: function (data: any) {
+        return data?.totalReceived;
+      },
     },
-
+    {
+      title: "Details",
+      dataIndex: "patientDetails",
+    },
+    {
+      title: "Status",
+      dataIndex: "status",
+      sorter: (a: any, b: any) => a.status - b.status,
+      render: function (data: any) {
+        if (data === "pending") {
+          return (
+            <p className="bg-blue-300 text-blue-600 rounded-xl text-center">
+              Pending
+            </p>
+          );
+        } else if (data === "accept") {
+          return (
+            <p className="bg-green-300 text-green-600 rounded-xl text-center">
+              Accept
+            </p>
+          );
+        }
+        return (
+          <p>
+            <p className=" bg-red-300 text-red-600 rounded-xl text-center">
+              Canceled
+            </p>
+          </p>
+        );
+      },
+    },
     {
       title: "Action",
+      dataIndex: "_id",
       render: function (data: any) {
-        const selectedReview = testFindData.find(
-          (blog: any) => blog.id === data.id
-        );
         return (
-          <>
+          <Popconfirm
+            title="Change role"
+            description="Are you sure to change the role?"
+            okText="Yes"
+            cancelText="No"
+            onConfirm={() => accept(data)}
+            onCancel={() => message.error("Cancel request...")}
+          >
             <Button
-              loading={updateLoading}
-              className="mr-[6px]"
-              onClick={() => {
-                setRequestId(selectedReview.id);
-                setEditRequest({});
-                setIsModalOpen(true);
-              }}
-              type="default"
+              loading={acceptLoading}
+              className="w-full rounded-md bg-primary hover:bg-black px-2 py-1 text-sm font-semibold text-white shadow-sm  focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary   hover:text-white transition duration-300 ease-in-out"
             >
-              <EditOutlined />
+              Accept
             </Button>
-          </>
+          </Popconfirm>
         );
       },
     },
@@ -162,79 +191,29 @@ const DonationRequest = () => {
         ]}
       />
 
-      <ActionBar title="Donation Request">
+      <ActionBar title="Pending Donation Request">
         <Input
           type="text"
           allowClear
           size="middle"
           placeholder="Search..."
-          onChange={(e) => setSearchText(e.target.value)}
-          value={searchText}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          value={searchTerm}
           className="max-w-sm mr-4"
         />
-        {/* <div>
-          <Link href="/admin/review/create">
-            <Button type="default">Create</Button>
-          </Link>
-        </div> */}
       </ActionBar>
-      <Table columns={columns} dataSource={testFindData} />
-
-      {/* Edit Modal */}
-      <Modal
-        title="Edit Review"
-        open={isModalOpen}
-        onOk={() => setIsModalOpen(false)}
-        onCancel={() => setIsModalOpen(false)}
-        footer={null}
-        centered
-      >
-        <form className="block w-full" onSubmit={handleSubmit(onSubmit)}>
-          <div className="w-full">
-            {/* <div className="my-[10px] mx-0">
-              <InputField
-                name="rating"
-                label="Rating"
-                type="text"
-                defaultValue={editRequest?.rating}
-                register={register}
-                errors={errors}
-              />
-            </div> */}
-
-            <div className="my-[10px]  md:max-w-md mx-0">
-              {/*   <MultiSelect
-                label="Select Service"
-                name="service"
-                options={requestOptions}
-                isMulti={false}
-                defaultValue={editRequest.service}
-                required={false}
-                setValue={setValue}
-              /> */}
-            </div>
-            <div className="my-[10px] mx-0">
-              {/*  <TextAreaField
-                name="review"
-                register={register}
-                errors={errors}
-                defaultValue={editRequest?.}
-                label="review"
-                rows={4}
-              /> */}
-            </div>
-          </div>
-          <Button
-            loading={updateLoading}
-            className="mt-2"
-            type="primary"
-            htmlType="submit"
-          >
-            Update Request
-          </Button>
-        </form>
-      </Modal>
+      <Table
+        columns={columns}
+        dataSource={filteredBlogData}
+        loading={isLoading}
+        pageSize={size}
+        totalPages={meta?.total}
+        showSizeChanger={true}
+        onPaginationChange={onPaginationChange}
+        onTableChange={onTableChange}
+        showPagination={true}
+      />
     </div>
   );
 };
-export default DonationRequest;
+export default AllUsers;
