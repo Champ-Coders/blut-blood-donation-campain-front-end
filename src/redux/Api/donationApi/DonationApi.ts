@@ -43,6 +43,42 @@ export const donationAPi = api.injectEndpoints({
       }),
       invalidatesTags: [tagTypes.donation],
     }),
+
+    // get all request history
+    getAllRequestHistory: build.query({
+      query: () => ({
+        url: `${DONATION_URL}/history`,
+        method: "GET",
+        headers: {
+          Authorization: `${getFromLocalStorage("user")}`,
+        },
+      }),
+      providesTags: [tagTypes.donation],
+    }),
+
+    // get all request
+    getAllRequest: build.query({
+      query: () => ({
+        url: `${DONATION_URL}/request`,
+        method: "GET",
+        headers: {
+          Authorization: `${getFromLocalStorage("user")}`,
+        },
+      }),
+      providesTags: [tagTypes.donation],
+    }),
+
+    // delete request
+    getData: build.query({
+      query: () => ({
+        url: `${DONATION_URL}`,
+        method: "GET",
+        headers: {
+          Authorization: `${getFromLocalStorage("user")}`,
+        },
+      }),
+      providesTags: [tagTypes.donation],
+    }),
   }),
 });
 
@@ -50,4 +86,7 @@ export const {
   useAcceptRequestByAdminMutation,
   useRequestForDonateMutation,
   useRequestForBloodMutation,
+  useGetAllRequestHistoryQuery,
+  useGetAllRequestQuery,
+  useGetDataQuery,
 } = donationAPi;
