@@ -30,6 +30,19 @@ export const donationAPi = api.injectEndpoints({
       }),
       invalidatesTags: [tagTypes.blogComment, tagTypes.blog],
     }),
+    // update blog comment
+    updateBlogComment: build.mutation({
+      query: (data: { id: string; comments: string }) => ({
+        url: `${BLOG_COMMENT_URL}/${data.id}`,
+        method: "PATCH",
+        body: data,
+        headers: {
+          Authorization: `${getFromLocalStorage("user")}`,
+        },
+      }),
+      invalidatesTags: [tagTypes.blogComment, tagTypes.blog],
+    }),
+
     // get comments by user id
     getCommentsByUserId: build.query({
       query: (id) => ({
@@ -45,4 +58,5 @@ export const {
   useDeleteBlogCommentMutation,
   useCreateBlogCommentMutation,
   useGetCommentsByUserIdQuery,
+  useUpdateBlogCommentMutation,
 } = donationAPi;
