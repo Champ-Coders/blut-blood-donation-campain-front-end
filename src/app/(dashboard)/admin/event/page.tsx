@@ -261,7 +261,7 @@ const AllEvents = () => {
       <Table
         columns={columns}
         dataSource={filteredEventData}
-        loading={isLoading ? true : false}
+        loading={isLoading}
       />
 
       {/* Edit Modal */}

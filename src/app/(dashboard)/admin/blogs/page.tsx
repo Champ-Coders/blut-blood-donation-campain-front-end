@@ -33,7 +33,7 @@ const AllBlogs = () => {
   // query and mutation
   const [updateBlog] = useUpdateBlogMutation();
   const [deleteBlog] = useDeleteBlogMutation();
-  const { data: blogs } = useBlogsQuery(undefined);
+  const { data: blogs, isLoading } = useBlogsQuery(undefined);
 
   // filter Blog by name and title
   const filteredBlogData = blogs?.data?.filter((blog: any) => {
@@ -183,7 +183,11 @@ const AllBlogs = () => {
           </Link>
         </div>
       </ActionBar>
-      <Table columns={columns} dataSource={filteredBlogData} />
+      <Table
+        columns={columns}
+        dataSource={filteredBlogData}
+        loading={isLoading}
+      />
 
       {/* Edit Modal */}
       <Modal

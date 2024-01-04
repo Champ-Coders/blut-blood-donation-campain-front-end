@@ -2,7 +2,6 @@
 import ActionBar from "@/components/UI/ActionBar";
 import Breadcrumb from "@/components/UI/BreadCrumb";
 import Table from "@/components/UI/Table";
-import dayjs from "dayjs";
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import { Button, Input, Modal, Popconfirm, message } from "antd";
 import Link from "next/link";
@@ -11,7 +10,6 @@ import { useForm } from "react-hook-form";
 import InputField from "@/components/InputField/InputField";
 import TextAreaField from "@/components/TextAreaField/TextAreaField";
 
-import MultiSelect from "@/components/MultiSelector/MultiSelector";
 import { useServicesQuery } from "@/redux/Api/serviceApi";
 import {
   useContactsQuery,
@@ -31,7 +29,6 @@ const AllContact = () => {
   const {
     handleSubmit,
     register,
-    setValue,
     reset,
     formState: { errors },
   } = useForm();
@@ -45,8 +42,7 @@ const AllContact = () => {
   // query and mutation
   const [updateContact] = useUpdateContactMutation();
   const [deleteContact] = useDeleteContactMutation();
-  const { data: Contacts } = useContactsQuery(undefined);
-  //   console.log("🚀 ~ file: page.tsx:49 ~ AllContact ~ Contacts:", Contacts)
+  const { data: Contacts, isLoading } = useContactsQuery(undefined);
 
   // filter Contact by Contact, service titlee, user name
   const filteredContactData = Contacts?.data?.filter((Contact: any) => {
@@ -75,7 +71,6 @@ const AllContact = () => {
     const updateData = {
       email: data.email,
       subject: data.subject,
-   
     };
     message.loading("Update Contact.....");
     try {
@@ -110,7 +105,6 @@ const AllContact = () => {
     {
       title: "Contact Message",
       dataIndex: "message",
-    
     },
     {
       title: "Action",
@@ -183,7 +177,11 @@ const AllContact = () => {
           </Link>
         </div>
       </ActionBar>
-      <Table columns={columns} dataSource={filteredContactData} />
+      <Table
+        columns={columns}
+        dataSource={filteredContactData}
+        loading={isLoading}
+      />
 
       {/* Edit Modal */}
       <Modal
