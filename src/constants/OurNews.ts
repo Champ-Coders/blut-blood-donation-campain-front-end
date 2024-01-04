@@ -1,4 +1,3 @@
-import { IOurNews } from "@/interfaces/common";
 import blogImage1 from "../../public/assets/our-news/activity.png";
 import blogImage2 from "../../public/assets/our-news/helpless.png";
 import blogImage3 from "../../public/assets/our-news/poor.png";
