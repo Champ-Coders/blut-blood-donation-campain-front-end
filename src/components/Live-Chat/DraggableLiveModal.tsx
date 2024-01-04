@@ -43,23 +43,25 @@ const DraggableLiveModal = () => {
 
     if (!userInfo) {
       return message.error("Please login first");
+    } else {
+      const newMessage = {
+        // id: chatMessages.length + 1,
+        message: data.message,
+        time: new Date().toLocaleTimeString(),
+        img: userInfo?.imgUrl || "",
+        status: "online",
+        types: "comment",
+        email: userInfo?.email,
+        _id: userInfo?._id,
+      };
+      // console.log(newMessage);
+      socket.emit("send-message", newMessage);
+      socket.on("update-message", (data) => {
+        console.log("uuuuu", data);
+        refreshChat(data);
+        reset();
+      });
     }
-    const newMessage = {
-      // id: chatMessages.length + 1,
-      message: data.message,
-      time: new Date().toLocaleTimeString(),
-      img: userInfo?.imgUrl || "",
-      status: "online",
-      types: "comment",
-      email: userInfo?.email,
-      _id: userInfo?._id,
-    };
-    // console.log(newMessage);
-    socket.emit("send-message", newMessage);
-    socket.on("update-message", (data) => {
-      // console.log("uuuuu", data);
-      reset();
-    });
   };
 
   const scroll = React.useRef<HTMLDivElement>(null);
@@ -77,9 +79,9 @@ const DraggableLiveModal = () => {
       //   api.endpoints.getUserMessage.ini
       //  )
     });
-  }, [refetch, MessageData, dispatch]);
+  }, [refetch, MessageData, dispatch, refreshChat]);
 
-  // console.log(chatMessages);
+  console.log(chatMessages);
   return (
     <div>
       <div className="flex-1 p-2 justify-between flex flex-col h-[500px]">
@@ -257,6 +259,7 @@ const DraggableLiveModal = () => {
               onChange={(text) => setValue("message", text)}
               cleanOnEnter
               value=""
+              
             />
 
             <button
