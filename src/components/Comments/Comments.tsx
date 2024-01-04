@@ -121,7 +121,8 @@ const Comments = ({ id, comment }: { id: string; comment: IComments[] }) => {
                             Commented{" "}
                             {formatDistanceToNowStrict(
                               new Date(singleComment.createdAt)
-                            )}
+                            )}{" "}
+                            ago -{" "}
                             <span
                               className={
                                 singleComment?.userId?._id !== userInfo?._id
