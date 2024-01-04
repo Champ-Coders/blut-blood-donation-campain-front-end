@@ -15,6 +15,7 @@ import {
   useCreateBlogCommentMutation,
   useDeleteBlogCommentMutation,
 } from "@/redux/Api/blogCommentApi/blogCommentApi";
+import { formatDistanceToNowStrict } from "date-fns";
 
 const Comments = ({ id, comment }: { id: string; comment: IComments[] }) => {
   const [createBlogComment, { isLoading }] = useCreateBlogCommentMutation();
@@ -118,10 +119,9 @@ const Comments = ({ id, comment }: { id: string; comment: IComments[] }) => {
                           </div>
                           <p className="mt-0.5 text-sm text-gray-500">
                             Commented{" "}
-                            {new Date(
-                              singleComment?.createdAt
-                            ).toLocaleDateString()}{" "}
-                            {}
+                            {formatDistanceToNowStrict(
+                              new Date(singleComment.createdAt)
+                            )}
                             <span
                               className={
                                 singleComment?.userId?._id !== userInfo?._id
