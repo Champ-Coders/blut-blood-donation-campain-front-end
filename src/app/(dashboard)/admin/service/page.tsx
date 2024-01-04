@@ -7,7 +7,7 @@ import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import { Button, Input, Modal, Popconfirm, message } from "antd";
 import Link from "next/link";
 import { useState } from "react";
-import { getUserDataFromLC } from "@/utils/local-storage";
+
 import { useForm } from "react-hook-form";
 import InputField from "@/components/InputField/InputField";
 import TextAreaField from "@/components/TextAreaField/TextAreaField";
