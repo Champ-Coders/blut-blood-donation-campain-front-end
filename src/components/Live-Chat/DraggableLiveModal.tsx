@@ -3,8 +3,12 @@
 "use client";
 
 import { ILiveChat } from "@/constants/ILiveChat";
+import { api } from "@/redux/Api/api";
 import { useUserProfileQuery } from "@/redux/Api/authApi/AuthApi";
-import { useGetUserMessageQuery } from "@/redux/Api/chatApi";
+import {
+  useGetUserMessageQuery,
+  useRefreshChatMutation,
+} from "@/redux/Api/chatApi";
 import socket from "@/socket/socket";
 
 // import { socket } from "@/socket";
@@ -14,18 +18,21 @@ import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { FaRegMessage } from "react-icons/fa6";
 import InputEmoji from "react-input-emoji";
+import { useDispatch } from "react-redux";
 
 const DraggableLiveModal = () => {
   const { data } = useUserProfileQuery(null);
   const userInfo = data?.data;
 
   const { register, handleSubmit, reset, setValue } = useForm();
-
+  const dispatch = useDispatch();
   const {
     data: MessageData,
     refetch,
     isLoading,
   } = useGetUserMessageQuery(userInfo?.email);
+
+  const [refreshChat] = useRefreshChatMutation();
   // console.log("🚀 ~MessageData:", MessageData);
 
   const [chatMessages, setChatMessages] = React.useState<any>(
@@ -59,15 +66,18 @@ const DraggableLiveModal = () => {
 
   // always scroll to bottom when new message added
   useEffect(() => {
-
     setChatMessages(MessageData?.data);
     socket.on("update-message", (data) => {
       console.log("uuuuuuuuuuuuuuuuuuuu", data);
       scroll.current?.scrollIntoView({ behavior: "smooth" });
       setChatMessages(MessageData?.data);
-      refetch();
+      refreshChat(data);
+      // refetch();
+      //  dispatch(
+      //   api.endpoints.getUserMessage.ini
+      //  )
     });
-  }, [refetch, MessageData]);
+  }, [refetch, MessageData, dispatch]);
 
   // console.log(chatMessages);
   return (
@@ -171,8 +181,6 @@ const DraggableLiveModal = () => {
             // chatMessages
             //   ?.sort((a: any, b: any) => a.updatedAt - b.updatedAt)
             chatMessages?.map((liveChat: ILiveChat) => {
-            
-
               return (
                 <div ref={scroll} key={liveChat?._id} className="chat-message">
                   <div
