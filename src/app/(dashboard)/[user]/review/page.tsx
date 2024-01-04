@@ -4,7 +4,7 @@ import Breadcrumb from "@/components/UI/BreadCrumb";
 import Table from "@/components/UI/Table";
 import dayjs from "dayjs";
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
-import { Button, Input, Modal, Popconfirm, message } from "antd";
+import { Button, Input, Modal, Popconfirm, Rate, message } from "antd";
 import Link from "next/link";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
@@ -12,14 +12,15 @@ import InputField from "@/components/InputField/InputField";
 import TextAreaField from "@/components/TextAreaField/TextAreaField";
 import {
   useDeleteReviewMutation,
+  useGetReviewsByUserIdQuery,
   useReviewsQuery,
   useUpdateReviewMutation,
 } from "@/redux/Api/reviewApi";
 import MultiSelect from "@/components/MultiSelector/MultiSelector";
 import { useServicesQuery } from "@/redux/Api/serviceApi";
+import { getUserDataFromLC } from "@/utils/local-storage";
 
 const UserReview = () => {
-  
   const [searchText, setSearchText] = useState<string>("");
   const [reviewId, setReviewId] = useState<string>("");
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -27,8 +28,9 @@ const UserReview = () => {
     rating: 0,
     review: "",
     user: "",
-    service: "",
+    service: { label: "", value: "" },
   });
+
   const { data: services } = useServicesQuery(undefined);
   const {
     handleSubmit,
@@ -45,9 +47,12 @@ const UserReview = () => {
   }));
 
   // query and mutation
-  const [updateReview] = useUpdateReviewMutation();
-  const [deleteReview] = useDeleteReviewMutation();
-  const { data: reviews } = useReviewsQuery(undefined);
+  const user = getUserDataFromLC();
+  const [updateReview, { isLoading: updateLoading }] =
+    useUpdateReviewMutation();
+  const [deleteReview, { isLoading: deleteLoading }] =
+    useDeleteReviewMutation();
+  const { data: reviews } = useGetReviewsByUserIdQuery(user?.id as string);
 
   // filter review by review, service titlee, user name
   const filteredReviewData = reviews?.data?.filter((review: any) => {
@@ -127,6 +132,7 @@ const UserReview = () => {
         return (
           <>
             <Button
+              loading={updateLoading}
               className="mr-[6px]"
               onClick={() => {
                 setReviewId(selectedReview.id);
@@ -134,7 +140,10 @@ const UserReview = () => {
                   rating: selectedReview?.rating,
                   review: selectedReview?.review,
                   user: selectedReview?.user,
-                  service: selectedReview?.service?.title,
+                  service: {
+                    value: selectedReview?.service?.id,
+                    label: selectedReview?.service?.title,
+                  },
                 });
                 setIsModalOpen(true);
               }}
@@ -151,7 +160,7 @@ const UserReview = () => {
               okText="Yes"
               cancelText="No"
             >
-              <Button danger>
+              <Button loading={deleteLoading} danger>
                 <DeleteOutlined />
               </Button>
             </Popconfirm>
@@ -165,13 +174,13 @@ const UserReview = () => {
       <Breadcrumb
         items={[
           {
-            label: "admin",
-            link: "/admin",
+            label: "user",
+            link: "/user",
           },
         ]}
       />
 
-      <ActionBar title="Review List">
+      <ActionBar title="My Review">
         <Input
           type="text"
           allowClear
@@ -181,11 +190,11 @@ const UserReview = () => {
           value={searchText}
           className="max-w-sm mr-4"
         />
-        <div>
+        {/* <div>
           <Link href="/admin/review/create">
             <Button type="default">Create</Button>
           </Link>
-        </div>
+        </div> */}
       </ActionBar>
       <Table columns={columns} dataSource={filteredReviewData} />
 
@@ -200,17 +209,7 @@ const UserReview = () => {
       >
         <form className="block w-full" onSubmit={handleSubmit(onSubmit)}>
           <div className="w-full">
-            <div className="my-[10px] mx-0">
-              <TextAreaField
-                name="review"
-                register={register}
-                errors={errors}
-                defaultValue={editReview?.review}
-                label="Review"
-                rows={4}
-              />
-            </div>
-            <div className="my-[10px] mx-0">
+            {/* <div className="my-[10px] mx-0">
               <InputField
                 name="rating"
                 label="Rating"
@@ -219,7 +218,20 @@ const UserReview = () => {
                 register={register}
                 errors={errors}
               />
+            </div> */}
+            <div>
+              <label className="text-[13px] leading-6 font-inter text-gray-40 font-semibold capitalize flex items-center gap-2">
+                Rating
+                <span className="text-rose-500">*</span>
+              </label>
+
+              <Rate
+                allowHalf={true}
+                onChange={(e) => setValue("rating", e)}
+                defaultValue={editReview?.rating}
+              />
             </div>
+
             <div className="my-[10px]  md:max-w-md mx-0">
               <MultiSelect
                 label="Select Service"
@@ -231,8 +243,23 @@ const UserReview = () => {
                 setValue={setValue}
               />
             </div>
+            <div className="my-[10px] mx-0">
+              <TextAreaField
+                name="review"
+                register={register}
+                errors={errors}
+                defaultValue={editReview?.review}
+                label="Review"
+                rows={4}
+              />
+            </div>
           </div>
-          <Button className="mt-2" type="primary" htmlType="submit">
+          <Button
+            loading={updateLoading}
+            className="mt-2"
+            type="primary"
+            htmlType="submit"
+          >
             Update Review
           </Button>
         </form>

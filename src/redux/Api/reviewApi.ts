@@ -54,7 +54,7 @@ export const reviewApi = api.injectEndpoints({
         url: `${REVIEW_URL}/myReviews/${id}`,
         method: "GET",
       }),
-      providesTags: [tagTypes.service],
+      providesTags: [tagTypes.review],
     }),
   }),
 });
