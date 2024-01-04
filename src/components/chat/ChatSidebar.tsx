@@ -20,9 +20,9 @@ export default function ChatSidebar() {
   // totalDonation: 0,
   // totalReceived: 0,
   return (
-    <div className=" w-auto bg-white border-r border-gray-300">
-      <header className="p-4 border-b border-gray-300 flex justify-between items-center bg-indigo-600 text-white">
-        <h1 className="text-2xl font-semibold">Chat Web</h1>
+    <div className="w-full bg-white border-r border-gray-300">
+      <header className="p-4 border-b border-gray-300 flex justify-between items-center bg-[#176325] text-white">
+        <h1 className="text-2xl font-semibold">Chat Users</h1>
         <div className="relative">
           <button id="menuButton" className="focus:outline-none">
             <svg
@@ -86,7 +86,9 @@ export default function ChatSidebar() {
                 </div>
                 <div className="flex-1">
                   <h2 className="text-lg font-semibold">{user?.name}</h2>
-                  <p className="text-gray-600">Any One Available!!</p>
+                  <p className="text-gray-600">
+                    {index + 2} bag need. I am {user?.name}
+                  </p>
                 </div>
               </Link>
             </div>

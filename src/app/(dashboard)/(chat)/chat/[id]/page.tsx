@@ -17,11 +17,13 @@ export default function ChatMessagePage({
   // console.log("🚀 ~ file: page.tsx:17 ~ name:", name);
 
   return (
-    <div className="w-auto flex-1 bg-blue-100">
+    <div className="">
+      <div className="w-auto flex-1  bg-blue-100">
       <header className="bg-wwhite p-4 text-gray-700">
         <h1 className="text-2xl font-semibold">{name}</h1>
       </header>
       <ChatContainer senderId={params?.id} />
+    </div>
     </div>
   );
 }

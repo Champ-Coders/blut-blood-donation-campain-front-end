@@ -8,8 +8,8 @@ export default function ChatLayout({
 }) {
   return (
     <div className="w-full">
-      <div className="flex h-screen overflow-hidden relative">
-        <div className="w-[100%] lg:w-1/4">
+      <div className=" block lg:flex  h-screen  overflow-hidden relative">
+        <div className="w-full lg:w-[25%]  bg-red-200 p-2 ">
           <ChatSidebar />
         </div>
         <div className="w-full lg:w-3/4">{children}</div>
@@ -17,5 +17,3 @@ export default function ChatLayout({
     </div>
   );
 }
-
-

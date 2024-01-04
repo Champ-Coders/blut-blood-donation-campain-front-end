@@ -10,6 +10,7 @@ import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import InputField from "../InputField/InputField";
 import TextAreaField from "../TextAreaField/TextAreaField";
+import ChatSkelleton from "../skeleton/ChatSkeleton";
 
 export default function ChatContainer({ senderId }: { senderId: string }) {
   // console.log("🚀 ~ file: ChatContainer.tsx:12 ~ ChatContainer ~ senderId:", senderId)
@@ -23,7 +24,7 @@ export default function ChatContainer({ senderId }: { senderId: string }) {
 
   const { register, handleSubmit, reset, setValue } = useForm();
 
-  const { data: messageData, refetch } = useGetMessageQuery(senderId);
+  const { data: messageData, isLoading } = useGetMessageQuery(senderId);
 
   const [refreshChat] = useRefreshChatMutation();
 
@@ -60,11 +61,12 @@ export default function ChatContainer({ senderId }: { senderId: string }) {
       // refetch();
       refreshChat(data);
     });
-  }, [refetch, refreshChat]);
+  }, [refreshChat]);
   // console.log("messageData", messageData);
   return (
     <div className="">
       <div className="h-screen overflow-y-auto p-4 pb-36">
+        {isLoading && <ChatSkelleton />}
         {messageData?.data?.map((liveChat: any) => {
           return (
             <div key={liveChat?._id} className="chat-message">
@@ -134,7 +136,7 @@ export default function ChatContainer({ senderId }: { senderId: string }) {
           />
           <button
             type="submit"
-            className="w-1/5 bg-indigo-500  text-white px-4 py-2 rounded-md ml-2"
+            className="w-1/5 bg-primary text-center  text-white px-4 py-2 rounded-md ml-2"
           >
             Send
           </button>
