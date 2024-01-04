@@ -32,7 +32,7 @@ const BlogDetail: React.FC<BlogDetailProps> = ({
 
   // filter data allBlog.data !=== data._id
   const filterData = allBlog?.data?.filter(
-    (item: any) => item._id !== data._id
+    (item: any) => item?._id !== data?._id
   );
 
   if (isLoading) {
