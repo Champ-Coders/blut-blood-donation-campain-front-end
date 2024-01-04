@@ -13,7 +13,12 @@ export default function ChatAdminnPage() {
     // </div>
     <div className="">
       {/* <h3>main chat page</h3> */}
-      <ChatContainer senderId="6582ba903e41d51f5948ff4e" />
+      <div className="flex lg:hidden">
+        <ChatSidebar />
+      </div>
+      <div className="hidden lg:flex">
+        <ChatContainer senderId="6582ba903e41d51f5948ff4e" />
+      </div>
     </div>
   );
 }

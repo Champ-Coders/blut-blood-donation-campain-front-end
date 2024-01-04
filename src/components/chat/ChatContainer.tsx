@@ -13,14 +13,9 @@ import TextAreaField from "../TextAreaField/TextAreaField";
 import ChatSkelleton from "../skeleton/ChatSkeleton";
 
 export default function ChatContainer({ senderId }: { senderId: string }) {
-  // console.log("🚀 ~ file: ChatContainer.tsx:12 ~ ChatContainer ~ senderId:", senderId)
 
   const { data: userInfo } = useUserProfileQuery(null);
 
-  // console.log(
-  //   "🚀 ~ file: ChatContainer.tsx:15 ~ ChatContainer ~ userInfo:",
-  //   userInfo
-  // );
 
   const { register, handleSubmit, reset, setValue } = useForm();
 
@@ -117,8 +112,8 @@ export default function ChatContainer({ senderId }: { senderId: string }) {
 
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="bg-white border-t border-gray-300 p-4 
-    //   absolute bottom-0 w-[80%]
+        className="bg-white border-t border-gray-300 p-4  w-full 
+      absolute bottom-0 lg:w-[80%]
       
       "
       >
@@ -136,7 +131,7 @@ export default function ChatContainer({ senderId }: { senderId: string }) {
           />
           <button
             type="submit"
-            className="w-1/5 bg-primary text-center  text-white px-4 py-2 rounded-md ml-2"
+            className="w-1/5 lg:w-1/3 bg-primary text-center  text-white px-4 py-2 rounded ml-2"
           >
             Send
           </button>
