@@ -5,25 +5,26 @@ import {
   useRefreshChatMutation,
 } from "@/redux/Api/chatApi";
 import socket from "@/socket/socket";
-import { Image } from "antd";
+
 import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import InputField from "../InputField/InputField";
-import TextAreaField from "../TextAreaField/TextAreaField";
+
 import ChatSkelleton from "../skeleton/ChatSkeleton";
+import Image from "next/image";
 
 export default function ChatContainer({ senderId }: { senderId: string }) {
-
+  //! get user profile data
   const { data: userInfo } = useUserProfileQuery(null);
 
+  //! for sent message
 
   const { register, handleSubmit, reset, setValue } = useForm();
 
   const { data: messageData, isLoading } = useGetMessageQuery(senderId);
 
+  //!@ for refresh messages
   const [refreshChat] = useRefreshChatMutation();
-
-  // console.log("🚀 ~ file: page.tsx:29 ~ messageData:", messageData);
 
   const onSubmit = (data: any) => {
     // console.log("🚀 ~ file: ChatContainer.tsx:23 ~ onSubmit ~ data:", data);
@@ -73,7 +74,7 @@ export default function ChatContainer({ senderId }: { senderId: string }) {
                 } `}
               >
                 <div
-                  className={`flex flex-col space-y-2 text-xl max-w-2xl mx-2 ${
+                  className={`flex flex-col  space-y-2 text-xl max-w-2xl my-2 mx-2 ${
                     liveChat?.types === "reply"
                       ? "order-2 items-start  "
                       : " order-1 items-end"
@@ -84,7 +85,7 @@ export default function ChatContainer({ senderId }: { senderId: string }) {
                       className={`px-4 py-2 rounded-lg inline-block ${
                         liveChat?.types === "reply"
                           ? "rounded-br-none bg-primary text-white "
-                          : "   order-1 items-end"
+                          : "order-1 items-end"
                       }  rounded-bl-none bg-gray-300 text-gray-600`}
                     >
                       {liveChat?.message}
@@ -97,7 +98,7 @@ export default function ChatContainer({ senderId }: { senderId: string }) {
                   src={
                     liveChat.types === "reply"
                       ? "https://i.ibb.co/VxhHWhd/professional-Side.png"
-                      : "https://i.ibb.co/YcjhGgs/IMG-20231111-142014-1.jpg"
+                      : "https://i.ibb.co/jRrMTKb/userIcon.png"
                   }
                   alt="My profile"
                   className={`w-6 h-6 rounded-full ${
