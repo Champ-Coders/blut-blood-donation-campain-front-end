@@ -9,19 +9,10 @@ export default function ChatSidebar() {
   console.log("🚀 ~ file: ChatSidebar.tsx:7 ~ ChatSidebar ~ data:", data);
 
   const userData = data?.data;
-  // address: 'Noakhali Sadar',
-  // _id: '6582be8e3e41d51f5948ff5b',
-  // name: 'Sarwar Hossain',
-  // phoneNumber: '+8801602819932',
-  // email: 'sarwarasik2@gmail.com',
-  // role: 'user',
-  // bloodGroup: 'AB+',
-  // dateOfBirth: '2023-11-30T00:00:00.000Z',
-  // totalDonation: 0,
-  // totalReceived: 0,
+
   return (
     <div className="w-full bg-white border-r border-gray-300">
-      <header className="p-4 border-b border-gray-300 flex justify-between items-center bg-[#176325] text-white">
+      <header className="p-4 border-b border-gray-300 flex justify-between items-center bg-slate-600 text-white">
         <h1 className="text-2xl font-semibold">Chat Users</h1>
         <div className="relative">
           <button id="menuButton" className="focus:outline-none">

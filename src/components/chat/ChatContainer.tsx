@@ -66,7 +66,7 @@ export default function ChatContainer({ senderId }: { senderId: string }) {
   return (
     <div className="">
       <div className="h-screen overflow-y-auto p-4 pb-36">
-        {isLoading && <ChatSkelleton />}
+        {isLoading || (messageData?.data?.length < 1 && <ChatSkelleton />)}
         {messageData?.data?.map((liveChat: any) => {
           return (
             <div key={liveChat?._id} className="chat-message">
