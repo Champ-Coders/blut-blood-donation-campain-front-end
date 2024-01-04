@@ -25,6 +25,9 @@ export default function ChatContainer({ senderId }: { senderId: string }) {
 
   //!@ for refresh messages
   const [refreshChat] = useRefreshChatMutation();
+  const [chatMessages, setChatMessages] = React.useState<any>(
+    messageData?.data || []
+  );
 
   const onSubmit = (data: any) => {
     // console.log("🚀 ~ file: ChatContainer.tsx:23 ~ onSubmit ~ data:", data);
@@ -46,18 +49,21 @@ export default function ChatContainer({ senderId }: { senderId: string }) {
     //   replyMessage
     // );
     socket.emit("send-message", replyMessage);
-    reset();
     refreshChat(replyMessage);
+    reset();
   };
   const scroll = React.useRef<HTMLDivElement>(null);
   useEffect(() => {
+    setChatMessages(messageData?.data);
     socket.on("update-message", (data) => {
       // scroll.current?.scrollIntoView({ behavior: "smooth" });
       // console.log("uuuuuuuuuuuuuuuuuuuu", data);
       // refetch();
+      scroll.current?.scrollIntoView({ behavior: "smooth" });
+      setChatMessages(messageData?.data);
       refreshChat(data);
     });
-  }, [refreshChat]);
+  }, [refreshChat,messageData]);
   // console.log("messageData", messageData);
   return (
     <div className="">
@@ -69,15 +75,15 @@ export default function ChatContainer({ senderId }: { senderId: string }) {
               <div
                 className={`flex ${
                   liveChat?.types === "reply"
-                    ? "items-end "
-                    : "  items-end justify-end"
+                    ? "items-end justify-end"
+                    : "  items-end "
                 } `}
               >
                 <div
                   className={`flex flex-col  space-y-2 text-xl max-w-2xl my-2 mx-2 ${
                     liveChat?.types === "reply"
-                      ? "order-2 items-start  "
-                      : " order-1 items-end"
+                      ? "order-1 items-end  "
+                      : " order-2 items-start"
                   } `}
                 >
                   <div>
@@ -102,7 +108,7 @@ export default function ChatContainer({ senderId }: { senderId: string }) {
                   }
                   alt="My profile"
                   className={`w-6 h-6 rounded-full ${
-                    liveChat?.types === "reply" ? "order-1" : "  order-2"
+                    liveChat?.types === "reply" ? "order-2" : "  order-1"
                   } `}
                 />
               </div>

@@ -105,15 +105,15 @@ const DraggableLiveModal = () => {
                   <div
                     className={`flex ${
                       liveChat?.types !== "reply"
-                        ? "items-end "
-                        : "  items-end justify-end"
+                        ? "items-end justify-end"
+                        : "items-end "
                     } `}
                   >
                     <div
                       className={`flex flex-col space-y-2 text-xs max-w-xs mx-2 ${
                         liveChat?.types !== "reply"
-                          ? "order-2 items-start  "
-                          : " order-1 items-end"
+                          ? "order-1 items-end  "
+                          : " order-2 items-start"
                       } `}
                     >
                       <div>
@@ -138,7 +138,7 @@ const DraggableLiveModal = () => {
                       }
                       alt="My profile"
                       className={`w-6 h-6 rounded-full ${
-                        liveChat?.types !== "reply" ? "order-1" : "  order-2"
+                        liveChat?.types !== "reply" ? "order-1" : "  order-1"
                       } `}
                     />
                   </div>
