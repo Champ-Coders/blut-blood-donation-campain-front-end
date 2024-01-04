@@ -16,6 +16,9 @@ import {
 } from "@ant-design/icons";
 import Link from "next/link";
 import { USER_ROLE } from "./userRole";
+import { RiGitPullRequestFill } from "react-icons/ri";
+import { VscGitPullRequestGoToChanges } from "react-icons/vsc";
+import { FaCommentDots } from "react-icons/fa";
 
 export const dashboardItems = (role: USER_ROLE) => {
   // ! common sidebar for every user
@@ -39,14 +42,6 @@ export const dashboardItems = (role: USER_ROLE) => {
           ),
           key: `/${role}/profile`,
         },
-        // {
-        //   label: (
-        //     <Link className="" href={`/profile/change-password`}>
-        //       Change Password
-        //     </Link>
-        //   ),
-        //   key: `/${role}/profile/change-password`,
-        // },
       ],
     },
   ];
@@ -366,8 +361,8 @@ export const dashboardItems = (role: USER_ROLE) => {
     ...defaultSidebarItems,
     {
       label: (
-        <Link className="" href={`/${role}/booking`}>
-          Booking History
+        <Link className="" href={`/${role}/donation-history`}>
+          Donation History
         </Link>
       ),
       icon: (
@@ -379,7 +374,24 @@ export const dashboardItems = (role: USER_ROLE) => {
           }}
         />
       ),
-      key: `/${role}/Service`,
+      key: `/${role}/donation-history`,
+    },
+    {
+      label: (
+        <Link className="" href={`/${role}/donation-request`}>
+          Donation Request
+        </Link>
+      ),
+      icon: (
+        <VscGitPullRequestGoToChanges
+          style={{
+            fontSize: "18px",
+            // marginRight:"5px"
+            // borderRadius: "10px",
+          }}
+        />
+      ),
+      key: `/${role}/donation-request`,
     },
     {
       label: (
@@ -398,15 +410,14 @@ export const dashboardItems = (role: USER_ROLE) => {
       ),
       key: `/${role}/review`,
     },
-
     {
       label: (
-        <Link className="" href={`/${role}/support`}>
-          Support and Help
+        <Link className="" href={`/${role}/comments-history`}>
+          Comments History
         </Link>
       ),
       icon: (
-        <BorderOuterOutlined
+        <FaCommentDots
           style={{
             fontSize: "18px",
             // marginRight:"5px"
@@ -414,7 +425,7 @@ export const dashboardItems = (role: USER_ROLE) => {
           }}
         />
       ),
-      key: `/${role}/support`,
+      key: `/${role}/comments-history`,
     },
   ];
 

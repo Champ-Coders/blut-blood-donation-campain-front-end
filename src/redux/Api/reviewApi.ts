@@ -48,6 +48,14 @@ export const reviewApi = api.injectEndpoints({
       }),
       invalidatesTags: [tagTypes.review],
     }),
+    // get reviews by user id
+    getReviewsByUserId: build.query({
+      query: (id: string) => ({
+        url: `${REVIEW_URL}/myReviews/${id}`,
+        method: "GET",
+      }),
+      providesTags: [tagTypes.service],
+    }),
   }),
 });
 
@@ -57,4 +65,5 @@ export const {
   useUpdateReviewMutation,
   useReviewQuery,
   useReviewsQuery,
+  useGetReviewsByUserIdQuery,
 } = reviewApi;
