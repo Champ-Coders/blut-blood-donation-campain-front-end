@@ -79,6 +79,23 @@ export const donationAPi = api.injectEndpoints({
       }),
       providesTags: [tagTypes.donation],
     }),
+
+    // accept request by user
+    acceptRequest: build.mutation({
+      query: (id) => ({
+        url: `${DONATION_URL}/accept-request/${id}`,
+        method: "PATCH",
+        headers: {
+          Authorization: `${getFromLocalStorage("user")}`,
+        },
+      }),
+      invalidatesTags: [tagTypes.donation],
+    }),
+
+
+
+
+
   }),
 });
 
@@ -89,4 +106,5 @@ export const {
   useGetAllRequestHistoryQuery,
   useGetAllRequestQuery,
   useGetDataQuery,
+  useAcceptRequestMutation,
 } = donationAPi;
