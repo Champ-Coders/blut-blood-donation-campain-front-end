@@ -11,7 +11,6 @@ import {
 } from "@/redux/Api/chatApi";
 import socket from "@/socket/socket";
 
-// import { socket } from "@/socket";
 import { message } from "antd";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
@@ -19,6 +18,8 @@ import { useForm } from "react-hook-form";
 import { FaRegMessage } from "react-icons/fa6";
 import InputEmoji from "react-input-emoji";
 import { useDispatch } from "react-redux";
+import ChatSkelleton from "../skeleton/ChatSkeleton";
+import userIcon from "../../../public/assets/icon/userIcon.png";
 
 const DraggableLiveModal = () => {
   const { data } = useUserProfileQuery(null);
@@ -57,7 +58,7 @@ const DraggableLiveModal = () => {
       // console.log(newMessage);
       socket.emit("send-message", newMessage);
       socket.on("update-message", (data) => {
-        console.log("uuuuu", data);
+        // console.log("uuuuu", data);
         refreshChat(data);
         reset();
       });
@@ -66,10 +67,11 @@ const DraggableLiveModal = () => {
 
   const scroll = React.useRef<HTMLDivElement>(null);
 
-  // always scroll to bottom when new message added
+  //!  always scroll to bottom when new message added
   useEffect(() => {
     setChatMessages(MessageData?.data);
     socket.on("update-message", (data) => {
+      ///! for refresh and update message
       // console.log("uuuuuuuuuuuuuuuuuuuu", data);
       scroll.current?.scrollIntoView({ behavior: "smooth" });
       setChatMessages(MessageData?.data);
@@ -95,7 +97,9 @@ const DraggableLiveModal = () => {
                 </svg>
               </span>
               <Image
-                src={"https://i.ibb.co/YcjhGgs/IMG-20231111-142014-1.jpg"}
+                src={
+                  "https://i.ibb.co/7xDVRjP/3d-illustration-businessman-with-headphone-blurred-background-business-concept.jpg"
+                }
                 alt="Live Chat"
                 width={4000}
                 height={4000}
@@ -104,12 +108,10 @@ const DraggableLiveModal = () => {
             </div>
             <div className="flex flex-col leading-tight">
               <div className="text-2xl mt-1 flex items-center">
-                <span className="text-gray-700 mr-3 text-[18px]">
-                  Md Mahafujur Rahaman
-                </span>
+                <span className="text-gray-700 mr-3 text-[18px]">Mr. Joe</span>
               </div>
               <span className="text-[12px] text-gray-600">
-                MERN Stack Developer
+                Coperative Officer
               </span>
             </div>
           </div>
@@ -178,7 +180,7 @@ const DraggableLiveModal = () => {
           id="messages"
           className="flex flex-col space-y-4 p-3 overflow-y-auto scrollbar-thumb-blue scrollbar-thumb-rounded scrollbar-track-blue-lighter scrollbar-w-2 scrolling-touch "
         >
-          {isLoading && <h2>Loadiing chat...........</h2>}
+          {isLoading || (chatMessages?.length < 1 && <ChatSkelleton />)}
           {
             // chatMessages
             //   ?.sort((a: any, b: any) => a.updatedAt - b.updatedAt)
@@ -214,7 +216,11 @@ const DraggableLiveModal = () => {
                     <Image
                       height={50}
                       width={50}
-                      src={"https://i.ibb.co/YcjhGgs/IMG-20231111-142014-1.jpg"}
+                      src={
+                        liveChat?.types === "reply"
+                          ? "https://i.ibb.co/7xDVRjP/3d-illustration-businessman-with-headphone-blurred-background-business-concept.jpg"
+                          : userIcon
+                      }
                       alt="My profile"
                       className={`w-6 h-6 rounded-full ${
                         liveChat?.types !== "reply" ? "order-1" : "  order-2"
@@ -259,7 +265,6 @@ const DraggableLiveModal = () => {
               onChange={(text) => setValue("message", text)}
               cleanOnEnter
               value=""
-              
             />
 
             <button
