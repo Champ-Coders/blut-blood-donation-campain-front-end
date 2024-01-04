@@ -4,21 +4,16 @@ import Breadcrumb from "@/components/UI/BreadCrumb";
 import Table from "@/components/UI/Table";
 import dayjs from "dayjs";
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
-import { Button, Input, Modal, Popconfirm, Rate, message } from "antd";
+import { Button, Input, Modal, Popconfirm, message } from "antd";
 
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import TextAreaField from "@/components/TextAreaField/TextAreaField";
-import {
-  useDeleteReviewMutation,
-  useUpdateReviewMutation,
-} from "@/redux/Api/reviewApi";
-import MultiSelect from "@/components/MultiSelector/MultiSelector";
-import { useServicesQuery } from "@/redux/Api/serviceApi";
 import { getUserDataFromLC } from "@/utils/local-storage";
 import {
   useDeleteBlogCommentMutation,
   useGetCommentsByUserIdQuery,
+  useUpdateBlogCommentMutation,
 } from "@/redux/Api/blogCommentApi/blogCommentApi";
 
 const UserReview = () => {
@@ -26,31 +21,21 @@ const UserReview = () => {
   const [reviewId, setReviewId] = useState<string>("");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editReview, setEditReview] = useState({
-    rating: 0,
-    review: "",
-    user: "",
-    service: { label: "", value: "" },
+    comments: "",
   });
 
-  const { data: services } = useServicesQuery(undefined);
   const {
     handleSubmit,
     register,
-    setValue,
+
     reset,
     formState: { errors },
   } = useForm();
 
-  //   service option
-  const serviceOptions = services?.data?.map((service: any) => ({
-    value: service.id,
-    label: service.title,
-  }));
-
   // query and mutation
   const user = getUserDataFromLC();
-  const [updateReview, { isLoading: updateLoading }] =
-    useUpdateReviewMutation();
+  const [updateBlogComment, { isLoading: updateLoading }] =
+    useUpdateBlogCommentMutation();
   // delete comments
   const [deleteBlogComment, { isLoading: deleteLoading }] =
     useDeleteBlogCommentMutation();
@@ -84,19 +69,17 @@ const UserReview = () => {
 
   // Review Edit function
   const onSubmit = async (data: any) => {
+    message.loading("Update Comments.....");
+
     const updateData = {
-      review: data.review,
-      rating: Number(data.rating),
-      service: data.service.id,
+      id: reviewId,
+      comments: data.comments,
     };
-    message.loading("Update Review.....");
+
     try {
-      const res = await updateReview({
-        id: reviewId,
-        body: { ...updateData },
-      }).unwrap();
+      const res = await updateBlogComment(updateData).unwrap();
       if (res) {
-        message.success("Review Update successfully");
+        message.success("Comments Update successfully");
         setIsModalOpen(false);
       }
     } catch (err: any) {
@@ -139,13 +122,7 @@ const UserReview = () => {
               onClick={() => {
                 setReviewId(selectedReview.id);
                 setEditReview({
-                  rating: selectedReview?.rating,
-                  review: selectedReview?.review,
-                  user: selectedReview?.user,
-                  service: {
-                    value: selectedReview?.service?.id,
-                    label: selectedReview?.service?.title,
-                  },
+                  comments: selectedReview?.comments,
                 });
                 setIsModalOpen(true);
               }}
@@ -201,7 +178,7 @@ const UserReview = () => {
 
       {/* Edit Modal */}
       <Modal
-        title="Edit Review"
+        title="Edit Comments"
         open={isModalOpen}
         onOk={() => setIsModalOpen(false)}
         onCancel={() => setIsModalOpen(false)}
@@ -210,47 +187,13 @@ const UserReview = () => {
       >
         <form className="block w-full" onSubmit={handleSubmit(onSubmit)}>
           <div className="w-full">
-            {/* <div className="my-[10px] mx-0">
-              <InputField
-                name="rating"
-                label="Rating"
-                type="text"
-                defaultValue={editReview?.rating}
-                register={register}
-                errors={errors}
-              />
-            </div> */}
-            <div>
-              <label className="text-[13px] leading-6 font-inter text-gray-40 font-semibold capitalize flex items-center gap-2">
-                Rating
-                <span className="text-rose-500">*</span>
-              </label>
-
-              <Rate
-                allowHalf={true}
-                onChange={(e) => setValue("rating", e)}
-                defaultValue={editReview?.rating}
-              />
-            </div>
-
-            <div className="my-[10px]  md:max-w-md mx-0">
-              <MultiSelect
-                label="Select Service"
-                name="service"
-                options={serviceOptions}
-                isMulti={false}
-                defaultValue={editReview.service}
-                required={false}
-                setValue={setValue}
-              />
-            </div>
             <div className="my-[10px] mx-0">
               <TextAreaField
-                name="review"
+                name="comments"
                 register={register}
                 errors={errors}
-                defaultValue={editReview?.review}
-                label="Review"
+                defaultValue={editReview?.comments}
+                label="Comments"
                 rows={4}
               />
             </div>
@@ -261,7 +204,7 @@ const UserReview = () => {
             type="primary"
             htmlType="submit"
           >
-            Update Review
+            Update Blogs
           </Button>
         </form>
       </Modal>
