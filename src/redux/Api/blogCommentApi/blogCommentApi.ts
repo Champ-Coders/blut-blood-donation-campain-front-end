@@ -30,8 +30,19 @@ export const donationAPi = api.injectEndpoints({
       }),
       invalidatesTags: [tagTypes.blogComment, tagTypes.blog],
     }),
+    // get comments by user id
+    getCommentsByUserId: build.query({
+      query: (id) => ({
+        url: `${BLOG_COMMENT_URL}/myComments/${id}`,
+        method: "GET",
+      }),
+      providesTags: [tagTypes.blogComment, tagTypes.blog],
+    }),
   }),
 });
 
-export const { useDeleteBlogCommentMutation, useCreateBlogCommentMutation } =
-  donationAPi;
+export const {
+  useDeleteBlogCommentMutation,
+  useCreateBlogCommentMutation,
+  useGetCommentsByUserIdQuery,
+} = donationAPi;

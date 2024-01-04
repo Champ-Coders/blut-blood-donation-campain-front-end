@@ -17,6 +17,7 @@ import {
 import MultiSelect from "@/components/MultiSelector/MultiSelector";
 import { useServicesQuery } from "@/redux/Api/serviceApi";
 import { getUserDataFromLC } from "@/utils/local-storage";
+import { useGetCommentsByUserIdQuery } from "@/redux/Api/blogCommentApi/blogCommentApi";
 
 const UserReview = () => {
   const [searchText, setSearchText] = useState<string>("");
@@ -50,15 +51,16 @@ const UserReview = () => {
     useUpdateReviewMutation();
   const [deleteReview, { isLoading: deleteLoading }] =
     useDeleteReviewMutation();
-  const { data: reviews } = useGetReviewsByUserIdQuery(user?.id as string);
+  const { data: comments } = useGetCommentsByUserIdQuery(user?.id as string);
+  console.log("🚀 ~ file: page.tsx:55 ~ UserReview ~ comments:", comments);
 
   // filter review by review, service titlee, user name
-  const filteredReviewData = reviews?.data?.filter((review: any) => {
+  const filteredReviewData = comments?.data?.filter((review: any) => {
     const lowercaseSearchText = searchText.toLowerCase();
     return (
-      review?.review?.toLowerCase().includes(lowercaseSearchText) ||
-      review?.user?.name?.toLowerCase().includes(lowercaseSearchText) ||
-      review?.service?.title?.toLowerCase().includes(lowercaseSearchText)
+      review?.comments?.toLowerCase().includes(lowercaseSearchText) ||
+      review?.userId?.name?.toLowerCase().includes(lowercaseSearchText) ||
+      review?.blogId?.title?.toLowerCase().includes(lowercaseSearchText)
     );
   });
 
@@ -188,11 +190,6 @@ const UserReview = () => {
           value={searchText}
           className="max-w-sm mr-4"
         />
-        {/* <div>
-          <Link href="/admin/review/create">
-            <Button type="default">Create</Button>
-          </Link>
-        </div> */}
       </ActionBar>
       <Table columns={columns} dataSource={filteredReviewData} />
 
