@@ -70,7 +70,7 @@ const DraggableLiveModal = () => {
   useEffect(() => {
     setChatMessages(MessageData?.data);
     socket.on("update-message", (data) => {
-      console.log("uuuuuuuuuuuuuuuuuuuu", data);
+      // console.log("uuuuuuuuuuuuuuuuuuuu", data);
       scroll.current?.scrollIntoView({ behavior: "smooth" });
       setChatMessages(MessageData?.data);
       refreshChat(data);
@@ -81,7 +81,7 @@ const DraggableLiveModal = () => {
     });
   }, [refetch, MessageData, dispatch, refreshChat]);
 
-  console.log(chatMessages);
+  // console.log('messageData',chatMessages)
   return (
     <div>
       <div className="flex-1 p-2 justify-between flex flex-col h-[500px]">

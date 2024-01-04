@@ -1,6 +1,9 @@
 "use client";
 import { useUserProfileQuery } from "@/redux/Api/authApi/AuthApi";
-import { useGetMessageQuery } from "@/redux/Api/chatApi";
+import {
+  useGetMessageQuery,
+  useRefreshChatMutation,
+} from "@/redux/Api/chatApi";
 import socket from "@/socket/socket";
 import { Image } from "antd";
 import React, { useEffect } from "react";
@@ -12,16 +15,19 @@ export default function ChatContainer({ senderId }: { senderId: string }) {
   // console.log("🚀 ~ file: ChatContainer.tsx:12 ~ ChatContainer ~ senderId:", senderId)
 
   const { data: userInfo } = useUserProfileQuery(null);
-  console.log(
-    "🚀 ~ file: ChatContainer.tsx:15 ~ ChatContainer ~ userInfo:",
-    userInfo
-  );
+
+  // console.log(
+  //   "🚀 ~ file: ChatContainer.tsx:15 ~ ChatContainer ~ userInfo:",
+  //   userInfo
+  // );
 
   const { register, handleSubmit, reset, setValue } = useForm();
 
   const { data: messageData, refetch } = useGetMessageQuery(senderId);
 
-  console.log("🚀 ~ file: page.tsx:29 ~ messageData:", messageData);
+  const [refreshChat] = useRefreshChatMutation();
+
+  // console.log("🚀 ~ file: page.tsx:29 ~ messageData:", messageData);
 
   const onSubmit = (data: any) => {
     // console.log("🚀 ~ file: ChatContainer.tsx:23 ~ onSubmit ~ data:", data);
@@ -36,19 +42,26 @@ export default function ChatContainer({ senderId }: { senderId: string }) {
       email: userInfo?.data.email,
       _id: senderId,
     };
-    // console.log("🚀 ~ file: ChatContainer.tsx:12 ~ onSubmit ~ data:", data);
+    console.log(
+      "🚀 ~ file: ChatContainer.tsx:12 ~ onSubmit ~ data:",
+      data,
+      "and",
+      replyMessage
+    );
     socket.emit("send-message", replyMessage);
     reset();
+    refreshChat(replyMessage);
   };
   const scroll = React.useRef<HTMLDivElement>(null);
   useEffect(() => {
     socket.on("update-message", (data) => {
-      scroll.current?.scrollIntoView({ behavior: "smooth" });
-      console.log("uuuuuuuuuuuuuuuuuuuu", data);
+      // scroll.current?.scrollIntoView({ behavior: "smooth" });
+      // console.log("uuuuuuuuuuuuuuuuuuuu", data);
       refetch();
+      refreshChat(data);
     });
-  }, [refetch]);
-
+  }, [refetch, refreshChat]);
+  // console.log("messageData", messageData);
   return (
     <div className="">
       <div className="h-screen overflow-y-auto p-4 pb-36">
