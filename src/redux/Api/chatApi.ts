@@ -45,6 +45,18 @@ export const ChatApi = api.injectEndpoints({
       }),
       invalidatesTags: [tagTypes.chat],
     }),
+    // ! for refresh chat
+    refreshChat: build.mutation({
+      query: (data: any) => ({
+        url: `${Chat_URL}/refresh`,
+        method: "POST",
+        body: data,
+        headers: {
+          Authorization: `${getFromLocalStorage("user")}`,
+        },
+      }),
+      invalidatesTags: [tagTypes.chat],
+    }),
 
     // getMessage: build.mutation({
     //   query: (data: any) => ({
@@ -76,4 +88,5 @@ export const {
   useDeleteChatMutation,
   // useGetMessageMutation,
   useGetUserMessageQuery,
+  useRefreshChatMutation
 } = ChatApi;
