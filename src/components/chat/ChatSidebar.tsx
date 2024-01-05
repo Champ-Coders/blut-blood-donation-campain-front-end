@@ -72,17 +72,14 @@ export default function ChatSidebar() {
               <div className="relative">
                 <Image
                   className="flex h-10 w-10 items-center justify-center rounded-full bg-gray-400 ring-8 ring-white"
-                  src="https://placehold.co/200x/ffa8e4/ffffff.svg?text=ʕ•́ᴥ•̀ʔ&font=Lato"
+                  src={user?.img}
                   alt=""
                   width={40}
                   height={40}
                 />
 
-                <span className="absolute -bottom-0.5 -right-1 rounded-tl bg-white px-0.5 py-px">
-                  <IoChatbubbleEllipses
-                    className="h-5 w-5 text-gray-400"
-                    aria-hidden="true"
-                  />
+                <span className="absolute -bottom-0.5 -right-1 rounded-tl  px-0.5 py-px">
+                  <div className="max-h-[2px] max-w-[2px] bg-[#4EAB5F] text-[#4EAB5F] rounded-[100%] p-2"></div>
                 </span>
                 {/* delete */}
               </div>
