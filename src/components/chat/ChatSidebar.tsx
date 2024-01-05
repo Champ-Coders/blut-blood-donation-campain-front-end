@@ -3,6 +3,13 @@ import { useChatUsersQuery } from "@/redux/Api/chatApi";
 import { Image, Skeleton } from "antd";
 import Link from "next/link";
 import React from "react";
+import { IoChatbubbleEllipses } from "react-icons/io5";
+import {
+  formatDistanceToNowStrict,
+  format,
+  formatRelative,
+  subDays,
+} from "date-fns";
 
 export default function ChatSidebar() {
   const { data, isLoading } = useChatUsersQuery({});
@@ -57,31 +64,44 @@ export default function ChatSidebar() {
         {isLoading && <Skeleton avatar paragraph={{ rows: 1 }} />}
         {userData?.map((user: any, index: number) => {
           return (
-            <div key={index}>
-              <Link
-                href={`/chat/${user?._id}?name=${user?.name}`}
-                className="flex items-center mb-4 cursor-pointer hover:bg-gray-100 p-2 rounded-md"
-              >
-                <div className="flex justify-end items-baseline gap-0 bg-gray-30 rounded-full mr-3">
-                  <Image
-                    src="https://placehold.co/200x/ffa8e4/ffffff.svg?text=ʕ•́ᴥ•̀ʔ&font=Lato"
-                    alt="User Avatar"
-                    style={{
-                      width: "3rem",
-                      height: "3rem",
-                      borderRadius: "50%",
-                    }}
-                    // className="w-12 h-12 rounded-full"
+            <div
+              key={index}
+              className="relative flex items-start space-x-3 space-y-4"
+            >
+              <div className="relative">
+                <Image
+                  className="flex h-10 w-10 items-center justify-center rounded-full bg-gray-400 ring-8 ring-white"
+                  src="https://placehold.co/200x/ffa8e4/ffffff.svg?text=ʕ•́ᴥ•̀ʔ&font=Lato"
+                  alt=""
+                  width={40}
+                  height={40}
+                />
+
+                <span className="absolute -bottom-0.5 -right-1 rounded-tl bg-white px-0.5 py-px">
+                  <IoChatbubbleEllipses
+                    className="h-5 w-5 text-gray-400"
+                    aria-hidden="true"
                   />
-                  <div className="max-h-[2px] max-w-[2px] bg-[#4EAB5F] text-[#4EAB5F] rounded-[100%] p-2"></div>
-                </div>
-                <div className="flex-1">
-                  <h2 className="text-lg font-semibold">{user?.name}</h2>
-                  <p className="text-gray-600">
-                    {index + 2} bag need. I am {user?.name}
+                </span>
+                {/* delete */}
+              </div>
+              <div className="min-w-0 flex-1">
+                <div>
+                  <h1 className="text-lg">{user?.name}</h1>
+                  <p className="mt-0.5 text-sm text-gray-500">
+                    Messaged{" "}
+                    {/* {formatDistanceToNowStrict(new Date(user?.chatTime))}
+                    ago */}
+                    {formatRelative(
+                      subDays(new Date(user?.chatTime), 3),
+                      new Date(user?.chatTime)
+                    )}
                   </p>
                 </div>
-              </Link>
+                <div className="mt-2 text-sm text-gray-700">
+                  <p>Any one available now to chat?</p>
+                </div>
+              </div>
             </div>
           );
         })}
