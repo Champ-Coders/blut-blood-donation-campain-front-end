@@ -35,7 +35,7 @@ const ChatSkelleton: React.FC = () => {
 
   return (
     <>
-      <Switch checked={!loading} onChange={onChange} style={{ marginBottom: 16 }} />
+      {/* <Switch checked={!loading} onChange={onChange} style={{ marginBottom: 16 }} /> */}
       <List
         itemLayout="vertical"
         size="large"
