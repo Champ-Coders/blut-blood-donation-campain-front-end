@@ -1,6 +1,6 @@
 "use client";
 import { useChatUsersQuery } from "@/redux/Api/chatApi";
-import { Image, Skeleton } from "antd";
+import { Skeleton } from "antd";
 import Link from "next/link";
 import React from "react";
 import { IoChatbubbleEllipses } from "react-icons/io5";
@@ -10,6 +10,8 @@ import {
   formatRelative,
   subDays,
 } from "date-fns";
+import userIcon from "../../../public/assets/icon/userIcon.png";
+import Image from "next/image";
 
 export default function ChatSidebar() {
   const { data, isLoading } = useChatUsersQuery({});
@@ -72,7 +74,7 @@ export default function ChatSidebar() {
               <div className="relative">
                 <Image
                   className="flex h-10 w-10 items-center justify-center rounded-full bg-gray-400 ring-8 ring-white"
-                  src={user?.img}
+                  src={user?.imgUrl || userIcon}
                   alt=""
                   width={40}
                   height={40}
