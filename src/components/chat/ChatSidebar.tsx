@@ -64,7 +64,8 @@ export default function ChatSidebar() {
         {isLoading && <Skeleton avatar paragraph={{ rows: 1 }} />}
         {userData?.map((user: any, index: number) => {
           return (
-            <div
+            <Link
+              href={`/chat/${user?._id}?name=${user?.name}`}
               key={index}
               className="relative flex items-start space-x-3 space-y-4"
             >
@@ -102,7 +103,7 @@ export default function ChatSidebar() {
                   <p>Any one available now to chat?</p>
                 </div>
               </div>
-            </div>
+            </Link>
           );
         })}
       </div>
