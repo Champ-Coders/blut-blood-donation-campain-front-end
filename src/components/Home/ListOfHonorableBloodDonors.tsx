@@ -8,7 +8,6 @@ import Link from "next/link";
 import Slider from "react-slick";
 import DonateCart from "../DonateList/DonateCart";
 
-import LoadingPage from "@/app/loading";
 import { IUser } from "@/interfaces/common";
 import { useGetAllUsersQuery } from "@/redux/Api/authApi/AuthApi";
 import bg from "../../../public/assets/list blood donar/bg.jpg";
@@ -28,11 +27,8 @@ const ListOfHonorableBloodDonors: React.FC<
     cssEase: "linear",
   };
 
-  const { data: users, isLoading } = useGetAllUsersQuery(undefined);
+  const { data: users } = useGetAllUsersQuery(undefined);
 
-  if (isLoading) {
-    return <LoadingPage />;
-  }
 
   const sortedUsers = users?.data?.data
     .filter((user: IUser) => user.totalDonation !== 0)
@@ -128,8 +124,8 @@ const ListOfHonorableBloodDonors: React.FC<
                     রক্তদাতাদের তালিকা
                   </h4>
                   <div>
-                    {donateValue.map((donate) => (
-                      <Link key={donate.id} href={`/donate-list`}>
+                    {donateValue?.map((donate) => (
+                      <Link key={donate?.id} href={`/donate-list`}>
                         <div className="">
                           <div
                             className="w-full h-full relative items-center justify-start overflow-hidden transition-all bg-white rounded hover:bg-white group 
@@ -147,11 +143,11 @@ const ListOfHonorableBloodDonors: React.FC<
                                     {donate.key}
                                   </span> */}
                                   <span className="text-[12px]">
-                                    {donate.club}
+                                    {donate?.club}
                                   </span>
                                 </p>
                                 <p className="text-[#111] group-hover:text-white">
-                                  {donate.key}
+                                  {donate?.key}
                                 </p>
                               </div>
                               <IoIosArrowForward className="text-[#111] group-hover:text-white" />

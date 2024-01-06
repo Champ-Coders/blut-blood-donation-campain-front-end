@@ -1,11 +1,15 @@
-import { events } from "@/constants/Event";
+"use client";
+
 import React from "react";
 import EventCard from "../EventCard/EventCard";
 import Link from "next/link";
+import { useEventsQuery } from "@/redux/Api/eventApi";
+import { IEvent } from "@/interfaces/common";
 
 type HomeEventProps = {};
 
 const HomeEvent: React.FC<HomeEventProps> = () => {
+  const { data: events } = useEventsQuery(undefined);
   return (
     <section>
       <div className="common">
@@ -27,7 +31,7 @@ const HomeEvent: React.FC<HomeEventProps> = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 mt-[100px]">
-          {events.slice(0, 3).map((item) => (
+          {events?.data?.slice(0, 3).map((item:IEvent) => (
             <EventCard key={item.id} item={item} />
           ))}
         </div>
