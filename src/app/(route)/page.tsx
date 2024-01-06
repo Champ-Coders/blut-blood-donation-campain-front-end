@@ -33,7 +33,7 @@ export default function Home() {
       <Testimonials />
       {/* <BloodOwner /> */}
       <TeamMember />
-      {/* <News /> */}
+      <News />
       <FaqQuestion />
       <FeedBackForum />
 
