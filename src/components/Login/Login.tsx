@@ -1,13 +1,18 @@
 "use client";
 import React, { useState } from "react";
 import { FaPhone, FaLocationDot, FaEnvelope } from "react-icons/fa6";
-import { SubmitHandler, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import InputField from "../InputField/InputField";
 import Link from "next/link";
 import { useUserLoginMutation } from "@/redux/Api/authApi/AuthApi";
 import { useRouter } from "next/navigation";
+
 import { ExclamationCircleOutlined } from "@ant-design/icons";
 import { Button, Modal, Space, message } from "antd";
+
+import { FaRegUser } from "react-icons/fa";
+import { GrUserAdmin } from "react-icons/gr";
+
 
 const Login = () => {
   const {
@@ -46,6 +51,68 @@ const Login = () => {
       message.error(error?.data?.message);
     }
   };
+
+  const handleSubmitAdmin = async () => {
+    const data = {
+      email: "admin@admin.com",
+      password: "admin",
+    };
+
+    try {
+      const response = await userLogin(data).unwrap();
+      console.log(response);
+      if (response?.success) {
+        // console.log(response);
+        message.success(response.message);
+        router.push("/");
+      } else {
+        console.log(response);
+        message.error(response?.message);
+      }
+    } catch (error: any) {
+      console.log(error, "login error");
+      message.error(error?.data?.message);
+    }
+  };
+
+  const handleSubmitUser = async () => {
+    const data = {
+      email: "masudhossainmbs129@gmail.com",
+      password: "mf123456789",
+    };
+
+    try {
+      const response = await userLogin(data).unwrap();
+      console.log(response);
+      if (response?.success) {
+        // console.log(response);
+        message.success(response.message);
+        router.push("/");
+      } else {
+        console.log(response);
+        message.error(response?.message);
+      }
+    } catch (error: any) {
+      console.log(error, "login error");
+      message.error(error?.data?.message);
+    }
+  };
+
+  const handleAutoFill = [
+    {
+      id: 1,
+      name: "Login-(Admin)",
+      handleButtonClick: handleSubmitAdmin,
+      svg: GrUserAdmin,
+    },
+    {
+      id: 2,
+      name: "Login-(User)",
+      handleButtonClick: handleSubmitUser,
+      svg: FaRegUser,
+    },
+  ];
+
   return (
     <div className="py-10 px-10 sm:px-24 mb-48">
       <div className="container mx-auto py-6 sm:py-12 px-0 sm:px-7 md:px-16 max-w-6xl flex justify-between lg:flex-row items-center gap-5 sm:gap-12 flex-col-reverse">
@@ -113,6 +180,50 @@ const Login = () => {
               </p>
             </div>
           </form>
+
+          <div className="flex justify-between items-center mt-4">
+            <div className="w-1/2">
+              <span className="border-b border-gray-300 block w-full"></span>
+            </div>
+            <p className="text-gray-400 text-sm">Or</p>
+            <div className="w-1/2">
+              <span className="border-b border-gray-300 block w-full"></span>
+            </div>
+          </div>
+
+          {/* AutoFill Button */}
+          <div className="flex justify-between flex-col md:flex-row gap-3 items-center mt-4">
+            {handleAutoFill?.map((item) => (
+              <Button
+                key={item.id}
+                onClick={item.handleButtonClick}
+                loading={isLoading}
+                className="
+
+                w-full
+                flex 
+                gap-3 
+                cursor-pointer 
+                text-white  
+                bg-gradient-to-r 
+                from-primary
+                to-red-300
+               
+                rounded-full 
+                border 
+                border-primary/70
+                hover:scale-105 
+                duration-300 
+                hover:text-white 
+                hover:border-primary/70 
+                hover:from-primary
+                hover:to-primary/40"
+              >
+                <item.svg className="w-[20px] h-[20px]" />
+                {item.name}
+              </Button>
+            ))}
+          </div>
         </div>
 
         <div className="lg:w-1/2 lg:text-start text-center w-full">

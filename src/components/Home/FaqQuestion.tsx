@@ -1,17 +1,9 @@
+"use client";
 import React from "react";
 import Faq from "../Faq/Faq";
 import { useFaqsQuery } from "@/redux/Api/faqsApi";
 
-// async function getData() {
-//   const res = await fetch(`${config.apiBaseUrl}/faqs`);
-//   if (!res.ok) {
-//     // This will activate the closest `error.js` Error Boundary
-//     throw new Error("Failed to fetch data");
-//   }
-//   return res.json();
-// }
-const FaqQuestion = async () => {
-  // const faqs = await getData();
+const FaqQuestion = () => {
   const { data: faqs } = useFaqsQuery(undefined);
 
   return (
