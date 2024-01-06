@@ -31,7 +31,7 @@ export default function Home() {
 
       <PopularCampaigns />
       <Testimonials />
-      {/* <BloodOwner /> */}
+      <BloodOwner />
       <TeamMember />
       <News />
       <FaqQuestion />
