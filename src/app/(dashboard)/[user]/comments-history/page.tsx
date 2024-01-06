@@ -16,6 +16,7 @@ import {
   useUpdateBlogCommentMutation,
 } from "@/redux/Api/blogCommentApi/blogCommentApi";
 import { useUserProfileQuery } from "@/redux/Api/authApi/AuthApi";
+import { getUserDataFromLC } from "@/utils/local-storage";
 
 const UserReview = () => {
   const [searchText, setSearchText] = useState<string>("");
@@ -35,12 +36,8 @@ const UserReview = () => {
 
   // query and mutation
 
-
-  const { data:userInfo, } = useUserProfileQuery(undefined, {
-    refetchOnMountOrArgChange: true,
-  });
-
-  const user = userInfo?.data
+  // const user = userInfo?.data;
+  const user = getUserDataFromLC();
 
   const [updateBlogComment, { isLoading: updateLoading }] =
     useUpdateBlogCommentMutation();
@@ -49,9 +46,7 @@ const UserReview = () => {
     useDeleteBlogCommentMutation();
 
   // get review by user id
-  const { data: comments, isLoading } = useGetCommentsByUserIdQuery(
-    user?.id as string
-  );
+  const { data: comments, isLoading } = useGetCommentsByUserIdQuery(user?.id);
 
   // filter review by review, service titlee, user name
   const filteredCommentsData = comments?.data?.filter((review: any) => {
