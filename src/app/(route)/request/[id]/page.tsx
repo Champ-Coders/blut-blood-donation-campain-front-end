@@ -5,10 +5,13 @@ import MultiSelect from "@/components/MultiSelector/MultiSelector";
 import TextAreaField from "@/components/TextAreaField/TextAreaField";
 import { blood_groups } from "@/constants/Register";
 import { IUser } from "@/interfaces/common";
-import { useGetSingleUserQuery, useUserProfileQuery } from "@/redux/Api/authApi/AuthApi";
+import {
+  useGetSingleUserQuery,
+  useUserProfileQuery,
+} from "@/redux/Api/authApi/AuthApi";
 import { useRequestForBloodMutation } from "@/redux/Api/donationApi/DonationApi";
 
-import { message } from "antd";
+import { Button, message } from "antd";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 
@@ -19,16 +22,17 @@ const DonateNow = ({ params }: { params: { id: string } }) => {
     setValue,
     formState: { errors },
   } = useForm();
-  const [request] = useRequestForBloodMutation(undefined);
+  const [request, { isLoading: updateLoading }] =
+    useRequestForBloodMutation(undefined);
   const router = useRouter();
 
   const { data, isLoading } = useGetSingleUserQuery(params.id);
 
-  const { data:userInfo, } = useUserProfileQuery(undefined, {
+  const { data: userInfo } = useUserProfileQuery(undefined, {
     refetchOnMountOrArgChange: true,
   });
 
-  const user = userInfo?.data
+  const user = userInfo?.data;
 
   const userData: IUser = data?.data;
 
@@ -127,13 +131,14 @@ const DonateNow = ({ params }: { params: { id: string } }) => {
                 />
               </div>
             </div>
-            <button
-              type="submit"
-              className="relative max-w-md rounded px-5 py-2 overflow-hidden group bg-primary  hover:bg-black text-white transition-all ease-out duration-300"
+            <Button
+              loading={updateLoading}
+              htmlType="submit"
+              className="relative max-w-md rounded px-5  overflow-hidden group bg-primary  hover:bg-black text-white transition-all ease-out duration-300 w-full"
             >
               <span className="absolute right-0 w-8 h-32 -mt-12 transition-all duration-1000 transform translate-x-10 bg-white opacity-10 rotate-12 group-hover:-translate-x-40 ease"></span>
               <span className="relative">Request</span>
-            </button>
+            </Button>
           </div>
         </form>
       </div>
