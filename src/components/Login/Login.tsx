@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FaPhone, FaLocationDot, FaEnvelope } from "react-icons/fa6";
 import { useForm } from "react-hook-form";
 import InputField from "../InputField/InputField";
@@ -12,7 +12,7 @@ import { Button, Modal, Space, message } from "antd";
 
 import { FaRegUser } from "react-icons/fa";
 import { GrUserAdmin } from "react-icons/gr";
-
+import ForgetPasswordForm from "./ForgetPasswordForm";
 
 const Login = () => {
   const {
@@ -24,15 +24,15 @@ const Login = () => {
 
   const [userLogin, { isLoading }] = useUserLoginMutation();
   const router = useRouter();
-  const [open, setOpen] = useState(false);
-
-  const showModal = () => {
-    setOpen(true);
-  };
-
-  const hideModal = () => {
-    setOpen(false);
-  };
+  const [isModalOpen, setIsModalOpen] = useState([false, false]);
+  // prevent hydration error
+  const [hydrated, setHydrated] = useState(false);
+  useEffect(() => {
+    setHydrated(true);
+  }, []);
+  if (!hydrated) {
+    return null;
+  }
 
   const onSubmit = async (data: any) => {
     try {
@@ -77,8 +77,8 @@ const Login = () => {
 
   const handleSubmitUser = async () => {
     const data = {
-      email: "masudhossainmbs129@gmail.com",
-      password: "mf123456789",
+      email: "abcde@gmail.com",
+      password: "12345",
     };
 
     try {
@@ -113,6 +113,13 @@ const Login = () => {
     },
   ];
 
+  const toggleModal = (idx: number, target: boolean) => {
+    setIsModalOpen((p) => {
+      p[idx] = target;
+      return [...p];
+    });
+  };
+
   return (
     <div className="py-10 px-10 sm:px-24 mb-48">
       <div className="container mx-auto py-6 sm:py-12 px-0 sm:px-7 md:px-16 max-w-6xl flex justify-between lg:flex-row items-center gap-5 sm:gap-12 flex-col-reverse">
@@ -145,21 +152,11 @@ const Login = () => {
               />
 
               <p
-                onClick={showModal}
+                onClick={() => toggleModal(0, true)}
                 className="text-sm text-end pt-2 cursor-pointer"
               >
                 Forget Password
               </p>
-              <Modal
-                title="Forget Password"
-                open={open}
-                onOk={hideModal}
-                footer={null}
-              >
-                <p>Bla bla ...</p>
-                <p>Bla bla ...</p>
-                <p>Bla bla ...</p>
-              </Modal>
             </div>
 
             <div className="w-full">
@@ -180,7 +177,10 @@ const Login = () => {
               </p>
             </div>
           </form>
-
+          <ForgetPasswordForm
+            isModalOpen={isModalOpen}
+            toggleModal={toggleModal}
+          />
           <div className="flex justify-between items-center mt-4">
             <div className="w-1/2">
               <span className="border-b border-gray-300 block w-full"></span>
