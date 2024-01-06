@@ -10,22 +10,22 @@ import React, { Fragment } from "react";
 import userIcon from "../../../../public/assets/icon/userIcon.png";
 import Logo from "../../../../public/assets/logo-light.png";
 
-import { logout } from "@/utils/local-storage";
+import { getUserDataFromLC, logout } from "@/utils/local-storage";
 import { Menu, Transition } from "@headlessui/react";
 import { message } from "antd";
 import { useRouter } from "next/navigation";
 
 import Notification from "@/components/Notification/Notification";
-import { useUserProfileQuery } from "@/redux/Api/authApi/AuthApi";
 
 const MainHeader = () => {
   const [open, setOpen] = React.useState(false);
 
-  const { data: user } = useUserProfileQuery(undefined, {
-    refetchOnMountOrArgChange: true,
-  })
+  // const { data: user } = useUserProfileQuery(undefined, {
+  //   refetchOnMountOrArgChange: true,
+  // })
 
-  const userInfo = user?.data;
+  // const userInfo = user?.data;
+  const userInfo = getUserDataFromLC();
 
   // const { data } = useUserProfileQuery(null);
   // const userInfo = data?.data;
@@ -33,8 +33,6 @@ const MainHeader = () => {
   function classNames(...classes: any) {
     return classes.filter(Boolean).join(" ");
   }
-
-  // console.log(userInfo);
 
   //! SignOut  section
   const router = useRouter();
@@ -142,19 +140,7 @@ const MainHeader = () => {
                       </Link>
                     )}
                   </Menu.Item>
-                  <Menu.Item>
-                    {({ active }) => (
-                      <a
-                        href="#"
-                        className={classNames(
-                          active ? "bg-gray-100" : "",
-                          "block px-4 py-2 text-sm text-gray-700"
-                        )}
-                      >
-                        Settings
-                      </a>
-                    )}
-                  </Menu.Item>
+
                   <Menu.Item>
                     {({ active }) => (
                       <button
