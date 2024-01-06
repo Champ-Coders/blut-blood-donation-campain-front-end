@@ -13,6 +13,8 @@ import InputField from "../InputField/InputField";
 import ChatSkelleton from "../skeleton/ChatSkeleton";
 import Image from "next/image";
 import userIcon from "../../../public/assets/icon/userIcon.png";
+import { LeftOutlined } from "@ant-design/icons";
+import Link from "next/link";
 
 export default function ChatContainer({ senderId }: { senderId: string }) {
   //! get user profile data
@@ -37,7 +39,9 @@ export default function ChatContainer({ senderId }: { senderId: string }) {
       // id: chatMessages.length + 1,
       message: data.message,
       time: new Date().toLocaleTimeString(),
-      img: userInfo?.data.imgUrl || "",
+      img:
+        userInfo?.data.imgUrl ||
+        "https://img.freepik.com/free-photo/confident-attractive-caucasian-guy-beige-pullon-smiling-broadly-while-standing-against-gray_176420-44508.jpg?w=1380&t=st=1704185130~exp=1704185730~hmac=59e603b1b189517200baee240e19841cac32cac33e3b18bf388d3af232517699",
       status: "online",
       type: "reply",
       email: userInfo?.data.email,
@@ -70,7 +74,7 @@ export default function ChatContainer({ senderId }: { senderId: string }) {
 
   // console.log("messageData", messageData);
   return (
-    <div className="">
+    <div className="w-full">
       <div className="h-screen overflow-y-auto p-4 pb-36">
         {isLoading || (messageData?.data?.length < 1 && <ChatSkelleton />)}
         {messageData?.data?.map((liveChat: any) => {
@@ -108,11 +112,7 @@ export default function ChatContainer({ senderId }: { senderId: string }) {
                   src={
                     liveChat.types === "reply"
                       ? "https://i.ibb.co/VxhHWhd/professional-Side.png"
-                      : `${
-                          liveChat?.img
-                            ? liveChat.img
-                            : userIcon
-                        }`
+                      : `${liveChat?.img ? liveChat.img : userIcon}`
                   }
                   alt="My profile"
                   className={`w-6 h-6 rounded-full ${
