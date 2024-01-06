@@ -20,6 +20,7 @@ import MultiSelect from "@/components/MultiSelector/MultiSelector";
 import { useServicesQuery } from "@/redux/Api/serviceApi";
 
 import { useUserProfileQuery } from "@/redux/Api/authApi/AuthApi";
+import { getUserDataFromLC } from "@/utils/local-storage";
 
 const UserReview = () => {
   const [searchText, setSearchText] = useState<string>("");
@@ -48,11 +49,8 @@ const UserReview = () => {
   }));
 
   // query and mutation
-  const { data:userInfo, } = useUserProfileQuery(undefined, {
-    refetchOnMountOrArgChange: true,
-  });
+  const user = getUserDataFromLC();
 
-  const user = userInfo?.data
   const [updateReview, { isLoading: updateLoading }] =
     useUpdateReviewMutation();
   const [deleteReview, { isLoading: deleteLoading }] =

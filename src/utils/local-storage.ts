@@ -16,6 +16,7 @@ type IUserInfo = {
   id: string;
   email: string;
   role: string;
+  imgUrl?: string;
 };
 export const getUserDataFromLC = (): IUserInfo | null => {
   const token = getFromLocalStorage("user");

@@ -1,5 +1,7 @@
 const config = {
-  apiBaseUrl: "https://blut-blood-donation-server.onrender.com/api/v1",
+  apiBaseUrl:
+    "https://redirect-blood-donation-campain-server.vercel.app/api/v1",
+  // "https://blut-blood-donation-server.onrender.com/api/v1",
   // "http://localhost:5000/api/v1",
 
   imageBbKey:
