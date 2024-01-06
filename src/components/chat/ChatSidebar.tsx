@@ -12,12 +12,20 @@ import {
 } from "date-fns";
 import userIcon from "../../../public/assets/icon/userIcon.png";
 import Image from "next/image";
+import { useSearchParams } from "next/navigation";
 
 export default function ChatSidebar() {
   const { data, isLoading } = useChatUsersQuery({});
-  console.log("🚀 ~ file: ChatSidebar.tsx:7 ~ ChatSidebar ~ data:", data);
+  // console.log("🚀 ~ file: ChatSidebar.tsx:7 ~ ChatSidebar ~ data:", data);
 
   const userData = data?.data;
+  const searchParams = useSearchParams();
+
+  const ActiveName = searchParams.get("name");
+  console.log(
+    "🚀 ~ file: ChatSidebar.tsx:25 ~ ChatSidebar ~ ActiveName:",
+    ActiveName
+  );
 
   return (
     <div className="w-full bg-white border-r border-gray-300">
@@ -69,7 +77,10 @@ export default function ChatSidebar() {
             <Link
               href={`/chat/${user?._id}?name=${user?.name}`}
               key={index}
-              className="relative flex items-start space-x-3 space-y-4"
+              className={`${
+                ActiveName === user?.name &&
+                "bg-primary text-white font-semibold"
+              } relative flex items-start space-x-3   space-y-4 my-3 rounded-md`}
             >
               <div className="relative">
                 <Image
@@ -88,7 +99,13 @@ export default function ChatSidebar() {
               <div className="min-w-0 flex-1">
                 <div>
                   <h1 className="text-lg">{user?.name}</h1>
-                  <p className="mt-0.5 text-sm text-gray-500">
+                  <p
+                    className={`mt-0.5 text-sm  ${
+                      ActiveName === user?.name
+                        ? "text-gray-100"
+                        : "text-gray-500 "
+                    }`}
+                  >
                     Messaged{" "}
                     {/* {formatDistanceToNowStrict(new Date(user?.chatTime))}
                     ago */}
@@ -98,7 +115,13 @@ export default function ChatSidebar() {
                     )}
                   </p>
                 </div>
-                <div className="mt-2 text-sm text-gray-700">
+                <div
+                  className={`mt-1 text-sm  ${
+                    ActiveName === user?.name
+                      ? "text-gray-200"
+                      : "text-gray-500 "
+                  }`}
+                >
                   <p>Any one available now to chat?</p>
                 </div>
               </div>

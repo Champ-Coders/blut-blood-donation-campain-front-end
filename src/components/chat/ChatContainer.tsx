@@ -12,6 +12,7 @@ import InputField from "../InputField/InputField";
 
 import ChatSkelleton from "../skeleton/ChatSkeleton";
 import Image from "next/image";
+import userIcon from "../../../public/assets/icon/userIcon.png";
 
 export default function ChatContainer({ senderId }: { senderId: string }) {
   //! get user profile data
@@ -63,7 +64,8 @@ export default function ChatContainer({ senderId }: { senderId: string }) {
       setChatMessages(messageData?.data);
       refreshChat(data);
     });
-  }, [refreshChat,messageData]);
+  }, [refreshChat, messageData]);
+
   // console.log("messageData", messageData);
   return (
     <div className="">
@@ -104,7 +106,11 @@ export default function ChatContainer({ senderId }: { senderId: string }) {
                   src={
                     liveChat.types === "reply"
                       ? "https://i.ibb.co/VxhHWhd/professional-Side.png"
-                      : "https://i.ibb.co/jRrMTKb/userIcon.png"
+                      : `${
+                          liveChat?.img
+                            ? liveChat.img
+                            : userIcon
+                        }`
                   }
                   alt="My profile"
                   className={`w-6 h-6 rounded-full ${

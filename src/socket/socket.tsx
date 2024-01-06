@@ -10,6 +10,7 @@ import { io } from "socket.io-client";
 const socket = io(config.socketServerURL, {
   transports: ["websocket", "polling"],
   // query: { user: JSON.stringify(user) }, // Serialize user data here
+  
 });
 
 export default socket;
