@@ -1,11 +1,17 @@
 "use client";
 import ChatContainer from "@/components/chat/ChatContainer";
 import ChatSidebar from "@/components/chat/ChatSidebar";
+import { useChatUsersQuery } from "@/redux/Api/chatApi";
 import socket from "@/socket/socket";
 
 import React, { useEffect, useState } from "react";
 
 export default function ChatAdminnPage() {
+  const { data, isLoading } = useChatUsersQuery({});
+
+  const userData = data?.data;
+  console.log("🚀 ~ file: page.tsx:15 ~ ChatAdminnPage ~ userData:", userData);
+
   return (
     // <div className="flex h-screen overflow-hidden relative">
     //   <ChatSidebar />

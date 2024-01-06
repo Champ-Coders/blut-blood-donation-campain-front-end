@@ -12,6 +12,7 @@ import InputField from "../InputField/InputField";
 
 import ChatSkelleton from "../skeleton/ChatSkeleton";
 import Image from "next/image";
+import userIcon from "../../../public/assets/icon/userIcon.png";
 
 export default function ChatContainer({ senderId }: { senderId: string }) {
   //! get user profile data
@@ -108,7 +109,7 @@ export default function ChatContainer({ senderId }: { senderId: string }) {
                       : `${
                           liveChat?.img
                             ? liveChat.img
-                            : "https://i.ibb.co/jRrMTKb/userIcon.png"
+                            : userIcon
                         }`
                   }
                   alt="My profile"
