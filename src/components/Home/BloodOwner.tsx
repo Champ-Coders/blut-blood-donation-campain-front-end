@@ -1,21 +1,10 @@
+"use client";
 import { FaHeart, FaPlay } from "react-icons/fa";
 import React from "react";
 import AppointmentForm from "../AppointmentForm/AppointmentForm";
 import { useGetAllUsersQuery } from "@/redux/Api/authApi/AuthApi";
 
-// async function getData() {
-//   const res = await fetch(`${config.apiBaseUrl}/users/all-users`);
-
-//   if (!res.ok) {
-//     // This will activate the closest `error.js` Error Boundary
-//     throw new Error("Failed to fetch data");
-//   }
-
-//   return res.json();
-// }
-
-const BloodOwner = async () => {
-  // const allBlood = await getData();
+const BloodOwner = () => {
   const { data: allBlood } = useGetAllUsersQuery(undefined);
 
   const availableDonor = allBlood?.data?.data?.filter((item: any) => {

@@ -52,7 +52,7 @@ const DraggableLiveModal = () => {
         // id: chatMessages.length + 1,
         message: messages,
         time: new Date().toLocaleTimeString(),
-        img: userInfo?.imgUrl || "",
+        img: userInfo?.imgUrl || "https://img.freepik.com/free-photo/confident-attractive-caucasian-guy-beige-pullon-smiling-broadly-while-standing-against-gray_176420-44508.jpg?w=1380&t=st=1704185130~exp=1704185730~hmac=59e603b1b189517200baee240e19841cac32cac33e3b18bf388d3af232517699",
         status: "online",
         types: "comment",
         email: userInfo?.email,
@@ -105,15 +105,15 @@ const DraggableLiveModal = () => {
                   <div
                     className={`flex ${
                       liveChat?.types !== "reply"
-                        ? "items-end "
-                        : "  items-end justify-end"
+                        ? "items-end justify-end"
+                        : "items-end "
                     } `}
                   >
                     <div
                       className={`flex flex-col space-y-2 text-xs max-w-xs mx-2 ${
                         liveChat?.types !== "reply"
-                          ? "order-2 items-start  "
-                          : " order-1 items-end"
+                          ? "order-1 items-end  "
+                          : " order-2 items-start"
                       } `}
                     >
                       <div>
@@ -138,7 +138,7 @@ const DraggableLiveModal = () => {
                       }
                       alt="My profile"
                       className={`w-6 h-6 rounded-full ${
-                        liveChat?.types !== "reply" ? "order-1" : "  order-2"
+                        liveChat?.types !== "reply" ? "order-1" : "  order-1"
                       } `}
                     />
                   </div>

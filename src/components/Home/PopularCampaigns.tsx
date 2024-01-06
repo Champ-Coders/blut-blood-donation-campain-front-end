@@ -9,12 +9,10 @@ import { FaCalendarDays, FaLocationDot } from "react-icons/fa6";
 import { FaClock } from "react-icons/fa";
 import { IPopularCamp } from "@/interfaces/common";
 import { useEventsQuery } from "@/redux/Api/eventApi";
-import LoadingPage from "@/app/loading";
 
 const PopularCampaigns = () => {
-  const { data: Events, isLoading } = useEventsQuery(undefined);
+  const { data: Events } = useEventsQuery(undefined);
 
-  if (isLoading) return <LoadingPage />;
 
   return (
     <section className=" relative  overflow-hidden bg-gradient-to-r py-12 sm:py-16 lg:pt-20">

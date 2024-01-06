@@ -9,12 +9,16 @@ import { Button, Input, Modal, Popconfirm, message } from "antd";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import TextAreaField from "@/components/TextAreaField/TextAreaField";
-import { getUserDataFromLC } from "@/utils/local-storage";
+
 import {
   useDeleteBlogCommentMutation,
   useGetCommentsByUserIdQuery,
   useUpdateBlogCommentMutation,
 } from "@/redux/Api/blogCommentApi/blogCommentApi";
+
+
+import { getUserDataFromLC } from "@/utils/local-storage";
+
 
 const UserReview = () => {
   const [searchText, setSearchText] = useState<string>("");
@@ -33,7 +37,12 @@ const UserReview = () => {
   } = useForm();
 
   // query and mutation
+
+
+  // const user = userInfo?.data;
   const user = getUserDataFromLC();
+
+
   const [updateBlogComment, { isLoading: updateLoading }] =
     useUpdateBlogCommentMutation();
   // delete comments
@@ -41,9 +50,7 @@ const UserReview = () => {
     useDeleteBlogCommentMutation();
 
   // get review by user id
-  const { data: comments, isLoading } = useGetCommentsByUserIdQuery(
-    user?.id as string
-  );
+  const { data: comments, isLoading } = useGetCommentsByUserIdQuery(user?.id);
 
   // filter review by review, service titlee, user name
   const filteredCommentsData = comments?.data?.filter((review: any) => {

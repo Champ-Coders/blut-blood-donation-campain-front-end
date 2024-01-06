@@ -55,7 +55,7 @@ const DonateList = ({ data }: { data: IUser }) => {
         data?.available === true ? (
           <Link
             href={`/request/${data?._id}`}
-            className="bg-primary text-white px-4 py-2 rounded-md text-center"
+            className="bg-primary text-white px-4 py-2 rounded-md text-center hover:bg-black hover:text-white transition-all ease-out duration-300  "
           >
             Request
           </Link>

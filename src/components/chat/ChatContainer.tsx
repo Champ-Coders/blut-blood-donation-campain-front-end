@@ -12,6 +12,9 @@ import InputField from "../InputField/InputField";
 
 import ChatSkelleton from "../skeleton/ChatSkeleton";
 import Image from "next/image";
+import userIcon from "../../../public/assets/icon/userIcon.png";
+import { LeftOutlined } from "@ant-design/icons";
+import Link from "next/link";
 
 export default function ChatContainer({ senderId }: { senderId: string }) {
   //! get user profile data
@@ -25,6 +28,9 @@ export default function ChatContainer({ senderId }: { senderId: string }) {
 
   //!@ for refresh messages
   const [refreshChat] = useRefreshChatMutation();
+  const [chatMessages, setChatMessages] = React.useState<any>(
+    messageData?.data || []
+  );
 
   const onSubmit = (data: any) => {
     // console.log("🚀 ~ file: ChatContainer.tsx:23 ~ onSubmit ~ data:", data);
@@ -33,7 +39,9 @@ export default function ChatContainer({ senderId }: { senderId: string }) {
       // id: chatMessages.length + 1,
       message: data.message,
       time: new Date().toLocaleTimeString(),
-      img: userInfo?.data.imgUrl || "",
+      img:
+        userInfo?.data.imgUrl ||
+        "https://img.freepik.com/free-photo/confident-attractive-caucasian-guy-beige-pullon-smiling-broadly-while-standing-against-gray_176420-44508.jpg?w=1380&t=st=1704185130~exp=1704185730~hmac=59e603b1b189517200baee240e19841cac32cac33e3b18bf388d3af232517699",
       status: "online",
       type: "reply",
       email: userInfo?.data.email,
@@ -46,21 +54,27 @@ export default function ChatContainer({ senderId }: { senderId: string }) {
     //   replyMessage
     // );
     socket.emit("send-message", replyMessage);
-    reset();
     refreshChat(replyMessage);
+    reset();
   };
   const scroll = React.useRef<HTMLDivElement>(null);
   useEffect(() => {
+    setChatMessages(messageData?.data);
     socket.on("update-message", (data) => {
       // scroll.current?.scrollIntoView({ behavior: "smooth" });
       // console.log("uuuuuuuuuuuuuuuuuuuu", data);
       // refetch();
+      scroll.current?.scrollIntoView({ behavior: "smooth" });
+      setChatMessages(messageData?.data);
       refreshChat(data);
     });
-  }, [refreshChat]);
+
+  }, [refreshChat, messageData]);
+
+
   // console.log("messageData", messageData);
   return (
-    <div className="">
+    <div className="w-full">
       <div className="h-screen overflow-y-auto p-4 pb-36">
         {isLoading || (messageData?.data?.length < 1 && <ChatSkelleton />)}
         {messageData?.data?.map((liveChat: any) => {
@@ -69,15 +83,15 @@ export default function ChatContainer({ senderId }: { senderId: string }) {
               <div
                 className={`flex ${
                   liveChat?.types === "reply"
-                    ? "items-end "
-                    : "  items-end justify-end"
+                    ? "items-end justify-end"
+                    : "  items-end "
                 } `}
               >
                 <div
                   className={`flex flex-col  space-y-2 text-xl max-w-2xl my-2 mx-2 ${
                     liveChat?.types === "reply"
-                      ? "order-2 items-start  "
-                      : " order-1 items-end"
+                      ? "order-1 items-end  "
+                      : " order-2 items-start"
                   } `}
                 >
                   <div>
@@ -98,11 +112,11 @@ export default function ChatContainer({ senderId }: { senderId: string }) {
                   src={
                     liveChat.types === "reply"
                       ? "https://i.ibb.co/VxhHWhd/professional-Side.png"
-                      : "https://i.ibb.co/jRrMTKb/userIcon.png"
+                      : `${liveChat?.img ? liveChat.img : userIcon}`
                   }
                   alt="My profile"
                   className={`w-6 h-6 rounded-full ${
-                    liveChat?.types === "reply" ? "order-1" : "  order-2"
+                    liveChat?.types === "reply" ? "order-2" : "  order-1"
                   } `}
                 />
               </div>
