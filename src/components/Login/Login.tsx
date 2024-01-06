@@ -1,12 +1,13 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import { FaPhone, FaLocationDot, FaEnvelope } from "react-icons/fa6";
 import { SubmitHandler, useForm } from "react-hook-form";
 import InputField from "../InputField/InputField";
 import Link from "next/link";
 import { useUserLoginMutation } from "@/redux/Api/authApi/AuthApi";
-import { Button, message } from "antd";
 import { useRouter } from "next/navigation";
+import { ExclamationCircleOutlined } from "@ant-design/icons";
+import { Button, Modal, Space, message } from "antd";
 
 const Login = () => {
   const {
@@ -18,11 +19,19 @@ const Login = () => {
 
   const [userLogin, { isLoading }] = useUserLoginMutation();
   const router = useRouter();
+  const [open, setOpen] = useState(false);
+
+  const showModal = () => {
+    setOpen(true);
+  };
+
+  const hideModal = () => {
+    setOpen(false);
+  };
 
   const onSubmit = async (data: any) => {
-    
     try {
-      const response = (await userLogin(data).unwrap()) 
+      const response = await userLogin(data).unwrap();
       console.log(response);
       if (response?.success) {
         // console.log(response);
@@ -68,9 +77,22 @@ const Login = () => {
                 errors={errors}
               />
 
-              <p className="text-sm text-end pt-2 cursor-pointer">
+              <p
+                onClick={showModal}
+                className="text-sm text-end pt-2 cursor-pointer"
+              >
                 Forget Password
               </p>
+              <Modal
+                title="Forget Password"
+                open={open}
+                onOk={hideModal}
+                footer={null}
+              >
+                <p>Bla bla ...</p>
+                <p>Bla bla ...</p>
+                <p>Bla bla ...</p>
+              </Modal>
             </div>
 
             <div className="w-full">
