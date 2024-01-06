@@ -7,11 +7,13 @@ const PrimaryButton = ({
   data: { text: string; link: string };
 }) => {
   return (
-    <Link
-      className="bg-primary text-center text-xl text-white p-3 h-[56px] w-[188px] hover:bg-black hover:text-white border-2 hover:border-primary"
-      href={link}
-    >
-      {text}
+    <Link className="no-underline" href={link}>
+      <button
+        className="relative rounded sm:px-5 py-2 sm:py-3  px-3 overflow-hidden group bg-primary text-lg sm:text-xl  hover:bg-black text-white transition-all ease-out duration-300"
+      >
+        <span className="absolute right-0 w-8 h-32 -mt-12 transition-all duration-1000 transform translate-x-10 bg-white opacity-10 rotate-12 group-hover:-translate-x-[450px] ease"></span>
+        <span className="relative">{text}</span>
+      </button>
     </Link>
   );
 };
