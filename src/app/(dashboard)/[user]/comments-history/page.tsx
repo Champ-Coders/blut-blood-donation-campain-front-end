@@ -15,8 +15,10 @@ import {
   useGetCommentsByUserIdQuery,
   useUpdateBlogCommentMutation,
 } from "@/redux/Api/blogCommentApi/blogCommentApi";
-import { useUserProfileQuery } from "@/redux/Api/authApi/AuthApi";
+
+
 import { getUserDataFromLC } from "@/utils/local-storage";
+
 
 const UserReview = () => {
   const [searchText, setSearchText] = useState<string>("");
@@ -36,8 +38,10 @@ const UserReview = () => {
 
   // query and mutation
 
+
   // const user = userInfo?.data;
   const user = getUserDataFromLC();
+
 
   const [updateBlogComment, { isLoading: updateLoading }] =
     useUpdateBlogCommentMutation();

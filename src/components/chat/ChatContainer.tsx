@@ -64,7 +64,9 @@ export default function ChatContainer({ senderId }: { senderId: string }) {
       setChatMessages(messageData?.data);
       refreshChat(data);
     });
+
   }, [refreshChat, messageData]);
+
 
   // console.log("messageData", messageData);
   return (
