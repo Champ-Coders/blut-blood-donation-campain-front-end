@@ -63,8 +63,9 @@ export default function ChatContainer({ senderId }: { senderId: string }) {
       setChatMessages(messageData?.data);
       refreshChat(data);
     });
-  }, [refreshChat,messageData]);
-  // console.log("messageData", messageData);
+  }, [refreshChat, messageData]);
+
+  console.log("messageData", messageData);
   return (
     <div className="">
       <div className="h-screen overflow-y-auto p-4 pb-36">
@@ -104,7 +105,11 @@ export default function ChatContainer({ senderId }: { senderId: string }) {
                   src={
                     liveChat.types === "reply"
                       ? "https://i.ibb.co/VxhHWhd/professional-Side.png"
-                      : "https://i.ibb.co/jRrMTKb/userIcon.png"
+                      : `${
+                          liveChat?.img
+                            ? liveChat.img
+                            : "https://i.ibb.co/jRrMTKb/userIcon.png"
+                        }`
                   }
                   alt="My profile"
                   className={`w-6 h-6 rounded-full ${
