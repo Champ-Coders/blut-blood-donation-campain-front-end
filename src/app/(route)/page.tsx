@@ -31,9 +31,9 @@ export default function Home() {
 
       <PopularCampaigns />
       <Testimonials />
-      <BloodOwner />
+      {/* <BloodOwner /> */}
       <TeamMember />
-      <News />
+      {/* <News /> */}
       <FaqQuestion />
       <FeedBackForum />
 
