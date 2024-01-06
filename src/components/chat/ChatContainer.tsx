@@ -66,7 +66,7 @@ export default function ChatContainer({ senderId }: { senderId: string }) {
     });
   }, [refreshChat, messageData]);
 
-  console.log("messageData", messageData);
+  // console.log("messageData", messageData);
   return (
     <div className="">
       <div className="h-screen overflow-y-auto p-4 pb-36">
