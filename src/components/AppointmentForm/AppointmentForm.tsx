@@ -17,14 +17,15 @@ const AppointmentForm = ({ availableDonor }: any) => {
     formState: { errors },
     reset,
   } = useForm();
-  const [requestForBlood, { isLoading }] = useRequestForBloodMutation(undefined);
+  const [requestForBlood, { isLoading }] =
+    useRequestForBloodMutation(undefined);
   const router = useRouter();
 
   const onSubmit = async (datas: any) => {
     const data = {
       bag: parseInt(datas.bag),
       donnerId: datas?.bloodGroup?.id,
-      bloodGroup: datas?.bloodGroup?.name,
+      bloodGroup: datas?.bloodGroup?.name?.split("(")[0]?.trim(),
       expectedDate: datas?.expectedDate?.toString(),
       patientDetails: datas?.patientDetails,
     };
@@ -55,7 +56,7 @@ const AppointmentForm = ({ availableDonor }: any) => {
               options={availableDonor?.map((blood: any) => {
                 return {
                   value: blood?._id,
-                  label: blood?.bloodGroup,
+                  label: blood?.bloodGroup + " (" + blood?.name + ")",
                 };
               })}
               isMulti={false}
@@ -100,7 +101,6 @@ const AppointmentForm = ({ availableDonor }: any) => {
               required
               errors={errors}
             />
-            
           </div>
         </div>
         <Button
@@ -116,3 +116,4 @@ const AppointmentForm = ({ availableDonor }: any) => {
   );
 };
 export default AppointmentForm;
+

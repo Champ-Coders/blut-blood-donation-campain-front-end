@@ -22,7 +22,7 @@ const TeamMember = () => {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-            {data?.data?.slice(0, 2).map((item: IVolunteers) => (
+            {data?.data?.slice(0, 3).map((item: IVolunteers) => (
               <TeamMembersCard item={item} key={item.id} />
             ))}
           </div>

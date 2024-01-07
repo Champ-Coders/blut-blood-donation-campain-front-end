@@ -3,7 +3,7 @@ import React from "react";
 type AdminPageProps = {
   title: string;
   date: string;
-  total: string;
+  total: number;
   backgroundColor: string;
   textColor: string;
 };
@@ -44,7 +44,7 @@ const DashboardCard = ({ item }: { item: AdminPageProps }) => {
         <h5 className="text-[24px] font-semibold font-playfair">
           {item.title}
         </h5>
-        <p className="font-oswald text-[16px] font-medium ">{item.date}</p>
+        {/* <p className="font-oswald text-[16px] font-medium ">{item.date}</p> */}
       </div>
       <div className="flex justify-between">
         {/* total */}

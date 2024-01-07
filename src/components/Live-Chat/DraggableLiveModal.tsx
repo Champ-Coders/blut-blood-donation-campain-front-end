@@ -3,7 +3,6 @@
 "use client";
 
 import { ILiveChat } from "@/constants/ILiveChat";
-import { api } from "@/redux/Api/api";
 import { useUserProfileQuery } from "@/redux/Api/authApi/AuthApi";
 import {
   useGetUserMessageQuery,
@@ -34,7 +33,7 @@ const DraggableLiveModal = () => {
   } = useGetUserMessageQuery(userInfo?.email);
 
   const [refreshChat] = useRefreshChatMutation();
-  // console.log("🚀 ~MessageData:", MessageData);
+
   const [messages, setMessages] = useState<any>("");
 
   const [chatMessages, setChatMessages] = React.useState<any>(
@@ -52,7 +51,9 @@ const DraggableLiveModal = () => {
         // id: chatMessages.length + 1,
         message: messages,
         time: new Date().toLocaleTimeString(),
-        img: userInfo?.imgUrl || "https://img.freepik.com/free-photo/confident-attractive-caucasian-guy-beige-pullon-smiling-broadly-while-standing-against-gray_176420-44508.jpg?w=1380&t=st=1704185130~exp=1704185730~hmac=59e603b1b189517200baee240e19841cac32cac33e3b18bf388d3af232517699",
+        img:
+          userInfo?.imgUrl ||
+          "https://img.freepik.com/free-photo/confident-attractive-caucasian-guy-beige-pullon-smiling-broadly-while-standing-against-gray_176420-44508.jpg?w=1380&t=st=1704185130~exp=1704185730~hmac=59e603b1b189517200baee240e19841cac32cac33e3b18bf388d3af232517699",
         status: "online",
         types: "comment",
         email: userInfo?.email,
@@ -77,7 +78,10 @@ const DraggableLiveModal = () => {
     socket.on("update-message", (data) => {
       ///! for refresh and update message
       // console.log("uuuuuuuuuuuuuuuuuuuu", data);
-      scroll.current?.scrollIntoView({ behavior: "smooth" });
+      scroll.current?.scrollIntoView({
+        behavior: "smooth",
+        block: "end",
+      });
       setChatMessages(MessageData?.data);
       refreshChat(data);
       // refetch();
@@ -101,7 +105,7 @@ const DraggableLiveModal = () => {
             //   ?.sort((a: any, b: any) => a.updatedAt - b.updatedAt)
             chatMessages?.map((liveChat: ILiveChat) => {
               return (
-                <div ref={scroll} key={liveChat?._id} className="chat-message">
+                <div key={liveChat?._id} className="chat-message">
                   <div
                     className={`flex ${
                       liveChat?.types !== "reply"
@@ -146,6 +150,8 @@ const DraggableLiveModal = () => {
               );
             })
           }
+
+          <div ref={scroll} />
         </div>
         {/* Message end */}
         {/* button */}

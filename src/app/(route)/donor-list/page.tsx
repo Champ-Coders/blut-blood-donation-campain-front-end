@@ -122,17 +122,12 @@ const AllUsers = () => {
     }
   }, [name]);
 
-  const debouncedSearchTerm = useDebounced({
-    searchQuery: searchTerm,
-    delay: 400,
-  });
-
-  if (!!debouncedSearchTerm) {
-    query["searchTerm"] = debouncedSearchTerm;
-  }
-
   // query and mutation
   const { data: users, isLoading } = useGetAllUsersQuery({ ...query });
+
+  const filterByName = users?.data?.data?.filter((item: IUser) =>
+    item.name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   // clear all
   const clearAll = () => {
@@ -235,10 +230,10 @@ const AllUsers = () => {
       <div className="w-full flex flex-col gap-2">
         {isLoading ? (
           <LoadingPage />
-        ) : users?.data?.data?.length === 0 ? (
+        ) : filterByName?.length === 0 ? (
           <Empty title="Donor" />
         ) : (
-          users?.data?.data?.map((item: IUser) => (
+          filterByName?.map((item: IUser) => (
             <DonateList key={item?._id} data={item} />
           ))
         )}
