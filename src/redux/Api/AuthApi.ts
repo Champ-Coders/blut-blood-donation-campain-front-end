@@ -13,7 +13,15 @@ export const donationApi = api.injectEndpoints({
       }),
       providesTags: [tagTypes.donation],
     }),
+    forgetPassword: build.mutation({
+      query: (body) => ({
+        url: `/users/forget-password`,
+        method: "POST",
+        body,
+      }),
+    }),
   }),
 });
 
-export const { useGetAllDonationInfoQuery } = donationApi;
+export const { useGetAllDonationInfoQuery, useForgetPasswordMutation } =
+  donationApi;
