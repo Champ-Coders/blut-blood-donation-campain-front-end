@@ -66,17 +66,28 @@ const BloodOwner = () => {
                 {availableDonor?.map((item: any, i: number) => (
                   <li
                     key={i}
-                    className="flex items-center gap-[10px] border-b-[#11111140] border-b-[1px] py-[19px]"
+                    className="flex items-center gap-[10px] border-b-[#11111140] border-b-[1px] py-[19px] text-[14px]"
                   >
+                    {/* name */}
+                    <span className="text-[#111111] font-bold">
+                      {item?.name?.length > 15 ? (
+                        <span>{item?.name?.slice(0, 15)}...</span>
+                      ) : (
+                        <span>{item?.name}</span>
+                      )}
+                    </span>
                     <span className="flex items-center gap-2">
                       <FaHeart className="text-[#ea062b]" />
                       {item?.bloodGroup}
                     </span>{" "}
                     , {item?.address ?? "Full BD"} ,{" "}
-                    {/* age ({item.dateOfBirth}) */}({" "}
-                    {new Date().getFullYear() -
-                      new Date(item?.dateOfBirth).getFullYear()}
-                    ) years old
+                    {/* age ({item.dateOfBirth}) */}{" "}
+                    <span className="text-[12px]">
+                      (
+                      {new Date().getFullYear() -
+                        new Date(item?.dateOfBirth).getFullYear()}
+                      ) years old
+                    </span>
                   </li>
                 ))}
               </ul>
