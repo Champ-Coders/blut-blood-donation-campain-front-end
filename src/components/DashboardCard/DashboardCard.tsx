@@ -3,7 +3,7 @@ import React from "react";
 type AdminPageProps = {
   title: string;
   date: string;
-  total: string;
+  total: number;
   backgroundColor: string;
   textColor: string;
 };
