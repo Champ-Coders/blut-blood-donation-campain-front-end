@@ -77,7 +77,7 @@ const Login = () => {
 
   const handleSubmitUser = async () => {
     const data = {
-      email: "abcde@gmail.com",
+      email: "abcd@gmail.com",
       password: "12345",
     };
 
