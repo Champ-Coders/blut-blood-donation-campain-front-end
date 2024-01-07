@@ -297,20 +297,20 @@ export const dashboardItems = (role: USER_ROLE) => {
           ),
           key: `/admin/review`,
         },
-        {
-          label: (
-            <Link className="" href={`/admin/review/create`}>
-              Create review
-            </Link>
-          ),
-          key: `/admin/review/create`,
-        },
+        // {
+        //   label: (
+        //     <Link className="" href={`/admin/review/create`}>
+        //       Create review
+        //     </Link>
+        //   ),
+        //   key: `/admin/review/create`,
+        // },
       ],
     },
 
     {
       label: <button className=" "> Chat List</button>,
-      key: "manage-contact",
+      key: "chat-list",
       icon: (
         <MessageOutlined
           style={{
