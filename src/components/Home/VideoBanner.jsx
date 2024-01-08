@@ -15,7 +15,12 @@ const VideoBanner = () => {
           src="https://res.cloudinary.com/dce4t5emk/video/upload/v1702898386/jtdswsajgic87bnqyclj.mp4"
         />
 
-        <div className="relative z-10   flex items-center justify-start md:h-screen h-[500px] w-full md:w-5/6 mx-0 md:mx-auto p-5">
+        <div
+          data-aos="fade-right"
+          data-aos-duration="400"
+          data-aos-offset="500"
+          className="relative z-10   flex items-center justify-start md:h-screen h-[500px] w-full md:w-5/6 mx-0 md:mx-auto p-5"
+        >
           <div className="text-start lg:w-3/6 font-playfair">
             <h1 className="text-primary md:text-5xl text-3xl font-bold">
               Donate Blood Save Life
@@ -39,7 +44,12 @@ const VideoBanner = () => {
       {/* Register */}
 
       <div className="flex w-full md:w-5/6 mx-0 md:mx-auto sm:flex-row flex-col text-white cursor-pointer md:absolute sm:-bottom-20 -bottom-48 left-0 right-0 z-30">
-        <div className="bg-black hover:bg-primary px-10 w-full h-44 border-r-2 border-black">
+        <div
+          data-aos="fade-right"
+          data-aos-duration="400"
+          data-aos-offset="500"
+          className="bg-black hover:bg-primary px-10 w-full h-44 border-r-2 border-black"
+        >
           <h3 className="text-2xl mt-5 sm:mt-8 mb-4 font-extrabold">
             Register Now
           </h3>
@@ -54,7 +64,12 @@ const VideoBanner = () => {
           </div>
         </div>
 
-        <div className="bg-primary hover:bg-black px-10 w-full h-44 text-justify border-l-2 border-primary">
+        <div
+          data-aos="fade-left"
+          data-aos-duration="400"
+          data-aos-offset="500"
+          className="bg-primary hover:bg-black px-10 w-full h-44 text-justify border-l-2 border-primary"
+        >
           <h3 className="text-2xl mt-5 sm:mt-8 mb-4 font-extrabold">
             Donate Now
           </h3>
@@ -62,7 +77,6 @@ const VideoBanner = () => {
             <p className="text-sm col-span-4">
               If you are eligible for donating blood, you can donate blood to
               the needy people.Blood donation is a noble cause.
-
             </p>
             <div className="sm:ml-10 ml-6  -mt-4">
               <DownloadOutlined className="-rotate-90 font-bold text-4xl" />

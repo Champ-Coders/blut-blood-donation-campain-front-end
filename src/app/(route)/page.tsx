@@ -17,11 +17,18 @@ import TeamMember from "@/components/Home/TeamMember";
 import News from "@/components/Home/News";
 import FaqQuestion from "@/components/Home/FaqQuestion";
 import FeedBackForum from "@/components/FeedBackForum/FeedBackForum";
+import { useEffect } from "react";
+import AOS from "aos";
 export default function Home() {
+  useEffect(() => {
+    AOS.init({
+      duration: 500,
+      once: false,
+    });
+  }, []);
+
   return (
     <>
-     
-
       <VideoBanner />
       <BloodTypeDonors />
       <ListOfHonorableBloodDonors />

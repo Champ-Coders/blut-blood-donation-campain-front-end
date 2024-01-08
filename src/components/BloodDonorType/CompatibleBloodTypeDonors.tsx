@@ -95,7 +95,12 @@ const CompatibleBloodTypeDonors = () => {
         </svg>
         <div className="relative mx-auto overflow-hidden px-4 py-16 sm:max-w-xl md:max-w-full md:px-24 lg:max-w-screen-xl lg:px-8 lg:py-20">
           <div className="flex flex-col items-center justify-between xl:flex-row">
-            <div className="mb-12 w-full max-w-xl xl:mb-0 xl:w-7/12 xl:pr-16">
+            <div
+              data-aos="fade-right"
+              data-aos-duration="400"
+              data-aos-offset="500"
+              className="mb-12 w-full max-w-xl xl:mb-0 xl:w-7/12 xl:pr-16"
+            >
               <h2 className="mb-6 max-w-lg font-oswald text-3xl font-bold tracking-tight text-white sm:text-7xl sm:leading-none">
                 You don&apos;t need to be a Doctor to Save Lives
               </h2>
@@ -117,7 +122,12 @@ const CompatibleBloodTypeDonors = () => {
                 </svg>
               </Link>
             </div>
-            <div className="w-full max-w-xl xl:w-6/12 xl:px-8">
+            <div
+              data-aos="fade-left"
+              data-aos-duration="400"
+              data-aos-offset="500"
+              className="w-full max-w-xl xl:w-6/12 xl:px-8"
+            >
               <Table
                 columns={columns}
                 dataSource={CompatibleBloodType}
