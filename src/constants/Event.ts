@@ -9,8 +9,8 @@ import img6 from "../../public/assets/event/6.jpg";
 export const events: IEvent[] = [
   {
     id: "1",
-    date: "17-08-2021",
-    time: "110 am - 1 pm",
+    event_date: "17-08-2021",
+    event_time: "110 am - 1 pm",
     location: "Mirpur-10, Dhaka",
     title: "Blood Donation for Independence Day",
     description:
@@ -20,8 +20,8 @@ export const events: IEvent[] = [
   },
   {
     id: "2",
-    date: "17-11-2021",
-    time: "10 am - 1 pm",
+    event_date: "17-11-2021",
+    event_time: "10 am - 1 pm",
     location: "Mohanpur, Rajshahi",
     title: "Woman International Day Blood Donation",
     description:
@@ -31,8 +31,8 @@ export const events: IEvent[] = [
   },
   {
     id: "3",
-    date: "09-12-2021",
-    time: "10 am - 1 pm",
+    event_date: "09-12-2021",
+    event_time: "10 am - 1 pm",
     location: "RSUD Sanjiwani",
     title: "August Blood Donation Regular Event    ",
     description:
@@ -42,8 +42,8 @@ export const events: IEvent[] = [
   },
   {
     id: "4",
-    date: "21-12-2021",
-    time: "10 am - 1 pm",
+    event_date: "21-12-2021",
+    event_time: "10 am - 1 pm",
     location: "RSUD Sanjiwani",
     title: "Great Green Day Blood Donation",
     description:
@@ -53,8 +53,8 @@ export const events: IEvent[] = [
   },
   {
     id: "5",
-    date: "22-02-2022",
-    time: "10 am - 1 pm",
+    event_date: "22-02-2022",
+    event_time: "10 am - 1 pm",
     location: "RSU Gatot Subroto",
     title: "Love for Cancer Surviver Blood Donation",
     description:
@@ -64,8 +64,8 @@ export const events: IEvent[] = [
   },
   {
     id: "6",
-    date: "03-03-2022",
-    time: "10 am - 1 pm",
+    event_date: "03-03-2022",
+    event_time: "10 am - 1 pm",
     location: "Gelora Bung Karno",
     title: "Youth Generation for Earth Blood Donation",
     description:
