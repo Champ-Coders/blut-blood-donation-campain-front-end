@@ -2,7 +2,7 @@
 
 <!-- live link -->
 
-[Live Link](https://blut-blood-donation-compaign.vercel.app/)
+[Live Link](https://blut-blood-donation-main-78a9a3422464.herokuapp.com/)
 
 <!-- Team Name -->
 
