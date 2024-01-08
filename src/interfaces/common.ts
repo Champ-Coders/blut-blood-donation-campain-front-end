@@ -61,8 +61,8 @@ export interface IResponse<T> {
 
 export interface IEvent {
   id: string;
-  date: string;
-  time: string;
+  event_date: string;
+  event_time: string;
   location: string;
   title: string;
   description: string;
