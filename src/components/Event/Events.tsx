@@ -1,10 +1,19 @@
-import { events } from "@/constants/Event";
+"use client";
+// import { events } from "@/constants/Event";
 import React from "react";
 import EventCard from "../EventCard/EventCard";
+import LoadingPage from "@/app/loading";
+import { useEventsQuery } from "@/redux/Api/eventApi";
 
 type EventsProps = {};
 
 const Events: React.FC<EventsProps> = () => {
+  const { data: events, isLoading: eventLoading } = useEventsQuery(undefined);
+
+  if (eventLoading) {
+    return <LoadingPage />;
+  }
+
   return (
     <section className="">
       <div className="common">
@@ -15,7 +24,7 @@ const Events: React.FC<EventsProps> = () => {
           </h4>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-          {events.map((item) => (
+          {events?.data?.map((item: any) => (
             <EventCard key={item.id} item={item} />
           ))}
         </div>
