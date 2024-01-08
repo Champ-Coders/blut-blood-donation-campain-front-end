@@ -18,7 +18,11 @@ const ServiceHeroUI = ({
     <div
       className={`px-7 mb-5 sm:mb-8 lg:flex gap-5 sm:gap-8 items-center justify-between  ${align}${align}`}
     >
-      <div className="w-full p-2 lg:w-[50%] h-full">
+      <div
+        data-aos="fade-right"
+        data-aos-duration="400"
+        className="w-full p-2 lg:w-[50%] h-full"
+      >
         <div className="h-full w-full">
           <Image
             className="w-full h-[300px] sm:h-[400px]"
@@ -31,6 +35,8 @@ const ServiceHeroUI = ({
         </div>
       </div>
       <div
+        data-aos="fade-left"
+        data-aos-duration="400"
         className={`w-full px-2 py-8 md:py-12 lg:py-[4rem] lg:w-[50%] flex flex-col gap-4 justify-between ${
           no % 2 === 0 && "items-end"
         }`}

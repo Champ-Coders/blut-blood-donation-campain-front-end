@@ -11,9 +11,12 @@ type EventCardProps = {
 };
 
 const EventCard: React.FC<EventCardProps> = ({ item }) => {
-  console.log("🚀 ~ file: EventCard.tsx:14 ~ item:", item);
   return (
-    <div className="border border-gray-200 rounded-lg hover:scale-105 transition-all duration-500 ease-in-out ">
+    <div
+      data-aos="zoom-in"
+      data-aos-duration="400"
+      className="border border-gray-200 rounded-lg hover:scale-105 transition-all duration-500 ease-in-out "
+    >
       <div className="rounded-md overflow-hidden">
         <div className="w-full h-[200px] ">
           <Image
