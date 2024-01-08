@@ -17,6 +17,7 @@ import TeamMember from "@/components/Home/TeamMember";
 import News from "@/components/Home/News";
 import FaqQuestion from "@/components/Home/FaqQuestion";
 import FeedBackForum from "@/components/FeedBackForum/FeedBackForum";
+import "aos/dist/aos.css";
 import { useEffect } from "react";
 import AOS from "aos";
 export default function Home() {
@@ -28,7 +29,11 @@ export default function Home() {
   }, []);
 
   return (
-    <>
+    <main
+      style={{
+        overflowX: "hidden",
+      }}
+    >
       <VideoBanner />
       <BloodTypeDonors />
       <ListOfHonorableBloodDonors />
@@ -54,6 +59,6 @@ export default function Home() {
         style={{ right: 24 }}
         icon={<VerticalAlignTopOutlined />}
       />
-    </>
+    </main>
   );
 }
