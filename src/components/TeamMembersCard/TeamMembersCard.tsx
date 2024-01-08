@@ -15,7 +15,11 @@ type TeamMembersCardProps = {
 
 const TeamMembersCard: React.FC<TeamMembersCardProps> = ({ item }) => {
   return (
-    <div className="p-2 bg-white shadow rounded-xl group border ">
+    <div
+      data-aos="zoom-in"
+      data-aos-duration="400"
+      className="p-2 bg-white shadow rounded-xl group border "
+    >
       <div className=" ">
         <div className="relative">
           <Image

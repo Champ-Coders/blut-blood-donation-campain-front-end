@@ -12,7 +12,11 @@ type EventCardProps = {
 
 const EventCard: React.FC<EventCardProps> = ({ item }) => {
   return (
-    <div className="border border-gray-200 rounded-lg hover:scale-105 transition-all duration-500 ease-in-out ">
+    <div
+      data-aos="zoom-in"
+      data-aos-duration="400"
+      className="border border-gray-200 rounded-lg hover:scale-105 transition-all duration-500 ease-in-out "
+    >
       <div className="rounded-md overflow-hidden">
         <div className="w-full h-[200px] ">
           <Image
@@ -27,11 +31,15 @@ const EventCard: React.FC<EventCardProps> = ({ item }) => {
           <div className="flex ">
             <p className="px-5 w-full py-[10px] bg-[#ea062b] flex items-center gap-2 text-white opacity-50">
               <BsCalendarDate />
-              {item?.date}
+              {new Date(item?.event_date).toLocaleDateString("en-US", {
+                year: "numeric",
+                month: "short",
+                day: "numeric",
+              })}
             </p>
             <p className="px-5 w-full py-[10px] bg-[#ea062b] flex items-center gap-2 text-white">
               <FaRegClock />
-              {item?.time}
+              {item?.event_time}
             </p>
           </div>
           <div>

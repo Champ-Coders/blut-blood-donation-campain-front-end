@@ -29,7 +29,6 @@ const ListOfHonorableBloodDonors: React.FC<
 
   const { data: users } = useGetAllUsersQuery(undefined);
 
-
   const sortedUsers = users?.data?.data
     .filter((user: IUser) => user.totalDonation !== 0)
     .sort((a: IUser, b: IUser) => b.totalDonation - a.totalDonation);
@@ -83,8 +82,12 @@ const ListOfHonorableBloodDonors: React.FC<
                 List of Honorable Blood Donors
               </h1>
             </div>
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
-              <div className="col-span-4">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-end">
+              <div
+                data-aos="fade-right"
+                data-aos-duration="400"
+                className="col-span-4"
+              >
                 <h4
                   className={`font-kalpurush text-xl font-bold mb-5 text-[#111] leading-normal`}
                 >
@@ -96,7 +99,11 @@ const ListOfHonorableBloodDonors: React.FC<
                   ))}
                 </Slider>
               </div>
-              <div className="col-span-4">
+              <div
+                data-aos="fade-right"
+                data-aos-duration="400"
+                className="col-span-4"
+              >
                 <h4
                   className={`font-kalpurush text-xl font-bold mb-5 text-[#111] leading-normal`}
                 >
@@ -108,7 +115,11 @@ const ListOfHonorableBloodDonors: React.FC<
                   ))}
                 </Slider>
               </div>
-              <div className="col-span-4">
+              <div
+                data-aos="fade-left"
+                data-aos-duration="400"
+                className="col-span-4 "
+              >
                 <div
                   style={{
                     backgroundImage: `url(${bg.src})`,
