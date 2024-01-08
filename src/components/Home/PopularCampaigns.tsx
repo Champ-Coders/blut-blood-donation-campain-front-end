@@ -13,7 +13,6 @@ import { useEventsQuery } from "@/redux/Api/eventApi";
 const PopularCampaigns = () => {
   const { data: Events } = useEventsQuery(undefined);
 
-
   return (
     <section className=" relative  overflow-hidden bg-gradient-to-r py-12 sm:py-16 lg:pt-20">
       <div className="pointer-events-none absolute left-20 top-1/2 h-36 w-36 -translate-y-1/2 text-primary/40 opacity-50">
@@ -99,6 +98,8 @@ const PopularCampaigns = () => {
             <SwiperSlide key={i}>
               <div
                 key={i}
+                data-aos="zoom-in "
+                data-aos-duration="400"
                 className="flex justify-between group relative min-h-[280px] group bg-white border-primary/30 flex-col lg:flex-row gap-3 border shadow-lg rounded-lg"
               >
                 <div className="lg:w-[45%] px-5 pt-5 lg:p-0 bg-cover bg-no-repeat">

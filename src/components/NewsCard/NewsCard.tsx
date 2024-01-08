@@ -15,7 +15,11 @@ const NewsCard: React.FC<NewsCardProps> = ({ news }) => {
   const date = news?.createdAt?.split("T")[0];
 
   return (
-    <article className="card border ">
+    <article
+      data-aos="zoom-up"
+      data-aos-duration="400"
+      className="card border "
+    >
       <figure className="card__header">
         <Image
           className="card__header__bg "
