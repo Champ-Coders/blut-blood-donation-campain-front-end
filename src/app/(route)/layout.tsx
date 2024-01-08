@@ -7,7 +7,7 @@ import HeaderPage from "@/components/shared/Header/Header";
 import FooterPage from "@/components/shared/Footer/Footer";
 import LiveChatButton from "@/components/Live-Chat/LiveChatButton";
 
-import "aos/dist/aos.css";
+
 import AnimatedCursor from "react-animated-cursor";
 
 const inter = Inter({ subsets: ["latin"] });
