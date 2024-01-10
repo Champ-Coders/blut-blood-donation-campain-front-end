@@ -4,9 +4,11 @@ import Image from "next/image";
 
 const LoadingPage = () => {
   return (
-    <div className="h-screen w-full flex items-center justify-center ">
-      <Image src={LoadingImage} alt="Loading" width={500} height={500} />
-    </div>
+    <main className="h-screen w-full flex items-center justify-center">
+      <div className=" bg-white shadow-2xl p-5 rounded-full border">
+        <Image src={LoadingImage} alt="Loading" width={300} height={300} className="rounded-full"/>
+      </div>
+    </main>
   );
 };
 

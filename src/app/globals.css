@@ -5,7 +5,162 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Oswald&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap");
+@import url("https://fonts.maateen.me/kalpurush/font.css");
+
+body {
+  /* playfair: ["Playfair Display", "serif"], */
+  font-family: "Playfair Display", serif;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  /* box-shadow: inset 0 0 5px grey; */
+  border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #ea062b;
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #b30000;
+}
 
 .common {
-  @apply mx-auto max-w-7xl px-6 pb-8 pt-20 sm:pt-24 lg:px-8 lg:pt-32;
+  @apply mx-auto max-w-7xl px-6 pb-8 pt-20 sm:pt-24 lg:px-8 lg:pt-20;
 }
+
+.commonGap {
+  @apply w-full md:w-5/6 mx-0 md:mx-auto;
+}
+
+.commonAdmin {
+  @apply bg-white rounded p-4;
+}
+
+.ant-table-title {
+  background-color: #ea062b;
+  font-size: 20px;
+  color: #fff;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+}
+
+.ant-menu-title-content {
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+}
+
+.ant-float-btn-icon {
+  width: 100% !important;
+  padding: 5px !important;
+}
+
+.ant-popover-inner {
+  padding: 0px !important;
+}
+
+.ant-breadcrumb-separator {
+  color: white !important;
+}
+
+.ant-popconfirm-inner-content {
+  padding: 10px !important;
+}
+
+/* ============= Blogs ================== */
+:root {
+  --color-body: #f0f3f8;
+  --color-title: #202123;
+  --color-text: #87888a;
+  --color-card: #ffffff;
+}
+
+.card {
+  --_radius: 3rem;
+  position: relative;
+  display: grid;
+  grid-template-columns: [card-header-start card-curve-start card-body-start] 1fr [card-header-end card-curve-end card-body-end];
+  grid-template-rows:
+    [card-header-start] 190px
+    [card-curve-start card-body-start] calc(var(--_radius) * 2)
+    [card-header-end card-curve-end]
+    auto [card-body-end];
+  max-width: 35rem;
+  width: 100%;
+  background-color: var(--color-card);
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 0 5rem rgba(0, 0, 0, 0.03);
+}
+
+.card__header {
+  grid-area: card-header;
+  position: relative;
+  isolation: isolate;
+  background-color: var(--color-title);
+  overflow: hidden;
+}
+
+.card__header__bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 250px;
+  pointer-events: none;
+  user-select: none;
+}
+
+.card::before {
+  grid-area: card-curve;
+  content: "";
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  background-color: var(--color-card);
+  border-top-right-radius: calc(var(--_radius) * 2);
+  pointer-events: none;
+}
+
+.card__body {
+  grid-area: card-body;
+  position: relative;
+  z-index: 1;
+  isolation: isolate;
+  padding: 18px;
+}
+
+.card__body::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  left: 0;
+  transform: translateY(-100%);
+  width: calc(var(--_radius) * 2);
+  aspect-ratio: 1 / 2;
+  border-bottom-left-radius: calc(var(--_radius) * 2);
+  box-shadow: 0 calc(var(--_radius) * 2) 0 var(--color-card);
+  pointer-events: none;
+}
+
+.ql-toolbar {
+  border-top-left-radius: 10px !important;
+  border-top-right-radius: 10px !important;
+  background: #e7e7e7 !important;
+}
+
+.ql-container {
+  /* border-redius bottom */
+  border-bottom-left-radius: 10px !important;
+  border-bottom-right-radius: 10px !important;
+}
+
+
